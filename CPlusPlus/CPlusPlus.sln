@@ -5,6 +5,11 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00.AR45Start", "00.AR45Start\00.AR45Start.vcxproj", "{333D9B11-7246-4673-937A-9ED8175A1A56}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{51FBF79B-1F2B-4165-97C9-A0C7D939124A}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\AROCK\AR45\CPlusPlus\용어정리.txt = ..\..\AROCK\AR45\CPlusPlus\용어정리.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
