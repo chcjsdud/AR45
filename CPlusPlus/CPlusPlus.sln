@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00.AR45Start", "00.AR45Start\00.AR45Start.vcxproj", "{333D9B11-7246-4673-937A-9ED8175A1A56}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{333D9B11-7246-4673-937A-9ED8175A1A56}.Debug|x64.ActiveCfg = Debug|x64
+		{333D9B11-7246-4673-937A-9ED8175A1A56}.Debug|x64.Build.0 = Debug|x64
+		{333D9B11-7246-4673-937A-9ED8175A1A56}.Debug|x86.ActiveCfg = Debug|Win32
+		{333D9B11-7246-4673-937A-9ED8175A1A56}.Debug|x86.Build.0 = Debug|Win32
+		{333D9B11-7246-4673-937A-9ED8175A1A56}.Release|x64.ActiveCfg = Release|x64
+		{333D9B11-7246-4673-937A-9ED8175A1A56}.Release|x64.Build.0 = Release|x64
+		{333D9B11-7246-4673-937A-9ED8175A1A56}.Release|x86.ActiveCfg = Release|Win32
+		{333D9B11-7246-4673-937A-9ED8175A1A56}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B341AC0-509B-48B4-BC66-EEFDFE4A7F24}
+	EndGlobalSection
+EndGlobal
