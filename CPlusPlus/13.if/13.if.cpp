@@ -16,8 +16,11 @@ int main()
 
 		if (0/*메모리 영역*/)
 		{
+			int a = 10;
 			printf_s("조건에 들어왔습니다.");
 		}
+
+		// a = 20;
 
 		if (/*bool Test =*/ -2)
 		{

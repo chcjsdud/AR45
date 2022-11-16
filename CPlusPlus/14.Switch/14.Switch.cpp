@@ -5,16 +5,72 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	// case by case 조건을 칠때
+	// 이게 이거라면...
+
+	int Value = 0;
+
+	// 메모리영역이 같냐.
+	// 메모리를 만들고 파괴하는 
+	// 구조가 달라서 저게 안됩니다.
+
+	// '상수'값과 비교해서 같다면.
+	// => 변수와는 switch에서 비교할수 없다.
+	int CaseValue = 200;
+	switch (Value)
+	{
+	// case CaseValue: <= 에러가 날 것이다.
+	case 0:
+	{
+		int a = 10;
+		printf_s("0입니다");
+	}
+		break;
+	case 1:
+		printf_s("1입니다");
+		break;
+	default:
+		printf_s("둘다 아닙니다");
+		break;
+	}
+
+	if (true)
+	{
+
+	}
+	else if (true)
+	{
+
+	}
+
+	Value = 0;
+
+	switch (Value)
+	{
+	case 0:
+		printf_s("0입니다");
+		break;
+	case 1:
+		printf_s("1입니다");
+		break;
+	default:
+		printf_s("둘다 아닙니다");
+		break;
+	}
+
+	char InputKey = 'A';
+
+	switch (InputKey)
+	{
+	case 'a':
+	case 'A':
+		printf_s("공격합니다");
+		break;
+	case 'f':
+	case 'F':
+		printf_s("점프합니다");
+		break;
+	default:
+		break;
+	}
 }
-
-// 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
-// 프로그램 디버그: <F5> 키 또는 [디버그] > [디버깅 시작] 메뉴
-
-// 시작을 위한 팁: 
-//   1. [솔루션 탐색기] 창을 사용하여 파일을 추가/관리합니다.
-//   2. [팀 탐색기] 창을 사용하여 소스 제어에 연결합니다.
-//   3. [출력] 창을 사용하여 빌드 출력 및 기타 메시지를 확인합니다.
-//   4. [오류 목록] 창을 사용하여 오류를 봅니다.
-//   5. [프로젝트] > [새 항목 추가]로 이동하여 새 코드 파일을 만들거나, [프로젝트] > [기존 항목 추가]로 이동하여 기존 코드 파일을 프로젝트에 추가합니다.
-//   6. 나중에 이 프로젝트를 다시 열려면 [파일] > [열기] > [프로젝트]로 이동하고 .sln 파일을 선택합니다.
