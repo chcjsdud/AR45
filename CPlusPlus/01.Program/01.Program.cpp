@@ -19,6 +19,7 @@
 // 기본적으로 os가 
 
 #include <iostream>
+#include <conio.h>
 
 int main()
 {
@@ -47,10 +48,16 @@ int main()
 
 	1 + 1;
 
-	while (true)
-	{
+	printf_s("다른 프로그램을 실행시킬수 있는 함수는 system이라고 합니다");
 
-	}
+	_getch();
+
+	//while (true)
+	//{
+
+	//}
+
+	return 100002;
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
