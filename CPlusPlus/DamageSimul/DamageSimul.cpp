@@ -10,14 +10,18 @@ int PlayerHp = 200;
 int MonsterAtt = 10;
 int MonsterHp = 100;
 
+// 플레이어 능력치는 이렇게 보여줘야 한다.
+// 100번지
+// 함수를 실행할 메모리를 만들고
 void PlayerStatus()
 {
-    printf_s("플레이어=====================================\n");
+    /*int Unname = */printf_s("플레이어=====================================\n");
     printf_s("공격력 = %d \n", PlayerAtt);
     printf_s("체  력 = %d \n", PlayerHp);
     printf_s("============================================\n");
 }
 
+// 200번지
 void MonsterStatus()
 {
     printf_s("몬스터=====================================\n");
@@ -26,6 +30,7 @@ void MonsterStatus()
     printf_s("===========================================\n");
 }
 
+// 300번지
 void PlayerDamage(int _Damage) 
 {
     PlayerHp -= _Damage;
@@ -36,6 +41,7 @@ void PlayerDamage(int _Damage)
     Input = _getch();
 }
 
+// 500번지
 void MonsterDamage(int _Damage)
 {
     MonsterHp -= _Damage;
@@ -55,6 +61,8 @@ int main()
         // int Value = system("D:\\AR45\\CPlusPlus\\x64\\Debug\\01.Program.exe");
         system("cls");
 
+        // 플레이어 능력치를 보여줘라.
+        // 100번지의 내용대로 해라.
         PlayerStatus();
         MonsterStatus();
         _getch();
@@ -81,3 +89,4 @@ int main()
         }
     }
 }
+ 
