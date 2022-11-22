@@ -13,21 +13,12 @@ int MonsterHp = 100;
 // 플레이어 능력치는 이렇게 보여줘야 한다.
 // 100번지
 // 함수를 실행할 메모리를 만들고
-void PlayerStatus()
+void StatusRender(char* _Name, int _Att, int _Hp)
 {
-    /*int Unname = */printf_s("플레이어=====================================\n");
-    printf_s("공격력 = %d \n", PlayerAtt);
-    printf_s("체  력 = %d \n", PlayerHp);
+    printf_s("%s =====================================\n", _Name);
+    printf_s("공격력 = %d \n", _Att);
+    printf_s("체  력 = %d \n", _Hp);
     printf_s("============================================\n");
-}
-
-// 200번지
-void MonsterStatus()
-{
-    printf_s("몬스터=====================================\n");
-    printf_s("공격력 = %d \n", MonsterAtt);
-    printf_s("체  력 = %d \n", MonsterHp);
-    printf_s("===========================================\n");
 }
 
 // 300번지
@@ -55,6 +46,8 @@ void MonsterDamage(int _Damage)
 
 int main()
 {
+    _getch();
+
     while (true)
     {
         // \n
@@ -63,8 +56,13 @@ int main()
 
         // 플레이어 능력치를 보여줘라.
         // 100번지의 내용대로 해라.
-        PlayerStatus();
-        MonsterStatus();
+        // "플레이어" == char[]
+        // char[] == char*
+
+        char NamePlayer[20] = "플레이어";
+        StatusRender(NamePlayer, PlayerAtt, PlayerHp);
+        char NameMonster[20] = "몬스터";
+        StatusRender(NameMonster, MonsterAtt, MonsterHp);
         _getch();
         // Winapi를 
         // 이거 말고도 다른 실행방법도
