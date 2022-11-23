@@ -13,7 +13,7 @@ int MonsterHp = 100;
 // 플레이어 능력치는 이렇게 보여줘야 한다.
 // 100번지
 // 함수를 실행할 메모리를 만들고
-void StatusRender(char* _Name, int _Att, int _Hp)
+void StatusRender(const char* _Name, int _Att, int _Hp)
 {
     printf_s("%s =====================================\n", _Name);
     printf_s("공격력 = %d \n", _Att);
@@ -59,10 +59,10 @@ int main()
         // "플레이어" == char[]
         // char[] == char*
 
-        char NamePlayer[20] = "플레이어";
-        StatusRender(NamePlayer, PlayerAtt, PlayerHp);
-        char NameMonster[20] = "몬스터";
-        StatusRender(NameMonster, MonsterAtt, MonsterHp);
+        // "플레이어" == const char[]
+        // const char[] => const char*
+        StatusRender("플레이어", PlayerAtt, PlayerHp);
+        StatusRender("몬스터", MonsterAtt, MonsterHp);
         _getch();
         // Winapi를 
         // 이거 말고도 다른 실행방법도
