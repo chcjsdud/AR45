@@ -5,20 +5,87 @@
 
 int StringCount(const char* _String) 
 {
-    char Value0 = _String[0];
-    char Value1 = _String[1];
-    char Value2 = _String[2];
-    char Value3 = _String[3];
-    char Value4 = _String[4];
+    int Count = 0;
+
+    while(0 != _String[Count])
+    {
+        ++Count;
+    }
+
+    return Count;
+}
+
+bool StringCompair(const char* _Text0, const char* _Text1)
+{
+    return false;// 둘이 같다면 true, 둘이 틀리면 false
+}
+
+void StringMerge(char* _Realut, const char* _Text1, const char* _Text0)
+{
+    return;// 둘이 같다면 true, 둘이 틀리면 false
+}
+
+
+void StringChange(char* _Text, const char* Old, const char* New) 
+{
+
+}
+
+void StringChangeEx(char* _Text, const char* Old, const char* New)
+{
 
 }
 
 int main()
 {
-    int Len0 = StringCount("aaaaa");
-    int Len1 = StringCount("fasdjklfasd");
-    int Len2 = StringCount("wew00000");
-    int Len3 = StringCount("gnvmkv");
+    // 글자수 새기
+    {
+        char Arr[10] = { "aaaaaa" };
+        // Arr[9] = 'a';
+        Arr[5] = 0;
 
-    std::cout << "Hello World!\n";
+        int Len0 = StringCount(Arr);
+
+        printf_s(Arr);
+    }
+
+    {
+        // 내일꼭 continue break
+
+        char Arr[20] = "aaa";
+        {
+            bool result = StringCompair(Arr, "bbb");
+
+            int a = 0;
+        }
+
+        {
+            bool result = StringCompair(Arr, "aaa");
+
+            int a = 0;
+        }
+
+
+    }
+
+    {
+        char Arr[100] = "";
+        StringMerge(Arr, "test", " Game");
+        // Arr = "test Game"
+    }
+
+    {
+        // 알파뱃
+        char Arr[20] = "aaa bbb ccc";
+        StringChange(Arr, "bbb", "qqq");
+    }
+
+    {
+        // 알파뱃
+        char Arr[20] = "aaa bbb ccc";
+        StringChangeEx(Arr, "bbb", "q");
+    }
+
+
+
 }

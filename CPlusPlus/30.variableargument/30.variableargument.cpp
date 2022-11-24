@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-//        100         108         116
-void Test(int Value0, int Value1, int Value2)
+//        100         108  116
+void Test(int Value0, int, const char*)
 {
     // 100
     int* StartAddress = &Value0;
@@ -14,8 +14,8 @@ void Test(int Value0, int Value1, int Value2)
     return;
 
     printf_s("%lld\n", (__int64)&Value0);
-    printf_s("%lld\n", (__int64)&Value1);
-    printf_s("%lld\n", (__int64)&Value2);
+    //printf_s("%lld\n", (__int64)&Value1);
+    //printf_s("%lld\n", (__int64)&Value2);
 
 }
 
@@ -48,6 +48,11 @@ int StringCount()
 
 }
 
+int Test(const char* const Text, ...) 
+{
+
+}
+
 
 int main()
 {
@@ -60,6 +65,7 @@ int main()
     // 64비트 정수를 출력한다.
 
     //__int64 aaa = 378912378921738921;
-    printf_s("%d, %d", 10, 20);
+    printf_s("%d, %d", 10, 'a');
+
 
 }
