@@ -36,6 +36,16 @@ void StringChangeEx(char* _Text, const char* Old, const char* New)
 
 }
 
+int NumberCount(int Number)
+{
+    return 0;
+}
+
+void NumberToString(char* Arr, int ArrSize, int Number)
+{
+
+}
+
 int main()
 {
     // 글자수 새기
@@ -87,5 +97,21 @@ int main()
     }
 
 
+    {
+        int Count = NumberCount(122);
+        int Value = 0;
+    }
+
+    {
+        char Arr[50];
+        NumberToString(Arr, 50, 321312);
+        // '3''2''1''3''1''2'0
+        printf_s(Arr);
+
+        // Arr;
+
+        // [1][2][3][4][1][2][3]
+
+    }
 
 }

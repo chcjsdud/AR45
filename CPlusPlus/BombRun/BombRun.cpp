@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include <conio.h>
 
 int main()
 {
@@ -36,4 +37,6 @@ int main()
     char* SelectName = Arr[rand() % 24];
 
     printf_s("축하드립니다!!!! %s 가 선택되었습니다.", SelectName);
+
+    _getch();
 }
