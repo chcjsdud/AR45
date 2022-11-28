@@ -4,6 +4,10 @@
 #include <iostream>
 #include <conio.h>
 
+// 절차지향 
+// 데이터 기반.
+// 플레이어라는 개념을 표현할수 없어요.
+
 int PlayerAtt = 20;
 int PlayerHp = 200;
 

@@ -7,6 +7,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "00.AR45Start", "00.AR45Star
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{51FBF79B-1F2B-4165-97C9-A0C7D939124A}"
 	ProjectSection(SolutionItems) = preProject
+		객체지향.txt = 객체지향.txt
 		검색순서.txt = 검색순서.txt
 		단축키.txt = 단축키.txt
 		용어정리.txt = 용어정리.txt
@@ -87,6 +88,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "32.Reference", "32.Reference\32.Reference.vcxproj", "{40545788-DC61-46E0-A297-8A10A79E53FE}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "33.PlusPlus", "33.PlusPlus\33.PlusPlus.vcxproj", "{92D8C300-5ED6-42B8-9558-EDBEA7F04645}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "34.class", "34.class\34.class.vcxproj", "{7B92467E-9001-43F7-B039-EFDB907C8405}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -400,6 +403,14 @@ Global
 		{92D8C300-5ED6-42B8-9558-EDBEA7F04645}.Release|x64.Build.0 = Release|x64
 		{92D8C300-5ED6-42B8-9558-EDBEA7F04645}.Release|x86.ActiveCfg = Release|Win32
 		{92D8C300-5ED6-42B8-9558-EDBEA7F04645}.Release|x86.Build.0 = Release|Win32
+		{7B92467E-9001-43F7-B039-EFDB907C8405}.Debug|x64.ActiveCfg = Debug|x64
+		{7B92467E-9001-43F7-B039-EFDB907C8405}.Debug|x64.Build.0 = Debug|x64
+		{7B92467E-9001-43F7-B039-EFDB907C8405}.Debug|x86.ActiveCfg = Debug|Win32
+		{7B92467E-9001-43F7-B039-EFDB907C8405}.Debug|x86.Build.0 = Debug|Win32
+		{7B92467E-9001-43F7-B039-EFDB907C8405}.Release|x64.ActiveCfg = Release|x64
+		{7B92467E-9001-43F7-B039-EFDB907C8405}.Release|x64.Build.0 = Release|x64
+		{7B92467E-9001-43F7-B039-EFDB907C8405}.Release|x86.ActiveCfg = Release|Win32
+		{7B92467E-9001-43F7-B039-EFDB907C8405}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
