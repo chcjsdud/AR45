@@ -100,8 +100,6 @@ class Int
 int main()
 {
 	int PlayerAtt = 10;
-	Player NewPlayer = 10;
-
 	// int == class Player
 }
 
