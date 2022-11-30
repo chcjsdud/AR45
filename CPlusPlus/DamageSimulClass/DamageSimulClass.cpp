@@ -114,7 +114,6 @@ int main()
 
         NewMonster.Damage(NewPlayer.GetAtt());
 
-        // if (true == NewMonster.Hp <= 0)
         if (true == NewMonster.IsDeath())
         {
             NewGame.EndMassage();
