@@ -11,78 +11,48 @@ void Function1();
 void Function1();
 void Function1();
 void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function1();
-void Function0();
 // 이런함수가 분명히 존재할거야.
 // 자세한 내용은 나중에 다 컴파일되어서 만들어지니까.
 // 지금은 이것만 믿고 사용가능하게 해줘.
 
 void TestFunction(); // 선언
 
+// 변수의 선언
+extern int A;
+extern int A;
+extern int A;
+extern int A;
+
 int main()
 {
+    A = 10;
+
     // Function1();
     // std::cout << "Hello World!\n";
 }
+
+int A = 10;
 
 // 구현
 void TestFunction()  // 함수선언
 {
     // 함수바디
 }
-
+//
+//
+//void TestFunction()  // 함수선언
+//{
+//    // 함수바디
+//}
+//
 
 
 void Function1()
 {
-    Function0();
+    // Function0();
 }
 
 void Function0()
 {
-    Function1();
+    // Function1();
 }
