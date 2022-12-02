@@ -4,6 +4,7 @@
 #include <iostream>
 #include "GameMap.h"
 #include "Player.h"
+#include <Windows.h>
 
 int main()
 {
@@ -14,16 +15,27 @@ int main()
     NewMap.Init('a');
 
     // 플레이어를 위치시키고 
-    Int4 Pos;
-    Pos.X = 2;
-    Pos.Y = 2;
-    NewPlayer.SetPos(Pos);
+    // 리스트 이니셜라이저 문법
+    NewPlayer.SetPos(/*Int4*/{2, 2});
 
     // 맵에 플레이어의 위치에 글자를 찍어야한다.
     NewMap.Init('a');
 
-    NewMap.SetTile(NewPlayer.GetPos(), NewPlayer.GetDisplayChar());
 
-    NewMap.Render();
+    while (true)
+    {
+        system("cls");
+
+        // 움직이고
+        NewPlayer.Update();
+
+        // 적용하고.
+        NewMap.SetTile(NewPlayer.GetPos(), NewPlayer.GetDisplayChar());
+
+        // 그려진다.
+        NewMap.Render();
+        // 1000 이
+        Sleep(500);
+    }
 
 }

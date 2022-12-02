@@ -10,6 +10,11 @@ public:
 		Pos = _Pos;
 	}
 
+	void Move(const Int4& _Dir)
+	{
+		Pos += _Dir;
+	}
+
 	// 외부에 알려주기만 하는 기능을 명확하게 구분
 	Int4 GetPos()
 	{
@@ -20,6 +25,8 @@ public:
 	{
 		return DisplayChar;
 	}
+
+	void Update();
 
 private:
 	char DisplayChar = '*';
