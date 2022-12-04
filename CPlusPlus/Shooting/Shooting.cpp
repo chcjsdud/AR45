@@ -19,23 +19,24 @@ int main()
     NewPlayer.SetPos(/*Int4*/{2, 2});
 
     // 맵에 플레이어의 위치에 글자를 찍어야한다.
-    NewMap.Init('a');
+   
 
 
     while (true)
     {
         system("cls");
 
+        NewMap.Init('a');
         // 움직이고
-        NewPlayer.Update();
-
+        NewPlayer.Update(NewMap.Mapsize());
+        
         // 적용하고.
         NewMap.SetTile(NewPlayer.GetPos(), NewPlayer.GetDisplayChar());
 
         // 그려진다.
         NewMap.Render();
         // 1000 이
-        Sleep(500);
+        Sleep(100);
     }
 
 }

@@ -6,10 +6,14 @@ class GameMap
 
 public:
 	void Render();
-	void Init(const char _BaseChar);
+	char Init(const char _BaseChar);
 
 	void SetTile(const Int4& _Pos, char _Char);
-
+	char* Mapsize()
+	{
+		return (char*)ArrTile;
+	}
+	
 private:
 	char ArrTile[5][6];
 	

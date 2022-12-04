@@ -26,6 +26,9 @@ void Test(int Test1, int Test2, int Test3)
 	__int64 AddRess2 = (__int64)&Test3;
 }
 
+
+
+
 int main()
 {
 	{
@@ -102,7 +105,7 @@ int main()
 		__int64 Address4 = (__int64)TestPlus4;
 	}
 
-	{
+	
 		int Arr[10];
 
 		for (int i = 0; i < 10; i++)
@@ -113,10 +116,11 @@ int main()
 		// 특정 자료형의 배열형은
 		// 특정 자료형의 포인터로 변환이 가능하다.
 		int* Ptr = Arr;
-
+		
 		int* Value1Ptr = (Ptr + 1);
 
 		int Value11 = *Value1Ptr;
+		
 
 		// *(Ptr + 1);
 
@@ -160,7 +164,7 @@ int main()
 		// Ptr[50];
 
 		int a = 0;
-	}
+	
 
 	{
 
@@ -232,7 +236,7 @@ int main()
 
 		int* ValuePtr1;
 
-		__int64 Address = (__int64)ValuePtr1;
+		//__int64 Address = (__int64)ValuePtr12;
 
 		int a = 0;
 	}

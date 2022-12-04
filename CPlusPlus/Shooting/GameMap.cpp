@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-void GameMap::Init(const char _Char)
+char GameMap::Init(const char _Char)
 {
 	// "бр"
 	// 3
@@ -18,12 +18,12 @@ void GameMap::Init(const char _Char)
 	{
 		for (unsigned int x = 0; x < 5; ++x)
 		{
-			ArrTile[y][x] = _Char;
+			ArrTile[y][x] = _Char;			
 		}
 
-		ArrTile[y][5] = 0;
+		ArrTile[y][5] = 0;		
 	}
-	
+	return ArrTile[5][5];
 }
 
 void GameMap::Render()
@@ -37,7 +37,10 @@ void GameMap::Render()
 
 }
 
-void GameMap::SetTile(const Int4& _Pos, char _Char)
+void GameMap::SetTile( const Int4& _Pos, char _Char)
 {
 	ArrTile[_Pos.Y][_Pos.X] = _Char;
+
+	
+
 }
