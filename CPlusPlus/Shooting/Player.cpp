@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <conio.h>
 
-void Player::Update(char a[])
+void Player::Update()
 {
 	// 숙제 1. 화면 바깥으로 못나가게 만드세요.
 	// 숙제 2. 잔상 지우세요.

@@ -27,7 +27,7 @@ public:
 		return DisplayChar;
 	}
 
-	void Update(char a[]);
+	void Update();
 
 private:
 	const char* DisplayChar = "бс";
