@@ -1,7 +1,7 @@
 #include "Player.h"
 #include <conio.h>
 
-void Player::Update() 
+void Player::Update(char a[])
 {
 	// 숙제 1. 화면 바깥으로 못나가게 만드세요.
 	// 숙제 2. 잔상 지우세요.
@@ -14,7 +14,7 @@ void Player::Update()
 
 	// 누르고 나서 뭘 눌렀는지 알려주는 함수.
 	// 진짜 뭔가를 눌
-
+	
 	if (0 == _kbhit())
 	{
 		return;
