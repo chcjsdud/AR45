@@ -8,23 +8,33 @@
 
 int main()
 {
+    // char Arr[3] = "□";
+
+        //aaaaaaaaaa
+        //＠＠＠＠＠
+        //※※※※※
+        //※※※※※
+        //※※※※※
+        //※※※※※
+
+
     GameMap NewMap;
     Player NewPlayer;
 
     // 맵이 만들어지고
-    NewMap.Init('a');
-
     // 플레이어를 위치시키고 
     // 리스트 이니셜라이저 문법
     NewPlayer.SetPos(/*Int4*/{2, 2});
 
     // 맵에 플레이어의 위치에 글자를 찍어야한다.
-    NewMap.Init('a');
+    NewMap.Init("□");
 
 
     while (true)
     {
         system("cls");
+
+        NewMap.Clear();
 
         // 움직이고
         NewPlayer.Update();
@@ -35,7 +45,7 @@ int main()
         // 그려진다.
         NewMap.Render();
         // 1000 이
-        Sleep(500);
+        Sleep(100);
     }
 
 }

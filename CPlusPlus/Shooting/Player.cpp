@@ -23,27 +23,45 @@ void Player::Update()
 	// 프로그램 입력이 올때까지 멈추죠?
 	int Input = _getch();
 
-	Int4 Left = {1, 0};
+	Int4 NextPos = GetPos();
 
 	switch (Input)
 	{
 	case 'a':
 	case 'A':
-		Move({-1, 0});
+		NextPos += {-1, 0};
 		break;
 	case 'd':
 	case 'D':
-		Move({1, 0 });
+		NextPos += {1, 0 };
 		break;
 	case 's':
 	case 'S':
-		Move({ 0, 1 });
+		NextPos += { 0, 1 };
 		break;
 	case 'w':
 	case 'W':
-		Move({ 0, -1 });
+		NextPos += { 0, -1 };
 		break;
 	default:
 		break;
 	}
+
+	// [][][][][]
+	// [][][][][]
+	// [][][][][]
+	// [][][][][]
+	// [][][][][]
+
+	// 나가지 않았다면
+	if (
+		(NextPos.X >= 0) &&
+		(NextPos.X < 5) &&
+		(NextPos.Y >= 0) &&
+		(NextPos.Y < 5) 
+		)
+	{
+		SetPos(NextPos);
+	}
+
 }

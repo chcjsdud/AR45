@@ -115,6 +115,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "44.HeaderAndCpp", "44.Heade
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shooting", "Shooting\Shooting.vcxproj", "{67BE1CB2-F0B4-41B5-A64B-39FA8A0526FC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KBHitTest", "KBHitTest\KBHitTest.vcxproj", "{853D2262-5357-46AF-BBB0-22AC0951CA02}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -531,6 +533,14 @@ Global
 		{67BE1CB2-F0B4-41B5-A64B-39FA8A0526FC}.Release|x64.Build.0 = Release|x64
 		{67BE1CB2-F0B4-41B5-A64B-39FA8A0526FC}.Release|x86.ActiveCfg = Release|Win32
 		{67BE1CB2-F0B4-41B5-A64B-39FA8A0526FC}.Release|x86.Build.0 = Release|Win32
+		{853D2262-5357-46AF-BBB0-22AC0951CA02}.Debug|x64.ActiveCfg = Debug|x64
+		{853D2262-5357-46AF-BBB0-22AC0951CA02}.Debug|x64.Build.0 = Debug|x64
+		{853D2262-5357-46AF-BBB0-22AC0951CA02}.Debug|x86.ActiveCfg = Debug|Win32
+		{853D2262-5357-46AF-BBB0-22AC0951CA02}.Debug|x86.Build.0 = Debug|Win32
+		{853D2262-5357-46AF-BBB0-22AC0951CA02}.Release|x64.ActiveCfg = Release|x64
+		{853D2262-5357-46AF-BBB0-22AC0951CA02}.Release|x64.Build.0 = Release|x64
+		{853D2262-5357-46AF-BBB0-22AC0951CA02}.Release|x86.ActiveCfg = Release|Win32
+		{853D2262-5357-46AF-BBB0-22AC0951CA02}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

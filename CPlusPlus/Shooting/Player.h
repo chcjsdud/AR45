@@ -21,7 +21,7 @@ public:
 		return Pos;
 	}
 
-	char GetDisplayChar()
+	const char* GetDisplayChar()
 	{
 		return DisplayChar;
 	}
@@ -29,6 +29,6 @@ public:
 	void Update();
 
 private:
-	char DisplayChar = '*';
+	const char* DisplayChar = "бс";
 	Int4 Pos;
 };
