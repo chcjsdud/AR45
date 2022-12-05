@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-void GameMap::Init(const char* _Char)
+void GameMap::Init(const wchar_t _Char)
 {
 	// "бр"
 	// 3
@@ -19,11 +19,10 @@ void GameMap::Init(const char* _Char)
 	{
 		for (unsigned int x = 0; x < 5; ++x)
 		{
-			ArrTile[y][x * 2 + 0] = BaseChar[0];
-			ArrTile[y][x * 2 + 1] = BaseChar[1];
+			ArrTile[y][x] = BaseChar;
 		}
 
-		ArrTile[y][10] = 0;
+		ArrTile[y][5] = 0;
 	}
 
 	
@@ -35,11 +34,10 @@ void GameMap::Clear()
 	{
 		for (unsigned int x = 0; x < 5; ++x)
 		{
-			ArrTile[y][x * 2 + 0] = BaseChar[0];
-			ArrTile[y][x * 2 + 1] = BaseChar[1];
+			ArrTile[y][x] = BaseChar;
 		}
 
-		ArrTile[y][10] = 0;
+		ArrTile[y][5] = 0;
 	}
 }
 
@@ -47,15 +45,14 @@ void GameMap::Render()
 {
 	for (unsigned int y = 0; y < 5; ++y)
 	{
-		const char* Ptr = ArrTile[y];
-		printf_s(Ptr);
-		printf_s("\n");
+		const wchar_t* Ptr = ArrTile[y];
+		wprintf_s(Ptr);
+		wprintf_s(L"\n");
 	}
 
 }
 
-void GameMap::SetTile(const Int4& _Pos, const char* _Char)
+void GameMap::SetTile(const Int4& _Pos, wchar_t _Char)
 {
-	ArrTile[_Pos.Y][_Pos.X * 2 + 0] = _Char[0];
-	ArrTile[_Pos.Y][_Pos.X * 2 + 1] = _Char[1];
+	ArrTile[_Pos.Y][_Pos.X] = _Char;
 }

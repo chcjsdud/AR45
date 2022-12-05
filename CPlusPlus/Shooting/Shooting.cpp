@@ -8,6 +8,12 @@
 
 int main()
 {
+    // 와이드 바이트의 경우
+    // 국가코드에 따라서 특수기호 위치나 이런것들이 달라지므로
+    // 국가코드를 변경해줘야 한국을 기준으로한 특수기호나 한글을 사용할수 있다.
+
+    setlocale(LC_ALL, "KOR");
+
     // char Arr[3] = "□";
 
         //aaaaaaaaaa
@@ -27,7 +33,7 @@ int main()
     NewPlayer.SetPos(/*Int4*/{2, 2});
 
     // 맵에 플레이어의 위치에 글자를 찍어야한다.
-    NewMap.Init("□");
+    NewMap.Init(L'□');
 
 
     while (true)

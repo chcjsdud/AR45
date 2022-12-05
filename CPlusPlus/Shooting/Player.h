@@ -22,7 +22,7 @@ public:
 		return Pos;
 	}
 
-	const char* GetDisplayChar()
+	wchar_t GetDisplayChar()
 	{
 		return DisplayChar;
 	}
@@ -30,6 +30,6 @@ public:
 	void Update();
 
 private:
-	const char* DisplayChar = "бс";
+	wchar_t DisplayChar = L'бс';
 	Int4 Pos;
 };
