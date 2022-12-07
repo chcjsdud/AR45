@@ -3,6 +3,15 @@
 
 #include <iostream>
 
+class A 
+{
+public:
+    ~A() 
+    {
+        int a = 0;
+    }
+};
+
 int main()
 {
     //                     101112131415
@@ -34,11 +43,13 @@ int main()
     // 만약 그 메모리가 해제안되면 로그로 출력창에 띄워죠.
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-    int* NewValue = new int();
+    A* NewValue = new A[10];
+
+    // NewValue[0];
 
     // 내가 직접 지워줘야 합니다.
-
-    delete NewValue;
+    // 배열일 경우에는 delete[]
+    delete[] NewValue;
     // 삭제하지 않은 heap 영역의 메모리를 c++에서는 릭이라고 한다.
     // 
     //Detected memory leaks!
@@ -47,4 +58,8 @@ int main()
     //    Data: < > 00 00 00 00
     //    Object dump complete.
 
+    A* Ptr = new A();
+
+    // 배열일 경우에는 delete
+    delete Ptr;
 }
