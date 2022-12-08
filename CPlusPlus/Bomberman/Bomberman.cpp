@@ -3,13 +3,31 @@
 
 #include <iostream>
 #include "ConsoleGameScreen.h"
+#include "Player.h"
+#include "GameEngineDebug.h"
+#include <conio.h>
+
+ConsoleGameScreen Screen;
+Player MainPlayer;
+
 
 int main()
 {
-    ConsoleGameScreen Screen;
+    LeckCheck();
 
-    Screen.ScreenInit({15, 15}, L'■');
+    // 지역변수로 만들어졌어.
+    Screen.ScreenInit({15, 10}, L'■');
 
-    Screen.ScreenRender();
+    // 정상종료를 시켜줘야 하는데.
+    while (true)
+    {
+        system("cls");
+        Screen.ScreenClear();
+
+        Screen.SetPixelChar(MainPlayer.GetPos(), MainPlayer.GetRenderChar());
+
+        Screen.ScreenRender();
+        Sleep(500);
+    }
     
 }

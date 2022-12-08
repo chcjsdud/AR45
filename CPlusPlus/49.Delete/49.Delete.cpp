@@ -62,4 +62,8 @@ int main()
 
     // 배열일 경우에는 delete
     delete Ptr;
+
+    int* Test = nullptr;
+
+    delete Test;
 }

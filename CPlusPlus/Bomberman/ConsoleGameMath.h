@@ -1,7 +1,7 @@
 #pragma once
 
 
-class Int4
+class int4
 {
 public:
 	int X = 0;
