@@ -21,6 +21,15 @@ public:
 // 설명 :
 class ConsoleGameScreen
 {
+private:
+	static ConsoleGameScreen* MainScreen;
+
+public:
+	static ConsoleGameScreen* GetMainScreen() 
+	{
+		return MainScreen;
+	}
+
 public:
 	// constrcuter destructer
 	ConsoleGameScreen();
@@ -39,11 +48,12 @@ public:
 	void ScreenRender();
 	void ScreenClear();
 
+	bool IsOver(int4 _Pos);
+
 protected:
 	
 
 private:
-	bool IsOver(int4 _Pos);
 
 	// 사용하지 않았다를 *에는 nullptr을 넣어서 표현합니다. 
 	ConsoleGameLine* Lines = nullptr;

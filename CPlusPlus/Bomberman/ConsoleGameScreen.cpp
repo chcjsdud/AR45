@@ -67,8 +67,12 @@ void ConsoleGameLine::Clear()
 
 
 ///////////////////////// ConsoleGameScreen
+
+ConsoleGameScreen* ConsoleGameScreen::MainScreen = nullptr;
+
 ConsoleGameScreen::ConsoleGameScreen()
 {
+	MainScreen = this;
 }
 
 ConsoleGameScreen::~ConsoleGameScreen()

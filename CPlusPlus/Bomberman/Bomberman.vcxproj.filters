@@ -3,10 +3,10 @@
   <ItemGroup>
     <ClCompile Include="Bomberman.cpp" />
     <ClCompile Include="ConsoleGameMath.cpp">
-      <Filter>Console</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="ConsoleGameScreen.cpp">
-      <Filter>Console</Filter>
+      <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineDebug.cpp">
       <Filter>Base</Filter>
@@ -14,29 +14,35 @@
     <ClCompile Include="Player.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
+    <ClCompile Include="Boom.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
       <UniqueIdentifier>{97976b95-bfa5-4018-8559-7528d09a6970}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Console">
-      <UniqueIdentifier>{faaaef4a-0161-45fb-8599-3bb756b0de56}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents">
       <UniqueIdentifier>{a7347343-4ee9-413c-b21a-bed521658b73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{faaaef4a-0161-45fb-8599-3bb756b0de56}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleGameMath.h">
-      <Filter>Console</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleGameScreen.h">
-      <Filter>Console</Filter>
+      <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineDebug.h">
       <Filter>Base</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="Boom.h">
       <Filter>Contents</Filter>
     </ClInclude>
   </ItemGroup>

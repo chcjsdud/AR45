@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d80ca181-57db-42df-91ac-2e823600daf6}</ProjectGuid>
-    <RootNamespace>Bomberman</RootNamespace>
+    <ProjectGuid>{6ea951be-d4ea-489b-90c3-d69518805b3a}</ProjectGuid>
+    <RootNamespace>My58ForwardDeclaration</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,46 +127,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bomberman.cpp" />
-    <ClCompile Include="Boom.cpp">
+    <ClCompile Include="58.ForwardDeclaration.cpp" />
+    <ClCompile Include="ClassA.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ConsoleGameMath.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="ConsoleGameScreen.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineDebug.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="ClassB.cpp">
       <SubType>
       </SubType>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Boom.h">
+    <ClInclude Include="ClassA.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ConsoleGameMath.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="ConsoleGameScreen.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineDebug.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="ClassB.h">
       <SubType>
       </SubType>
     </ClInclude>
