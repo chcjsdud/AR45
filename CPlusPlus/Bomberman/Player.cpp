@@ -7,6 +7,8 @@
 Player::Player()
 {
 	ArrBoomObject = new Boom[10000]();
+
+	SetRenderChar(L'£À');
 }
 
 Player::~Player()
@@ -76,7 +78,7 @@ bool Player::Update()
 	case 'F':
 	{
 		Boom& NewBoomObject = ArrBoomObject[BoomUseCount];
-		NewBoomObject.GetPos() = GetPos();
+		NewBoomObject.SetPos(GetPos());
 		++BoomUseCount;
 
 	}

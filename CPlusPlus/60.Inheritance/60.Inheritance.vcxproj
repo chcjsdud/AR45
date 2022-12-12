@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{d80ca181-57db-42df-91ac-2e823600daf6}</ProjectGuid>
-    <RootNamespace>Bomberman</RootNamespace>
+    <ProjectGuid>{aa54f82e-f249-4b9b-8016-c0f186c0ed97}</ProjectGuid>
+    <RootNamespace>My60Inheritance</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,57 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bomberman.cpp" />
-    <ClCompile Include="Boom.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="ConsoleGameMath.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="ConsoleGameObject.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="ConsoleGameScreen.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineDebug.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Boom.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="ConsoleGameMath.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="ConsoleGameObject.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="ConsoleGameScreen.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineDebug.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClCompile Include="60.Inheritance.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,11 +1,12 @@
 #pragma once
 #include "ConsoleGameMath.h"
+#include "ConsoleGameObject.h"
 
 // Ό³Έν :
 
 class ConsoleGameScreen;
 class Player;
-class Boom
+class Boom : public ConsoleGameObject
 {
 public:
 	// constrcuter destructer
@@ -20,33 +21,17 @@ public:
 
 	void Update();
 
-	int4& GetPos()
-	{
-		return Pos;
-	}
-
-
-	void SetPos(const int4& _Value)
-	{
-		Pos = _Value;
-	}
-
-	wchar_t GetRenderChar()
-	{
-		return RenderChar;
-	}
-
 	bool IsDeath()
 	{
 		return 0 > Time;
 	}
+
 protected:
 
 private:
-	int4 Pos = { 0,0 };
-	int Time = 10;
+	int Time = 20;
+	int Range = 4;
 
-	wchar_t RenderChar = L'’Β';
 
 };
 
