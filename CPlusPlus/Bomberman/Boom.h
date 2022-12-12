@@ -2,6 +2,9 @@
 #include "ConsoleGameMath.h"
 
 // Ό³Έν :
+
+class ConsoleGameScreen;
+class Player;
 class Boom
 {
 public:
@@ -17,10 +20,11 @@ public:
 
 	void Update();
 
-	int4 GetPos()
+	int4& GetPos()
 	{
 		return Pos;
 	}
+
 
 	void SetPos(const int4& _Value)
 	{
@@ -32,10 +36,16 @@ public:
 		return RenderChar;
 	}
 
+	bool IsDeath()
+	{
+		return 0 > Time;
+	}
 protected:
 
 private:
-	int4 Pos = { 0, 0 };
+	int4 Pos = { 0,0 };
+	int Time = 10;
+
 	wchar_t RenderChar = L'’Β';
 
 };

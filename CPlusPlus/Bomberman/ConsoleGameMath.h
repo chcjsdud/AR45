@@ -18,4 +18,11 @@ public:
 		W += _Value.W;
 		return *this;
 	}
+
+	// 1 == 1 
+	bool operator==(const int4& _Value)
+	{
+		return X == _Value.X && Y == _Value.Y;
+	}
+
 };

@@ -3,47 +3,47 @@
   <ItemGroup>
     <ClCompile Include="Bomberman.cpp" />
     <ClCompile Include="ConsoleGameMath.cpp">
-      <Filter>Engine</Filter>
+      <Filter>01.Engine</Filter>
     </ClCompile>
     <ClCompile Include="ConsoleGameScreen.cpp">
-      <Filter>Engine</Filter>
+      <Filter>01.Engine</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineDebug.cpp">
-      <Filter>Base</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Contents</Filter>
+      <Filter>00.Base</Filter>
     </ClCompile>
     <ClCompile Include="Boom.cpp">
-      <Filter>Contents</Filter>
+      <Filter>02.Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>02.Contents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Base">
+    <Filter Include="00.Base">
       <UniqueIdentifier>{97976b95-bfa5-4018-8559-7528d09a6970}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents">
-      <UniqueIdentifier>{a7347343-4ee9-413c-b21a-bed521658b73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine">
+    <Filter Include="01.Engine">
       <UniqueIdentifier>{faaaef4a-0161-45fb-8599-3bb756b0de56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Contents">
+      <UniqueIdentifier>{a7347343-4ee9-413c-b21a-bed521658b73}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConsoleGameMath.h">
-      <Filter>Engine</Filter>
+      <Filter>01.Engine</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleGameScreen.h">
-      <Filter>Engine</Filter>
+      <Filter>01.Engine</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineDebug.h">
-      <Filter>Base</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Contents</Filter>
+      <Filter>00.Base</Filter>
     </ClInclude>
     <ClInclude Include="Boom.h">
-      <Filter>Contents</Filter>
+      <Filter>02.Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>02.Contents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

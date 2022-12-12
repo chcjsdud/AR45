@@ -1,7 +1,6 @@
 #pragma once
 #include "ConsoleGameMath.h"
-
-
+#include "Boom.h"
 // ¼³¸í :
 class Boom;
 class ConsoleGameScreen;
@@ -18,7 +17,7 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
-	int4 GetPos() 
+	int4 GetPos()
 	{
 		return Pos;
 	}
@@ -33,20 +32,16 @@ public:
 		return RenderChar;
 	}
 
-	//wchar_t SetScreen(ConsoleGameScreen* _Screen)
-	//{
-	//	Screen = _Screen;
-	//}
-
 	bool Update();
 
 protected:
 
 private:
-	int4 Pos = {0, 0};
-	wchar_t RenderChar = L'¡Ú';
 
-	Boom* BoomObject = nullptr;
+	int4 Pos = { 0,0 };
+	wchar_t RenderChar = L'¡Ú';
+	int BoomUseCount = 0;
+	Boom* ArrBoomObject = nullptr;
 
 };
 
