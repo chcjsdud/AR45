@@ -31,7 +31,5 @@ protected:
 private:
 	int Time = 20;
 	int Range = 4;
-
-
 };
 

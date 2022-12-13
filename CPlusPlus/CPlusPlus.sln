@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{51FBF79B-1F2
 		검색순서.txt = 검색순서.txt
 		단축키.txt = 단축키.txt
 		용어정리.txt = 용어정리.txt
+		자료구조.txt = 자료구조.txt
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01.Program", "01.Program\01.Program.vcxproj", "{53209E28-BCBA-4599-AF9B-2985E459A2A6}"
@@ -150,6 +151,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "59.Static", "59.Static\59.Static.vcxproj", "{4769714A-0FF4-4669-B56F-2E8265936341}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "60.Inheritance", "60.Inheritance\60.Inheritance.vcxproj", "{AA54F82E-F249-4B9B-8016-C0F186C0ED97}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stl", "Stl", "{3999A9D1-9EE8-44AA-8D60-97D37F51B5BA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameArray", "GameArray\GameArray.vcxproj", "{37A84B22-7160-475E-9B5C-5026F9B49767}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -711,6 +716,14 @@ Global
 		{AA54F82E-F249-4B9B-8016-C0F186C0ED97}.Release|x64.Build.0 = Release|x64
 		{AA54F82E-F249-4B9B-8016-C0F186C0ED97}.Release|x86.ActiveCfg = Release|Win32
 		{AA54F82E-F249-4B9B-8016-C0F186C0ED97}.Release|x86.Build.0 = Release|Win32
+		{37A84B22-7160-475E-9B5C-5026F9B49767}.Debug|x64.ActiveCfg = Debug|x64
+		{37A84B22-7160-475E-9B5C-5026F9B49767}.Debug|x64.Build.0 = Debug|x64
+		{37A84B22-7160-475E-9B5C-5026F9B49767}.Debug|x86.ActiveCfg = Debug|Win32
+		{37A84B22-7160-475E-9B5C-5026F9B49767}.Debug|x86.Build.0 = Debug|Win32
+		{37A84B22-7160-475E-9B5C-5026F9B49767}.Release|x64.ActiveCfg = Release|x64
+		{37A84B22-7160-475E-9B5C-5026F9B49767}.Release|x64.Build.0 = Release|x64
+		{37A84B22-7160-475E-9B5C-5026F9B49767}.Release|x86.ActiveCfg = Release|Win32
+		{37A84B22-7160-475E-9B5C-5026F9B49767}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -724,6 +737,7 @@ Global
 		{67BE1CB2-F0B4-41B5-A64B-39FA8A0526FC} = {B15CAFD4-BEB4-4EAF-95F1-E1D0F3619DB9}
 		{853D2262-5357-46AF-BBB0-22AC0951CA02} = {B15CAFD4-BEB4-4EAF-95F1-E1D0F3619DB9}
 		{D80CA181-57DB-42DF-91AC-2E823600DAF6} = {B15CAFD4-BEB4-4EAF-95F1-E1D0F3619DB9}
+		{37A84B22-7160-475E-9B5C-5026F9B49767} = {3999A9D1-9EE8-44AA-8D60-97D37F51B5BA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B341AC0-509B-48B4-BC66-EEFDFE4A7F24}

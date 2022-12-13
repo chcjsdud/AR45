@@ -37,6 +37,7 @@ void Boom::Update()
 
 	// 2. ÄçÄçÄçÄç¹üÀ§¿¡ ´Ù¸¥ ÆøÅºÀÌ ÀÖÀ¸¸é °³µµ ÄçÄçÄçÄç.
 
+	int4 Pos = GetPos();
 
 	ConsoleGameScreen::GetMainScreen()->SetPixelChar(GetPos(), GetRenderChar());
 }
