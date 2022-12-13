@@ -3,7 +3,25 @@
 
 #include <iostream>
 
+class A 
+{
+public:
+    int Arr[20];
+
+public:
+    bool Function() {
+        Arr[10] = 20;
+        return true;
+    }
+};
+
 int main()
 {
+    A NewA;
+    A* NewAPtr = &NewA;
+
+    NewA.Function();
+    NewAPtr->Function();
+
     std::cout << "Hello World!\n";
 }
