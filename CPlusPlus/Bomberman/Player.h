@@ -2,6 +2,8 @@
 #include "ConsoleGameMath.h"
 #include "ConsoleGameObject.h"
 #include "Boom.h"
+#include "GameEngineArray.h"
+
 // Ό³Έν :
 class Boom;
 class ConsoleGameScreen;
@@ -24,7 +26,7 @@ protected:
 
 private:
 	int BoomUseCount = 0;
-	Boom* ArrBoomObject = nullptr;
+	GameEngineArray<Boom> ArrBoomObject;
 
 };
 

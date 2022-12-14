@@ -5,27 +5,22 @@
 #include "Boom.h"
 
 Player::Player()
+	: ArrBoomObject(100)
 {
-	ArrBoomObject = new Boom[10000]();
-
+	// 대입
+	// ArrBoomObject = GameEngineArray<Boom>(100);
 	SetRenderChar(L'＠');
 }
 
 Player::~Player()
+	// ArrBoomObject()
 {
-	if (ArrBoomObject != nullptr)
-	{
-		delete[] ArrBoomObject;
-		ArrBoomObject = nullptr;
-	}
-
-
+	// 클래스의 소멸자가 알아서 호출된다.
 }
 
 bool Player::Update()
 {
-
-	if (ArrBoomObject == nullptr)
+	if (0 == ArrBoomObject.GetCount())
 	{
 		MessageBoxAssert("폭탄이 만들어지지 않았습니다.");
 		return false;
@@ -119,10 +114,6 @@ bool Player::Update()
 	}
 
 	ConsoleGameScreen::GetMainScreen()->SetPixelChar(GetPos(), GetRenderChar());
-
-
-
-
 
 
 	return true;

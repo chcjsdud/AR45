@@ -144,6 +144,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEngineArray.cpp" />
     <ClCompile Include="GameEngineDebug.cpp">
       <SubType>
       </SubType>
@@ -170,6 +171,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineArray.h" />
     <ClInclude Include="GameEngineDebug.h">
       <SubType>
       </SubType>

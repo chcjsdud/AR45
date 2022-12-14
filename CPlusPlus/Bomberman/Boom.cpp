@@ -16,30 +16,47 @@ Boom::~Boom()
 
 void Boom::Update()
 {
-	if (0 > --Time)
+	if (CurRange >= Range)
 	{
 		return;
 	}
 
-	//   ★
-	//   ★
-	//★★◎★★
-	//   ★
-	//   ★
+	if (0 > --Time)
+	{
+		++CurRange;
+		// return;
+	}
 
-	// 1. 쾅쾅쾅쾅을 만들어 오세요.
-	// 1-1. 왼쪽 오른쪽 위 아래에 1개만이라도 보이게 해라.
-	// 1-2. 그냥 범위크기 전체로 보이게 만들어라.
-	// 1-3. 시간차로 범위가 보이게 만들어라.
-	// 
-	// 십자가 표시로 먼저 나오게 하세요.
-
-
-	// 2. 쾅쾅쾅쾅범위에 다른 폭탄이 있으면 개도 쾅쾅쾅쾅.
-
+	// 폭탄 그자체는 그냥 출력
 	int4 Pos = GetPos();
-
 	ConsoleGameScreen::GetMainScreen()->SetPixelChar(GetPos(), GetRenderChar());
+
+	for (int i = 1; i < CurRange; i++)
+	{
+		int4 Left = Pos + int4{-i, 0};
+		if (false == ConsoleGameScreen::GetMainScreen()->IsOver(Left))
+		{
+			ConsoleGameScreen::GetMainScreen()->SetPixelChar(Left, L'◆');
+		}
+
+		int4 Right = Pos + int4{ i, 0 };
+		if (false == ConsoleGameScreen::GetMainScreen()->IsOver(Right))
+		{
+			ConsoleGameScreen::GetMainScreen()->SetPixelChar(Right, L'◆');
+		}
+
+		int4 Up = Pos + int4{ 0, i };
+		if (false == ConsoleGameScreen::GetMainScreen()->IsOver(Up))
+		{
+			ConsoleGameScreen::GetMainScreen()->SetPixelChar(Up, L'◆');
+		}
+
+		int4 Down = Pos + int4{ 0, -i };
+		if (false == ConsoleGameScreen::GetMainScreen()->IsOver(Down))
+		{
+			ConsoleGameScreen::GetMainScreen()->SetPixelChar(Down, L'◆');
+		}
+	}
 }
 
 

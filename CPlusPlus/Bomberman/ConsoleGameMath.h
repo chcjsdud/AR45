@@ -19,6 +19,17 @@ public:
 		return *this;
 	}
 
+	int4 operator+(const int4& _Value)
+	{
+		int4 Result = *this;
+		Result.X += _Value.X;
+		Result.Y += _Value.Y;
+		Result.Z += _Value.Z;
+		Result.W += _Value.W;
+		return Result;
+	}
+
+
 	// 1 == 1 
 	bool operator==(const int4& _Value)
 	{

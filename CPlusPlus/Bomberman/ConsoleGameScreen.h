@@ -1,22 +1,23 @@
 #pragma once
 #include "ConsoleGameMath.h"
 #include "GameEngineDebug.h"
+#include "GameEngineArray.h"
 
-class ConsoleGameLine 
-{
-	wchar_t* Arr = nullptr;
-	wchar_t BaseChar;
-	size_t XCount = 0;
-
-public:
-	wchar_t& operator[](size_t _Index);
-
-	void Init(size_t _XCount, wchar_t _Char);
-	void Render();
-	void Clear();
-
-	~ConsoleGameLine();
-};
+//class ConsoleGameLine 
+//{
+//	wchar_t* Arr = nullptr;
+//	wchar_t BaseChar;
+//	size_t XCount = 0;
+//
+//public:
+//	wchar_t& operator[](size_t _Index);
+//
+//	void Init(size_t _XCount, wchar_t _Char);
+//	void Render();
+//	void Clear();
+//
+//	~ConsoleGameLine();
+//};
 
 // 설명 :
 class ConsoleGameScreen
@@ -56,7 +57,7 @@ protected:
 private:
 
 	// 사용하지 않았다를 *에는 nullptr을 넣어서 표현합니다. 
-	ConsoleGameLine* Lines = nullptr;
+	GameEngineArray<GameEngineArray<wchar_t>> Lines;
 	int4 ScreenSize;
 	wchar_t BaseChar = '□';
 

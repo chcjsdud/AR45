@@ -30,6 +30,7 @@ protected:
 
 private:
 	int Time = 20;
+	int CurRange = 0;
 	int Range = 4;
 };
 
