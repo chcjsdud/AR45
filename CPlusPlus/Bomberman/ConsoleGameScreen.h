@@ -1,7 +1,7 @@
 #pragma once
 #include "ConsoleGameMath.h"
 #include "GameEngineDebug.h"
-#include "GameEngineArray.h"
+#include <GameEngineArray.h>
 
 //class ConsoleGameLine 
 //{
@@ -60,17 +60,5 @@ private:
 	GameEngineArray<GameEngineArray<wchar_t>> Lines;
 	int4 ScreenSize;
 	wchar_t BaseChar = 'กเ';
-
-	// 4 5
-
-		// *****
-		// *****
-		// *****
-		// *****
-
-	// วัมู.
-
-	// wchar_t* ScreenChar;
-
 };
 

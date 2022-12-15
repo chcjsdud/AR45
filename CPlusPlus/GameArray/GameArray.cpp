@@ -3,6 +3,12 @@
 
 #include <iostream>
 #include "GameEngineArray.h"
+
+class A 
+{
+	A& operator=(const A& _A) = delete;
+};
+
 int main()
 {
 	LeckCheck();
@@ -20,15 +26,24 @@ int main()
 	// 8바이트 정수죠?
 	// ArrPtr0 = ArrPtr1;
 
-	// Bomb
+	// GameEngineArray<A> NewArray(10);
 
-	GameEngineArray<int*> NewArray(10);
+	// 배열은 오로지
+	// 그냥 n 자료형을 x개 만든다라는 목적만 있는겁니다.
+	// 거기에는 의도도 없고. 
+	GameEngineArray<size_t> NewArray(10);
+
+	for (size_t i = 0; i < NewArray.GetCount(); i++)
+	{
+		NewArray[i] = i;
+	}
 
 	NewArray.ReSize(20);
 
-	NewArray.ReSize(30);
-
-	NewArray.ReSize(40);
+	for (size_t i = 0; i < NewArray.GetCount(); i++)
+	{
+		std::cout << NewArray[i] << std::endl;
+	}
 
 	//for (size_t i = 0; i < NewArray.GetCount(); i++)
 	//{

@@ -20,8 +20,8 @@
     <ClCompile Include="ConsoleGameObject.cpp">
       <Filter>01.Engine</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineArray.cpp">
-      <Filter>01.Engine</Filter>
+    <ClCompile Include="Wall.cpp">
+      <Filter>02.Contents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -54,8 +54,8 @@
     <ClInclude Include="ConsoleGameObject.h">
       <Filter>01.Engine</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineArray.h">
-      <Filter>01.Engine</Filter>
+    <ClInclude Include="Wall.h">
+      <Filter>02.Contents</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

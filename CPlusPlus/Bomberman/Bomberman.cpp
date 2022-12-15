@@ -4,6 +4,7 @@
 #include <iostream>
 #include "ConsoleGameScreen.h"
 #include "Player.h"
+#include "Wall.h"
 #include "GameEngineDebug.h"
 #include <conio.h>
 
@@ -20,12 +21,21 @@ Player MainPlayer;
 // 1. 장애물 만들기
 // 2. 플레이어는 못지나감.
 
+// 1. 몬스터를 1개 화면에 나오게 한다.
+// 2. 몬스터a가 왼쪽으로 움직이다가 끝을 만나면 오른쪽으로 가게 만드세요.
+// 3. 몬스터b를 만들고 위로 움직이다가 끝을 만나면 
+
+int4 ScreenSize = { 15, 11 };
+
 int main()
 {
     LeckCheck();
 
     // 지역변수로 만들어졌어.
-    Screen.ScreenInit({15, 10}, L'■');
+    Screen.ScreenInit(ScreenSize, L'■');
+
+    Boom::BoomMapInit(ScreenSize);
+    Wall::WallMapInit(ScreenSize);
 
 
     // 정상종료를 시켜줘야 하는데.
@@ -38,15 +48,19 @@ int main()
         // AA
         Screen.ScreenClear();
 
+        Wall::WallUpdate();
         
         bool End = MainPlayer.Update();
 
         // Ao
         // AA
 
+
         // 화면에 그린다.
         Screen.ScreenRender();
         Sleep(100);
+
+        Boom::MapClear();
 
         if (false == End)
         {

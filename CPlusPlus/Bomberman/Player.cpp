@@ -3,6 +3,7 @@
 #include "ConsoleGameScreen.h"
 #include "GameEngineDebug.h"
 #include "Boom.h"
+#include "Wall.h"
 
 Player::Player()
 	: ArrBoomObject(100)
@@ -97,17 +98,21 @@ bool Player::Update()
 	}
 
 	// 폭탄들을 전부다 검사해서 만약 나의 이동위치에 폭탄이 있다면 이동하지 않는다.
-	for (size_t i = 0; i < BoomUseCount; i++)
+	// 공간적 최적화와
+	// 연산적 최적화가 있습니다.
+	// 근래의 트랜드는
+	// 연산적 최적화를 하는겁니다.
+
+	if (nullptr != Boom::GetBoom(NextPos))
 	{
-		if (
-			false == ArrBoomObject[i].IsDeath() &&
-			ArrBoomObject[i].GetPos() == NextPos
-			)
-		{
-			IsMove = false;
-		}
+		IsMove = false;
+	}
+	if (true == Wall::GetIsWall(NextPos))
+	{
+		IsMove = false;
 	}
 
+	
 	if (true == IsMove)
 	{
 		SetPos(NextPos);

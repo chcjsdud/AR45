@@ -2,7 +2,8 @@
 #include "ConsoleGameMath.h"
 #include "ConsoleGameObject.h"
 #include "Boom.h"
-#include "GameEngineArray.h"
+#include <GameEngineArray.h>
+
 
 // Ό³Έν :
 class Boom;

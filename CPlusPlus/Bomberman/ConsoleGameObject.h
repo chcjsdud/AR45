@@ -36,6 +36,8 @@ public:
 		return RenderChar;
 	}
 
+	void Render();
+
 private:
 	int4 Pos = { 0,0 };
 	wchar_t RenderChar = L'¡¡';
