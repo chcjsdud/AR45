@@ -17,6 +17,9 @@ GameEngineArray<GameEngineArray<Wall>> Wall::WallMap;
 		for (int x = 0; x < WallMap[y].GetCount(); x++)
 		{
 			WallMap[y][x].SetPos(int4{x, y});
+			// ±×³É ÀÏµý ²ö´Ù.
+
+			WallMap[y][x].Off();
 			if (0 == y % 2)
 			{
 				continue;
@@ -26,7 +29,7 @@ GameEngineArray<GameEngineArray<Wall>> Wall::WallMap;
 			{
 				continue;
 			}
-			WallMap[y][x].IsWall = true;
+			WallMap[y][x].On();
 		}
 	}
 }
@@ -38,6 +41,11 @@ GameEngineArray<GameEngineArray<Wall>> Wall::WallMap;
 	{
 		for (int x = 0; x < WallMap[y].GetCount(); x++)
 		{
+			if (false == WallMap[y][x].GetIsUpdate())
+			{
+				continue;
+			}
+
 			WallMap[y][x].Update();
 		}
 	}
@@ -45,12 +53,11 @@ GameEngineArray<GameEngineArray<Wall>> Wall::WallMap;
 
 /*static */bool Wall::GetIsWall(int4 _Size)
 {
-	return WallMap[_Size.Y][_Size.X].IsWall;
+	return WallMap[_Size.Y][_Size.X].GetIsUpdate();
 }
 
 
 Wall::Wall()
-	: IsWall(false)
 {
 	SetRenderChar(L'¡à');
 }
@@ -62,11 +69,6 @@ Wall::~Wall()
 
 void Wall::Update()
 {
-	if (false == IsWall)
-	{
-		return;
-	}
-
 	Render();
 }
 

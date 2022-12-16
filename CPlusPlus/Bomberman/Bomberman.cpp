@@ -5,6 +5,7 @@
 #include "ConsoleGameScreen.h"
 #include "Player.h"
 #include "Wall.h"
+#include "Monster.h"
 #include "GameEngineDebug.h"
 #include <conio.h>
 
@@ -36,7 +37,11 @@ int main()
 
     Boom::BoomMapInit(ScreenSize);
     Wall::WallMapInit(ScreenSize);
+    Monster::AllMonsterInit(L'◎');
 
+    Monster::CreateMonster({0, 2}, int4::LEFT);
+    Monster::CreateMonster({ 0, 3 }, int4::UP);
+    Monster::CreateMonster({ 0, 4 }, int4::RIHGT);
 
     // 정상종료를 시켜줘야 하는데.
     while (true)
@@ -49,6 +54,7 @@ int main()
         Screen.ScreenClear();
 
         Wall::WallUpdate();
+        Monster::AllMonsterUpdate();
         
         bool End = MainPlayer.Update();
 

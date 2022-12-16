@@ -33,7 +33,6 @@ public:
 	void Update();
 
 protected:
-	bool IsWall;
 
 private:
 	static GameEngineArray<GameEngineArray<Wall>> WallMap;
