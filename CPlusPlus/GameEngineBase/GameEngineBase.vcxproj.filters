@@ -2,8 +2,16 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="GameEngineDebug.cpp" />
+    <ClCompile Include="ConsoleGameMath.cpp" />
+    <ClCompile Include="ConsoleGameObject.cpp" />
+    <ClCompile Include="ConsoleGameScreen.cpp" />
+    <ClCompile Include="GameEngineArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineDebug.h" />
+    <ClInclude Include="ConsoleGameMath.h" />
+    <ClInclude Include="ConsoleGameObject.h" />
+    <ClInclude Include="ConsoleGameScreen.h" />
+    <ClInclude Include="GameEngineArray.h" />
   </ItemGroup>
 </Project>

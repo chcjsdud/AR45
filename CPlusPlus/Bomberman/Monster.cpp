@@ -90,7 +90,6 @@ void Monster::Update()
 		Dir.Y *= -1;
 	}
 
-
 	SetPos(Pos + Dir);
 
 	Render();
