@@ -7,6 +7,7 @@ class ConsoleGameObject
 public:
 	// constrcuter destructer
 	ConsoleGameObject();
+	ConsoleGameObject(wchar_t _RenderChar);
 	~ConsoleGameObject();
 
 	// delete Function

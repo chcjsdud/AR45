@@ -9,6 +9,12 @@ ConsoleGameObject::~ConsoleGameObject()
 {
 }
 
+ConsoleGameObject::ConsoleGameObject(wchar_t _RenderChar)
+	: RenderChar(_RenderChar)
+{
+
+}
+
 
 
 void ConsoleGameObject::Render()

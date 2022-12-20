@@ -57,6 +57,7 @@ int main()
     PlayerAttackButton.Click();
     MenuButton.Click();
     
+    // 전역함수일때만 이 함수포인터로 가능합니다.
     void(*Function)(int Vlaue);
 
     std::cout << sizeof(Function);

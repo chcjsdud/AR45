@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{88da766d-61fe-4e4a-8960-204ee5092b84}</ProjectGuid>
-    <RootNamespace>SnakeGame</RootNamespace>
+    <ProjectGuid>{a0524412-e204-44c0-ab46-5a3dfcd2015e}</ProjectGuid>
+    <RootNamespace>My68MemberFunctionPointer</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,18 +70,6 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\GameEngineBase\</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\GameEngineBase\</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\GameEngineBase\</IncludePath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);..\GameEngineBase\</IncludePath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -139,38 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Body.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Head.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Part.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="SnakeGame.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GameEngineBase\GameEngineBase.vcxproj">
-      <Project>{f1915099-49f6-413f-b36b-c6b71a29185f}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Body.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Head.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Part.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClCompile Include="68.MemberFunctionPointer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
