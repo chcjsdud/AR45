@@ -51,6 +51,7 @@ public:
 
 	bool IsOver(int4 _Pos);
 
+
 protected:
 	
 

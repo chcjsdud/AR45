@@ -51,8 +51,12 @@ public:
 
 	bool IsOver(int4 _Pos);
 
+	inline int4 GetScreenSize()
+	{
+		return ScreenSize;
+	}
+
 protected:
-	
 
 private:
 

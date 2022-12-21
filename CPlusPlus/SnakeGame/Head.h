@@ -15,6 +15,8 @@ public:
 	Head& operator=(const Head& _Other) = delete;
 	Head& operator=(Head&& _Other) noexcept = delete;
 
+
+
 protected:
 	void Update() override;
 

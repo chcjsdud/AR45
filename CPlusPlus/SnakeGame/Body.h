@@ -5,8 +5,11 @@
 class Body : public Part
 {
 public:
+	static void CreateBody();
+
+	static Body* GetCurBody();
+
 	// constrcuter destructer
-	Body();
 	~Body();
 
 	// delete Function
@@ -15,10 +18,13 @@ public:
 	Body& operator=(const Body& _Other) = delete;
 	Body& operator=(Body&& _Other) noexcept = delete;
 
-protected:
 	void Update() override;
 
-private:
+protected:
 
+private:
+	Body();
+
+	static Body* CurBody;
 };
 

@@ -6,6 +6,7 @@
     <ClCompile Include="ConsoleGameObject.cpp" />
     <ClCompile Include="ConsoleGameScreen.cpp" />
     <ClCompile Include="GameEngineArray.cpp" />
+    <ClCompile Include="GameEngineInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineDebug.h" />
@@ -13,5 +14,6 @@
     <ClInclude Include="ConsoleGameObject.h" />
     <ClInclude Include="ConsoleGameScreen.h" />
     <ClInclude Include="GameEngineArray.h" />
+    <ClInclude Include="GameEngineInput.h" />
   </ItemGroup>
 </Project>

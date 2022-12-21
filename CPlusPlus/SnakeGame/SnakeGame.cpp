@@ -3,10 +3,14 @@
 
 #include <iostream>
 #include <ConsoleGameScreen.h>
+#include <GameEngineInput.h>
+
 #include "Head.h"
+#include "Body.h"
+#include <conio.h>
 
 ConsoleGameScreen Screen;
-int4 ScreenSize = { 15, 11 };
+int4 ScreenSize = { 5, 5 };
 
 int main()
 {
@@ -14,19 +18,46 @@ int main()
 
     Part* StartPart = new Head();
 
-    Screen.ScreenInit(ScreenSize, L'■');
+    // Part* CurBody = new Body();
+    Screen.ScreenInit(ScreenSize, L'□');
+
+    Body::CreateBody();
 
     while (true)
     {
+        GameEngineInput::ConsoleInputCheck();
+
+        if (
+            true == GameEngineInput::GetIsInput()
+            && ('q' == GameEngineInput::GetKey() || 'Q' == GameEngineInput::GetKey())
+            )
+        {
+            break;
+        }
+
+
         system("cls");
         Screen.ScreenClear();
 
+        Body::GetCurBody()->Update();
+
         StartPart->Update();
+
+
+        Body::GetCurBody()->Render();
 
         StartPart->Render();
 
+        // CurBody->Render();
+
         Screen.ScreenRender();
         Sleep(100);
+    }
+
+    if (nullptr != StartPart)
+    {
+        delete StartPart;
+        StartPart = nullptr;
     }
 
 }
