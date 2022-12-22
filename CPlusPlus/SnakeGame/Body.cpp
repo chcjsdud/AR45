@@ -7,6 +7,8 @@ Body* Body::CurBody = nullptr;
 
 void Body::CreateBody() 
 {
+	srand(time(nullptr));
+
 	CurBody = new Body();
 
 	CurBody->SetPos({ rand() % ConsoleGameScreen::GetMainScreen()->GetScreenSize().X , rand() % ConsoleGameScreen::GetMainScreen()->GetScreenSize().Y });
@@ -18,7 +20,7 @@ Body* Body::GetCurBody()
 }
 
 Body::Body()
-	: Part(L'●')
+	: Part(L'★')
 {
 }
 
@@ -31,11 +33,11 @@ void Body::Update()
 	// 나중에 이 제한을 풀어야 할 가능성이 높다.
 	if (true == GameEngineInput::GetIsInput())
 	{
-		if (nullptr == GetNext())
+		if (nullptr == GetFront())
 		{
 			return;
 		}
 
-		SetPos(GetNext()->GetPos());
+		SetPos(GetFront()->GetPos());
 	}
 }

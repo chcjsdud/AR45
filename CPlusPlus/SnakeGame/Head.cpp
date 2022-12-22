@@ -5,6 +5,10 @@
 
 #include <conio.h>
 
+// 1. 새로운 몸통이 빈공간에만 생기게 만들어라.
+// 2. 머리가 몸통에 닿으면 게임 오버가 되게 만들어라.
+// 3. q를 눌러서 종료했을때 릭도 전부다 없애오세요/
+
 Head::Head()
 	: Part(L'◆')
 {
@@ -16,10 +20,9 @@ Head::~Head()
 
 void Head::Update() 
 {
-	if (nullptr != GetPrev())
+	if (true == GameEngineInput::GetIsInput())
 	{
-		RecursionPrevUpdate();
-		RecursionPrevRender();
+		int a = 0;
 	}
 
 	if (true == GameEngineInput::GetIsInput())
@@ -72,19 +75,25 @@ void Head::Update()
 			IsMove = false;
 		}
 
+		// 최초 1, 1
+		// 최초 2, 1
+
 		if (true == IsMove)
 		{
-			Part* PrevPart = GetRecursionLastPrev();
-			int4 CurPos = PrevPart->GetPos();
+			// 내가 이동했으니까 모든애들이 따라와야해.
+			Part* LastPart = GetLastPart();
+			int4 PrevPos = LastPart->GetPos();
+
+			LastPart->RecursionFrontMove();
 
 			SetPos(NextPos);
 
-			if (Body::GetCurBody()->GetPos() == GetPos())
-			{
-				
 
-				Body::GetCurBody()->SetPos(CurPos);
-				PrevPart->SetPrev(Body::GetCurBody());
+			if (GetPos() == Body::GetCurBody()->GetPos())
+			{
+				Body::GetCurBody()->SetPos(PrevPos);
+				Body::GetCurBody()->SetRenderChar(L'●');
+				LastPart->SetBack(Body::GetCurBody());
 				Body::CreateBody();
 			}
 		}

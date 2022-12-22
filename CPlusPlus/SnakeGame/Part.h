@@ -18,60 +18,39 @@ public:
 
 	virtual void Update();
 
-	void SetPrev(Part* _Prev) 
+	Part* GetBack()
 	{
-		Prev = _Prev;
-		_Prev->Next = this;
+		return Back;
 	}
 
-	Part* GetPrev()
+	Part* GetFront()
 	{
-		return Prev;
+		return Front;
 	}
 
-	void RecursionPrevUpdate()
+	void SetBack(Part* _Part)
 	{
-		if (nullptr == Prev)
-		{
-			return;
-		}
-
-		Prev->Update();
-		Prev->RecursionPrevUpdate();
+		Back = _Part;
+		Back->Front = this;
 	}
 
+	void RecursionFrontMove();
 
-	void RecursionPrevRender()
+	void RecursionBackRender();
+
+	Part* GetLastPart() 
 	{
-		if (nullptr == Prev)
-		{
-			return;
-		}
-
-		Prev->Render();
-		Prev->RecursionPrevRender();
-	}
-
-
-	// 재귀함수를 사용해보겠습니다.
-	Part* GetRecursionLastPrev()
-	{
-		if (nullptr == Prev)
+		if (nullptr == Back)
 		{
 			return this;
 		}
-
-		return Prev->GetRecursionLastPrev();
-	}
-
-	Part* GetNext()
-	{
-		return Next;
+		
+		return Back->GetLastPart();
 	}
 
 protected:
-	Part* Next = nullptr;
-	Part* Prev = nullptr;
+	Part* Front = nullptr;
+	Part* Back = nullptr;
 
 private:
 

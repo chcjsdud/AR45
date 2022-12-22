@@ -43,10 +43,9 @@ int main()
 
         StartPart->Update();
 
+        StartPart->RecursionBackRender();
 
         Body::GetCurBody()->Render();
-
-        StartPart->Render();
 
         // CurBody->Render();
 
