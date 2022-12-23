@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <GameEngineDebug.h>
 
 // new와 delete는 c++의 기본연산중에서도 가장 느린 연산입니다.
 // 되도록이면 많이 안되게하려고 프로그래머들이 노력한다.
@@ -14,39 +15,240 @@ typedef int DataType;
 
 class GameEngineVector 
 {
-    int DataSize;
-    int MemorySize;
-    DataType* Ptr;
+public:
+	class iterator 
+	{
+	public:
+		GameEngineVector* ParentPtr;
+		int index;
+
+		iterator& operator++() 
+		{
+			++index;
+			return *this;
+		}
+	};
+
+public:
+	GameEngineVector()
+	{
+
+	}
+
+	// constrcuter destructer
+	GameEngineVector(size_t _Count)
+		: MemorySize(_Count)
+		, DataSize(_Count)
+		, DataPtr(nullptr)
+	{
+		// 10개짜리를 만들어달라고 한거니까.
+		// 할당해서 만들어내야 하니까.
+		resize(_Count);
+	}
+
+	~GameEngineVector()
+	{
+		if (nullptr != DataPtr)
+		{
+			delete[] DataPtr;
+			DataPtr = nullptr;
+		}
+	}
+
+
+	// delete Function
+	GameEngineVector(const GameEngineVector& _Other) = delete;
+	GameEngineVector(GameEngineVector&& _Other) noexcept 
+	{
+		// 최적화때문에 이걸 사용합니다.
+	}
+	GameEngineVector& operator=(GameEngineVector&& _Other) noexcept = delete;
+
+	// 메모리의 사이즈를 리턴해주는것이 아니라
+	// 데이터의 사이즈를 리턴하는 겁니다.
+	// 내가 집어넣은 
+	size_t size()
+	{
+		return DataSize;
+	}
+
+	size_t capacity()
+	{
+		return MemorySize;
+	}
+
+	iterator begin()
+	{
+		iterator Return = iterator();
+		Return.index = 0;
+		Return.ParentPtr = this;
+		return Return;
+	}
+
+	void erase(const iterator& Iter)
+	{
+		// Iter.index;
+		
+		// 0
+		// 1 2 2 3 4 5 6 7 8 9
+
+		for (size_t i = Iter.index; i < size(); i++)
+		{
+			DataPtr[i] = DataPtr[i + 1];
+		}
+
+		--DataSize;
+
+		//memcpy_s(&DataPtr[Iter.index], sizeof(DataType) * (size() - Iter.index), &DataPtr[Iter.index + 1], sizeof(DataType) * (size() - Iter.index - 1));
+
+		return;
+	}
+
+	void clear()
+	{
+		DataSize = 0;
+
+	}
+
+	DataType& operator[](size_t _Index)
+	{
+		if (DataSize <= _Index)
+		{
+			MessageBoxAssert("배열의 인덱스를 넘겼습니다");
+		}
+
+		return DataPtr[_Index];
+	}
+
+	void push_back(const DataType& _Data) 
+	{
+		if (size() + 1 > capacity())
+		{
+			reserve((size() * 2) + 1);
+		}
+
+		DataPtr[DataSize] = _Data;
+		++DataSize;
+	}
+
+	// 데이터는 넣지 않고 메모리 크기만 확장시키는 함수.
+	void reserve(size_t _Count)
+	{
+		DataType* PrevData = DataPtr;
+
+		DataPtr = new DataType[_Count];
+
+		memset(DataPtr, 0, sizeof(DataType) * _Count);
+
+		MemorySize = _Count;
+
+		if (nullptr == PrevData)
+		{
+			return;
+		}
+
+		for (size_t i = 0; i < DataSize; i++)
+		{
+			DataPtr[i] = PrevData[i];
+		}
+
+
+		delete PrevData;
+		PrevData = nullptr;
+	}
+
+	// 데이터는 넣지 않고 메모리 크기만 확장시키는 함수.
+	void resize(size_t _Count)
+	{
+		reserve(_Count);
+		DataSize = _Count;
+	}
+
+
+private:
+	size_t DataSize = 0;
+	size_t MemorySize = 0;
+	DataType* DataPtr = nullptr;
 };
 
 int main()
 {
+	std::cout << "stdvector" << std::endl;
     {
         // push_back
         // 배열형 시퀸스 자료구조 입니다.
         
         // 크기가 정해져있지 않습니다.
         std::vector<int> IntVector = std::vector<int>();
-        //IntVector.push_back(8);
-        //IntVector.push_back(9);
-        //IntVector.push_back(5);
-        //IntVector.push_back(0);
-        //IntVector.push_back(7);
 
-        for (size_t i = 0; i < 100; i++)
+		IntVector.reserve(10);
+
+        for (size_t i = 0; i < 10; i++)
         {
+            IntVector.push_back(i);
             // 내부에 존재하는 배열의 크기입니다.
             std::cout << "Capacity" << IntVector.capacity() << std::endl;
             // 내가 집어넣은 데이터의 크기입니다.
             std::cout << "Size" << IntVector.size() << std::endl;
-            IntVector.push_back(i);
         }
+
+		//   I
+		// 0 2 3 4 5 6 7 8 9
+
+		std::vector<int>::iterator ITER = IntVector.begin();
+		ITER.operator++();
+
+		IntVector.erase(ITER);
 
         for (size_t i = 0; i < IntVector.size(); i++)
         {
-            // std::cout << IntVector[i] << std::endl;
+            std::cout << IntVector[i] << std::endl;
         }
 
-            // std::cout << "Hello World!\n";
+		// IntVector.clear();
+
+		// 내부에 존재하는 배열의 크기입니다.
+		std::cout << "Capacity" << IntVector.capacity() << std::endl;
+		std::cout << "Size" << IntVector.size() << std::endl;
+	}
+
+	// return 1;
+
+	std::cout << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "myvector" << std::endl;
+
+    {
+        // GameEngineVector
+		GameEngineVector IntVector = GameEngineVector();
+
+		// IntVector.resize(10);
+
+		IntVector.reserve(10);
+
+		for (size_t i = 0; i < 10; i++)
+		{
+			IntVector.push_back(i);
+			// 내부에 존재하는 배열의 크기입니다.
+			std::cout << "Capacity" << IntVector.capacity() << std::endl;
+			// 내가 집어넣은 데이터의 크기입니다.
+			std::cout << "Size" << IntVector.size() << std::endl;
+		}
+
+		GameEngineVector::iterator ITER = IntVector.begin();
+		ITER.operator++();
+		IntVector.erase(ITER);
+
+		for (size_t i = 0; i < IntVector.size(); i++)
+		{
+			std::cout << IntVector[i] << std::endl;
+		}
+
+
+		// 내부에 존재하는 배열의 크기입니다.
+		std::cout << "Capacity" << IntVector.capacity() << std::endl;
+		std::cout << "Size" << IntVector.size() << std::endl;
     }
 }
