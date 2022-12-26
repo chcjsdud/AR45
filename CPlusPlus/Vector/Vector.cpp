@@ -27,6 +27,11 @@ public:
 			++index;
 			return *this;
 		}
+
+		DataType& operator*() const noexcept
+		{
+			return ParentPtr->DataPtr[index];
+		}
 	};
 
 public:
@@ -120,6 +125,8 @@ public:
 		return DataPtr[_Index];
 	}
 
+
+
 	void push_back(const DataType& _Data) 
 	{
 		if (size() + 1 > capacity())
@@ -171,6 +178,15 @@ private:
 	DataType* DataPtr = nullptr;
 };
 
+std::vector<int> Test() 
+{
+	std::vector<int> ArrReturn;
+
+	ArrReturn.resize(100);
+
+	return ArrReturn;
+}
+
 int main()
 {
 	std::cout << "stdvector" << std::endl;
@@ -185,6 +201,7 @@ int main()
 
         for (size_t i = 0; i < 10; i++)
         {
+			// IntVector.pushfront
             IntVector.push_back(i);
             // 내부에 존재하는 배열의 크기입니다.
             std::cout << "Capacity" << IntVector.capacity() << std::endl;
@@ -194,16 +211,28 @@ int main()
 
 		//   I
 		// 0 2 3 4 5 6 7 8 9
+		{
+			//std::vector<int>::iterator ITER = IntVector.begin();
+			//ITER.operator++();
 
-		std::vector<int>::iterator ITER = IntVector.begin();
-		ITER.operator++();
+			//IntVector.erase(ITER);
 
-		IntVector.erase(ITER);
+			//for (size_t i = 0; i < IntVector.size(); i++)
+			//{
+			//	std::cout << IntVector[i] << std::endl;
+			//}
+		}
 
-        for (size_t i = 0; i < IntVector.size(); i++)
-        {
-            std::cout << IntVector[i] << std::endl;
-        }
+		{
+			std::vector<int>::iterator StartIter = IntVector.begin();
+			std::vector<int>::iterator EndIter = IntVector.end();
+			for (; StartIter != EndIter; ++StartIter)
+			{
+				std::cout << *StartIter << std::endl;
+			}
+
+			int a = 0;
+		}
 
 		// IntVector.clear();
 
@@ -212,11 +241,20 @@ int main()
 		std::cout << "Size" << IntVector.size() << std::endl;
 	}
 
-	// return 1;
+	return 1;
 
-	std::cout << std::endl;
-	std::cout << std::endl;
-	std::cout << std::endl;
+	//int Arr[10];
+	//std::vector<int> ArrVector;
+	//ArrVector.reserve(10);
+
+	std::vector<int> ArrVector0 = Test(); // 100 8바이트 복사
+	// std::vector<int> ArrVector1; // 100 
+
+	//ArrVector0 = ArrVector1;
+
+	//std::cout << std::endl;
+	//std::cout << std::endl;
+	//std::cout << std::endl;
 
 	std::cout << "myvector" << std::endl;
 
@@ -226,7 +264,7 @@ int main()
 
 		// IntVector.resize(10);
 
-		IntVector.reserve(10);
+		// IntVector.reserve(10);
 
 		for (size_t i = 0; i < 10; i++)
 		{
@@ -240,6 +278,8 @@ int main()
 		GameEngineVector::iterator ITER = IntVector.begin();
 		ITER.operator++();
 		IntVector.erase(ITER);
+
+		// int Arr[100];
 
 		for (size_t i = 0; i < IntVector.size(); i++)
 		{

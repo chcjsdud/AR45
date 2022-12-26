@@ -31,17 +31,19 @@ public:
         }
     }
 
-    void operator=(const Test& _Other)
+    Test& operator=(const Test& _Other)
     {
         Ptr = new int[10];
         for (size_t i = 0; i < 10; i++)
         {
             Ptr[i] = _Other.Ptr[i];
         }
+
+        return *this;
     }
 
     //// 이동 대입연산자.
-    void operator=(Test&& _Other) noexcept
+    Test& operator=(Test&& _Other) noexcept
     {
         if (nullptr != Ptr)
         {
@@ -49,8 +51,12 @@ public:
             Ptr = nullptr;
         }
 
+        this;
+
         Ptr = _Other.Ptr;
         _Other.Ptr = nullptr;
+
+        return *this;
     }
 
     // Test(Test&& _Other) noexcept = delete;
@@ -105,18 +111,26 @@ int CreateTest0()
 
 int main()
 {
+    int Value = 0;
+    int Value1 = 10;
+
+    Value = Value1 = Value;
+
+
     Test NewArr0;
     Test NewArr1 = NewArr0;
 
-    Test NewArr6;
+    NewArr1.operator=(NewArr0).operator=(NewArr0);
 
-    NewArr1.operator=(CreateTest());
+    //Test NewArr6;
 
-    Test NewArr2 = CreateTest2();
+    //NewArr1.operator=(CreateTest());
+
+    //Test NewArr2 = CreateTest2();
 
 
-    CreateTest0();
-    
+    //CreateTest0();
+    //
 
-    std::vector<int> Arr = TestNewTest();
+    //std::vector<int> Arr = TestNewTest();
 }
