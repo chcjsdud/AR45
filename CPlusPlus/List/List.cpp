@@ -26,11 +26,19 @@ private:
 		ListNode* Back = nullptr;
 		DataType Value;
 
-
-
 	public:
-		ListNode() {}
-		~ListNode() {}
+		ListNode() 
+		{
+
+		}
+		~ListNode() 
+		{
+			if (nullptr != Back)
+			{
+				delete Back;
+				Back = nullptr;
+			}
+		}
 	};
 
 public:
@@ -81,6 +89,11 @@ public:
 
 	~GameEngineList()
 	{
+		if (nullptr != FrontNode)
+		{
+			delete FrontNode;
+			FrontNode = nullptr;
+		}
 	}
 
 
@@ -127,6 +140,8 @@ public:
 
 		ListNode* DeleteFrontNode = Node->Front;
 		ListNode* DeleteBackNode = Node->Back;
+		Node->Front = nullptr;
+		Node->Back = nullptr;
 
 		delete Node;
 		Node = nullptr;
@@ -140,6 +155,17 @@ public:
 
 	void clear()
 	{
+		if (nullptr != FrontNode)
+		{
+			delete FrontNode;
+			FrontNode = nullptr;
+		}
+
+		FrontNode = new ListNode();
+		BackNode = new ListNode();
+
+		FrontNode->Back = BackNode;
+		BackNode->Front = FrontNode;
 	}
 
 	void push_back(const DataType& _Data)
@@ -147,25 +173,34 @@ public:
 		ListNode* NewNode = new ListNode();
 		NewNode->Value = _Data;
 
-		ListNode* FrontNode = BackNode->Front;
-		FrontNode->Back = NewNode;
+		ListNode* BackFrontNode = BackNode->Front;
+		BackFrontNode->Back = NewNode;
 		BackNode->Front = NewNode;
 
-		NewNode->Front = FrontNode;
+		NewNode->Front = BackFrontNode;
 		NewNode->Back = BackNode;
 
 		++DataSize;
-
 	}
 
 	void push_front(const DataType& _Data)
 	{
+		ListNode* NewNode = new ListNode();
+		NewNode->Value = _Data;
+
+		ListNode* FrontBackNode = FrontNode->Back;
+		FrontBackNode->Front = NewNode;
+		FrontNode->Back = NewNode;
+
+		NewNode->Back = FrontBackNode;
+		NewNode->Front = FrontNode;
+
+		++DataSize;
 	}
 
 	void resize(size_t _Count)
 	{
 	}
-
 
 private:
 	size_t DataSize = 0;
@@ -236,9 +271,7 @@ int main()
 
 		{
 			GameEngineList::iterator StartIter = IntList.begin();
-
 			++StartIter;
-
 			IntList.erase(StartIter);
 		}
 
