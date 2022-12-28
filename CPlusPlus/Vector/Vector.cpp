@@ -212,10 +212,11 @@ int main()
 		//   I
 		// 0 2 3 4 5 6 7 8 9
 		{
-			//std::vector<int>::iterator ITER = IntVector.begin();
-			//ITER.operator++();
+			std::vector<int>::iterator ITER = IntVector.begin();
+			ITER.operator++();
+			ITER = IntVector.erase(ITER);
 
-			//IntVector.erase(ITER);
+			int a = 0;
 
 			//for (size_t i = 0; i < IntVector.size(); i++)
 			//{

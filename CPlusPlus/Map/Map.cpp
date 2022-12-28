@@ -26,6 +26,72 @@ private:
 		BinaryNode* RightChild = nullptr;
         GameEnginePair Pair;
 
+        BinaryNode* MinNode() 
+        {
+            if (nullptr == LeftChild)
+            {
+                return this;
+            }
+
+            return LeftChild->MinNode();
+        }
+
+        BinaryNode* MaxNode()
+        {
+            if (nullptr == RightChild)
+            {
+                return this;
+            }
+
+            return RightChild->MaxNode();
+        }
+
+        BinaryNode* ParentNext(const KeyType& _Key) 
+        {
+            if (Pair.first > _Key)
+            {
+                return this;
+            }
+
+            if (nullptr == Parent)
+            {
+                return nullptr;
+            }
+
+            return Parent->ParentNext(_Key);
+        }
+
+        BinaryNode* NextNode()
+        {
+            if (nullptr == RightChild)
+            {
+                return Parent->ParentNext(Pair.first);
+            }
+
+            return RightChild->MinNode();
+        }
+
+
+        void ChildChange(BinaryNode* _Old, BinaryNode* _New)
+        {
+            if (_Old == RightChild)
+            {
+                RightChild = _New;
+            }
+
+            if (_Old == LeftChild)
+            {
+                LeftChild = _New;
+
+            }
+
+            if (nullptr != _New)
+            {
+                _New->Parent = this;
+            }
+        }
+
+
         BinaryNode* find(const KeyType& _Key) 
         {
             if (Pair.first == _Key)
@@ -98,6 +164,19 @@ private:
             {
                 RightChild->FirstOrder();
             }
+        }
+
+        void Relase() 
+        {
+            if (nullptr != LeftChild)
+            {
+                LeftChild->Relase();
+            }
+            if (nullptr != RightChild)
+            {
+                RightChild->Relase();
+            }
+            delete this;
         }
 
         // 후위 순회
@@ -177,6 +256,7 @@ public:
 
 		iterator& operator++()
 		{
+            CurNode = CurNode->NextNode();
 			return *this;
 		}
 	};
@@ -206,6 +286,94 @@ public:
         return NewIter;
     }
 
+    void erase(const iterator& _Other)
+    {
+        BinaryNode* DeleteNode = _Other.CurNode;
+        BinaryNode* ParentNode = DeleteNode->Parent;
+        BinaryNode* LeftChildNode = DeleteNode->LeftChild;
+        BinaryNode* RightChildNode = DeleteNode->RightChild;
+
+        if (nullptr == DeleteNode)
+        {
+            MessageBoxAssert("end를 삭제하려고 했습니다.");
+            return;
+        }
+
+        if (nullptr == LeftChildNode && nullptr == RightChildNode)
+        {
+            if (nullptr != ParentNode)
+            {
+                ParentNode->ChildChange(DeleteNode, nullptr);
+            }
+
+            if (RootNode == DeleteNode)
+            {
+                RootNode = nullptr;
+            }
+
+            delete DeleteNode;
+            DeleteNode = nullptr;
+            return;
+        }
+
+        BinaryNode* ChangeNode = nullptr;
+        BinaryNode* ChangeParentNode = nullptr;
+
+        if (nullptr != LeftChildNode)
+        {
+            ChangeNode = LeftChildNode->MaxNode();
+            ChangeParentNode = ChangeNode->Parent;
+        } else if (nullptr != RightChildNode)
+        {
+            ChangeNode = RightChildNode->MinNode();
+            ChangeParentNode = ChangeNode->Parent;
+        }
+
+        if (nullptr != ChangeParentNode)
+        {
+            ChangeParentNode->ChildChange(ChangeNode, ChangeNode->LeftChild);
+        }
+
+        if (nullptr != ParentNode)
+        {
+            ParentNode->ChildChange(DeleteNode, ChangeNode);
+        }
+
+        if (LeftChildNode != ChangeNode)
+        {
+            ChangeNode->LeftChild = LeftChildNode;
+            LeftChildNode->Parent = ChangeNode;
+        }
+        if (RightChildNode != ChangeNode)
+        {
+            ChangeNode->RightChild = RightChildNode;
+            RightChildNode->Parent = ChangeNode;
+        }
+
+        if (RootNode == DeleteNode)
+        {
+            RootNode = ChangeNode;
+        }
+
+        delete DeleteNode;
+        DeleteNode = nullptr;
+        return;
+    }
+
+
+    iterator begin()
+    {
+        if (nullptr == RootNode)
+        {
+            return end();
+        }
+
+        iterator NewIter;
+        NewIter.CurNode = RootNode->MinNode();
+        return NewIter;
+    }
+
+
     iterator end()
     {
         iterator NewIter;
@@ -221,6 +389,16 @@ public:
             return;
         }
         RootNode->FirstOrder();
+    }
+
+    void Relase()
+    {
+        if (nullptr == RootNode)
+        {
+            return;
+        }
+        RootNode->Relase();
+        RootNode = nullptr;
     }
 
     // 후위 순회
@@ -241,6 +419,15 @@ public:
             return;
         }
         RootNode->MidOrder();
+    }
+
+    ~GameEngineMap() 
+    {
+        if (nullptr != RootNode)
+        {
+            RootNode->Relase();
+            RootNode = nullptr;
+        }
     }
 
 
@@ -301,6 +488,15 @@ int main()
             FindIter->second;
         }
 
+        std::map<int, int>::iterator DeleteNextIter = DataMap.erase(DataMap.find(2));
+        //std::map<int, int>::iterator StartIter = DataMap.begin();
+        //std::map<int, int>::iterator EndIter = DataMap.end();
+
+        //for (; StartIter != EndIter; ++StartIter)
+        //{
+        //    std::cout << StartIter->first << std::endl;
+        //}
+
         int a = 0;
 
     }
@@ -320,13 +516,16 @@ int main()
     {
         GameEngineMap DataMap;
 
-        DataMap.insert(make_pair(10, 1));
-        DataMap.insert(make_pair(2, 1 ));
-        DataMap.insert(make_pair(5, 1 ));
-        DataMap.insert(make_pair(7, 1 ));
-        DataMap.insert(make_pair(8, 1 ));
-        DataMap.insert(make_pair(3, 1 ));
         DataMap.insert(make_pair(20, 1));
+        DataMap.insert(make_pair(2, 1 ));
+        DataMap.insert(make_pair(10, 1 ));
+        DataMap.insert(make_pair(3, 1 ));
+        DataMap.insert(make_pair(5, 1));
+        DataMap.insert(make_pair(4, 1));
+        DataMap.insert(make_pair(15, 1 ));
+        DataMap.insert(make_pair(16, 1));
+        DataMap.insert(make_pair(30, 1 ));
+        DataMap.insert(make_pair(25, 1));
 
         GameEngineMap::iterator FindIter = DataMap.find(99);
 
@@ -336,14 +535,33 @@ int main()
             FindIter->second;
         }
 
-        std::cout << "전위 순회" << std::endl;
-        DataMap.FirstOrder();
-        std::cout << "후위 순회" << std::endl;
-        DataMap.LastOrder();
-        std::cout << "중위 순회" << std::endl;
-        DataMap.MidOrder();
+        //std::cout << "전위 순회" << std::endl;
+        //DataMap.FirstOrder();
+        //std::cout << "후위 순회" << std::endl;
+        //DataMap.LastOrder();
+        //std::cout << "중위 순회" << std::endl;
+        //DataMap.MidOrder();
 
-        int a = 0;
+        DataMap.erase(DataMap.find(10));
+
+
+        GameEngineMap::iterator StartIter = DataMap.begin();
+        GameEngineMap::iterator EndIter = DataMap.end();
+
+        for (; 
+            StartIter != EndIter; 
+            ++StartIter
+            )
+        {
+            if (StartIter->first == 8)
+            {
+                int a = 0;
+            }
+
+            std::cout << StartIter->first << std::endl;
+        }
+
+
     }
 
 
