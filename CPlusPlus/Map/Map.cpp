@@ -286,17 +286,21 @@ public:
         return NewIter;
     }
 
-    void erase(const iterator& _Other)
+    iterator erase(const iterator& _Other)
     {
         BinaryNode* DeleteNode = _Other.CurNode;
         BinaryNode* ParentNode = DeleteNode->Parent;
         BinaryNode* LeftChildNode = DeleteNode->LeftChild;
         BinaryNode* RightChildNode = DeleteNode->RightChild;
+        BinaryNode* NextNode = _Other.CurNode->NextNode();
+
+        iterator NewIter;
+        NewIter.CurNode = NextNode;
 
         if (nullptr == DeleteNode)
         {
             MessageBoxAssert("end를 삭제하려고 했습니다.");
-            return;
+            return NewIter;
         }
 
         if (nullptr == LeftChildNode && nullptr == RightChildNode)
@@ -313,7 +317,7 @@ public:
 
             delete DeleteNode;
             DeleteNode = nullptr;
-            return;
+            return NewIter;
         }
 
         BinaryNode* ChangeNode = nullptr;
@@ -342,12 +346,18 @@ public:
         if (LeftChildNode != ChangeNode)
         {
             ChangeNode->LeftChild = LeftChildNode;
-            LeftChildNode->Parent = ChangeNode;
+            if (nullptr != LeftChildNode)
+            {
+                LeftChildNode->Parent = ChangeNode;
+            }
         }
         if (RightChildNode != ChangeNode)
         {
             ChangeNode->RightChild = RightChildNode;
-            RightChildNode->Parent = ChangeNode;
+            if (nullptr != RightChildNode)
+            {
+                RightChildNode->Parent = ChangeNode;
+            }
         }
 
         if (RootNode == DeleteNode)
@@ -357,7 +367,8 @@ public:
 
         delete DeleteNode;
         DeleteNode = nullptr;
-        return;
+
+        return NewIter;
     }
 
 
@@ -488,7 +499,7 @@ int main()
             FindIter->second;
         }
 
-        std::map<int, int>::iterator DeleteNextIter = DataMap.erase(DataMap.find(2));
+        // std::map<int, int>::iterator DeleteNextIter = DataMap.erase(DataMap.find(15));
         //std::map<int, int>::iterator StartIter = DataMap.begin();
         //std::map<int, int>::iterator EndIter = DataMap.end();
 
@@ -542,7 +553,7 @@ int main()
         //std::cout << "중위 순회" << std::endl;
         //DataMap.MidOrder();
 
-        DataMap.erase(DataMap.find(10));
+        DataMap.erase(DataMap.find(15));
 
 
         GameEngineMap::iterator StartIter = DataMap.begin();
