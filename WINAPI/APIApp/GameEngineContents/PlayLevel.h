@@ -16,6 +16,8 @@ public:
 	PlayLevel& operator=(PlayLevel&& _Other) noexcept = delete;
 
 protected:
+	void Loading() override;
+	void Update() override;
 
 private:
 
