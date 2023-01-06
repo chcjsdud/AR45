@@ -22,6 +22,15 @@ public:
 	// 이 디렉토리에 이 파일이 있어?
 	bool IsFile(const std::string_view& _FileName);
 
+	bool MoveParent();
+
+	void MoveParentToDirectory(const std::string_view& _String);
+
+	bool Move(const std::string_view& _String);
+
+	GameEnginePath GetPlusFileName(const std::string_view& _String);
+
+
 	// std::vector<GameEngineFile> GetAllFile();
 
 	// void MoveParent();

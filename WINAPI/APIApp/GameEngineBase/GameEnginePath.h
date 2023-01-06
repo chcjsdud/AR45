@@ -8,13 +8,31 @@ class GameEnginePath
 public:
 	// constrcuter destructer
 	GameEnginePath();
+	GameEnginePath(std::filesystem::path _Path);
+	GameEnginePath(const std::string& _Path);
 	~GameEnginePath();
 
 	// delete Function
-	GameEnginePath(const GameEnginePath& _Other) = delete;
-	GameEnginePath(GameEnginePath&& _Other) noexcept = delete;
+	GameEnginePath(const GameEnginePath& _Other);
+	GameEnginePath(GameEnginePath&& _Other);
 	GameEnginePath& operator=(const GameEnginePath& _Other) = delete;
 	GameEnginePath& operator=(GameEnginePath&& _Other) noexcept = delete;
+
+	std::string GetPathToString() const;
+
+	void MoveParent();
+
+	// 내자식중 특정 경로나 특정 파일이 있는곳까지 자동 move
+	void MoveParentToChildPath(const std::string_view& _String);
+
+	bool IsExists();
+	bool IsExistsToPlusString(const std::string_view& _String);
+
+	// bool MoveParentToChildPath(const std::string_view& _IOName );
+
+	bool IsRoot();
+
+	bool Move(const std::string_view& _Path);
 
 protected:
 

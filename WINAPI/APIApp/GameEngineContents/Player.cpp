@@ -1,5 +1,6 @@
 #include "Player.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEngineBase/GameEnginePath.h>
 
 Player::Player() 
 {
@@ -23,6 +24,11 @@ void Player::Render()
 {
 	float4 PlayerPos = GetPos();
 
+	//GameEnginePath Path;
+
+	//std::string PathText = Path.GetPathToString();
+
+	// TextOutA(GameEngineWindow::GetDrawHdc(), 0, 0, PathText.c_str(), PathText.size());
 
 
 	Rectangle(
