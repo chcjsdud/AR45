@@ -23,6 +23,8 @@ void Player::Render()
 {
 	float4 PlayerPos = GetPos();
 
+
+
 	Rectangle(
 		GameEngineWindow::GetDrawHdc(),
 		PlayerPos.ix() - 50, 
