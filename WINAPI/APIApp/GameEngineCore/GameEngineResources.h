@@ -2,6 +2,7 @@
 
 #include <map>
 #include <string>
+#include <GameEnginePlatform/GameEngineImage.h>
 
 // 사운드 이미지 전부다 이녀석이 관리하겠습니다.
 
@@ -24,6 +25,10 @@ public:
 	bool ImageLoad(const GameEnginePath& _Path);
 
 	bool ImageLoad(const std::string_view& _Path, const std::string_view& _Name);
+
+	GameEngineImage* ImageFind(const std::string_view& _Name);
+
+	void Relase();
 
 protected:
 	// 

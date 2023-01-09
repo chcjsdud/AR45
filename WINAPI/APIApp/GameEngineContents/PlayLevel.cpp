@@ -26,7 +26,6 @@ void PlayLevel::Loading()
 
 	GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Heros.BMP"));
 
-
 	//if (true == Path.IsExistsToPlusString("\\Heros.bmp"))
 	//{
 	//	int a = 0;

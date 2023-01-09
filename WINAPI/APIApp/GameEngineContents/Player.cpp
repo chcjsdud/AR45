@@ -1,6 +1,7 @@
 #include "Player.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineBase/GameEnginePath.h>
+#include <GameEngineCore/GameEngineResources.h>
 
 Player::Player() 
 {
@@ -20,7 +21,7 @@ void Player::Update()
 	SetMove(float4::Left * 0.0001f);
 }
 
-void Player::Render() 
+void Player::Render()
 {
 	float4 PlayerPos = GetPos();
 
@@ -30,21 +31,32 @@ void Player::Render()
 
 	// TextOutA(GameEngineWindow::GetDrawHdc(), 0, 0, PathText.c_str(), PathText.size());
 
-	char Color[4] = {255, 0, 0, 0};
-	int* Ptr = reinterpret_cast<int*>(Color);
+	//char Color[4] = {255, 0, 0, 0};
+	//int* Ptr = reinterpret_cast<int*>(Color);
 
-	SetPixel(
-		GameEngineWindow::GetWindowBackBufferHdc(),
-		10, 10, *Ptr
-	);
+	//SetPixel(
+	//	GameEngineWindow::GetWindowBackBufferHdc(),
+	//	10, 10, *Ptr
+	//);
+
+	//Rectangle(
+	//	GameEngineWindow::GetWindowBackBufferHdc(),
+	//	PlayerPos.ix() - 50, 
+	//	PlayerPos.iy() - 50, 
+	//	PlayerPos.ix() + 50,
+	//	PlayerPos.iy() + 50
+	//	);
+
+	GameEngineImage* Image = GameEngineResources::GetInst().ImageFind("Heros.bmp");
+
+	// 특정한 hdc를 다른 hdc에 복사하는 함수
+	// bitblt는 이미지를 크기를 줄이거나 늘리는 기능이 없다.
 
 
-	Rectangle(
-		GameEngineWindow::GetWindowBackBufferHdc(),
-		PlayerPos.ix() - 50, 
-		PlayerPos.iy() - 50, 
-		PlayerPos.ix() + 50,
-		PlayerPos.iy() + 50
-		);
+
+
+
+	GameEngineWindow::GetBackBufferImage()->BitCopy(Image, PlayerPos - float4{50, 50}, { 100, 100 });
+
 
 }
