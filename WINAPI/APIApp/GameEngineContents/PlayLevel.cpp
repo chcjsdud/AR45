@@ -1,6 +1,7 @@
 #include "PlayLevel.h"
 #include "Player.h"
 #include <GameEngineBase/GameEngineDirectory.h>
+#include <GameEngineCore/GameEngineResources.h>
 
 PlayLevel::PlayLevel() 
 {
@@ -23,9 +24,7 @@ void PlayLevel::Loading()
 	Dir.Move("ContentsResources");
 	Dir.Move("Image");
 
-	Dir.GetPlusFileName("Heros.BMP");
-
-
+	GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Heros.BMP"));
 
 
 	//if (true == Path.IsExistsToPlusString("\\Heros.bmp"))

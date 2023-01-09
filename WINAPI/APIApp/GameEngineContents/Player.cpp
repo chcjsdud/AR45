@@ -30,9 +30,17 @@ void Player::Render()
 
 	// TextOutA(GameEngineWindow::GetDrawHdc(), 0, 0, PathText.c_str(), PathText.size());
 
+	char Color[4] = {255, 0, 0, 0};
+	int* Ptr = reinterpret_cast<int*>(Color);
+
+	SetPixel(
+		GameEngineWindow::GetWindowBackBufferHdc(),
+		10, 10, *Ptr
+	);
+
 
 	Rectangle(
-		GameEngineWindow::GetDrawHdc(),
+		GameEngineWindow::GetWindowBackBufferHdc(),
 		PlayerPos.ix() - 50, 
 		PlayerPos.iy() - 50, 
 		PlayerPos.ix() + 50,
