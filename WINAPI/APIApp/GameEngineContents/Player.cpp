@@ -18,7 +18,7 @@ void Player::Start()
 
 void Player::Update() 
 {
-	SetMove(float4::Left * 0.0001f);
+	// SetMove(float4::Left * 0.0001f);
 }
 
 void Player::Render()
@@ -40,7 +40,7 @@ void Player::Render()
 	//);
 
 	//Rectangle(
-	//	GameEngineWindow::GetWindowBackBufferHdc(),
+	//	GameEngineWindow::GetDoubleBufferImage()->GetImageDC(),
 	//	PlayerPos.ix() - 50, 
 	//	PlayerPos.iy() - 50, 
 	//	PlayerPos.ix() + 50,
@@ -52,11 +52,7 @@ void Player::Render()
 	// 특정한 hdc를 다른 hdc에 복사하는 함수
 	// bitblt는 이미지를 크기를 줄이거나 늘리는 기능이 없다.
 
+	// GameEngineWindow::GetDoubleBufferImage()->BitCopy(Image, PlayerPos - float4{50, 50}, { 100, 100 });
 
-
-
-
-	GameEngineWindow::GetBackBufferImage()->BitCopy(Image, PlayerPos - float4{50, 50}, { 100, 100 });
-
-
+	GameEngineWindow::GetDoubleBufferImage()->TransCopy(Image, PlayerPos - float4{ 50, 50 }, { 100, 100 }, float4::Left, Image->GetImageScale());
 }

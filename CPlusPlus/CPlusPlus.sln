@@ -230,6 +230,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "85.StringEx", "85.StringEx\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapEx", "MapEx\MapEx.vcxproj", "{9FDA3B80-4673-4968-8EB0-7293A91F2616}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "86, DefaultParameter", "86, DefaultParameter\86, DefaultParameter.vcxproj", "{A0812C84-A1A0-4AC2-B394-DCD162C7DDDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1086,6 +1088,14 @@ Global
 		{9FDA3B80-4673-4968-8EB0-7293A91F2616}.Release|x64.Build.0 = Release|x64
 		{9FDA3B80-4673-4968-8EB0-7293A91F2616}.Release|x86.ActiveCfg = Release|Win32
 		{9FDA3B80-4673-4968-8EB0-7293A91F2616}.Release|x86.Build.0 = Release|Win32
+		{A0812C84-A1A0-4AC2-B394-DCD162C7DDDD}.Debug|x64.ActiveCfg = Debug|x64
+		{A0812C84-A1A0-4AC2-B394-DCD162C7DDDD}.Debug|x64.Build.0 = Debug|x64
+		{A0812C84-A1A0-4AC2-B394-DCD162C7DDDD}.Debug|x86.ActiveCfg = Debug|Win32
+		{A0812C84-A1A0-4AC2-B394-DCD162C7DDDD}.Debug|x86.Build.0 = Debug|Win32
+		{A0812C84-A1A0-4AC2-B394-DCD162C7DDDD}.Release|x64.ActiveCfg = Release|x64
+		{A0812C84-A1A0-4AC2-B394-DCD162C7DDDD}.Release|x64.Build.0 = Release|x64
+		{A0812C84-A1A0-4AC2-B394-DCD162C7DDDD}.Release|x86.ActiveCfg = Release|Win32
+		{A0812C84-A1A0-4AC2-B394-DCD162C7DDDD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

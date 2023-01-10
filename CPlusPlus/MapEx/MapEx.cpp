@@ -18,6 +18,13 @@ int main()
     }
     Map.insert(std::make_pair("aaa", 1));
 
+    std::map<int, int> IntMap;
+
+    // 배열 같죠?
+    // 없으면 insert
+    // 있다면 find
+    // 없으면 만들고
+    IntMap[10] = 1;
 
     std::cout << "Hello World!\n";
 }
