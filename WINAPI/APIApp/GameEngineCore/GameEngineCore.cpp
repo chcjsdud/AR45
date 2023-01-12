@@ -36,7 +36,7 @@ void GameEngineCore::GlobalEnd()
 {
 	Core->End();
 
-	GameEngineResources::GetInst().Relase();
+	GameEngineResources::GetInst().Release();
 }
 
 

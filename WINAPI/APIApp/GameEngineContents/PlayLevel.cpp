@@ -32,6 +32,12 @@ void PlayLevel::Loading()
 		Image->Cut({ 2, 12 }, {949,38}, 32, 1);
 	}
 
+	{
+		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("aaaaa.BMP"));
+		Image->Cut(4, 8);
+	}
+
+
 	//if (true == Path.IsExistsToPlusString("\\Heros.bmp"))
 	//{
 	//	int a = 0;

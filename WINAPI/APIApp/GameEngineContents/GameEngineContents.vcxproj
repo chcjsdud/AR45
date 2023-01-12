@@ -43,6 +43,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ContentsEnums.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Monster.cpp">
