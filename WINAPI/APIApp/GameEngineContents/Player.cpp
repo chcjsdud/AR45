@@ -16,47 +16,38 @@ void Player::Start()
 	SetMove(GameEngineWindow::GetScreenSize().half());
 }
 
-void Player::Update() 
+void Player::Update(float _DeltaTime) 
 {
-	SetMove(float4::Left * 1.0f);
+	// AccTime += _DeltaTime;
+
+	// 렉이라고 하는 현상.
+	//for (size_t i = 0; i < 1000000000; i++)
+	//{
+
+	//}
+	
+	// 1.0f * AccTime
+	SetMove(float4::Left * 100.0f * _DeltaTime);
 }
 
-void Player::Render()
+void Player::Render(float _DeltaTime)
 {
 	float4 PlayerPos = GetPos();
+	GameEngineImage* Image = GameEngineResources::GetInst().ImageFind("Heros.bmp");
 
-	//GameEnginePath Path;
+	AccTime += _DeltaTime;
 
-	//std::string PathText = Path.GetPathToString();
+	if (AccTime >= 0.1f)
+	{
+		// AccTime = 0.0f;
+		AccTime -= 0.1f;
+		++StartFrame;
+	}
 
-	// TextOutA(GameEngineWindow::GetDrawHdc(), 0, 0, PathText.c_str(), PathText.size());
+	if (10 < StartFrame)
+	{
+		StartFrame = 0;
+	}
 
-	//char Color[4] = {255, 0, 0, 0};
-	//int* Ptr = reinterpret_cast<int*>(Color);
-
-	//SetPixel(
-	//	GameEngineWindow::GetWindowBackBufferHdc(),
-	//	10, 10, *Ptr
-	//);
-
-	//Rectangle(
-	//	GameEngineWindow::GetDoubleBufferImage()->GetImageDC(),
-	//	PlayerPos.ix() - 50, 
-	//	PlayerPos.iy() - 50, 
-	//	PlayerPos.ix() + 50,
-	//	PlayerPos.iy() + 50
-	//	);
-
-	GameEngineImage* Image = GameEngineResources::GetInst().ImageFind("aaaaa.bmp");
-
-	// 특정한 hdc를 다른 hdc에 복사하는 함수
-	// bitblt는 이미지를 크기를 줄이거나 늘리는 기능이 없다.
-
-	// GameEngineWindow::GetDoubleBufferImage()->BitCopy(Image, PlayerPos - float4{50, 50}, { 100, 100 });
-
-	// 비율이 어긋날수록 더 느려진다.
-	// GameEngineWindow::GetDoubleBufferImage()->TransCopy(Image, PlayerPos, { 100, 200 }, { 0, 32 }, {16, 32});
-
-	// 프레임 애니메이션이라고 합니다.
-	GameEngineWindow::GetDoubleBufferImage()->TransCopy(Image, 4, PlayerPos, { 100, 200 });
+	GameEngineWindow::GetDoubleBufferImage()->TransCopy(Image, StartFrame, PlayerPos, { 100, 200 });
 }
