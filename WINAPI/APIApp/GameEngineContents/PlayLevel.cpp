@@ -1,8 +1,8 @@
 #include "PlayLevel.h"
 #include "Player.h"
+
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineCore/GameEngineResources.h>
-#include <GameEngineBase/GameEngineTime.h>
 
 PlayLevel::PlayLevel() 
 {
@@ -14,47 +14,20 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Loading() 
 {
-	GameEngineTime NewTime;
-
-	// 이런 경로를 절대 경로.
-	// "D:\Project\AR45\WINAPI\APIApp\ContentsResources\Iamge\Heros.bmp";
-
-	// std::string Text = "D:\Project\AR45\WINAPI\APIApp\ContentsResources\Iamge\Heros.bmp";
-
+	// 상대경로 탐색
 	GameEngineDirectory Dir;
-
 	Dir.MoveParentToDirectory("ContentsResources");
 	Dir.Move("ContentsResources");
 	Dir.Move("Image");
+	Dir.Move("Play");
 
+	// 이미지 로드
 	{
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Heros.BMP"));
 		Image->Cut({ 2, 12 }, {949,38}, 32, 1);
 	}
 
-	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("aaaaa.BMP"));
-		Image->Cut(4, 8);
-	}
-
-
-	//if (true == Path.IsExistsToPlusString("\\Heros.bmp"))
-	//{
-	//	int a = 0;
-	//}
-
-	//bool Result = false;
-	//Result = Path.IsExistsToPlusString("\\ContentsResources");
-	//Path.MoveParent();
-	//Result = Path.IsExistsToPlusString("\\ContentsResources");
-	//Path.MoveParent();
-	//Result = Path.IsExistsToPlusString("\\ContentsResources");
-	//Path.MoveParent();
-	//Result = Path.IsExistsToPlusString("\\ContentsResources");
-	//Path.MoveParent();
-
-
-	// 만들어야할 것들을 만드는 시점이 Loading시점입니다.
+	// 액터 생성
 	CreateActor<Player>();
 }
 

@@ -1,6 +1,7 @@
 #include "GameEngineCore.h"
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 #include "GameEngineLevel.h"
 #include "GameEngineResources.h"
 #include <GameEngineBase/GameEngineTime.h>
@@ -18,6 +19,7 @@ void GameEngineCore::GlobalUpdate()
 {
 	// 프레임 시작할때 한번 델타타임을 정하고
 	float TimeDeltaTime = GameEngineTime::GlobalTime.TimeCheck();
+	GameEngineInput::Update(TimeDeltaTime);
 
 	Core->Update();
 	if (nullptr == Core->MainLevel)

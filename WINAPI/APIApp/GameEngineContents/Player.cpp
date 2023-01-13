@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEngineCore/GameEngineRender.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 #include "ContentsEnums.h"
 
 Player::Player() 
@@ -17,17 +18,20 @@ void Player::Start()
 {
 	SetMove(GameEngineWindow::GetScreenSize().half());
 
+
+	if (false == GameEngineInput::IsKey("LeftMove"))
+	{
+		GameEngineInput::CreateKey("LeftMove", 'A');
+		GameEngineInput::CreateKey("RightMove", 'D');
+		GameEngineInput::CreateKey("DownMove", 'S');
+		GameEngineInput::CreateKey("UpMove", 'W');
+	}
+
 	{
 		GameEngineRender* Render = CreateRender("Heros.bmp", BubbleRenderOrder::BackGround);
 		Render->SetScale({ 100, 100 });
+		Render->SetFrame(4);
 	}
-
-	{
-		GameEngineRender* Render = CreateRender("aaaaa.bmp", BubbleRenderOrder::Player);
-		Render->SetPosition({ 10, 0 });
-		Render->SetScale({ 500, 500 });
-	}
-
 
 	// Render->SetPosition({0.0f, -100.0f});
 
@@ -37,6 +41,46 @@ void Player::Start()
 
 void Player::Update(float _DeltaTime) 
 {
+	if (true == GameEngineInput::IsPress("LeftMove"))
+	{
+		SetMove(float4::Left * MoveSpeed * _DeltaTime);
+	}
+
+	if (true == GameEngineInput::IsPress("RightMove"))
+	{
+		SetMove(float4::Right * MoveSpeed * _DeltaTime);
+	}
+
+	if (true == GameEngineInput::IsPress("UpMove"))
+	{
+		SetMove(float4::Up * MoveSpeed * _DeltaTime);
+	}
+
+	if (true == GameEngineInput::IsPress("DownMove"))
+	{
+		SetMove(float4::Down * MoveSpeed * _DeltaTime);
+	}
+
+	//if (0 != GetAsyncKeyState('A'))
+	//{
+	//	SetMove(float4::Left * 100.0f * _DeltaTime);
+	//}
+
+	//if (0 != GetAsyncKeyState('D'))
+	//{
+	//	SetMove(float4::Right * 100.0f * _DeltaTime);
+	//}
+
+	//if (0 != GetAsyncKeyState('W'))
+	//{
+	//	SetMove(float4::Up * 100.0f * _DeltaTime);
+	//}
+
+	//if (0 != GetAsyncKeyState('S'))
+	//{
+	//	SetMove(float4::Down * 100.0f * _DeltaTime);
+	//}
+
 	// AccTime += _DeltaTime;
 
 	// 렉이라고 하는 현상.

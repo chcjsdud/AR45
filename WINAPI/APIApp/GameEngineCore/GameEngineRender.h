@@ -34,9 +34,21 @@ public:
 		Scale = _Scale;
 	}
 
+	void SetFrame(int _Frame);
+
+	inline GameEngineImage* GetImage()
+	{
+		return Image;
+	}
+
 	inline int GetOrder() 
 	{
 		return Order;
+	}
+
+	inline int GetFrame()
+	{
+		return Frame;
 	}
 
 protected:
