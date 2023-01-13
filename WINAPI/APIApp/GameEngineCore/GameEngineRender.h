@@ -51,6 +51,18 @@ public:
 		return Frame;
 	}
 
+
+	inline float4 GetPosition()
+	{
+		return Position;
+	}
+
+	inline float4 GetScale()
+	{
+		return Scale;
+	}
+
+
 protected:
 
 private:
