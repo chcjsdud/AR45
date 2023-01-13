@@ -3,7 +3,6 @@
 
 #include "PlayLevel.h"
 #include "TitleLevel.h"
-#include "OpenningLevel.h"
 
 // StudyGameCore StudyGameCore::Core = new StudyGameCore();
 
@@ -27,12 +26,11 @@ void StudyGameCore::Start()
 
 	new int();
 
-	CreateLevel<TitleLevel>("Title");
-	CreateLevel<OpenningLevel>("Openning");
-	CreateLevel<PlayLevel>("Play");
+	CreateLevel<TitleLevel>("TitleLevel");
+	CreateLevel<PlayLevel>("PlayLevel");
 	// static_assert
 	// CreateLevel<HPlayer>("Title1");
-	ChangeLevel("Play");
+	ChangeLevel("TitleLevel");
 }
 
 void StudyGameCore::Update()

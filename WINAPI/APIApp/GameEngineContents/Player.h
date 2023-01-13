@@ -5,6 +5,8 @@
 class Player : public GameEngineActor
 {
 public:
+	static Player* MainPlayer;
+
 	// constrcuter destructer
 	Player();
 	~Player();

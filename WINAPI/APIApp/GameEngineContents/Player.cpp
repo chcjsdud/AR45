@@ -6,6 +6,8 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include "ContentsEnums.h"
 
+Player* Player::MainPlayer;
+
 Player::Player() 
 {
 }
@@ -16,6 +18,8 @@ Player::~Player()
 
 void Player::Start()
 {
+	MainPlayer = this;
+
 	SetMove(GameEngineWindow::GetScreenSize().half());
 
 

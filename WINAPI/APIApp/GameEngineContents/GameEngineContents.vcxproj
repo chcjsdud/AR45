@@ -23,10 +23,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="OpenningLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -36,6 +32,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="StudyGameCore.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TitleBack.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -50,10 +50,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="OpenningLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
@@ -63,6 +59,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="StudyGameCore.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TitleBack.cpp">
       <SubType>
       </SubType>
     </ClCompile>

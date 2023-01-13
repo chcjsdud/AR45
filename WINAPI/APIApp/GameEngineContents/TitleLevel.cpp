@@ -2,6 +2,9 @@
 
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineCore/GameEngineResources.h>
+#include <GameEngineCore/GameEngineCore.h>
+#include <GameEnginePlatform/GameEngineInput.h>
+#include "TitleBack.h"
 
 TitleLevel::TitleLevel() 
 {
@@ -25,9 +28,19 @@ void TitleLevel::Loading()
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("TitleBack.BMP"));
 	}
 
+	if (false == GameEngineInput::IsKey("LevelChange"))
+	{
+		GameEngineInput::CreateKey("LevelChange", 'P');
+	}
+
+	CreateActor<TitleBack>();
 
 }
-void TitleLevel::Update()
+void TitleLevel::Update(float _DeltaTime)
 {
-
+	if (true == GameEngineInput::IsDown("LevelChange"))
+	{
+		GameEngineCore::GetInst()->ChangeLevel("PlayLevel");
+	}
+	int a = 0;
 }

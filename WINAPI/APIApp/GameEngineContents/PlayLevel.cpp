@@ -3,6 +3,7 @@
 
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineCore/GameEngineResources.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 
 PlayLevel::PlayLevel() 
 {
@@ -29,9 +30,19 @@ void PlayLevel::Loading()
 
 	// 액터 생성
 	CreateActor<Player>();
+
+	if (false == GameEngineInput::IsKey("PlayerOff"))
+	{
+		GameEngineInput::CreateKey("PlayerOff", 'R');
+	}
 }
 
-void PlayLevel::Update() 
+void PlayLevel::Update(float _DeltaTime)
 {
-
+	if (GameEngineInput::IsDown("PlayerOff"))
+	{
+		Player::MainPlayer->OnOffSwtich();
+		// Player::MainPlayer->Death()p;
+	}
 }
+

@@ -54,7 +54,7 @@ void GameEngineLevel::ActorsUpdate(float _DeltaTime)
 			for (GameEngineActor* Actor : ActorList)
 			{
 				// Actors.erase()
-				if (nullptr == Actor)
+				if (nullptr == Actor || false == Actor->IsUpdate())
 				{
 					continue;
 				}
@@ -76,7 +76,7 @@ void GameEngineLevel::ActorsUpdate(float _DeltaTime)
 			for (GameEngineActor* Actor : ActorList)
 			{
 				// Actors.erase()
-				if (nullptr == Actor)
+				if (nullptr == Actor || false == Actor->IsUpdate())
 				{
 					continue;
 				}
@@ -101,7 +101,7 @@ void GameEngineLevel::ActorsRender(float _DeltaTime)
 			for (GameEngineRender* Renderer : RenderList)
 			{
 				// Actors.erase()
-				if (nullptr == Renderer)
+				if (nullptr == Renderer || false == Renderer->IsUpdate())
 				{
 					continue;
 				}
@@ -122,7 +122,7 @@ void GameEngineLevel::ActorsRender(float _DeltaTime)
 			for (GameEngineActor* Actor : ActorList)
 			{
 				// Actors.erase()
-				if (nullptr == Actor)
+				if (nullptr == Actor || false == Actor->IsUpdate())
 				{
 					continue;
 				}
