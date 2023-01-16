@@ -38,7 +38,8 @@ void TitleLevel::Loading()
 }
 void TitleLevel::Update(float _DeltaTime)
 {
-	if (true == GameEngineInput::IsDown("LevelChange"))
+	// if (true == GameEngineInput::IsDown("LevelChange"))
+	if (true == GameEngineInput::IsAnyKey())
 	{
 		GameEngineCore::GetInst()->ChangeLevel("PlayLevel");
 	}
