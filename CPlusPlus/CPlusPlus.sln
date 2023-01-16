@@ -234,6 +234,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "86, DefaultParameter", "86,
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "87.Union", "87.Union\87.Union.vcxproj", "{08A7CA87-74A1-4032-9AF0-CDE35CCC6CF4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "88StructParameter", "88StructParameter\88StructParameter.vcxproj", "{66407BCF-8C09-4FBC-8239-49C2AB53A145}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1106,6 +1108,14 @@ Global
 		{08A7CA87-74A1-4032-9AF0-CDE35CCC6CF4}.Release|x64.Build.0 = Release|x64
 		{08A7CA87-74A1-4032-9AF0-CDE35CCC6CF4}.Release|x86.ActiveCfg = Release|Win32
 		{08A7CA87-74A1-4032-9AF0-CDE35CCC6CF4}.Release|x86.Build.0 = Release|Win32
+		{66407BCF-8C09-4FBC-8239-49C2AB53A145}.Debug|x64.ActiveCfg = Debug|x64
+		{66407BCF-8C09-4FBC-8239-49C2AB53A145}.Debug|x64.Build.0 = Debug|x64
+		{66407BCF-8C09-4FBC-8239-49C2AB53A145}.Debug|x86.ActiveCfg = Debug|Win32
+		{66407BCF-8C09-4FBC-8239-49C2AB53A145}.Debug|x86.Build.0 = Debug|Win32
+		{66407BCF-8C09-4FBC-8239-49C2AB53A145}.Release|x64.ActiveCfg = Release|x64
+		{66407BCF-8C09-4FBC-8239-49C2AB53A145}.Release|x64.Build.0 = Release|x64
+		{66407BCF-8C09-4FBC-8239-49C2AB53A145}.Release|x86.ActiveCfg = Release|Win32
+		{66407BCF-8C09-4FBC-8239-49C2AB53A145}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

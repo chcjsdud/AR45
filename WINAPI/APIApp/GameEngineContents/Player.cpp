@@ -32,10 +32,17 @@ void Player::Start()
 	}
 
 	{
-		GameEngineRender* Render = CreateRender("Heros.bmp", BubbleRenderOrder::BackGround);
-		Render->SetScale({ 100, 100 });
-		Render->SetFrame(4);
+		AnimationRender = CreateRender(BubbleRenderOrder::BackGround);
+		AnimationRender->SetScale({ 100, 100 });
+
+		AnimationRender->CreateAnimation({ .AnimationName = "Test0",  .ImageName = "Heros.bmp", .Start = 0, .End = 5});
+		AnimationRender->CreateAnimation({ .AnimationName = "Test1",  .ImageName = "Heros.bmp", .Start = 20, .End = 26 });
+		AnimationRender->ChangeAnimation("Test0");
+
+		// Render->SetFrame(4);
 	}
+
+
 
 	// Render->SetPosition({0.0f, -100.0f});
 
@@ -47,6 +54,7 @@ void Player::Update(float _DeltaTime)
 {
 	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
+		AnimationRender->ChangeAnimation("Test1");
 		SetMove(float4::Left * MoveSpeed * _DeltaTime);
 	}
 

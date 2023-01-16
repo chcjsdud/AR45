@@ -27,5 +27,7 @@ private:
 	int StartFrame = 0;
 	float MoveSpeed = 100.0f;
 
+	GameEngineRender* AnimationRender;
+
 };
 
