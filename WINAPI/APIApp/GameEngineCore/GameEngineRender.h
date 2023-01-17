@@ -69,6 +69,10 @@ public:
 		return Frame;
 	}
 
+	void SetTransColor(int _Color) 
+	{
+		TransColor = _Color;
+	}
 
 	inline float4 GetPosition()
 	{
@@ -93,6 +97,8 @@ private:
 	float4 Position = float4::Zero;
 	float4 Scale = float4::Zero;
 	GameEngineImage* Image = nullptr;
+
+	int TransColor = RGB(255, 0, 255);
 
 	int Frame = 0;
 

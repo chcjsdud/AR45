@@ -89,7 +89,6 @@ void GameEngineLevel::ActorsUpdate(float _DeltaTime)
 
 void GameEngineLevel::ActorsRender(float _DeltaTime)
 {
-
 	{
 		std::map<int, std::list<GameEngineRender*>>::iterator GroupStartIter = Renders.begin();
 		std::map<int, std::list<GameEngineRender*>>::iterator GroupEndIter = Renders.end();
@@ -131,6 +130,7 @@ void GameEngineLevel::ActorsRender(float _DeltaTime)
 			}
 		}
 	}
+
 }
 
 void GameEngineLevel::PushRender(GameEngineRender* _Render)

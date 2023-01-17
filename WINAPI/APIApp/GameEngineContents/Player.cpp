@@ -33,10 +33,11 @@ void Player::Start()
 
 	{
 		AnimationRender = CreateRender(BubbleRenderOrder::BackGround);
-		AnimationRender->SetScale({ 100, 100 });
+		AnimationRender->SetScale({ 256, 256 });
+		AnimationRender->SetTransColor(RGB(0, 0, 255));
 
-		AnimationRender->CreateAnimation({ .AnimationName = "Test0",  .ImageName = "Heros.bmp", .Start = 0, .End = 5});
-		AnimationRender->CreateAnimation({ .AnimationName = "Test1",  .ImageName = "Heros.bmp", .Start = 20, .End = 26 });
+		AnimationRender->CreateAnimation({ .AnimationName = "Test0",  .ImageName = "Player.bmp", .Start = 0, .End = 5});
+		AnimationRender->CreateAnimation({ .AnimationName = "Test1",  .ImageName = "Player.bmp", .Start = 20, .End = 26 });
 		AnimationRender->ChangeAnimation("Test0");
 
 		// Render->SetFrame(4);
@@ -107,5 +108,15 @@ void Player::Update(float _DeltaTime)
 
 void Player::Render(float _DeltaTime)
 {
+	HDC DoubleDC = GameEngineWindow::GetDoubleBufferImage()->GetImageDC();
+	float4 ActorPos = GetPos();
+
+	Rectangle(DoubleDC, 
+		ActorPos.ix() - 5,
+		ActorPos.iy() - 5,
+		ActorPos.ix() + 5,
+		ActorPos.iy() + 5
+		);
+
 	// µð¹ö±ë¿ë.
 }
