@@ -46,11 +46,6 @@ void GameEngineRender::SetFrame(int _Frame)
 
 void GameEngineRender::FrameAnimation::Render(float _DeltaTime)
 {
-	//if (CurrentTime <= 0.0f)
-	//{
-	//	CurrentTime = FrameTime[]
-	//}
-
 	CurrentTime -= _DeltaTime;
 
 	if (CurrentTime <= 0.0f)

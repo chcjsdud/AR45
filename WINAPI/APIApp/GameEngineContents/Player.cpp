@@ -36,15 +36,15 @@ void Player::Start()
 		AnimationRender->SetScale({ 256, 256 });
 		AnimationRender->SetTransColor(RGB(0, 0, 255));
 
-		AnimationRender->CreateAnimation({ .AnimationName = "Test0",  .ImageName = "Player.bmp", .Start = 0, .End = 5});
-		AnimationRender->CreateAnimation({ .AnimationName = "Test1",  .ImageName = "Player.bmp", .Start = 20, .End = 26 });
-		AnimationRender->ChangeAnimation("Test0");
+		AnimationRender->CreateAnimation({ .AnimationName = "Right_Idle",  .ImageName = "Right_Player.bmp", .Start = 0, .End = 2, .InterTime = 0.3f});
+		AnimationRender->CreateAnimation({ .AnimationName = "Right_Move",  .ImageName = "Right_Player.bmp", .Start = 3, .End = 7 });
 
-		// Render->SetFrame(4);
+		AnimationRender->CreateAnimation({ .AnimationName = "Left_Idle",  .ImageName = "Left_Player.bmp", .Start = 0, .End = 2, .InterTime = 0.3f });
+		AnimationRender->CreateAnimation({ .AnimationName = "Left_Move",  .ImageName = "Left_Player.bmp", .Start = 3, .End = 7 });
 	}
 
 
-
+	ChangeState(PlayerState::IDLE);
 	// Render->SetPosition({0.0f, -100.0f});
 
 	// CreateRender("PlayerCharacter.Bmp");
@@ -53,57 +53,21 @@ void Player::Start()
 
 void Player::Update(float _DeltaTime) 
 {
-	if (true == GameEngineInput::IsPress("LeftMove"))
+	DirCheck();
+	UpdateState(_DeltaTime);
+}
+
+void Player::DirCheck()
+{
+	if (GameEngineInput::IsPress("LeftMove"))
 	{
-		AnimationRender->ChangeAnimation("Test1");
-		SetMove(float4::Left * MoveSpeed * _DeltaTime);
+		DirString = "Left_";
+	}
+	else if(GameEngineInput::IsPress("RightMove"))
+	{
+		DirString = "Right_";
 	}
 
-	if (true == GameEngineInput::IsPress("RightMove"))
-	{
-		SetMove(float4::Right * MoveSpeed * _DeltaTime);
-	}
-
-	if (true == GameEngineInput::IsPress("UpMove"))
-	{
-		SetMove(float4::Up * MoveSpeed * _DeltaTime);
-	}
-
-	if (true == GameEngineInput::IsPress("DownMove"))
-	{
-		SetMove(float4::Down * MoveSpeed * _DeltaTime);
-	}
-
-	//if (0 != GetAsyncKeyState('A'))
-	//{
-	//	SetMove(float4::Left * 100.0f * _DeltaTime);
-	//}
-
-	//if (0 != GetAsyncKeyState('D'))
-	//{
-	//	SetMove(float4::Right * 100.0f * _DeltaTime);
-	//}
-
-	//if (0 != GetAsyncKeyState('W'))
-	//{
-	//	SetMove(float4::Up * 100.0f * _DeltaTime);
-	//}
-
-	//if (0 != GetAsyncKeyState('S'))
-	//{
-	//	SetMove(float4::Down * 100.0f * _DeltaTime);
-	//}
-
-	// AccTime += _DeltaTime;
-
-	// 렉이라고 하는 현상.
-	//for (size_t i = 0; i < 1000000000; i++)
-	//{
-
-	//}
-	
-	// 1.0f * AccTime
-	// SetMove(float4::Left * 100.0f * _DeltaTime);
 }
 
 void Player::Render(float _DeltaTime)

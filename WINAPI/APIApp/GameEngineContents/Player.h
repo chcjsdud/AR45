@@ -1,6 +1,12 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+enum class PlayerState
+{
+	IDLE,
+	MOVE,
+};
+
 // 설명 :
 class Player : public GameEngineActor
 {
@@ -22,12 +28,32 @@ protected:
 	void Update(float _DeltaTime) override;
 	void Render(float _Time) override;
 
+
 private:
 	float AccTime = 0.0f;
 	int StartFrame = 0;
 	float MoveSpeed = 100.0f;
 
-	GameEngineRender* AnimationRender;
+	std::string DirString = "Right_";
+	PlayerState StateValue = PlayerState::IDLE;
+
+	GameEngineRender* AnimationRender = nullptr;
+
+
+	void DirCheck();
+
+	// State
+	void ChangeState(PlayerState _State);
+	void UpdateState(float _Time);
+
+	// FSM 내가 어떤일을 할때 이동하면서 가만히 있을수 없다.
+	void IdleStart();
+	void IdleUpdate(float _Time);
+	void IdleEnd();
+
+	void MoveStart();
+	void MoveUpdate(float _Time);
+	void MoveEnd();
 
 };
 

@@ -24,9 +24,14 @@ void PlayLevel::Loading()
 
 	// 이미지 로드
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Player.BMP"));
-		// Image->Cut({ 2, 12 }, {949,38}, 32, 1);
-		Image->Cut(5, 17);
+		{
+			GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Right_Player.BMP"));
+			Image->Cut(5, 17);
+		}
+		{
+			GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Left_Player.BMP"));
+			Image->Cut(5, 17);
+		}
 	}
 
 	// 액터 생성
