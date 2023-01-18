@@ -1,9 +1,11 @@
 #include "Player.h"
-#include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineBase/GameEnginePath.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEngineCore/GameEngineRender.h>
-#include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEngineCore/GameEngineLevel.h>
+
 #include "ContentsEnums.h"
 
 
@@ -93,9 +95,11 @@ void Player::MoveUpdate(float _Time)
 	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
 		SetMove(float4::Left * MoveSpeed * _Time);
+		// GetLevel()->SetCameraMove(float4::Left * _Time * MoveSpeed);
 	} else if (true == GameEngineInput::IsPress("RightMove"))
 	{
 		SetMove(float4::Right * MoveSpeed * _Time);
+		// GetLevel()->SetCameraMove(float4::Right * _Time * MoveSpeed);
 	}
 
 	DirCheck("Move");

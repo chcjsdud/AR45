@@ -1,12 +1,14 @@
 #pragma once
 #include <list>
 #include <map>
+#include <GameEngineBase/GameEngineMath.h>
+#include <GameEngineCore/GameEngineObject.h>
 
 // 설명 :
 class GameEngineCore;
 class GameEngineActor;
 class GameEngineRender;
-class GameEngineLevel
+class GameEngineLevel : public GameEngineObject
 {
 	friend GameEngineCore;
 	friend GameEngineRender;
@@ -45,6 +47,21 @@ public:
 		return dynamic_cast<ActorType*>(Actor);
 	}
 
+	void SetCameraMove(const float4& _MoveValue)
+	{
+		CameraPos += _MoveValue;
+	}
+
+	void SetCameraPos(const float4& _CameraPos)
+	{
+		CameraPos = _CameraPos;
+	}
+
+	float4 GetCameraPos()
+	{
+		return CameraPos;
+	}
+
 protected:
 	virtual void Loading() = 0;
 	virtual void Update(float _DeltaTime) = 0;
@@ -54,6 +71,8 @@ protected:
 	virtual void LevelChangeStart(GameEngineLevel* _PrevLevel) = 0;
 
 private:
+	float4 CameraPos = float4::Zero;
+
 	// 컨텐츠를 알아서도 안되지만
 	//std::list<Player*> Actors;
 	//std::list<Monster*> Actors;
@@ -68,7 +87,6 @@ private:
 
 
 	void ActorStart(GameEngineActor* _Actor, int _Order);
-
 
 	std::map<int, std::list<GameEngineRender*>> Renders;
 

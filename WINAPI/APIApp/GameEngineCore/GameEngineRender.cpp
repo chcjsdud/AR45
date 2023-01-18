@@ -13,6 +13,12 @@ GameEngineRender::~GameEngineRender()
 {
 }
 
+GameEngineActor* GameEngineRender::GetActor()
+{
+	return GetOwner<GameEngineActor>();
+}
+
+
 void GameEngineRender::SetImage(const std::string_view& _ImageName) 
 {
 	Image = GameEngineResources::GetInst().ImageFind(_ImageName);
@@ -21,7 +27,7 @@ void GameEngineRender::SetImage(const std::string_view& _ImageName)
 void GameEngineRender::SetOrder(int _Order) 
 {
 	Order = _Order;
-	Owner->GetLevel()->PushRender(this);
+	GetActor()->GetLevel()->PushRender(this);
 }
 
 void GameEngineRender::SetFrame(int _Frame)
@@ -76,7 +82,14 @@ void GameEngineRender::Render(float _DeltaTime)
 		Image = CurrentAnimation->Image;
 	}
 
-	float4 RenderPos = Owner->GetPos() + Position;
+	float4 CameraPos = float4::Zero;
+
+	if (true == IsEffectCamera)
+	{
+		CameraPos = GetActor()->GetLevel()->GetCameraPos();
+	}
+
+	float4 RenderPos = GetActor()->GetPos() + Position - CameraPos;
 
 	if (true == Image->IsImageCutting())
 	{
