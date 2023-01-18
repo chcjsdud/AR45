@@ -28,7 +28,7 @@ public:
 	/// <typeparam name="ActorType"> GameEngineActor를 상속받은 클래스 타입 </typeparam>
 	/// <param name="_Order"> Actor의 업데이트 순서 숫자가 작을수록 먼저 업데이트 됩니다. </param>
 	template<typename ActorType>
-	void CreateActor(int _Order = 0)
+	ActorType* CreateActor(int _Order = 0)
 	{
 		//if (Actors.end() == Actors.find(_Order))
 		//{
@@ -41,6 +41,8 @@ public:
 
 		// 맵의 새로운 문법
 		Actors[_Order].push_back(Actor);
+
+		return dynamic_cast<ActorType*>(Actor);
 	}
 
 protected:

@@ -1,6 +1,6 @@
 #pragma once
 
-// 설명 :
+// 설명 : 오브젝트 구조의 가장 기본이 되어주는 클래스.
 class GameEngineObject
 {
 public:
@@ -17,7 +17,13 @@ public:
 	bool IsUpdate() 
 	{
 		//         조건          ?              true 일때                                      :         false 일때
-		return nullptr != Parent ? ((ObjectUpdate && false == IsDeath()) || Parent->IsUpdate()) : (ObjectUpdate && false == IsDeath());
+		// 부모가 있다면
+		// ((true == ObjectUpdate && false == IsDeath()) && true == Parent->IsUpdate())
+		// 내가 켜져있어야하고 true == ObjectUpdate
+		// 내가 죽지도 않았어야 한다. false == IsDeath()
+		// 부모도 켜져있어야 한다 true == Parent->IsUpdate()
+
+		return nullptr != Parent ? ((true == ObjectUpdate && false == IsDeath()) && true == Parent->IsUpdate()) : (ObjectUpdate && false == IsDeath());
 
 		// return nullptr != Parent ? 1000 : 200;
 	}

@@ -32,9 +32,8 @@ void Player::Start()
 	}
 
 	{
-		AnimationRender = CreateRender(BubbleRenderOrder::BackGround);
-		AnimationRender->SetScale({ 256, 256 });
-		AnimationRender->SetTransColor(RGB(0, 0, 255));
+		AnimationRender = CreateRender(BubbleRenderOrder::Player);
+		AnimationRender->SetScale({ 200, 200 });
 
 		AnimationRender->CreateAnimation({ .AnimationName = "Right_Idle",  .ImageName = "Right_Player.bmp", .Start = 0, .End = 2, .InterTime = 0.3f});
 		AnimationRender->CreateAnimation({ .AnimationName = "Right_Move",  .ImageName = "Right_Player.bmp", .Start = 3, .End = 7 });
@@ -43,22 +42,19 @@ void Player::Start()
 		AnimationRender->CreateAnimation({ .AnimationName = "Left_Move",  .ImageName = "Left_Player.bmp", .Start = 3, .End = 7 });
 	}
 
-
 	ChangeState(PlayerState::IDLE);
-	// Render->SetPosition({0.0f, -100.0f});
-
-	// CreateRender("PlayerCharacter.Bmp");
-
 }
 
 void Player::Update(float _DeltaTime) 
 {
-	DirCheck();
 	UpdateState(_DeltaTime);
 }
 
-void Player::DirCheck()
+void Player::DirCheck(const std::string_view& _AnimationName)
 {
+	std::string PrevDirString = DirString;
+	AnimationRender->ChangeAnimation(DirString + _AnimationName.data());
+
 	if (GameEngineInput::IsPress("LeftMove"))
 	{
 		DirString = "Left_";
@@ -68,6 +64,10 @@ void Player::DirCheck()
 		DirString = "Right_";
 	}
 
+	if (PrevDirString != DirString)
+	{
+		AnimationRender->ChangeAnimation(DirString + _AnimationName.data());
+	}
 }
 
 void Player::Render(float _DeltaTime)
