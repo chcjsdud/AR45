@@ -15,6 +15,8 @@ Map::~Map()
 void Map::Start()
 {
 	{
+		// float4 Scree = GameEngineWindow::GetScreenSize();
+
 		GameEngineRender* AnimationRender = CreateRender(BubbleRenderOrder::Map);
 		AnimationRender->SetPosition(GameEngineWindow::GetScreenSize().half());
 		AnimationRender->SetScale(GameEngineWindow::GetScreenSize());

@@ -32,10 +32,11 @@ protected:
 private:
 	float AccTime = 0.0f;
 	int StartFrame = 0;
-	float MoveSpeed = 100.0f;
+	float MoveSpeed = 1.0f;
 
 	std::string DirString = "Right_";
 	PlayerState StateValue = PlayerState::IDLE;
+	float4 MoveDir = float4::Zero;
 
 	GameEngineRender* AnimationRender = nullptr;
 
@@ -54,6 +55,8 @@ private:
 	void MoveStart();
 	void MoveUpdate(float _Time);
 	void MoveEnd();
+
+	void Movecalculation(float _DeltaTime);
 
 };
 

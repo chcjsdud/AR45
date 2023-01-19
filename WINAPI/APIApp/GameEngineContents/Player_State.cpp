@@ -92,15 +92,16 @@ void Player::MoveUpdate(float _Time)
 		return;
 	}
 
+	// float4 MoveDir = float4::Zero;
+
 	if (true == GameEngineInput::IsPress("LeftMove"))
 	{
-		SetMove(float4::Left * MoveSpeed * _Time);
-		// GetLevel()->SetCameraMove(float4::Left * _Time * MoveSpeed);
+		MoveDir += float4::Left * MoveSpeed;
 	} else if (true == GameEngineInput::IsPress("RightMove"))
 	{
-		SetMove(float4::Right * MoveSpeed * _Time);
-		// GetLevel()->SetCameraMove(float4::Right * _Time * MoveSpeed);
+		MoveDir += float4::Right * MoveSpeed;
 	}
+
 
 	DirCheck("Move");
 }
