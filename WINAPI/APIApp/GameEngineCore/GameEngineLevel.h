@@ -2,7 +2,9 @@
 #include <list>
 #include <map>
 #include <vector>
+
 #include <GameEngineBase/GameEngineMath.h>
+#include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineCore/GameEngineObject.h>
 
 // Ό³Έν :
