@@ -153,6 +153,8 @@ bool Player::FreeMoveState(float _DeltaTime)
 
 void Player::Update(float _DeltaTime) 
 {
+	// std::vector<Monster*> AllMonster = GetLevel()->GetActors<Monster>(BubbleRenderOrder::Monster);
+
 	if (true == FreeMoveState(_DeltaTime))
 	{
 		return;

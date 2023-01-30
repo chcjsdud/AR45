@@ -96,8 +96,9 @@ public:
 		IsEffectCamera = false;
 	}
 
+	bool IsAnimationEnd();
 	void CreateAnimation(const FrameAnimationParameter& _Paramter);
-	void ChangeAnimation(const std::string_view& _AnimationName);
+	void ChangeAnimation(const std::string_view& _AnimationName, bool _ForceChange = false);
 
 protected:
 
@@ -128,6 +129,9 @@ private:
 		int CurrentIndex = 0;
 		float CurrentTime = 0.0f;
 		bool Loop = true;
+
+
+		bool IsEnd();
 
 		void Render(float _DeltaTime);
 

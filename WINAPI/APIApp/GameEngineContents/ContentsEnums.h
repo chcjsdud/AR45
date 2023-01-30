@@ -5,4 +5,5 @@ enum class BubbleRenderOrder
 	BackGround,
 	Map,
 	Player,
+	Monster,
 };
