@@ -8,7 +8,6 @@
 // 나랑 같은 등급의 헤더들
 #include "Player.h"
 #include "Map.h"
-#include "BackGround.h"
 
 PlayLevel::PlayLevel()
 {
@@ -41,19 +40,27 @@ void PlayLevel::Loading()
 		Image->Cut(3, 1);
 	}
 	{
-		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Map.BMP"));
-		GameEngineImage* ColImage = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("ColMap.BMP"));
+		GameEngineImage* Image1 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Map_Spaceport.BMP"));
+		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Map.BMP"));
+		GameEngineImage* Image3 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("ColMap.BMP"));
 	}
 
-	// 액터 생성
-	{
-		BackGround* Actor = CreateActor<BackGround>();
-	}
 	{
 		Map* Actor = CreateActor<Map>();
+
+		// Actor->GetRender()
+		// Actor->GetRender()->SetImage();
 	}
 	{
 		Player* Actor = CreateActor<Player>();
+
+		// 횡스크롤류 게임은 맵의 크기를 
+		// 시작위치를 
+		// 레벨마다 배경맵 이미지가 다를것이고
+		// 그때마다 스테이지가 다르니까.
+		//Actor->SetMove();
+		//SetCameraMove();
+
 	}
 
 

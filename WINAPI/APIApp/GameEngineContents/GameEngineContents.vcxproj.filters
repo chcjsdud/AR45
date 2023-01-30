@@ -18,9 +18,6 @@
     <ClInclude Include="TitleBack.h">
       <Filter>Title</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>Play</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>Play</Filter>
     </ClInclude>
@@ -43,9 +40,6 @@
       <Filter>Title</Filter>
     </ClCompile>
     <ClCompile Include="Player_State.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="BackGround.cpp">
       <Filter>Play</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">

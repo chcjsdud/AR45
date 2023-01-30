@@ -4,7 +4,10 @@
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEngineCore/GameEngineRender.h>
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEngineCore/GameEngineLevel.h>
 #include "ContentsEnums.h"
+
+#include "Map.h"
 
 Player* Player::MainPlayer;
 
@@ -29,6 +32,9 @@ void Player::Start()
 		GameEngineInput::CreateKey("RightMove", 'D');
 		GameEngineInput::CreateKey("DownMove", 'S');
 		GameEngineInput::CreateKey("UpMove", 'W');
+
+		GameEngineInput::CreateKey("FreeMoveSwitch", '1');
+		GameEngineInput::CreateKey("StageClear", '2');
 	}
 
 	{
@@ -47,10 +53,7 @@ void Player::Start()
 
 void Player::Movecalculation(float _DeltaTime)
 {
-	if (true)
-	{
-		MoveDir += float4::Down * 200.0f * _DeltaTime;
-	}
+	MoveDir += float4::Down * 200.0f * _DeltaTime;
 
 	if (100.0f <= abs(MoveDir.x))
 	{
@@ -107,8 +110,59 @@ void Player::Movecalculation(float _DeltaTime)
 	SetMove(MoveDir * _DeltaTime);
 }
 
+bool FreeMove = false;
+
+bool Player::FreeMoveState(float _DeltaTime)
+{
+	if (true == GameEngineInput::IsPress("FreeMoveSwitch"))
+	{
+		FreeMove = true;
+	}
+
+	if (true == FreeMove)
+	{
+		if (GameEngineInput::IsPress("LeftMove"))
+		{
+			SetMove(float4::Left * 1000.0f * _DeltaTime);
+			GetLevel()->SetCameraMove(float4::Left * 1000.0f * _DeltaTime);
+		}
+		else if (GameEngineInput::IsPress("RightMove"))
+		{
+			SetMove(float4::Right * 1000.0f * _DeltaTime);
+			GetLevel()->SetCameraMove(float4::Right * 1000.0f * _DeltaTime);
+		}
+		else if (GameEngineInput::IsPress("UpMove"))
+		{
+			SetMove(float4::Up * 1000.0f * _DeltaTime);
+			GetLevel()->SetCameraMove(float4::Up * 1000.0f * _DeltaTime);
+		}
+		else if (GameEngineInput::IsPress("DownMove"))
+		{
+			SetMove(float4::Down * 1000.0f * _DeltaTime);
+			GetLevel()->SetCameraMove(float4::Down * 1000.0f * _DeltaTime);
+		}
+	}
+
+	if (true == FreeMove)
+	{
+		return true;
+	}
+
+	return false;
+}
+
 void Player::Update(float _DeltaTime) 
 {
+	if (true == FreeMoveState(_DeltaTime))
+	{
+		return;
+	}
+
+	if (GameEngineInput::IsDown("StageClear"))
+	{
+		Map::MainMap->StageClearOn();
+	}
+
 	UpdateState(_DeltaTime);
 	Movecalculation(_DeltaTime);
 }
@@ -144,6 +198,11 @@ void Player::Render(float _DeltaTime)
 		ActorPos.ix() + 5,
 		ActorPos.iy() + 5
 		);
+
+
+	//std::string Text = "출력";
+	//SetBkMode(DoubleDC, TRANSPARENT);
+	//TextOut(DoubleDC, 0, 0, Text.c_str(), Text.size());
 
 	// 디버깅용.
 }

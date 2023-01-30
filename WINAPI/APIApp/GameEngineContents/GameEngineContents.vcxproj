@@ -19,10 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BackGround.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <SubType>
       </SubType>
@@ -54,10 +50,6 @@
     <ClInclude Include="ContentsEnums.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BackGround.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <SubType>
       </SubType>
