@@ -23,7 +23,6 @@ void Player::Start()
 {
 	MainPlayer = this;
 
-	SetMove(GameEngineWindow::GetScreenSize().half());
 
 
 	if (false == GameEngineInput::IsKey("LeftMove"))

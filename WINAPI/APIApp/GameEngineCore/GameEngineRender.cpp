@@ -18,7 +18,6 @@ GameEngineActor* GameEngineRender::GetActor()
 	return GetOwner<GameEngineActor>();
 }
 
-
 void GameEngineRender::SetImage(const std::string_view& _ImageName) 
 {
 	Image = GameEngineResources::GetInst().ImageFind(_ImageName);
@@ -36,7 +35,7 @@ void GameEngineRender::SetScaleToImage()
 
 void GameEngineRender::SetOrder(int _Order) 
 {
-	Order = _Order;
+	GameEngineObject::SetOrder(_Order);
 	GetActor()->GetLevel()->PushRender(this);
 }
 

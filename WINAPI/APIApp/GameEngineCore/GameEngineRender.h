@@ -64,11 +64,6 @@ public:
 		return Image;
 	}
 
-	inline int GetOrder() 
-	{
-		return Order;
-	}
-
 	inline int GetFrame()
 	{
 		return Frame;
@@ -100,11 +95,11 @@ public:
 	void CreateAnimation(const FrameAnimationParameter& _Paramter);
 	void ChangeAnimation(const std::string_view& _AnimationName, bool _ForceChange = false);
 
+	void SetOrder(int _Order) override;
+
 protected:
 
-
 private:
-	int Order = 0;
 	float4 Position = float4::Zero;
 	float4 Scale = float4::Zero;
 	GameEngineImage* Image = nullptr;
@@ -113,8 +108,6 @@ private:
 	int TransColor = RGB(255, 0, 255);
 
 	int Frame = 0;
-
-	void SetOrder(int _Order);
 
 	void Render(float _DeltaTime);
 

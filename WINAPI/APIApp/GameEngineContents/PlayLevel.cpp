@@ -4,10 +4,13 @@
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineResources.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
 
 // 나랑 같은 등급의 헤더들
 #include "Player.h"
+#include "Monster.h"
 #include "Map.h"
+#include "ContentsEnums.h"
 
 PlayLevel::PlayLevel()
 {
@@ -46,20 +49,19 @@ void PlayLevel::Loading()
 
 	{
 		Map* Actor = CreateActor<Map>();
-
-		// Actor->GetRender()
-		// Actor->GetRender()->SetImage();
 	}
 	{
-		Player* Actor = CreateActor<Player>();
-
-		// 횡스크롤류 게임은 맵의 크기를 
-		// 시작위치를 
-		// 레벨마다 배경맵 이미지가 다를것이고
-		// 그때마다 스테이지가 다르니까.
-		//Actor->SetMove();
-		//SetCameraMove();
-
+		Player* Actor = CreateActor<Player>(BubbleRenderOrder::Player);
+		Actor->SetMove(GameEngineWindow::GetScreenSize().half());
+		Actor->SetMove({100, 0});
+	}
+	{
+		srand(time(nullptr));
+		for (size_t i = 0; i < 1; i++)
+		{
+			Monster* Actor = CreateActor<Monster>(BubbleRenderOrder::Monster);
+			Actor->SetMove(float4(rand() % GameEngineWindow::GetScreenSize().ix(), rand() % GameEngineWindow::GetScreenSize().iy()));
+		}
 	}
 
 
