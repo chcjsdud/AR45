@@ -28,13 +28,7 @@ void StudyGameCore::Start()
 
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<PlayLevel>("PlayLevel");
-	// static_assert
-	// CreateLevel<HPlayer>("Title1");
 	ChangeLevel("TitleLevel");
-
-	float4 AAAA = {100, 100};
-
-	AAAA = -AAAA;
 }
 
 void StudyGameCore::Update()

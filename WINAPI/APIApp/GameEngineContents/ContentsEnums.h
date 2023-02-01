@@ -7,3 +7,11 @@ enum class BubbleRenderOrder
 	Player,
 	Monster,
 };
+
+enum class BubbleCollisionOrder
+{
+	Player,
+	Monster,
+	PlayerAttack,
+	MonsterAttack,
+};

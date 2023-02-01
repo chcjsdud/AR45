@@ -3,8 +3,10 @@
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEngineCore/GameEngineRender.h>
+#include <GameEngineCore/GameEngineCollision.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineLevel.h>
+
 #include "ContentsEnums.h"
 
 #include "Map.h"
@@ -45,6 +47,12 @@ void Player::Start()
 
 		AnimationRender->CreateAnimation({ .AnimationName = "Left_Idle",  .ImageName = "Left_Player.bmp", .Start = 0, .End = 2, .InterTime = 0.3f });
 		AnimationRender->CreateAnimation({ .AnimationName = "Left_Move",  .ImageName = "Left_Player.bmp", .Start = 3, .End = 7 });
+	}
+
+
+	{
+		BodyCollision = CreateCollision(BubbleCollisionOrder::Player);
+		BodyCollision->SetScale({ 50, 50 });
 	}
 
 	ChangeState(PlayerState::IDLE);
@@ -152,6 +160,19 @@ bool Player::FreeMoveState(float _DeltaTime)
 
 void Player::Update(float _DeltaTime) 
 {
+	std::vector<GameEngineCollision*> Collision;
+	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(BubbleCollisionOrder::Monster)}, Collision))
+	{
+		for (size_t i = 0; i < Collision.size(); i++)
+		{
+			// Monster* FindMonster = Collision[i]->GetOwner<Monster>();
+
+			GameEngineActor* ColActor = Collision[i]->GetActor();
+			ColActor->Death();
+		}
+	}
+
+
 	// std::vector<Monster*> AllMonster = GetLevel()->GetActors<Monster>(BubbleRenderOrder::Monster);
 
 	if (true == FreeMoveState(_DeltaTime))

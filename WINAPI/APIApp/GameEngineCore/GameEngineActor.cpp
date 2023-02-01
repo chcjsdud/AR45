@@ -19,6 +19,18 @@ GameEngineActor::~GameEngineActor()
 		delete _Render;
 		_Render = nullptr;
 	}
+
+	for (GameEngineCollision* _Collision : CollisionList)
+	{
+		if (nullptr == _Collision)
+		{
+			continue;
+		}
+
+		delete _Collision;
+		_Collision = nullptr;
+	}
+
 }
 
 GameEngineLevel* GameEngineActor::GetLevel()

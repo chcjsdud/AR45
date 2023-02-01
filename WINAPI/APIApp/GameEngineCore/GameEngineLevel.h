@@ -11,10 +11,12 @@
 class GameEngineCore;
 class GameEngineActor;
 class GameEngineRender;
+class GameEngineCollision;
 class GameEngineLevel : public GameEngineObject
 {
 	friend GameEngineCore;
 	friend GameEngineRender;
+	friend GameEngineCollision;
 
 public:
 	// constrcuter destructer
@@ -122,6 +124,7 @@ public:
 protected:
 	virtual void Loading() = 0;
 	virtual void Update(float _DeltaTime) = 0;
+	
 	// 내가 이제 다른 레벨로 교체된다.
 	virtual void LevelChangeEnd(GameEngineLevel* _NextLevel) = 0;
 	// 내가 이제 새로운 눈에 보이는 레벨이 될거다.
@@ -146,9 +149,12 @@ private:
 	void ActorStart(GameEngineActor* _Actor, int _Order);
 
 	std::map<int, std::list<GameEngineRender*>> Renders;
-
 	void PushRender(GameEngineRender* _Render);
 
+	std::map<int, std::list<GameEngineCollision*>> Collisions;
+	void PushCollision(GameEngineCollision* _Collision);
 
+	// 엔진수준의 기능이기 때문에 private으로 둔다.
+	void Release();
 };
 

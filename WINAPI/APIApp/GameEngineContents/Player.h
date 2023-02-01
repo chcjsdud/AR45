@@ -39,6 +39,7 @@ private:
 	float4 MoveDir = float4::Zero;
 
 	GameEngineRender* AnimationRender = nullptr;
+	GameEngineCollision* BodyCollision = nullptr;
 
 
 	void DirCheck(const std::string_view& _AnimationName);

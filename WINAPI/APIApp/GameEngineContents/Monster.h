@@ -23,6 +23,7 @@ protected:
 
 private:
 	GameEngineRender* AnimationRender = nullptr;
+	GameEngineCollision* BodyCollision = nullptr;
 
 };
 

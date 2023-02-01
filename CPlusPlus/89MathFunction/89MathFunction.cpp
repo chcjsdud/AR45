@@ -37,11 +37,7 @@ int main()
 	float Value0 = sqrtf(2.0f);
 	float Value1 = sqrtf(4.0f);
 
-	// 1, 1, 1.4
-	// 0.7, 0.7, 1
 
-	// 절대값을 구해준다.
-	// -1 1
 	float Value2 = abs(-4.0f);
 
 	float Value3 = lerp(3, 5, 0.5);

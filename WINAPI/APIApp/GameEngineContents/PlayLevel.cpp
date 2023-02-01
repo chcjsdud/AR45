@@ -56,11 +56,13 @@ void PlayLevel::Loading()
 		Actor->SetMove({100, 0});
 	}
 	{
-		srand(time(nullptr));
-		for (size_t i = 0; i < 1; i++)
+		srand(static_cast<unsigned int>(time(nullptr)));
+		for (size_t i = 0; i < 10; i++)
 		{
 			Monster* Actor = CreateActor<Monster>(BubbleRenderOrder::Monster);
-			Actor->SetMove(float4(rand() % GameEngineWindow::GetScreenSize().ix(), rand() % GameEngineWindow::GetScreenSize().iy()));
+			Actor->SetMove(
+				float4(static_cast<float>(rand() % GameEngineWindow::GetScreenSize().ix()), static_cast<float>(rand() % GameEngineWindow::GetScreenSize().iy()))
+			);
 		}
 	}
 
