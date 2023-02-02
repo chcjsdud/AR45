@@ -67,9 +67,9 @@ void PlayLevel::Loading()
 	}
 
 
-	if (false == GameEngineInput::IsKey("PlayerOff"))
+	if (false == GameEngineInput::IsKey("DebugRenderSwitch"))
 	{
-		GameEngineInput::CreateKey("PlayerOff", 'R');
+		GameEngineInput::CreateKey("DebugRenderSwitch", 'R');
 	}
 
 
@@ -85,9 +85,9 @@ void PlayLevel::Loading()
 
 void PlayLevel::Update(float _DeltaTime)
 {
-	if (GameEngineInput::IsDown("PlayerOff"))
+	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
-		Player::MainPlayer->OnOffSwtich();
+		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;
 	}
 

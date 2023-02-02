@@ -25,8 +25,6 @@ void Player::Start()
 {
 	MainPlayer = this;
 
-
-
 	if (false == GameEngineInput::IsKey("LeftMove"))
 	{
 		GameEngineInput::CreateKey("LeftMove", 'A');
@@ -123,6 +121,12 @@ bool Player::FreeMoveState(float _DeltaTime)
 {
 	if (true == GameEngineInput::IsPress("FreeMoveSwitch"))
 	{
+		if (nullptr != BodyCollision)
+		{
+			BodyCollision->Death();
+			BodyCollision = nullptr;
+		}
+
 		FreeMove = true;
 	}
 
@@ -160,20 +164,19 @@ bool Player::FreeMoveState(float _DeltaTime)
 
 void Player::Update(float _DeltaTime) 
 {
-	std::vector<GameEngineCollision*> Collision;
-	if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(BubbleCollisionOrder::Monster)}, Collision))
-	{
-		for (size_t i = 0; i < Collision.size(); i++)
-		{
-			// Monster* FindMonster = Collision[i]->GetOwner<Monster>();
 
-			GameEngineActor* ColActor = Collision[i]->GetActor();
-			ColActor->Death();
+	if (nullptr != BodyCollision)
+	{
+		std::vector<GameEngineCollision*> Collision;
+		if (true == BodyCollision->Collision({ .TargetGroup = static_cast<int>(BubbleCollisionOrder::Monster), .TargetColType = CT_Rect, .ThisColType = CT_Rect }, Collision))
+		{
+			for (size_t i = 0; i < Collision.size(); i++)
+			{
+				GameEngineActor* ColActor = Collision[i]->GetActor();
+				ColActor->Death();
+			}
 		}
 	}
-
-
-	// std::vector<Monster*> AllMonster = GetLevel()->GetActors<Monster>(BubbleRenderOrder::Monster);
 
 	if (true == FreeMoveState(_DeltaTime))
 	{
@@ -221,6 +224,15 @@ void Player::Render(float _DeltaTime)
 		ActorPos.iy() + 5
 		);
 
+
+	std::string MouseText = "MousePosition : ";
+	MouseText += GetLevel()->GetMousePos().ToString();
+
+	std::string CameraMouseText = "MousePositionCamera : ";
+	CameraMouseText += GetLevel()->GetMousePosToCamera().ToString();
+
+	GameEngineLevel::DebugTextPush(MouseText);
+	GameEngineLevel::DebugTextPush(CameraMouseText);
 
 	//std::string Text = "Ãâ·Â";
 	//SetBkMode(DoubleDC, TRANSPARENT);
