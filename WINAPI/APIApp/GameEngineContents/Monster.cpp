@@ -29,6 +29,7 @@ void Monster::Start()
 	{
 		BodyCollision = CreateCollision(BubbleCollisionOrder::Monster);
 		BodyCollision->SetScale({ 50, 50 });
+		BodyCollision->Off();
 	}
 }
 
