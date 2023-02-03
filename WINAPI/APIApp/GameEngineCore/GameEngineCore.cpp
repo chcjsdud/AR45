@@ -31,6 +31,7 @@ void GameEngineCore::GlobalUpdate()
 		if (nullptr != PrevLevel)
 		{
 			PrevLevel->LevelChangeEnd(NextLevel);
+			PrevLevel->ActorLevelChangeEnd(NextLevel);
 		}
 
 		Core->MainLevel = NextLevel;
@@ -39,6 +40,7 @@ void GameEngineCore::GlobalUpdate()
 		if (nullptr != NextLevel)
 		{
 			NextLevel->LevelChangeStart(PrevLevel);
+			NextLevel->ActorLevelChangeStart(PrevLevel);
 		}
 	}
 
