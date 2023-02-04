@@ -41,8 +41,6 @@ private:
 	GameEngineRender* AnimationRender = nullptr;
 	GameEngineCollision* BodyCollision = nullptr;
 
-	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
-
 
 	void DirCheck(const std::string_view& _AnimationName);
 
@@ -62,5 +60,6 @@ private:
 	void MoveEnd();
 
 	void Movecalculation(float _DeltaTime);
+
 };
 
