@@ -16,3 +16,38 @@ const float4 float4::Back	   = { 0.0f, 0.0f, -1.0f, 1.0f };
 
 const float4 float4::Zero = { 0.0f, 0.0f, 0.0f, 1.0f };
 const float4 float4::Null = { 0.0f, 0.0f, 0.0f, 0.0f };
+
+std::vector<unsigned int> GameEngineMath::GetDigits(unsigned int _Value)
+{
+	std::vector<unsigned int> ResultValue = std::vector<unsigned int>();
+
+	if (0 == _Value)
+	{
+		ResultValue.push_back(0);
+		return ResultValue;
+	}
+
+	int Lenth = GetLenth(_Value);
+	ResultValue.resize(Lenth);
+
+	int Value = _Value;
+	int HighestDigitValue = 0;
+	for (size_t i = 0; i < Lenth; i++)
+	{
+		HighestDigitValue = Value / pow(10, Lenth - (1 + i));
+		ResultValue[i] = HighestDigitValue;
+		Value -= HighestDigitValue * pow(10, Lenth - (1 + i));
+	}
+
+	return ResultValue;
+}
+
+unsigned int GameEngineMath::GetLenth(unsigned int _Value)
+{
+	int Lenth = 0;
+	while (_Value >= pow(10, Lenth))
+	{
+		++Lenth;
+	}
+	return Lenth;
+}
