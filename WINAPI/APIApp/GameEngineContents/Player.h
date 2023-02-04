@@ -32,7 +32,7 @@ protected:
 private:
 	float AccTime = 0.0f;
 	int StartFrame = 0;
-	float MoveSpeed = 500.0f;
+	float MoveSpeed = 1.0f;
 
 	std::string DirString = "Right_";
 	PlayerState StateValue = PlayerState::IDLE;
@@ -40,6 +40,8 @@ private:
 
 	GameEngineRender* AnimationRender = nullptr;
 	GameEngineCollision* BodyCollision = nullptr;
+
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 
 	void DirCheck(const std::string_view& _AnimationName);
@@ -60,6 +62,5 @@ private:
 	void MoveEnd();
 
 	void Movecalculation(float _DeltaTime);
-
 };
 

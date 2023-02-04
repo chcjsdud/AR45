@@ -115,6 +115,12 @@ void Player::Movecalculation(float _DeltaTime)
 	SetMove(MoveDir * _DeltaTime);
 }
 
+void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	MainPlayer = this;
+	int a = 0;
+}
+
 bool FreeMove = false;
 
 bool Player::FreeMoveState(float _DeltaTime)
