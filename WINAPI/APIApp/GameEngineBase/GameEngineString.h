@@ -8,6 +8,8 @@ class GameEngineString
 public:
 	static std::string ToUpper(const std::string_view& _Str);
 
+	static std::string ToString(int Value);
+
 	// delete Function
 
 protected:
