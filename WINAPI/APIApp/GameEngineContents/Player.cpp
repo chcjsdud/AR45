@@ -47,6 +47,10 @@ void Player::Start()
 		AnimationRender->CreateAnimation({ .AnimationName = "Left_Move",  .ImageName = "Left_Player.bmp", .Start = 3, .End = 7 });
 	}
 
+	{
+		GameEngineRender* Render = CreateRender(BubbleRenderOrder::Player);
+		Render->SetText("aaaa");
+	}
 
 	{
 		BodyCollision = CreateCollision(BubbleCollisionOrder::Player);

@@ -57,7 +57,7 @@ void PlayLevel::Loading()
 	}
 	{
 		srand(static_cast<unsigned int>(time(nullptr)));
-		for (size_t i = 0; i < 10; i++)
+		for (size_t i = 0; i < 0; i++)
 		{
 			Monster* Actor = CreateActor<Monster>(BubbleRenderOrder::Monster);
 			Actor->SetMove(
