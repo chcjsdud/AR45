@@ -25,6 +25,9 @@ void Player::Start()
 {
 	MainPlayer = this;
 
+	TestNumber.SetOwner(this);
+	TestNumber.SetImage("Number.BMp", {40, 40});
+
 	if (false == GameEngineInput::IsKey("LeftMove"))
 	{
 		GameEngineInput::CreateKey("LeftMove", 'A');
@@ -51,6 +54,10 @@ void Player::Start()
 		GameEngineRender* Render = CreateRender(BubbleRenderOrder::Player);
 		Render->SetText("aaaa");
 	}
+
+	// NumbersRender NewRender;
+	// NewRender.SetActor(this);
+	// NewRender.SetValue(10000);
 
 	{
 		BodyCollision = CreateCollision(BubbleCollisionOrder::Player);

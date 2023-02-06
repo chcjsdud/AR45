@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEngineCore/NumberRenderObject.h>
 
 enum class PlayerState
 {
@@ -30,6 +31,8 @@ protected:
 
 
 private:
+	NumberRenderObject TestNumber;
+
 	float AccTime = 0.0f;
 	int StartFrame = 0;
 	float MoveSpeed = 1.0f;

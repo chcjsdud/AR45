@@ -46,6 +46,10 @@ void PlayLevel::Loading()
 		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Map.BMP"));
 		GameEngineImage* Image3 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("ColMap.BMP"));
 	}
+	{
+		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Number.BMP"));
+		Image2->Cut(10, 1);
+	}
 
 	{
 		Map* Actor = CreateActor<Map>();
@@ -81,6 +85,13 @@ void PlayLevel::Loading()
 		GameEngineInput::CreateKey("CameraDownMove", VK_DOWN);
 		GameEngineInput::CreateKey("CameraUpMove", VK_UP);
 	}
+
+	// class NumbersRender : GameEngineActor
+	// {
+	// }
+
+	// NumbersRender = CreateActor<NumbersRender>();
+	// NumbersRender->SetValue(190111);
 }
 
 void PlayLevel::Update(float _DeltaTime)
