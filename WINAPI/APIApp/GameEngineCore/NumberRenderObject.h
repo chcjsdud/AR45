@@ -22,8 +22,13 @@ public:
 	NumberRenderObject& operator=(NumberRenderObject&& _Other) noexcept = delete;
 
 	// 
-	void SetImage(const std::string_view& _ImageName, float4 _Scale, int _Order);
+	void SetImage(const std::string_view& _ImageName, float4 _Scale, int _Order, int _TransColor);
 	void SetValue(int _Value);
+
+	inline int GetValue() 
+	{
+		return Value;
+	}
 
 protected:
 
@@ -32,6 +37,7 @@ private:
 	float4 NumberScale;
 	float4 Pos;
 	int Value = 0;
+	int TransColor = RGB(255, 0, 255);
 	// GameEngineImage* NumberImage;
 
 	std::string_view ImageName;

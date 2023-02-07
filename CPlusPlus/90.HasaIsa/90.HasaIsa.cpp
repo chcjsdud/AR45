@@ -46,9 +46,10 @@ class NumbersRenderObject : public GameEngineActor
 class PlayLevel
 {
 public:
-    NumbersRenderObject TimeNumber;
-    NumbersRenderObject BulletNumber;
-    NumbersRenderObject BomeNumber;
+    // PlayUI
+    NumbersRenderObject* TimeNumber;
+    NumbersRenderObject* BulletNumber;
+    NumbersRenderObject* BomeNumber;
 };
 
 

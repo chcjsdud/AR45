@@ -26,7 +26,8 @@ void Player::Start()
 	MainPlayer = this;
 
 	TestNumber.SetOwner(this);
-	TestNumber.SetImage("Number.BMp", {40, 40});
+	TestNumber.SetImage("Number.BMp", {40, 40}, 10, RGB(255, 255, 255));
+	TestNumber.SetValue(Value);
 
 	if (false == GameEngineInput::IsKey("LeftMove"))
 	{
@@ -175,6 +176,7 @@ bool Player::FreeMoveState(float _DeltaTime)
 
 void Player::Update(float _DeltaTime) 
 {
+	TestNumber.SetValue(++Value);
 
 	if (nullptr != BodyCollision)
 	{

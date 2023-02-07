@@ -65,5 +65,7 @@ private:
 	void MoveEnd();
 
 	void Movecalculation(float _DeltaTime);
+
+	int Value = 0;
 };
 

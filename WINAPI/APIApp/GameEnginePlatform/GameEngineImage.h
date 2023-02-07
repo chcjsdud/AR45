@@ -87,7 +87,7 @@ public:
 		return IsCut;
 	}
 
-	bool GetImageCuttingCount()
+	size_t GetImageCuttingCount()
 	{
 		return ImageCutDatas.size();
 	}
