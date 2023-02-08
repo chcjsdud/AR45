@@ -8,6 +8,7 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include "TitleBack.h"
 #include "MouseObject.h"
+#include "ContentsValue.h"
 
 TitleLevel::TitleLevel() 
 {
@@ -125,4 +126,10 @@ void TitleLevel::Update(float _DeltaTime)
 		}
 	}
 
+}
+
+
+void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+	ContentsValue::CameraScale = { 2000, 3000 };
 }

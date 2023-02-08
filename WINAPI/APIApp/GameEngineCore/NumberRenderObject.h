@@ -35,7 +35,10 @@ public:
 	void SetMove(float4 _RenderPos);
 	void SetAlign(Align _Align);
 
-	void SetCameraEffectOff();
+	void SetCameraEffect(bool _EffectSetting) 
+	{
+		CameraEffect = _EffectSetting;
+	}
 
 	inline void SetRenderPos(float4 _Pos)
 	{
@@ -57,6 +60,8 @@ private:
 	int TransColor = RGB(255, 0, 255);
 	Align AlignState = Align::Left;
 	// GameEngineImage* NumberImage;
+
+	bool CameraEffect = false;
 
 	std::string_view ImageName = std::string_view();
 

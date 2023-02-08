@@ -8,8 +8,10 @@
 #include <GameEngineCore/GameEngineLevel.h>
 
 #include "ContentsEnums.h"
+#include "ContentsValue.h"
 
 #include "Map.h"
+#include "STLevel.h"
 
 Player* Player::MainPlayer;
 
@@ -23,12 +25,20 @@ Player::~Player()
 
 void Player::Start()
 {
+	ContentsValue::CameraScale;
+
+	ContentsValue::CameraScale = { 1000, 2000 };
+
 	MainPlayer = this;
 
 	TestNumber.SetOwner(this);
 	TestNumber.SetImage("Number.BMp", {40, 40}, 10, RGB(255, 255, 255));
 	TestNumber.SetValue(Value);
 	TestNumber.SetAlign(Align::Right);
+
+	//STLevel* Level = GetOwner<STLevel>();
+	//Level->GetCameraScale();
+
 
 	if (false == GameEngineInput::IsKey("LeftMove"))
 	{

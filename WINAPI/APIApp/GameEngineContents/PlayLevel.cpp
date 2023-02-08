@@ -1,5 +1,7 @@
 #include "PlayLevel.h"
 
+#include "Structs.h"
+
 // 프로젝트 순서에 따라서 정렬
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEnginePlatform/GameEngineInput.h>
@@ -11,9 +13,14 @@
 #include "Monster.h"
 #include "Map.h"
 #include "ContentsEnums.h"
+#include "ContentsValue.h"
 
 PlayLevel::PlayLevel()
 {
+	// SetName("PlayerLevel");
+
+	// WeaponInfo::Infos.insert(std::make_pair(std::string("철검"), WeaponInfo{ 10, "aaaaa.bmp"}));
+	WeaponInfo::Infos["철검"] = WeaponInfo{10, "aaaaa.bmp"};
 }
 
 PlayLevel::~PlayLevel()
@@ -22,12 +29,19 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Loading()
 {
+
+	// STLevel* Ptr = GetOwner<STLevel>();
+	// Ptr->GetCameraScale();
+
+	SetCameraScale({1000, 100});
+
 	// 상대경로 탐색
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
 	Dir.Move("ContentsResources");
 	Dir.Move("Image");
 	Dir.Move("Play");
+
 
 	// 이미지 로드
 	{
@@ -125,5 +139,6 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+	ContentsValue::CameraScale = { 2000, 3000 };
 	int a = 0;
 }

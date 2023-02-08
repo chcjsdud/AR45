@@ -24,6 +24,9 @@
     <ClInclude Include="MouseObject.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="Structs.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -49,6 +52,9 @@
       <Filter>Play</Filter>
     </ClCompile>
     <ClCompile Include="MouseObject.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Structs.cpp">
       <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>

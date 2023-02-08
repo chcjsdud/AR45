@@ -61,9 +61,19 @@ public:
 		TransColor = _Color;
 	}
 
+	inline void SetEffectCamera(bool _Effect)
+	{
+		IsEffectCamera = _Effect;
+	}
+
 	inline void EffectCameraOff()
 	{
-		IsEffectCamera = false;
+		SetEffectCamera(false);
+	}
+
+	inline void EffectCameraOn()
+	{
+		SetEffectCamera(true);
 	}
 
 	bool IsAnimationEnd();
