@@ -106,7 +106,7 @@ void NumberRenderObject::SetAlign(int _Align)
 
 void NumberRenderObject::SetAlign(Align _Align)
 {
-	SetAlign(static_cast<int>(_Align));
+	AlignState = _Align;
 }
 
 
