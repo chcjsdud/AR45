@@ -32,7 +32,7 @@ void Player::Start()
 	MainPlayer = this;
 
 	TestNumber.SetOwner(this);
-	TestNumber.SetImage("Number.BMp", {40, 40}, 10, RGB(255, 255, 255));
+	TestNumber.SetImage("Number.BMp", {40, 40}, 10, RGB(255, 255, 255), "Hover.bmp");
 	TestNumber.SetValue(Value);
 	TestNumber.SetAlign(Align::Right);
 
@@ -187,7 +187,7 @@ bool Player::FreeMoveState(float _DeltaTime)
 
 void Player::Update(float _DeltaTime) 
 {
-	TestNumber.SetValue(++Value);
+	TestNumber.SetValue(--Value);
 
 	if (nullptr != BodyCollision)
 	{
