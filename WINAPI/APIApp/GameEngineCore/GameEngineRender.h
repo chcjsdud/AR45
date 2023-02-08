@@ -40,6 +40,8 @@ public:
 
 	void SetImage(const std::string_view& _ImageName);
 
+	void SetImageToScaleToImage(const std::string_view& _ImageName);
+
 	void SetScaleToImage();
 
 	void SetFrame(int _Frame);

@@ -32,6 +32,14 @@ void NumberRenderObject::SetImage(const std::string_view& _ImageName, float4 _Sc
 	TransColor = _TransColor;
 }
 
+void NumberRenderObject::SetCameraEffectOff()
+{
+	for (size_t i = 0; i < NumberRenders.size(); i++)
+	{
+		NumberRenders[i]->EffectCameraOff();
+	}
+}
+
 void NumberRenderObject::SetValue(int _Value)
 {
 	Value = _Value;

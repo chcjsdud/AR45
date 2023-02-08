@@ -21,6 +21,9 @@
     <ClInclude Include="Map.h">
       <Filter>Play</Filter>
     </ClInclude>
+    <ClInclude Include="MouseObject.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -45,6 +48,9 @@
     <ClCompile Include="Map.cpp">
       <Filter>Play</Filter>
     </ClCompile>
+    <ClCompile Include="MouseObject.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Play">
@@ -52,6 +58,9 @@
     </Filter>
     <Filter Include="Title">
       <UniqueIdentifier>{e319163e-7f2f-4f80-b187-882031d15de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{9c0d32d6-1c65-4d26-b67f-25da7c7391d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

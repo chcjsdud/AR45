@@ -3,9 +3,11 @@
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEngineCore/GameEngineCore.h>
+#include <GameEngineCore/Button.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include "TitleBack.h"
+#include "MouseObject.h"
 
 TitleLevel::TitleLevel() 
 {
@@ -13,6 +15,11 @@ TitleLevel::TitleLevel()
 
 TitleLevel::~TitleLevel() 
 {
+}
+
+void TestError() 
+{
+	MsgAssert("버튼을 눌렀습니다.");
 }
 
 
@@ -27,6 +34,10 @@ void TitleLevel::Loading()
 	// 이미지 로드
 	{
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("TitleBack.BMP"));
+
+		GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Hover.BMP"));
+		GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Press.BMP"));
+		GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Release.BMP"));
 	}
 
 	if (false == GameEngineInput::IsKey("LevelChange"))
@@ -38,7 +49,25 @@ void TitleLevel::Loading()
 		GameEngineInput::CreateKey("TitleScrollDown", 'S');
 	}
 
+	MouseObject* MouseObjectInst = CreateActor<MouseObject>();
+
+	MouseObjectInst->GetMouseRender()->EffectCameraOff();
+	MouseObjectInst->GetMouseRender()->SetOrder(100);
+	MouseObjectInst->GetMouseRender()->SetScale({50, 50});
+	MouseObjectInst->GetMouseRender()->SetImage("Hover.BMP");
+
 	CreateActor<TitleBack>();
+
+	Button* NewButton = CreateActor<Button>();
+	NewButton->GetButtonRender()->EffectCameraOff();
+	NewButton->SetPos(GameEngineWindow::GetScreenSize().half());
+	NewButton->SetHoverImage("Hover.BMP");
+	NewButton->SetPressImage("Press.BMP");
+	NewButton->SetReleaseImage("Release.BMP");
+	NewButton->SetScale({100, 100});
+	NewButton->SetClickCallBack(TestError);
+
+	GameEngineInput::MouseCursorOff();
 
 	Start = float4::Zero;
 	End = float4(0.0f, GameEngineWindow::GetScreenSize().half().y);
