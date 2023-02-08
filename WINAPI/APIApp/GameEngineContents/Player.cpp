@@ -28,6 +28,7 @@ void Player::Start()
 	TestNumber.SetOwner(this);
 	TestNumber.SetImage("Number.BMp", {40, 40}, 10, RGB(255, 255, 255));
 	TestNumber.SetValue(Value);
+	TestNumber.SetAlign(Align::Right);
 
 	if (false == GameEngineInput::IsKey("LeftMove"))
 	{

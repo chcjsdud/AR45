@@ -107,11 +107,6 @@ void NumberRenderObject::SetMove(float4 _RenderPos)
 	}
 }
 
-void NumberRenderObject::SetAlign(int _Align)
-{
-	AlignState = static_cast<Align>(_Align);
-}
-
 void NumberRenderObject::SetAlign(Align _Align)
 {
 	AlignState = _Align;

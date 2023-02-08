@@ -33,10 +33,14 @@ public:
 	void SetValue(int _Value);
 	
 	void SetMove(float4 _RenderPos);
-	void SetAlign(int _Align);
 	void SetAlign(Align _Align);
 
 	void SetCameraEffectOff();
+
+	inline void SetRenderPos(float4 _Pos)
+	{
+		Pos = _Pos;
+	}
 
 	inline int GetValue() 
 	{

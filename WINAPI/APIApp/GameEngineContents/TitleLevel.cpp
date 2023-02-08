@@ -67,7 +67,7 @@ void TitleLevel::Loading()
 	NewButton->SetScale({100, 100});
 	NewButton->SetClickCallBack(TestError);
 
-	GameEngineInput::MouseCursorOff();
+	// GameEngineInput::MouseCursorOff();
 
 	Start = float4::Zero;
 	End = float4(0.0f, GameEngineWindow::GetScreenSize().half().y);
