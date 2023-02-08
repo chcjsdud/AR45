@@ -27,6 +27,12 @@
     <ClInclude Include="Structs.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="STLevel.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsValue.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="StudyGameCore.cpp" />
@@ -55,6 +61,12 @@
       <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="Structs.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="STLevel.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsValue.cpp">
       <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>

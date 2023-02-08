@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <string_view>
 
 // 설명 : 오브젝트 구조의 가장 기본이 되어주는 클래스.
 class GameEngineObject

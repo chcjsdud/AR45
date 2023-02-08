@@ -27,7 +27,7 @@ void Player::Start()
 {
 	ContentsValue::CameraScale;
 
-	ContentsValue::CameraScale = { 1000, 2000 };
+	// ContentsValue::CameraScale = { 1000, 2000 };
 
 	MainPlayer = this;
 
