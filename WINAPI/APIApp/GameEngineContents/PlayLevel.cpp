@@ -161,6 +161,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("Appear.wav");
 	BGMPlayer.LoopCount(100);
+	BGMPlayer.Volume(0.2f);
 
 
 	ContentsValue::CameraScale = { 2000, 3000 };
