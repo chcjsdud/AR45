@@ -27,13 +27,22 @@ PlayLevel::~PlayLevel()
 {
 }
 
-void PlayLevel::Loading()
+void PlayLevel::SoundLoad()
 {
+	GameEngineDirectory Dir;
+	Dir.MoveParentToDirectory("ContentsResources");
+	Dir.Move("ContentsResources");
+	Dir.Move("Sound");
 
-	// STLevel* Ptr = GetOwner<STLevel>();
-	// Ptr->GetCameraScale();
+	{
+		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("Appear.wav"));
+	}
 
-	SetCameraScale({1000, 100});
+	// GameEngineResources::GetInst().SoundPlay("Appear.wav");
+
+}
+void PlayLevel::ImageLoad()
+{
 
 	// 상대경로 탐색
 	GameEngineDirectory Dir;
@@ -41,7 +50,6 @@ void PlayLevel::Loading()
 	Dir.Move("ContentsResources");
 	Dir.Move("Image");
 	Dir.Move("Play");
-
 
 	// 이미지 로드
 	{
@@ -64,6 +72,16 @@ void PlayLevel::Loading()
 		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Number.BMP"));
 		Image2->Cut(10, 1);
 	}
+
+}
+
+void PlayLevel::Loading()
+{
+	SoundLoad();
+	ImageLoad();
+
+	SetCameraScale({1000, 100});
+
 
 	{
 		Map* Actor = CreateActor<Map>();
@@ -112,6 +130,7 @@ void PlayLevel::Update(float _DeltaTime)
 {
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
+		BGMPlayer.Stop();
 		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;
 	}
@@ -139,6 +158,11 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+
+	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("Appear.wav");
+	BGMPlayer.LoopCount(100);
+
+
 	ContentsValue::CameraScale = { 2000, 3000 };
 	int a = 0;
 }
