@@ -35,7 +35,7 @@ void PlayLevel::SoundLoad()
 	Dir.Move("Sound");
 
 	{
-		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("Appear.wav"));
+		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("BGMTest.mp3"));
 	}
 
 	// GameEngineResources::GetInst().SoundPlay("Appear.wav");
@@ -130,7 +130,17 @@ void PlayLevel::Update(float _DeltaTime)
 {
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
-		BGMPlayer.Stop();
+		// BGMPlayer.Stop();
+
+		if (false == BGMPlayer.GetPause())
+		{
+			BGMPlayer.PauseOn();
+		}
+		else 
+		{
+			BGMPlayer.PauseOff();
+		}
+
 		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;
 	}
@@ -159,9 +169,9 @@ void PlayLevel::Update(float _DeltaTime)
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 
-	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("Appear.wav");
+	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("BGMTest.mp3");
 	BGMPlayer.LoopCount(100);
-	BGMPlayer.Volume(0.2f);
+	// BGMPlayer.Volume(0.2f);
 
 
 	ContentsValue::CameraScale = { 2000, 3000 };
