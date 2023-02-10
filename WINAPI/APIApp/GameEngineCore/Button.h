@@ -79,8 +79,11 @@ private:
 	ButtonState State;
 	std::string CurImageName;
 	std::string HoverImageName;
+	int HoverIndex = -1;
 	std::string ReleaseImageName;
+	int ReleaseIndex = -1;
 	std::string PressImageName;
+	int PressIndex = -1;
 
 };
 
