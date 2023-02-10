@@ -114,7 +114,9 @@ void NumberRenderObject::SetValue(int _Value)
 		//                       5                   3
 		for (size_t i = 0; i < (CurRenderSize - Digits); ++i)
 		{
+			GameEngineRender* LastRender = NumberRenders.back();
 			NumberRenders.pop_back(); // 삭제되는지 체크 필요
+			LastRender->Death();
 		}
 	}
 
@@ -160,34 +162,11 @@ void NumberRenderObject::SetValue(int _Value)
 	if (true == Negative && nullptr == NegativeRender)
 	{
 		SetNumberRenders(NumRenderIndex++, TransColor, RenderPos, NegativeName, NumberScale, CameraEffect);
-		/*GameEngineRender* Render = NumberRenders[NumRenderIndex++];
-		if (nullptr == Render)
-		{
-			MsgAssert("숫자랜더러가 nullptr 입니다");
-		}
-		Render->SetTransColor(TransColor);
-		Render->SetPosition(RenderPos);
-		Render->SetImage(NegativeName);
-		Render->SetScale(NumberScale);
-		Render->SetEffectCamera(CameraEffect);*/
 		RenderPos.x += NumberScale.x;
 	}
 	for (; NumRenderIndex < Digits - Numbers.size(); ++NumRenderIndex) 
 	{
 		SetNumberRenders(NumRenderIndex, TransColor, RenderPos, ImageName, NumberScale, CameraEffect, 0);
-		/*GameEngineRender* Render = NumberRenders[NumRenderIndex];
-
-		if (nullptr == Render)
-		{
-			MsgAssert("숫자랜더러가 nullptr 입니다");
-		}
-
-		Render->SetTransColor(TransColor);
-		Render->SetPosition(RenderPos);
-		Render->SetImage(ImageName);
-		Render->SetScale(NumberScale);
-		Render->SetFrame(0);
-		Render->SetEffectCamera(CameraEffect);*/
 		RenderPos.x += NumberScale.x;
 	}
 	for (int i = 0; NumRenderIndex < NumberRenders.size(); ++NumRenderIndex)
@@ -243,6 +222,7 @@ void NumberRenderObject::SetValue(int _Value)
 	//	//CameraEffect
 	//	NumberRenders[i]->SetEffectCamera(CameraEffect);
 	//}
+	// --
 
 }
 
