@@ -35,7 +35,7 @@ void NumberRenderObject::SetImage(const std::string_view& _ImageName, float4 _Sc
 	NegativeName = _NegativeName;
 }
 
-void NumberRenderObject::SetNumberRenders(int _Index, int _TransColor, float4 _Pos, const std::string_view& _ImageName, float4 _Scale, bool _CameraEffect, int _Frame)
+void NumberRenderObject::SetNumberRenders(size_t _Index, int _TransColor, float4 _Pos, const std::string_view& _ImageName, float4 _Scale, bool _CameraEffect, int _Frame)
 {
 	GameEngineRender* Render = NumberRenders[_Index];
 	if (nullptr == Render)
@@ -84,7 +84,7 @@ void NumberRenderObject::SetValue(int _Value)
 	Negative = _Value >= 0 ? false : true;
 
 	// 최종 랜더 길이 설정x - Numbers.size(), 설정o - NumOfDigits
-	int Digits = (NumOfDigits == -1 ? Numbers.size() : NumOfDigits) + (Negative ? 1 : 0);
+	size_t Digits = (NumOfDigits == -1 ? Numbers.size() : NumOfDigits) + (Negative ? 1 : 0);
 
 	// -- [수정 전] : NumOfDigits 추가 이전
 	////            자리수가 바뀌었고                  3자리 랜더하고 있었는데 5자리가 됐다면
