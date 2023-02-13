@@ -186,6 +186,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineResources.h" />
+    <ClInclude Include="GameEngineTileMap.h" />
     <ClInclude Include="NumberRenderObject.h">
       <SubType>
       </SubType>
@@ -225,6 +226,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineResources.cpp" />
+    <ClCompile Include="GameEngineTileMap.cpp" />
     <ClCompile Include="NumberRenderObject.cpp">
       <SubType>
       </SubType>

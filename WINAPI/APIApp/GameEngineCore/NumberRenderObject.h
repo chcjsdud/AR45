@@ -40,6 +40,9 @@ public:
 		CameraEffect = _EffectSetting;
 	}
 
+	void On() override;
+	void Off() override;
+
 	void SetRenderPos(float4 _Pos);
 	
 

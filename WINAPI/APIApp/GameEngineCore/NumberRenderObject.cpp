@@ -53,6 +53,23 @@ void NumberRenderObject::SetNumberRenders(size_t _Index, int _TransColor, float4
 	}
 }
 
+void NumberRenderObject::On()
+{
+	GameEngineObject::On();	
+	for (size_t i = 0; i < NumberRenders.size(); i++)
+	{
+		NumberRenders[i]->On();
+	}
+}
+
+void NumberRenderObject::Off()
+{
+	GameEngineObject::Off();
+	for (size_t i = 0; i < NumberRenders.size(); i++)
+	{
+		NumberRenders[i]->Off();
+	}
+}
 
 void NumberRenderObject::SetValue(int _Value)
 {
