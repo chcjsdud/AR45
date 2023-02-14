@@ -128,3 +128,13 @@ int GameEngineTileMap::GetTileFrame(int _ZIndex, float4 _Pos)
 
     return TileRender->GetFrame();
 }
+
+
+GameEngineRender* GameEngineTileMap::GetTile(int _ZIndex, float4 _Pos)
+{
+    float4 Index = _Pos;
+    Index.x /= TileScale.x;
+    Index.y /= TileScale.y;
+
+    return TileRenders[_ZIndex][Index.iy()][Index.ix()];
+}

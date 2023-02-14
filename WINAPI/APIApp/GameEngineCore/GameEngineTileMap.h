@@ -34,6 +34,8 @@ public:
 
     int GetTileFrame(int _ZIndex, float4 _Pos);
 
+    GameEngineRender* GetTile(int _ZIndex, float4 _Pos); 
+
 protected:
 
 private:
