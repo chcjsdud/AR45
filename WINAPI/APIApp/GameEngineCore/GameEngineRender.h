@@ -89,7 +89,7 @@ public:
 
 	void SetOrder(int _Order) override;
 
-	void SetText(const std::string_view& _Text, const int _TextHeight, const std::string_view& _TextType, const TextAlign _TextAlign, const COLORREF _TextColor);
+	void SetText(const std::string_view& _Text, const int _TextHeight = 20, const std::string_view& _TextType = "±¼¸²", const TextAlign _TextAlign = TextAlign::Center, const COLORREF _TextColor = RGB(0, 0, 0));
 
 protected:
 
