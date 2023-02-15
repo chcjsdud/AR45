@@ -89,6 +89,11 @@ public:
 
 	void SetOrder(int _Order) override;
 
+	void SetAlpha(int _Alpha) 
+	{
+		Alpha = _Alpha;
+	}
+
 	void SetText(const std::string_view& _Text, const int _TextHeight = 20, const std::string_view& _TextType = "±¼¸²", const TextAlign _TextAlign = TextAlign::Center, const COLORREF _TextColor = RGB(0, 0, 0));
 
 protected:
@@ -100,6 +105,8 @@ private:
 	int TransColor = RGB(255, 0, 255);
 
 	int Frame = 0;
+
+	int Alpha = 255;
 
 	void Render(float _DeltaTime);
 
