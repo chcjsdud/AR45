@@ -18,7 +18,7 @@ TitleLevel::~TitleLevel()
 {
 }
 
-void TestError() 
+void TestError(Button* _Btn) 
 {
 	MsgAssert("버튼을 눌렀습니다.");
 }
