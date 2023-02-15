@@ -4,6 +4,13 @@
 #include "GameEngineComponent.h"
 // 랜더링에 관련된 기능을 모두 집약한다.
 
+enum class TextAlign
+{
+	Left = TA_LEFT,
+	Right = TA_RIGHT,
+	Center = TA_CENTER
+};
+
 class FrameAnimationParameter
 {
 public:
@@ -82,7 +89,7 @@ public:
 
 	void SetOrder(int _Order) override;
 
-	void SetText(const std::string_view& _Text);
+	void SetText(const std::string_view& _Text, const int _TextHeight, const std::string_view& _TextType, const TextAlign _TextAlign, const COLORREF _TextColor);
 
 protected:
 
@@ -129,7 +136,11 @@ private:
 	/// <summary>
 	/// TextRender
 	/// </summary>
-	std::string RenderText;
+	std::string RenderText = std::string();
+	int TextHeight = 0;
+	std::string TextType = std::string();
+	TextAlign Align = TextAlign::Left;
+	COLORREF TextColor = RGB(0, 0, 0);
 	// 그런걸 하면 HBRUSH 만드는데 사용하고 나면 Release
 	// GameEngineImage를 참조해라.
 };
