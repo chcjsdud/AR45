@@ -4,6 +4,7 @@
 
 // 프로젝트 순서에 따라서 정렬
 #include <GameEngineBase/GameEngineDirectory.h>
+#include <GameEngineBase/GameEngineFile.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
@@ -33,9 +34,15 @@ void PlayLevel::SoundLoad()
 	Dir.MoveParentToDirectory("ContentsResources");
 	Dir.Move("ContentsResources");
 	Dir.Move("Sound");
+	std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+	for (size_t i = 0; i < Files.size(); i++)
+	{
+		GameEngineResources::GetInst().SoundLoad(Files[i].GetFullPath());
+	}
 
 	{
-		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("BGMTest.mp3"));
+		// GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("BGMTest.mp3"));
 	}
 
 	// GameEngineResources::GetInst().SoundPlay("Appear.wav");
