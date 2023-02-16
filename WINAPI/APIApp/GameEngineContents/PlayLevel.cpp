@@ -32,7 +32,7 @@ void PlayLevel::SoundLoad()
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
 	Dir.Move("ContentsResources");
-	Dir.Move("사운드");
+	Dir.Move("Sound");
 
 	{
 		GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("BGMTest.mp3"));
@@ -48,7 +48,7 @@ void PlayLevel::ImageLoad()
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
 	Dir.Move("ContentsResources");
-	Dir.Move("이미지");
+	Dir.Move("Image");
 	Dir.Move("Play");
 
 	// 이미지 로드
