@@ -29,7 +29,7 @@ void TitleLevel::Loading()
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
 	Dir.Move("ContentsResources");
-	Dir.Move("Image");
+	Dir.Move("이미지");
 	Dir.Move("Title");
 
 	// 이미지 로드
