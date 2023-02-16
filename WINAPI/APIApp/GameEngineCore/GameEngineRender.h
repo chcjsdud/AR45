@@ -45,14 +45,6 @@ public:
 	GameEngineRender& operator=(const GameEngineRender& _Other) = delete;
 	GameEngineRender& operator=(GameEngineRender&& _Other) noexcept = delete;
 
-	void SetImage(const std::string_view& _ImageName);
-
-	void SetImageToScaleToImage(const std::string_view& _ImageName);
-
-	void SetScaleToImage();
-
-	void SetFrame(int _Frame);
-
 	inline GameEngineImage* GetImage()
 	{
 		return Image;
@@ -63,7 +55,7 @@ public:
 		return Frame;
 	}
 
-	void SetTransColor(int _Color) 
+	inline void SetTransColor(int _Color)
 	{
 		TransColor = _Color;
 	}
@@ -83,16 +75,30 @@ public:
 		SetEffectCamera(true);
 	}
 
+	inline int GetTextHeight()
+	{
+		return TextHeight;
+	}
+
+	inline void SetAlpha(int _Alpha)
+	{
+		Alpha = _Alpha;
+	}
+
+	void SetImage(const std::string_view& _ImageName);
+
+	void SetImageToScaleToImage(const std::string_view& _ImageName);
+
+	void SetScaleToImage();
+
+	void SetFrame(int _Frame);
+
 	bool IsAnimationEnd();
 	void CreateAnimation(const FrameAnimationParameter& _Paramter);
 	void ChangeAnimation(const std::string_view& _AnimationName, bool _ForceChange = false);
 
 	void SetOrder(int _Order) override;
 
-	void SetAlpha(int _Alpha) 
-	{
-		Alpha = _Alpha;
-	}
 
 	void SetText(const std::string_view& _Text, const int _TextHeight = 20, const std::string_view& _TextType = "±¼¸²", const TextAlign _TextAlign = TextAlign::Center, const COLORREF _TextColor = RGB(0, 0, 0));
 
