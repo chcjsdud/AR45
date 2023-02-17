@@ -147,7 +147,16 @@ void GameEngineRender::TextRender(float _DeltaTime)
 	SetTextColor(hdc, TextColor);
 	SetBkMode(hdc, TRANSPARENT);
 
-	TextOutA(GameEngineWindow::GetDoubleBufferImage()->GetImageDC(), RenderPos.ix(), RenderPos.iy(), RenderText.c_str(), static_cast<int>(RenderText.size()));
+	RECT Rect;
+	Rect.left = RenderPos.ix();
+	Rect.top = RenderPos.iy();
+	Rect.right = RenderPos.ix() + TextBoxScale.ix();
+	Rect.bottom = RenderPos.iy() + TextBoxScale.iy();
+
+	DrawTextA(GameEngineWindow::GetDoubleBufferImage()->GetImageDC(), RenderText.c_str(), static_cast<int>(RenderText.size()), &Rect, DT_LEFT);
+
+
+	// TextOutA(GameEngineWindow::GetDoubleBufferImage()->GetImageDC(), RenderPos.ix(), RenderPos.iy(), RenderText.c_str(), static_cast<int>(RenderText.size()));
 
 	SelectObject(hdc, OldFont);
 	DeleteObject(hFont);

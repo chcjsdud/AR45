@@ -85,6 +85,12 @@ public:
 		Alpha = _Alpha;
 	}
 
+	inline void SetAlpha(float4 _TextBoxScale)
+	{
+		TextBoxScale = _TextBoxScale;
+	}
+
+
 	void SetImage(const std::string_view& _ImageName);
 
 	void SetImageToScaleToImage(const std::string_view& _ImageName);
@@ -154,6 +160,7 @@ private:
 	std::string TextType = std::string();
 	TextAlign Align = TextAlign::Left;
 	COLORREF TextColor = RGB(0, 0, 0);
+	float4 TextBoxScale;
 	// 그런걸 하면 HBRUSH 만드는데 사용하고 나면 Release
 	// GameEngineImage를 참조해라.
 };
