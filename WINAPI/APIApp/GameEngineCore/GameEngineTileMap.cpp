@@ -124,7 +124,7 @@ float4 GameEngineTileMap::ConvertIndexToTilePosition(float4 _Pos)
 
 float4 GameEngineTileMap::ConvertIndexToTilePosition(int _X, int _Y)
 {
-    return float4( _X * TileScale.x + TileScale.hx(), _Y * TileScale.y + TileScale.hy(), 0.0f, 0.0f);
+    return float4( _X * TileScale.x + TileScale.hx(), _Y * TileScale.y + TileScale.hy(), 0.0f, 0.0f) + GetPos();
 }
 
 int GameEngineTileMap::GetTileFrame(int _ZIndex, float4 _Pos) 
