@@ -90,7 +90,7 @@ void GameEngineRender::FrameAnimation::Render(float _DeltaTime)
 	}
 }
 
-void GameEngineRender::SetText(const std::string_view& _Text, const int _TextHeight = 20, const std::string_view& _TextType, const TextAlign _TextAlign, const COLORREF _TextColor, float4 _TextBoxScale)
+void GameEngineRender::SetText(const std::string_view& _Text, const int _TextHeight, const std::string_view& _TextType, const TextAlign _TextAlign, const COLORREF _TextColor, float4 _TextBoxScale)
 {
 	RenderText = _Text;
 	TextHeight = _TextHeight;
