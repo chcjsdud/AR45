@@ -119,7 +119,7 @@ void GameEngineTileMap::SetTileFrame(int _ZIndex, int _X, int _Y, int _ImageFram
 float4 GameEngineTileMap::ConvertIndexToTilePosition(float4 _Pos)
 {
     float4 Index = GetIndex(_Pos);
-    ConvertIndexToTilePosition(Index.ix(), Index.iy());
+    return ConvertIndexToTilePosition(Index.ix(), Index.iy());
 }
 
 float4 GameEngineTileMap::ConvertIndexToTilePosition(int _X, int _Y)
