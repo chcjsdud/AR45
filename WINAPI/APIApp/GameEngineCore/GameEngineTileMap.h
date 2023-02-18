@@ -12,6 +12,7 @@ struct FloorInfo
 };
 
 // 설명 :
+class GameEngineCollision;
 class GameEngineTileMap : public GameEngineActor
 {
 public:
@@ -28,6 +29,8 @@ public:
     // 무조건 
     void CreateTileMap(int _X, int _Y, int _Z, int _Order, float4 _TileSize);
 
+    void CreateTileMapCollision(int _X, int _Y, int _Z, int _Order, float4 _TileSize);
+
     void SetFloorSetting(int _ZIndex, const std::string_view& _ImageName);
 
     void SetTileFrame(int _ZIndex, float4 _Pos, int _ImageFrame);
@@ -41,6 +44,8 @@ public:
     int GetTileFrame(int _ZIndex, float4 _Pos);
 
     GameEngineRender* GetTile(int _ZIndex, float4 _Pos); 
+
+    GameEngineCollision* GetTileCollision(int _ZIndex, float4 _Pos); 
 
     bool IsValidIndex(int _Z, int _Y, int _X);
 
@@ -58,5 +63,6 @@ private:
 
     std::vector<std::string_view> FloorImageName;
     std::vector<std::vector<std::vector<GameEngineRender*>>> TileRenders;
+    std::vector<std::vector<std::vector<GameEngineCollision*>>> TileCollision;
 };
 
