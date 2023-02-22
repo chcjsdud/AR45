@@ -252,7 +252,14 @@ void Player::Render(float _DeltaTime)
 		);
 
 
-	std::string MouseText = "MousePosition : \n";
+	float4 Angle = GetLevel()->GetMousePos() - GetPos();
+	float Deg = Angle.GetAnagleDeg();
+
+	std::string AngleText = "Angle : ";
+	AngleText += std::to_string(Deg);
+	GameEngineLevel::DebugTextPush(AngleText);
+
+	std::string MouseText = "MousePosition : ";
 	MouseText += GetLevel()->GetMousePos().ToString();
 
 	std::string CameraMouseText = "MousePositionCamera : ";
