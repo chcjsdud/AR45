@@ -15,6 +15,8 @@
 
 Player* Player::MainPlayer;
 
+static bool IsStop = false; 
+
 Player::Player() 
 {
 }

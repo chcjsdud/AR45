@@ -12,6 +12,8 @@ enum class PlayerState
 class Player : public GameEngineActor
 {
 public:
+	static bool IsStop;
+
 	static Player* MainPlayer;
 
 	// constrcuter destructer

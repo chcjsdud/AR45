@@ -240,6 +240,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "89MathFunction", "89MathFun
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "90.HasaIsa", "90.HasaIsa\90.HasaIsa.vcxproj", "{B0738D42-58E3-4AC4-B5B2-75DA6DD7B9B7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "91.FunctionObject", "91.FunctionObject\91.FunctionObject.vcxproj", "{7E951CF6-73CE-471A-A955-0D79FDF7FC04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1136,6 +1138,14 @@ Global
 		{B0738D42-58E3-4AC4-B5B2-75DA6DD7B9B7}.Release|x64.Build.0 = Release|x64
 		{B0738D42-58E3-4AC4-B5B2-75DA6DD7B9B7}.Release|x86.ActiveCfg = Release|Win32
 		{B0738D42-58E3-4AC4-B5B2-75DA6DD7B9B7}.Release|x86.Build.0 = Release|Win32
+		{7E951CF6-73CE-471A-A955-0D79FDF7FC04}.Debug|x64.ActiveCfg = Debug|x64
+		{7E951CF6-73CE-471A-A955-0D79FDF7FC04}.Debug|x64.Build.0 = Debug|x64
+		{7E951CF6-73CE-471A-A955-0D79FDF7FC04}.Debug|x86.ActiveCfg = Debug|Win32
+		{7E951CF6-73CE-471A-A955-0D79FDF7FC04}.Debug|x86.Build.0 = Debug|Win32
+		{7E951CF6-73CE-471A-A955-0D79FDF7FC04}.Release|x64.ActiveCfg = Release|x64
+		{7E951CF6-73CE-471A-A955-0D79FDF7FC04}.Release|x64.Build.0 = Release|x64
+		{7E951CF6-73CE-471A-A955-0D79FDF7FC04}.Release|x86.ActiveCfg = Release|Win32
+		{7E951CF6-73CE-471A-A955-0D79FDF7FC04}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

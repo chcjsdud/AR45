@@ -100,7 +100,7 @@ void PlayLevel::Loading()
 	}
 	{
 		srand(static_cast<unsigned int>(time(nullptr)));
-		for (size_t i = 0; i < 0; i++)
+		for (size_t i = 0; i < 10; i++)
 		{
 			Monster* Actor = CreateActor<Monster>(BubbleRenderOrder::Monster);
 			Actor->SetMove(
@@ -137,6 +137,9 @@ void PlayLevel::Update(float _DeltaTime)
 {
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
+		SetTimeScale(BubbleRenderOrder::Monster, 0);
+
+		// BubbleRenderOrder::Monster
 		// BGMPlayer.Stop();
 
 		if (false == BGMPlayer.GetPause())
