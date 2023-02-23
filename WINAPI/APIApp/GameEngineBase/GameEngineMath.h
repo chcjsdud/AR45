@@ -118,6 +118,18 @@ public:
 		return GetAnagleRad() * GameEngineMath::RadToDeg;
 	}
 
+	void RotaitonZDeg(float _Deg)
+	{
+		RotaitonZRad(_Deg * GameEngineMath::RadToDeg);
+	}
+
+	void RotaitonZRad(float _Rad)
+	{
+		float4 Copy = *this;
+		x = Copy.x * cosf(_Rad) - Copy.y * sinf(_Rad);
+		y = Copy.x * sinf(_Rad) + Copy.y * cosf(_Rad);
+	}
+
 	float GetAnagleRad()
 	{
 		float4 AngleCheck = (*this);
