@@ -86,6 +86,16 @@ public:
 		Alpha = _Alpha;
 	}
 
+	inline float GetAngle(float _Angle)
+	{
+		return Angle;
+	}
+
+	inline void SetAngleAdd(float _Angle)
+	{
+		Angle += _Angle;
+	}
+
 	inline void SetAngle(float _Angle)
 	{
 		Angle = _Angle;

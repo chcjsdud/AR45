@@ -191,6 +191,8 @@ bool Player::FreeMoveState(float _DeltaTime)
 
 void Player::Update(float _DeltaTime) 
 {
+	AnimationRender->SetAngleAdd(_DeltaTime * 360.0f);
+
 	TestNumber.SetValue(--Value);
 
 	if (nullptr != BodyCollision)

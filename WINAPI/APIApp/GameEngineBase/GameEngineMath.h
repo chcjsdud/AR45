@@ -121,7 +121,7 @@ public:
 
 	void RotaitonZDeg(float _Deg)
 	{
-		RotaitonZRad(_Deg * GameEngineMath::RadToDeg);
+		RotaitonZRad(_Deg * GameEngineMath::DegToRad);
 	}
 
 	void RotaitonZRad(float _Rad)
