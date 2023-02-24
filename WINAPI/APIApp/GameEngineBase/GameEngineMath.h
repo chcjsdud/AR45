@@ -3,6 +3,7 @@
 #include <math.h>
 #include <cmath>
 #include <string>
+#include <Windows.h>
 #include <vector>
 
 
@@ -130,6 +131,14 @@ public:
 		y = Copy.x * sinf(_Rad) + Copy.y * cosf(_Rad);
 	}
 
+	float4 RotaitonZDegReturn(float _Deg)
+	{
+		float4 Copy = *this;
+		Copy.RotaitonZDeg(_Deg);
+		return Copy;
+	}
+
+
 	float GetAnagleRad()
 	{
 		float4 AngleCheck = (*this);
@@ -147,6 +156,11 @@ public:
 		}
 		return Result;
 
+	}
+
+	POINT ToWindowPOINT() 
+	{
+		return POINT(ix(), iy());
 	}
 
 	float4 half() const
@@ -172,7 +186,14 @@ public:
 		x /= SizeValue;
 		y /= SizeValue;
 		z /= SizeValue;
-		
+	}
+
+	// 자기가 길이 1로 줄어든 애를 리턴해주는것.
+	float4 NormalizeReturn()
+	{
+		float4 Result = *this;
+		Result.Normalize();
+		return Result;
 	}
 
 	static float4 Lerp(const float4& Start, const float4& End, float Ratio)
@@ -298,4 +319,45 @@ public:
 		return std::string(ArrReturn);
 	}
 
+};
+
+class CollisionData
+{
+public:
+	float4 Position;
+	float4 Scale; // x만 원의 반지름으로 보겠습니다.
+
+	float Left() const
+	{
+		return Position.x - Scale.hx();
+	}
+	float Right() const
+	{
+		return Position.x + Scale.hx();
+	}
+	float Top() const
+	{
+		return Position.y - Scale.hy();
+	}
+	float Bot() const
+	{
+		return Position.y + Scale.hy();
+	}
+
+	float4 LeftTop() const
+	{
+		return float4{Left(), Top()};
+	}
+	float4 RightTop() const
+	{
+		return float4{ Right(), Top() };
+	}
+	float4 LeftBot() const
+	{
+		return float4{ Left(), Bot() };
+	}
+	float4 RightBot() const
+	{
+		return float4{ Right(), Bot() };
+	}
 };
