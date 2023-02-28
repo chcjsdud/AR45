@@ -56,6 +56,8 @@ void Player::Start()
 	ChangeState(PlayerState::IDLE);
 }
 
+
+
 void Player::Movecalculation(float _DeltaTime)
 {
 	MoveDir += float4::Down * 200.0f * _DeltaTime;
