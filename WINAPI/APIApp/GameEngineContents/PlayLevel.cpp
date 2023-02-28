@@ -1,7 +1,10 @@
 #include "PlayLevel.h"
 
+#include "Structs.h"
+
 // 프로젝트 순서에 따라서 정렬
 #include <GameEngineBase/GameEngineDirectory.h>
+#include <GameEngineBase/GameEngineFile.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineResources.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
@@ -11,17 +14,43 @@
 #include "Monster.h"
 #include "Map.h"
 #include "ContentsEnums.h"
+#include "ContentsValue.h"
 
 PlayLevel::PlayLevel()
 {
+	// SetName("PlayerLevel");
+
+	// WeaponInfo::Infos.insert(std::make_pair(std::string("철검"), WeaponInfo{ 10, "aaaaa.bmp"}));
+	WeaponInfo::Infos["철검"] = WeaponInfo{10, "aaaaa.bmp"};
 }
 
 PlayLevel::~PlayLevel()
 {
 }
 
-void PlayLevel::Loading()
+void PlayLevel::SoundLoad()
 {
+	GameEngineDirectory Dir;
+	Dir.MoveParentToDirectory("ContentsResources");
+	Dir.Move("ContentsResources");
+	Dir.Move("Sound");
+	std::vector<GameEngineFile> Files = Dir.GetAllFile();
+
+	for (size_t i = 0; i < Files.size(); i++)
+	{
+		GameEngineResources::GetInst().SoundLoad(Files[i].GetFullPath());
+	}
+
+	{
+		// GameEngineResources::GetInst().SoundLoad(Dir.GetPlusFileName("BGMTest.mp3"));
+	}
+
+	// GameEngineResources::GetInst().SoundPlay("Appear.wav");
+
+}
+void PlayLevel::ImageLoad()
+{
+
 	// 상대경로 탐색
 	GameEngineDirectory Dir;
 	Dir.MoveParentToDirectory("ContentsResources");
@@ -33,10 +62,14 @@ void PlayLevel::Loading()
 	{
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Right_Player.BMP"));
 		Image->Cut(5, 17);
+
+		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Right_Roll_Back.bmp"));
 	}
 	{
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Left_Player.BMP"));
 		Image->Cut(5, 17);
+
+		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Left_Roll_Back.bmp"));
 	}
 	{
 		GameEngineImage* Image = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("BackGround.BMP"));
@@ -46,6 +79,20 @@ void PlayLevel::Loading()
 		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Map.BMP"));
 		GameEngineImage* Image3 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("ColMap.BMP"));
 	}
+	{
+		GameEngineImage* Image2 = GameEngineResources::GetInst().ImageLoad(Dir.GetPlusFileName("Number.BMP"));
+		Image2->Cut(10, 1);
+	}
+
+}
+
+void PlayLevel::Loading()
+{
+	SoundLoad();
+	ImageLoad();
+
+	SetCameraScale({1000, 100});
+
 
 	{
 		Map* Actor = CreateActor<Map>();
@@ -57,7 +104,7 @@ void PlayLevel::Loading()
 	}
 	{
 		srand(static_cast<unsigned int>(time(nullptr)));
-		for (size_t i = 0; i < 10; i++)
+		for (size_t i = 0; i < 0; i++)
 		{
 			Monster* Actor = CreateActor<Monster>(BubbleRenderOrder::Monster);
 			Actor->SetMove(
@@ -81,12 +128,33 @@ void PlayLevel::Loading()
 		GameEngineInput::CreateKey("CameraDownMove", VK_DOWN);
 		GameEngineInput::CreateKey("CameraUpMove", VK_UP);
 	}
+
+	// class NumbersRender : GameEngineActor
+	// {
+	// }
+
+	// NumbersRender = CreateActor<NumbersRender>();
+	// NumbersRender->SetValue(190111);
 }
 
 void PlayLevel::Update(float _DeltaTime)
 {
 	if (GameEngineInput::IsDown("DebugRenderSwitch"))
 	{
+		SetTimeScale(BubbleRenderOrder::Monster, 0);
+
+		// BubbleRenderOrder::Monster
+		// BGMPlayer.Stop();
+
+		if (false == BGMPlayer.GetPause())
+		{
+			BGMPlayer.PauseOn();
+		}
+		else 
+		{
+			BGMPlayer.PauseOff();
+		}
+
 		DebugRenderSwitch();
 		// Player::MainPlayer->Death()p;
 	}
@@ -114,5 +182,12 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
+
+	BGMPlayer = GameEngineResources::GetInst().SoundPlayToControl("BGMTest.mp3");
+	BGMPlayer.LoopCount(100);
+	// BGMPlayer.Volume(0.2f);
+
+
+	ContentsValue::CameraScale = { 2000, 3000 };
 	int a = 0;
 }

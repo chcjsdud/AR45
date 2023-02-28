@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEngineCore/NumberRenderObject.h>
 
 enum class PlayerState
 {
@@ -11,6 +12,8 @@ enum class PlayerState
 class Player : public GameEngineActor
 {
 public:
+	static bool IsStop;
+
 	static Player* MainPlayer;
 
 	// constrcuter destructer
@@ -30,6 +33,11 @@ protected:
 
 
 private:
+
+	// std::vector<WeaponInfo> MyWeapon;
+
+	NumberRenderObject TestNumber;
+
 	float AccTime = 0.0f;
 	int StartFrame = 0;
 	float MoveSpeed = 1.0f;
@@ -62,5 +70,7 @@ private:
 	void MoveEnd();
 
 	void Movecalculation(float _DeltaTime);
+
+	int Value = 0;
 };
 

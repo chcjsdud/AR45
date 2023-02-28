@@ -8,10 +8,14 @@
 #include <GameEngineCore/GameEngineLevel.h>
 
 #include "ContentsEnums.h"
+#include "ContentsValue.h"
 
 #include "Map.h"
+#include "STLevel.h"
 
 Player* Player::MainPlayer;
+
+static bool IsStop = false; 
 
 Player::Player() 
 {
@@ -23,7 +27,20 @@ Player::~Player()
 
 void Player::Start()
 {
+	ContentsValue::CameraScale;
+
+	// ContentsValue::CameraScale = { 1000, 2000 };
+
 	MainPlayer = this;
+
+	TestNumber.SetOwner(this);
+	TestNumber.SetImage("Number.BMp", {40, 40}, 10, RGB(255, 255, 255), "Hover.bmp");
+	TestNumber.SetValue(Value);
+	TestNumber.SetAlign(Align::Right);
+
+	//STLevel* Level = GetOwner<STLevel>();
+	//Level->GetCameraScale();
+
 
 	if (false == GameEngineInput::IsKey("LeftMove"))
 	{
@@ -39,14 +56,24 @@ void Player::Start()
 	{
 		AnimationRender = CreateRender(BubbleRenderOrder::Player);
 		AnimationRender->SetScale({ 200, 200 });
+		AnimationRender->SetAlpha(100);
 
-		AnimationRender->CreateAnimation({ .AnimationName = "Right_Idle",  .ImageName = "Right_Player.bmp", .Start = 0, .End = 2, .InterTime = 0.3f});
-		AnimationRender->CreateAnimation({ .AnimationName = "Right_Move",  .ImageName = "Right_Player.bmp", .Start = 3, .End = 7 });
+		AnimationRender->CreateAnimation({ .AnimationName = "Right_Idle",  .ImageName = "Right_Player.bmp",.FilterName = "Right_Roll_Back.bmp",.Start = 0, .End = 2, .InterTime = 0.3f});
+		AnimationRender->CreateAnimation({ .AnimationName = "Right_Move",  .ImageName = "Right_Player.bmp",.FilterName = "Right_Roll_Back.bmp",.Start = 3, .End = 7 });
 
-		AnimationRender->CreateAnimation({ .AnimationName = "Left_Idle",  .ImageName = "Left_Player.bmp", .Start = 0, .End = 2, .InterTime = 0.3f });
-		AnimationRender->CreateAnimation({ .AnimationName = "Left_Move",  .ImageName = "Left_Player.bmp", .Start = 3, .End = 7 });
+		AnimationRender->CreateAnimation({ .AnimationName = "Left_Idle", .ImageName = "Left_Player.bmp", .FilterName = "Left_Roll_Back.bmp", .Start = 0, .End = 2, .InterTime = 0.3f });
+		AnimationRender->CreateAnimation({ .AnimationName = "Left_Move", .ImageName = "Left_Player.bmp", .FilterName = "Left_Roll_Back.bmp", .Start = 3, .End = 7 });
+		AnimationRender->SetAngle(-45);
 	}
 
+	//{
+	//	GameEngineRender* Render = CreateRender(BubbleRenderOrder::Player);
+	//	Render->SetText("かいしかいしかいしかいしかいしかいしかいし");
+	//}
+
+	// NumbersRender NewRender;
+	// NewRender.SetActor(this);
+	// NewRender.SetValue(10000);
 
 	{
 		BodyCollision = CreateCollision(BubbleCollisionOrder::Player);
@@ -166,6 +193,9 @@ bool Player::FreeMoveState(float _DeltaTime)
 
 void Player::Update(float _DeltaTime) 
 {
+	AnimationRender->SetAngleAdd(_DeltaTime * 360.0f);
+
+	TestNumber.SetValue(--Value);
 
 	if (nullptr != BodyCollision)
 	{
@@ -227,6 +257,13 @@ void Player::Render(float _DeltaTime)
 		);
 
 
+	float4 Angle = GetLevel()->GetMousePos() - GetPos();
+	float Deg = Angle.GetAnagleDeg();
+
+	std::string AngleText = "Angle : ";
+	AngleText += std::to_string(Deg);
+	GameEngineLevel::DebugTextPush(AngleText);
+
 	std::string MouseText = "MousePosition : ";
 	MouseText += GetLevel()->GetMousePos().ToString();
 
@@ -234,7 +271,7 @@ void Player::Render(float _DeltaTime)
 	CameraMouseText += GetLevel()->GetMousePosToCamera().ToString();
 
 	GameEngineLevel::DebugTextPush(MouseText);
-	GameEngineLevel::DebugTextPush(CameraMouseText);
+	// GameEngineLevel::DebugTextPush(CameraMouseText);
 
 	//std::string Text = "窒径";
 	//SetBkMode(DoubleDC, TRANSPARENT);

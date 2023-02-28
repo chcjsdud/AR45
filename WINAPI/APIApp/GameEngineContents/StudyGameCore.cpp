@@ -20,11 +20,13 @@ StudyGameCore::~StudyGameCore()
 
 void StudyGameCore::Start()
 {
+	// GameEngineDebug::LeakPointBreak(557);
+	new int();
+
 	// 정수의 연산 결과값은? 무조건 정수만 나옵니다.
 	// 실수 1.2 원한다면 
 	GameEngineWindow::SettingWindowSize({1280, 960});
 
-	new int();
 
 	CreateLevel<TitleLevel>("TitleLevel");
 	CreateLevel<PlayLevel>("PlayLevel");

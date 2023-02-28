@@ -36,9 +36,14 @@ void Monster::Start()
 
 void Monster::Update(float _DeltaTime) 
 {
+	// 
+	// 0.2f초마다 플레이어의 방향을 알아내서 
 	float4 Dir = Player::MainPlayer->GetPos() - GetPos();
 	// Dir.y = 0.0f;
 	Dir.Normalize();
+
+
+
 	SetMove(Dir * 200.0f * _DeltaTime);
 
 	//if (true == BodyCollision->Collision({.TargetGroup = static_cast<int>(BubbleCollisionOrder::Player)}))
