@@ -9,6 +9,7 @@
 class Monster 
 {
 public:
+    int RefCount;
     int Value;
 
 public:
