@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <GameEngineBase\GameEngineFile.h>
 #include <GameEngineBase\GameEngineDirectory.h>
+#include <GameEngineCore\GameEngineCore.h>
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -9,13 +10,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	_In_ LPWSTR    lpCmdLine,
 	_In_ int       nCmdShow)
 {
-
-	std::string Str = "aaaaa bbbbb ccccc";
-	GameEngineSerializer Data;
-	Data.Write(Str);
-
-	GameEngineFile NewFile = GameEngineFile("D:\\AAAA.txt");
-	NewFile.Save(Data);
-	
+	//GameEngineCore::Start(hInstance, );
 }
 
