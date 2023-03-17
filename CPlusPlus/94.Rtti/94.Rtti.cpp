@@ -23,7 +23,19 @@ class Monster : public Parent
 
 int main()
 {
+    // Hash는 특정 메모리영역을 특정 정수로 변경하는 함수를 해쉬함수라고 부릅니다.
+
+    // 면접때는 중요하기 때문에
+    // "fasdfasdfasdfasdfsad" => 1231121122111% 5
+    // "gsgregregergegregerg" => 1231121122111
+
     const type_info& Info = typeid(Player);
     std::cout << Info.name() << std::endl;
-    
+
+    std::string Name0 = Info.name();
+    std::string Name1 = Info.raw_name();
+
+    size_t Value = Info.hash_code();
 }
+
+
