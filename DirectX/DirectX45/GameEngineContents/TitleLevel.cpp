@@ -14,13 +14,22 @@ void TitleLevel::Loading()
 {
 	// TimeEvent.AddEvent(5.0f, std::bind(&TitleLevel::TestMsg, this), true);
 
-	// 람다 문법
-	// 이름이 없는 함수를 만들어내는 문법.
-	std::function<void()> Test = [] 
-	{
-		MsgTextBox("이벤트 정상 작동");
-	};
+	//std::function<void(GameEngineTimeEvent::TimeEvent&, GameEngineTimeEvent*)> Test0 =
+	//	[](GameEngineTimeEvent::TimeEvent& _Event, GameEngineTimeEvent* _Manager)
+	//{
+	//	MsgTextBox("도주");
+	//};
 
-	TimeEvent.AddEvent(1.0f, Test, true);
+	//// 람다 문법
+	//// 이름이 없는 함수를 만들어내는 문법.
+	//std::function<void(GameEngineTimeEvent::TimeEvent&, GameEngineTimeEvent*)> Test = 
+	//	[=](GameEngineTimeEvent::TimeEvent& _Event, GameEngineTimeEvent* _Manager)
+	//{
+	//	MsgTextBox("공격");
+
+	//	_Manager->AddEvent(3.0f, Test0, false);
+	//};
+
+	// TimeEvent.AddEvent(3.0f, Test, false);
 }
 

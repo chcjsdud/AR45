@@ -92,6 +92,25 @@ int Test()
 int main()
 {
 
+
+    {
+        // 1  
+        std::shared_ptr<A> NewA = std::make_shared<A>();
+        // 1
+        std::shared_ptr<B> NewB = std::make_shared<B>();
+
+        // 순환 참조라고 합니다.
+        // A가 B 를 알고
+        // B는 A 를 알고
+        // 2
+        NewA->Ptr = NewB;
+
+        // 2
+        NewB->Ptr = NewA;
+    }
+
+    return;
+
     {
         int Value = Test();
     }
@@ -116,20 +135,6 @@ int main()
 
 
         int a = 0;
-    }
-
-    {
-                         // 1  
-        std::shared_ptr<A> NewA = std::make_shared<A>();
-                         // 1
-        std::shared_ptr<B> NewB = std::make_shared<B>();
-
-        // 순환 참조라고 합니다.
-        // A가 B 를 알고
-        // B는 A 를 알고
-        // 2
-        NewA->Ptr = NewB;
-        NewB->Ptr = NewA;
     }
 
 }
