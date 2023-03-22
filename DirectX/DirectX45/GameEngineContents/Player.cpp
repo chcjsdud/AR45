@@ -16,6 +16,7 @@ void Player::Update(float _Delta)
 }
 
 float Angle = 0.0f;
+float Scale = 100.0f;
 
 void Player::Render(float _Delta) 
 {
@@ -27,15 +28,18 @@ void Player::Render(float _Delta)
 
 	float4 Pos = {640, 360};
 
+	// 최초의 버텍스의 위치를 로컬공간이라고 부릅니다.
 	float4 ArrVertex[VertexCount];
-	ArrVertex[0] = { -50, -50 };
-	ArrVertex[1] = { 50, -50 };
-	ArrVertex[2] = { 50, 50 };
-	ArrVertex[3] = { -50, 50 };
+	ArrVertex[0] = { -0.5f, -0.5f, 0.5f };
+	ArrVertex[1] = { 0.5f, -0.5f,0.5f };
+	ArrVertex[2] = { 0.5f, 0.5f,0.5f };
+	ArrVertex[3] = { -0.5f, 0.5f,0.5f };
 
 	POINT ArrPoint[VertexCount];
 
 	Angle += _Delta * 360.0f;
+
+	Scale += _Delta * 1.0f;
 
 	// 크자이공부
 	
@@ -48,7 +52,10 @@ void Player::Render(float _Delta)
 
 	for (size_t i = 0; i < VertexCount; i++)
 	{
-		ArrVertex[i].RotaitonZDeg(Angle);
+		ArrVertex[i] *= Scale;
+		ArrVertex[i].RotaitonXDeg(Angle);
+		ArrVertex[i].RotaitonYDeg(Angle);
+		//ArrVertex[i].RotaitonZDeg(Angle);
 		ArrVertex[i] += Pos;
 
 
