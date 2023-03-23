@@ -257,6 +257,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "95.Ramda", "95.Ramda\95.Ram
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "96_StringEx", "96_StringEx\96_StringEx.vcxproj", "{13BC246F-2B1F-4562-94D2-7D3DAE8B3342}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "97_UnionEx", "97_UnionEx\97_UnionEx.vcxproj", "{6F87935A-F873-4A47-9723-671D973B105C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -1201,6 +1203,14 @@ Global
 		{13BC246F-2B1F-4562-94D2-7D3DAE8B3342}.Release|x64.Build.0 = Release|x64
 		{13BC246F-2B1F-4562-94D2-7D3DAE8B3342}.Release|x86.ActiveCfg = Release|Win32
 		{13BC246F-2B1F-4562-94D2-7D3DAE8B3342}.Release|x86.Build.0 = Release|Win32
+		{6F87935A-F873-4A47-9723-671D973B105C}.Debug|x64.ActiveCfg = Debug|x64
+		{6F87935A-F873-4A47-9723-671D973B105C}.Debug|x64.Build.0 = Debug|x64
+		{6F87935A-F873-4A47-9723-671D973B105C}.Debug|x86.ActiveCfg = Debug|Win32
+		{6F87935A-F873-4A47-9723-671D973B105C}.Debug|x86.Build.0 = Debug|Win32
+		{6F87935A-F873-4A47-9723-671D973B105C}.Release|x64.ActiveCfg = Release|x64
+		{6F87935A-F873-4A47-9723-671D973B105C}.Release|x64.Build.0 = Release|x64
+		{6F87935A-F873-4A47-9723-671D973B105C}.Release|x86.ActiveCfg = Release|Win32
+		{6F87935A-F873-4A47-9723-671D973B105C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
