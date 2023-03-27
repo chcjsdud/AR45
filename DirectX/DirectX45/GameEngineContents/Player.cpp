@@ -15,9 +15,6 @@ void Player::Update(float _Delta)
 	
 }
 
-float Angle = 0.0f;
-float Scale = 100.0f;
-
 void Player::Render(float _Delta) 
 {
 	HDC Dc = GameEngineWindow::GetWindowBackBufferHdc();
@@ -67,8 +64,13 @@ void Player::Render(float _Delta)
 
 	POINT ArrPoint[VertexCount];
 
-	Angle += _Delta * 10.0f;
-	Scale += _Delta * 1.0f;
+	float4x4 ScaleMat;
+	ScaleMat.Scale({100, 100, 100});
+
+	float4x4 PosMat;
+	PosMat.Pos(Pos);
+
+	float4x4 WorldMat = ScaleMat * PosMat;
 
 	// 크자이공부
 	
@@ -83,11 +85,7 @@ void Player::Render(float _Delta)
 
 	for (size_t i = 0; i < VertexCount; i++)
 	{
-		ArrVertex[i] *= Scale;
-		ArrVertex[i].RotaitonXDeg(Angle);
-		ArrVertex[i].RotaitonYDeg(Angle);
-		ArrVertex[i].RotaitonZDeg(Angle);
-		ArrVertex[i] += Pos;
+		ArrVertex[i] = ArrVertex[i] * WorldMat;
 		ArrPoint[i] = ArrVertex[i].ToWindowPOINT();
 	}
 
@@ -102,7 +100,7 @@ void Player::Render(float _Delta)
 		float4 Dir0 = Vector0 - Vector1;
 		float4 Dir1 = Vector1 - Vector2;
 
-		float4 Cross = float4::CrossReturn(Dir0, Dir1);
+		float4 Cross = float4::Cross3DReturn(Dir0, Dir1);
 		if (0 <= Cross.z)
 		{
 			continue;
