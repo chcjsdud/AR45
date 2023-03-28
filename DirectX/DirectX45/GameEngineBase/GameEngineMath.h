@@ -211,8 +211,8 @@ public:
 		float4 Copy = *this;
 		float Z = Copy.z;
 		float Y = Copy.y;
-		z = Z * cosf(_Rad) - Y * sinf(_Rad);
-		y = Z * sinf(_Rad) + Y * cosf(_Rad);
+		z = Y * cosf(_Rad) - Z * sinf(_Rad);
+		y = Y * sinf(_Rad) + Z * cosf(_Rad);
 	}
 
 	void RotaitonYRad(float _Rad)
@@ -220,8 +220,8 @@ public:
 		float4 Copy = *this;
 		float X = Copy.x;
 		float Z = Copy.z;
-		x = X * cosf(_Rad) - Z * sinf(_Rad);
-		z = X * sinf(_Rad) + Z * cosf(_Rad);
+		x = Z * cosf(_Rad) - X * sinf(_Rad);
+		z = Z * sinf(_Rad) + X * cosf(_Rad);
 	}
 
 	void RotaitonZRad(float _Rad)
