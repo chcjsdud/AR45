@@ -1,5 +1,7 @@
 #include "Player.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEngineCore/GameEngineLevel.h>
+#include <GameEngineCore/GameEngineCamera.h>
 
 Player::Player() 
 {
@@ -65,12 +67,16 @@ void Player::Render(float _Delta)
 	POINT ArrPoint[VertexCount];
 
 	GetTransform().SetLocalScale({100, 100, 100});
-
 	GetTransform().AddLocalRotation({ _Delta * 360.0f, _Delta * 360.0f, _Delta * 360.0f });
+
+	GetTransform().SetView(GetLevel()->GetMainCamera()->GetView());
+
+	// 
+
 
 	for (size_t i = 0; i < VertexCount; i++)
 	{
-		ArrVertex[i] = ArrVertex[i] * GetTransform().GetLocalWorldMatrixRef();
+		ArrVertex[i] = ArrVertex[i] * GetTransform().GetWorldMatrixRef();
 		ArrPoint[i] = ArrVertex[i].ToWindowPOINT();
 	}
 
