@@ -67,7 +67,7 @@ void Player::Render(float _Delta)
 	POINT ArrPoint[VertexCount];
 
 	GetTransform().SetLocalScale({100, 100, 100});
-	GetTransform().AddLocalRotation({ _Delta * 360.0f, _Delta * 360.0f, _Delta * 360.0f });
+	// GetTransform().AddLocalRotation({ _Delta * 360.0f, _Delta * 360.0f, _Delta * 360.0f });
 
 	GetTransform().SetView(GetLevel()->GetMainCamera()->GetView());
 
