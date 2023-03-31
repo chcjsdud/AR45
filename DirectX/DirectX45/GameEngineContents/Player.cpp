@@ -78,6 +78,8 @@ void Player::Render(float _Delta)
 		ArrVertex[i] = ArrVertex[i] * GetTransform().GetWorldMatrixRef();
 		// 투영행렬의 핵심
 		ArrVertex[i] /= ArrVertex[i].w;
+
+		// TransformCoord
 		ArrVertex[i].w = 1.0f;
 
 		ArrVertex[i] *= GetLevel()->GetMainCamera()->GetViewPort();
