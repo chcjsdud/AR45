@@ -389,6 +389,13 @@ public:
 		return *this;
 	}
 
+	float4& operator /=(const float _Value)
+	{
+		x /= _Value;
+		y /= _Value;
+		z /= _Value;
+		return *this;
+	}
 
 	float4& operator *=(const float4& _Other)
 	{
@@ -534,7 +541,7 @@ public:
 		Arr2D[2][3] = 1.0f;
 		Arr2D[3][3] = 0.0f;
 
-		Arr2D[0][0] = 1 / tanf(FOV / 2.0f) * _AspectRatio;
+		Arr2D[0][0] = 1 / (tanf(FOV / 2.0f) * _AspectRatio);
 
 		// y 300
 		// z 5000
@@ -543,6 +550,22 @@ public:
 		Arr2D[2][2] = _FarZ / (_FarZ - _NearZ);
 
 		Arr2D[3][2] = -( _NearZ * _FarZ) / (_FarZ - _NearZ);
+	}
+
+	//            화면의 너비
+	void ViewPort(float _Width, float _Height, float _Left, float _Right, float _ZMin = 0.0f, float _ZMax = 1.0f)
+	{
+		Identity();
+
+		// 모니터의 공간으로 변환시키는 행렬
+		Arr2D[0][0] = _Width * 0.5f;
+		Arr2D[1][1] = -_Height * 0.5f;
+		Arr2D[2][2] = _ZMax != 0.0f ? 1.0f : _ZMin / _ZMax;
+
+		Arr2D[3][0] = Arr2D[0][0] + _Left;
+		Arr2D[3][1] = _Height * 0.5f + _Right;
+		Arr2D[3][2] = _ZMax != 0.0f ? 0.0f : _ZMin / _ZMax;
+		Arr2D[3][3] = 1.0f;
 	}
 
 	void LookAtLH(const float4& _EyePos, const float4& _EyeDir, const float4& _EyeUp)
@@ -718,6 +741,13 @@ public:
 		}
 
 		return Return;
+	}
+
+	float4x4& operator*=(const float4x4& _Other) 
+	{
+		*this = *this * _Other;
+
+		return *this;
 	}
 
 	float4x4()
