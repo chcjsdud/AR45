@@ -10,7 +10,6 @@
 
 void GameEngineCore::CoreResourcesInit()
 {
-
 	// 최초의 버텍스의 위치를 로컬공간이라고 부릅니다.
 	std::vector<float4> ArrVertex;
 	ArrVertex.resize(24);
