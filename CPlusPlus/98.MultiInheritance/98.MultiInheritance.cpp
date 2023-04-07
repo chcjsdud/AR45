@@ -29,6 +29,13 @@ int main()
 	C NewC;
 
 	NewC.A::Update();
+
+	int b = 0;
+
+	for (size_t i = 0; i < 7372800; i++)
+	{
+		b += 1;
+	}
 }
 
 // 프로그램 실행: <Ctrl+F5> 또는 [디버그] > [디버깅하지 않고 시작] 메뉴
