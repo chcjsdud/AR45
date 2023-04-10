@@ -43,6 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contents", "Contents", "{EF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "문서", "문서", "{F6FD5304-4B13-4CBE-A4DA-189C0A1151F6}"
 	ProjectSection(SolutionItems) = preProject
+		랜파.jpg = 랜파.jpg
 		수학.txt = 수학.txt
 	EndProjectSection
 EndProject
