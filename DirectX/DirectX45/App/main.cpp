@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include <Windows.h>
 #include <GameEngineBase\GameEngineFile.h>
 #include <GameEngineBase\GameEngineDirectory.h>
@@ -38,5 +39,3 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		{2000, 0}
 	);
 }
-
-
