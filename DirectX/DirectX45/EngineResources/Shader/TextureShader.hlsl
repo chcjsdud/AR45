@@ -50,6 +50,11 @@ cbuffer OutPixelColor : register(b0)
     float4 OutColor;
 }
 
+cbuffer OutPixelColor1 : register(b1)
+{
+    float4 OutColor1;
+}
+
 
 float4 Texture_PS(OutPut _Value) : SV_Target0
 {

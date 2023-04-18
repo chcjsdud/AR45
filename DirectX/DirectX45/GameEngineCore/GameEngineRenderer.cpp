@@ -21,6 +21,17 @@ GameEngineRenderer::~GameEngineRenderer()
 
 void GameEngineRenderer::Render(float _Delta) 
 {
+	std::shared_ptr<GameEngineCamera> MainCamera = GetLevel()->GetMainCamera();
+
+	if (nullptr == MainCamera)
+	{
+		assert(false);
+		return;
+	}
+
+	GetTransform()->SetCameraMatrix(MainCamera->GetView(), MainCamera->GetProjection());
+
+
 	// GameEngineDevice::GetContext()->VSSetConstantBuffers();
 	// GameEngineDevice::GetContext()->PSSetConstantBuffers();
 
@@ -46,7 +57,7 @@ void GameEngineRenderer::SetPipeLine(const std::string_view& _Name)
 
 	if (true == ShaderResHelper.IsConstantBuffer("TransformData"))
 	{
-		const float4x4& World = GetTransform()->GetWorldMatrixRef();
+		const float4x4& World = GetTransform()->GetWorldViewProjectionMatrixRef();
 		ShaderResHelper.SetConstantBufferLink("TransformData", World);
 	}
 
