@@ -29,7 +29,6 @@ void PlayLevel::Start()
 		}
 
 		int a = 0;
-
 	}
 
 
