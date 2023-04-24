@@ -6,7 +6,12 @@
 #include "A.h"
 #include "B.h"
 
-class Monster 
+class PtrClass 
+{
+    int RefCount = 0;
+};
+
+class Monster : public PtrClass
 {
 public:
     int RefCount;
@@ -76,8 +81,8 @@ public:
 TPtr make_Ptr() 
 {
     TPtr Ptr;
-    Ptr.Ptr = new Monster();
-    Ptr.RefCount = new int();
+    Ptr.Ptr = new Monster(); // 100만번째 
+    Ptr.RefCount = new int(); // 200만번째
     Ptr.AddCount();
 
     return Ptr;
@@ -89,9 +94,48 @@ int Test()
     return Value;
 }
 
+class GameEngineObject : public std::enable_shared_from_this<GameEngineObject>
+{
+public:
+    template<typename PtrType>
+    std::shared_ptr<PtrType> GetSharedThis()
+    {
+        return std::dynamic_pointer_cast<PtrType>(std::enable_shared_from_this<GameEngineObject>::shared_from_this());
+    }
+
+    virtual ~GameEngineObject() 
+    {
+
+    }
+};
+
+class Player  : public GameEngineObject
+{
+public:
+    //std::shared_ptr< Player> GetSPtr() 
+    //{
+    //    return shared_from_this();
+    //}
+};
+
 int main()
 {
 
+    {
+        //NewPlayer->shared_from_this();
+        //NewPlayer->weak_from_this();
+     
+        // Player* NewPlayer = new Player();
+        std::shared_ptr<Player> NewPlayerSPtr = std::make_shared<Player>();
+        // Player* NewPlayer = NewPlayerSPtr.get();
+
+        std::shared_ptr<Player> Test0 = NewPlayerSPtr->GetSharedThis<Player>();
+
+        std::shared_ptr<Player> Test1 = NewPlayerSPtr->shared_from_this();
+
+
+        int a = 0;
+    }
 
     {
         // 1  
@@ -109,7 +153,7 @@ int main()
         NewB->Ptr = NewA;
     }
 
-    return;
+    return 1;
 
     {
         int Value = Test();
