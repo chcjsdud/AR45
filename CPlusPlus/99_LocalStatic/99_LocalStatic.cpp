@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-// 특정 함수에서만 
+// 특정 함수에서만 사용하고 싶은 전역 변수를 만들고 싶을때 쓰면 됩니다.
 // static int Function::A = 0;
 
 void Function() 
