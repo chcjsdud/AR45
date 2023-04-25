@@ -54,10 +54,10 @@ void GameEngineCore::EngineUpdate()
 	GameEngineSound::SoundUpdate();
 
 	MainLevel->TimeEvent.Update(TimeDeltaTime);
-	MainLevel->Update(TimeDeltaTime);
+	MainLevel->ActorUpdate(TimeDeltaTime);
 
 	GameEngineDevice::RenderStart();
-	MainLevel->Render(TimeDeltaTime);
+	MainLevel->ActorRender(TimeDeltaTime);
 	GameEngineDevice::RenderEnd();
 }
 
