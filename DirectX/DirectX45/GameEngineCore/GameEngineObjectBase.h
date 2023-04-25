@@ -43,12 +43,12 @@ public:
 		DeathValue = true;
 	}
 
-	bool IsDeath()
+	virtual bool IsDeath()
 	{
 		return DeathValue;
 	}
 
-	bool IsUpdate()
+	virtual bool IsUpdate()
 	{
 		return UpdateValue;
 	}
