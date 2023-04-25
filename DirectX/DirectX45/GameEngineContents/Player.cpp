@@ -114,6 +114,8 @@ void Player::Update(float _DeltaTime)
 		{
 			GetTransform()->AddLocalScale({ -ScaleSpeed * _DeltaTime, 0.0f, 0.0f });
 		}
+
+		Render0->GetTransform()->SetWorldRotation(float4::Zero);
 }
 
 void Player::Start()
@@ -148,7 +150,17 @@ void Player::Start()
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
 	Render0 = CreateComponent<GameEngineSpriteRenderer>();
 	Render0->SetTexture("Test.png");
-	Render0->GetTransform()->SetLocalScale({500.0f, 500.0f , 500.0f });
+	Render0->GetTransform()->SetLocalScale({100.0f, 100.0f , 100.0f });
+
+	Render1 = CreateComponent<GameEngineSpriteRenderer>();
+	Render1->SetTexture("Test.png");
+	Render1->GetTransform()->SetLocalScale({ 100.0f, 100.0f , 100.0f });
+	Render1->GetTransform()->SetLocalPosition({ -200.0f, 0.0f, 0.0f });
+
+	Render2 = CreateComponent<GameEngineSpriteRenderer>();
+	Render2->SetTexture("Test.png");
+	Render2->GetTransform()->SetLocalScale({ 100.0f, 100.0f , 100.0f });
+	Render2->GetTransform()->SetLocalPosition({ 200.0f, 0.0f, 0.0f });
 
 	//Render1 = CreateComponent<GameEngineRenderer>();
 	//Render1->SetPipeLine("2DTexture");
