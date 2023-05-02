@@ -106,28 +106,28 @@
     <ClInclude Include="GameEngineDepthState.h">
       <Filter>Resources\RenderingSetting</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imgui_impl_win32.h">
+    <ClInclude Include="imconfig.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imgui_internal.h">
+    <ClInclude Include="imgui.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imstb_rectpack.h">
+    <ClInclude Include="imgui_impl_dx11.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imstb_textedit.h">
+    <ClInclude Include="imgui_impl_win32.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imstb_truetype.h">
+    <ClInclude Include="imgui_internal.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imconfig.h">
+    <ClInclude Include="imstb_rectpack.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imgui.h">
+    <ClInclude Include="imstb_textedit.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Imgui\imgui_impl_dx11.h">
+    <ClInclude Include="imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
   </ItemGroup>
@@ -236,25 +236,25 @@
     <ClCompile Include="GameEngineDepthState.cpp">
       <Filter>Resources\RenderingSetting</Filter>
     </ClCompile>
-    <ClCompile Include="Imgui\imgui_tables.cpp">
+    <ClCompile Include="imgui.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Imgui\imgui_widgets.cpp">
+    <ClCompile Include="imgui_demo.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Imgui\imgui.cpp">
+    <ClCompile Include="imgui_draw.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Imgui\imgui_demo.cpp">
+    <ClCompile Include="imgui_impl_dx11.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Imgui\imgui_draw.cpp">
+    <ClCompile Include="imgui_impl_win32.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Imgui\imgui_impl_dx11.cpp">
+    <ClCompile Include="imgui_tables.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Imgui\imgui_impl_win32.cpp">
+    <ClCompile Include="imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
   </ItemGroup>
