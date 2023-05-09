@@ -36,18 +36,11 @@ protected:
 	virtual void Start() {}
 	virtual void Update(float _DeltaTime) {}
 	virtual void Render(float _DeltaTime) {}
-	void Release() override;
-	void AccLiveTime(float _LiveTime) override;
-
 
 private:
 	class GameEngineLevel* Level = nullptr;
 
 	void ComponentInit(std::shared_ptr<class GameEngineComponent> _Component);
-
-	void ComponentsUpdate(float _DeltaTime);
-
-	void ComponentsRender(float _DeltaTime);
 
 	
 };

@@ -63,6 +63,10 @@ protected:
 	virtual void Render(float _DeltaTime) {}
 	virtual void Release();
 
+	void PushChild(std::shared_ptr<GameEngineObject> _Child)
+	{
+		Childs.push_back(_Child);
+	}
 
 private:
 	float LiveTime = 0.0f;
