@@ -20,58 +20,24 @@ void GameEngineActor::ComponentInit(std::shared_ptr<class GameEngineComponent> _
 }
 
 
-void GameEngineActor::ComponentsUpdate(float _DeltaTime)
+void GameEngineActor::Release()
 {
-	for (std::shared_ptr<class GameEngineComponent>& Component : ComponentsList)
-	{
-		if (false == Component->IsUpdate())
-		{
-			continue;
-		}
+	GameEngineObject::Release();
 
-		Component->Update(_DeltaTime);
-	}
-}
+	//std::list<std::shared_ptr<class GameEngineComponent>>::iterator ComStartIter = ComponentsList.begin();
+	//std::list<std::shared_ptr<class GameEngineComponent>>::iterator ComEndIter = ComponentsList.end();
 
-void GameEngineActor::ComponentsRender(float _DeltaTime)
-{
-	for (std::shared_ptr<class GameEngineComponent>& Component : ComponentsList)
-	{
-		if (false == Component->IsUpdate())
-		{
-			continue;
-		}
+	//for (; ComStartIter != ComEndIter; )
+	//{
+	//	std::shared_ptr<class GameEngineComponent>& ComPtr = *ComStartIter;
 
-		Component->Render(_DeltaTime);
-	}
-}
+	//	if (false == ComPtr->IsDeath())
+	//	{
+	//		++ComStartIter;
+	//		continue;
+	//	}
 
-void GameEngineActor::AccLiveTime(float _LiveTime) 
-{
-	GameEngineUpdateObject::AccLiveTime(_LiveTime);
-
-	for (std::shared_ptr<class GameEngineComponent>& Component : ComponentsList)
-	{
-		Component->AccLiveTime(_LiveTime);
-	}
-}
-
-void GameEngineActor::ComponentsRelease()
-{
-	std::list<std::shared_ptr<class GameEngineComponent>>::iterator ComStartIter = ComponentsList.begin();
-	std::list<std::shared_ptr<class GameEngineComponent>>::iterator ComEndIter = ComponentsList.end();
-
-	for (; ComStartIter != ComEndIter; )
-	{
-		std::shared_ptr<class GameEngineComponent>& ComPtr = *ComStartIter;
-
-		if (false == ComPtr->IsDeath())
-		{
-			++ComStartIter;
-			continue;
-		}
-
-		ComStartIter = ComponentsList.erase(ComStartIter);
-	}
+	//	ComStartIter = ComponentsList.erase(ComStartIter);
+	//}
 
 }
