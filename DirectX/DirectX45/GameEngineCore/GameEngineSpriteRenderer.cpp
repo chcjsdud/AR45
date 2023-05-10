@@ -118,7 +118,8 @@ std::shared_ptr<AnimationInfo> GameEngineSpriteRenderer::CreateAnimation(const s
 	float _FrameInter /*= 0.1f*/,
 	int _Start /*= -1*/,
 	int _End /*= -1*/,
-	bool _Loop /*= true*/) 
+	bool _Loop /*= true*/,
+	bool _ScaleToImage)
 {
 	if (nullptr != FindAnimation(_Name))
 	{
@@ -171,6 +172,7 @@ std::shared_ptr<AnimationInfo> GameEngineSpriteRenderer::CreateAnimation(const s
 	NewAnimation->Parent = this;
 	NewAnimation->Loop = _Loop;
 	NewAnimation->Inter = _FrameInter;
+	NewAnimation->ScaleToImage = _ScaleToImage;
 
 	return NewAnimation;
 }
@@ -200,8 +202,12 @@ void GameEngineSpriteRenderer::Render(float _Delta)
 	if (nullptr != CurAnimation)
 	{
 		CurAnimation->Update(_Delta);
-
 		GetShaderResHelper().SetTexture("DiffuseTex", CurAnimation->CurFrameTexture());
+		if (true == CurAnimation->ScaleToImage)
+		{
+			float4 Scale = float4(static_cast<float>(CurAnimation->CurFrameTexture()->GetWidth()), static_cast<float>(CurAnimation->CurFrameTexture()->GetHeight()), 1);
+			GetTransform()->SetLocalScale(Scale);
+		}
 
 	}
 

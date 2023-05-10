@@ -27,9 +27,25 @@ public:
 	float CurTime = 0.0f;
 	float Inter = 0.1f;
 	bool Loop = true;
+	bool ScaleToImage = false;
 
 	bool IsEnd();
 };
+
+
+class AnimationParameter
+{
+public:
+	std::string_view AnimationName = "";
+	std::string_view SpriteName = "";
+	float FrameInter = 0.1f;
+	int Start = -1;
+	int End = -1;
+	bool Loop = true;
+	bool ScaleToImage = false;
+	
+};
+
 
 // Ό³Έν :
 class GameEngineSpriteRenderer : public GameEngineRenderer
@@ -59,7 +75,19 @@ public:
 		float _FrameInter = 0.1f, 
 		int _Start = -1, 
 		int _End = -1, 
-		bool _Loop = true);
+		bool _Loop = true,
+		bool _ScaleToImage = false);
+
+	std::shared_ptr<AnimationInfo> CreateAnimation(const AnimationParameter& _Paramter)
+	{
+		return CreateAnimation(_Paramter.AnimationName,
+			_Paramter.SpriteName,
+			_Paramter.FrameInter,
+			_Paramter.Start,
+			_Paramter.End,
+			_Paramter.Loop,
+			_Paramter.ScaleToImage);
+	}
 
 	void ChangeAnimation(const std::string_view& _Name, bool _Force, size_t _Frame = -1)
 	{
