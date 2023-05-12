@@ -323,6 +323,15 @@ void GameEngineTransform::SetParent(GameEngineTransform* _Parent)
 
 		AbsoluteReset();
 
+		GameEngineLevel* Level = Master->GetLevel();
+
+		std::shared_ptr<GameEngineObject> MasterPtr = Master->shared_from_this();
+
+		if (nullptr != dynamic_cast<GameEngineActor*>(Master))
+		{
+			Level->Actors[MasterPtr->GetOrder()].remove(std::dynamic_pointer_cast<GameEngineActor>(MasterPtr));
+		}
+
 		// 나의 로컬포지션 나의 로컬 이런것들이 있었는데.
 		// 나는 새로운 부모가 생겼고
 		// 내가 이미 다른 부모가 있다면
