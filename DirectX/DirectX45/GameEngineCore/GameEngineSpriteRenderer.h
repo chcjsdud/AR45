@@ -121,6 +121,11 @@ public:
 		return AtlasData;
 	}
 
+	inline float GetScaleRatio() const
+	{
+		return ScaleRatio;
+	}
+
 	void SetSprite(const std::string_view& _SpriteName, size_t _Frame = 0);
 
 	void SetFrame(size_t _Frame);
