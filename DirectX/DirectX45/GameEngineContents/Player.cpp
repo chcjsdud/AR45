@@ -22,6 +22,10 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
+	GameEngineTextureSetter* Tex = MainRenderer->GetShaderResHelper().GetTextureSetter("DiffuseTex");
+	std::string Name = Tex->Res->GetNameToString();
+
+
 	float RotSpeed = 10.0f;
 
 	float Speed = 200.0f;
@@ -44,10 +48,14 @@ void Player::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 	{
+		MainRenderer->ColorOptionValue.MulColor.a -= _DeltaTime;
+
 		GetTransform()->AddLocalPosition(float4::Left * Speed * _DeltaTime);
 	}
 	if (true == GameEngineInput::IsPress("PlayerMoveRight"))
 	{
+		MainRenderer->ColorOptionValue.MulColor.a += _DeltaTime;
+
 		GetTransform()->AddLocalPosition(float4::Right * Speed * _DeltaTime);
 	}
 	if (true == GameEngineInput::IsPress("PlayerMoveUp"))
@@ -199,24 +207,24 @@ void Player::Start()
 
 
 	// 나는 스케일을 1로 고정해 놓는게 좋다.
-	Render0 = CreateComponent<GameEngineSpriteRenderer>();
+	MainRenderer = CreateComponent<GameEngineSpriteRenderer>();
 	// Render0->SetOrder(5);
-	Render0->SetScaleToTexture("Test.png");
+	MainRenderer->SetScaleToTexture("Test.png");
 	// Render0->CreateAnimation({ "Run", "PlayerRun", 0.01f, -1, -1, true, true });
 
-	Render0->CreateAnimation({ .AnimationName = "Run", .SpriteName = "PlayerRun", .ScaleToTexture =true });
-	Render0->CreateAnimation({ "Win", "TestAnimation.png", 0, 5, 0.1f, true, true });
+	MainRenderer->CreateAnimation({ .AnimationName = "Run", .SpriteName = "PlayerRun", .ScaleToTexture =true });
+	MainRenderer->CreateAnimation({ "Win", "TestAnimation.png", 0, 5, 0.1f, true, true });
 
-	Render0->SetAnimationStartEvent("Win", 5, [this] 
+	MainRenderer->SetAnimationStartEvent("Win", 5, [this] 
 		{
 			//std::shared_ptr<TestObject> Actor = GetLevel()->CreateActor<TestObject>();
 			//Actor->GetTransform()->SetLocalPosition(GetTransform()->GetLocalPosition());
 			//Actor->GetTransform()->SetLocalScale({100.0f, 100.0f, 1.0f});
 		});
 
-	Render0->SetScaleRatio(5.0f);
+	MainRenderer->SetScaleRatio(5.0f);
 
-	Render0->ChangeAnimation("Win");
+	MainRenderer->ChangeAnimation("Win");
 
 	TestColor = { 0.0f, 0.0f, 0.0f, 1.0f };
 }
