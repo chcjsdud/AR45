@@ -3,6 +3,7 @@
 #include <GameEngineBase\GameEngineTimeEvent.h>
 #include <string_view>
 #include <map>
+#include <GameEngineCore/GameEngineRenderTarget.h>
 
 // Ό³Έν :
 class GameEngineActor;
@@ -80,8 +81,11 @@ protected:
 	void Render(float _DeltaTime);
 
 private:
+	std::map<int, std::shared_ptr<GameEngineCamera>> Cameras;
 	std::shared_ptr<GameEngineCamera> MainCamera;
-	std::shared_ptr<GameEngineCamera> UICamera;
+
+	std::shared_ptr<GameEngineRenderTarget> CameraTarget;
+
 
 	std::map<int, std::list<std::shared_ptr<GameEngineActor>>> Actors;
 

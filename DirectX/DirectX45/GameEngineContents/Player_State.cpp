@@ -146,6 +146,12 @@ void Player::StateInit()
 			//	// Col->GetActor()->Death();
 			//}
 
+			float4 Pos = GetTransform()->GetLocalPosition();
+
+			Pos.z -= 100;
+
+			GetLevel()->GetMainCamera()->GetTransform()->SetLocalPosition(Pos);
+
 		},
 			.End = [this]()
 		{
@@ -153,6 +159,8 @@ void Player::StateInit()
 
 		}
 	);
+
+
 	FSM.ChangeState("FreeMove");
 
 }
