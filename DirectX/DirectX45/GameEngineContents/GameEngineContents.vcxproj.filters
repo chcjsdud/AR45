@@ -31,6 +31,9 @@
     <ClCompile Include="TestObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Player_State.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

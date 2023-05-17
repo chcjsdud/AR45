@@ -84,7 +84,7 @@ void PlayLevel::Start()
 
 		Window->Test = std::bind(&PlayLevel::PlayerCreate, this);
 
-		Object0 = CreateActor<Player>(0);
+		Object0 = CreateActorToName<Player>("fasdfdsa");
 		Object0->GetTransform()->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
 
 		Object1 = CreateActor<TestObject>(-20);
