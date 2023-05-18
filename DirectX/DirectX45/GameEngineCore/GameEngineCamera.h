@@ -6,6 +6,7 @@
 
 // Ό³Έν :
 class GameEngineRenderer;
+class GameEngineRenderTarget;
 class GameEngineCamera : public GameEngineActor
 {
 	friend GameEngineRenderer;
@@ -53,6 +54,12 @@ public:
 
 	void CameraTransformUpdate();
 
+	std::shared_ptr<GameEngineRenderTarget> GetCamTarget() 
+	{
+		return CamTarget;
+	}
+
+
 protected:
 	void Start() override;
 
@@ -78,7 +85,8 @@ private:
 	float Near = 0.1f;
 	float Far = 10000.0f;
 
-
 	void PushRenderer(std::shared_ptr<GameEngineRenderer> _Render);
+
+	std::shared_ptr<GameEngineRenderTarget> CamTarget;
 };
 

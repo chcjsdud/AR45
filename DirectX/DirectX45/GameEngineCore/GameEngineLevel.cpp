@@ -11,10 +11,10 @@ GameEngineLevel::GameEngineLevel()
 
 	Cameras.insert(std::make_pair(0, MainCamera));
 
-	std::shared_ptr<GameEngineCamera> UICamera = CreateActor<GameEngineCamera>();
-	UICamera->SetProjectionType(CameraType::Orthogonal);
+	//std::shared_ptr<GameEngineCamera> UICamera = CreateActor<GameEngineCamera>();
+	//UICamera->SetProjectionType(CameraType::Orthogonal);
 
-	Cameras.insert(std::make_pair(100, UICamera));
+	//Cameras.insert(std::make_pair(100, UICamera));
 }
 
 GameEngineLevel::~GameEngineLevel() 
@@ -25,7 +25,6 @@ GameEngineLevel::~GameEngineLevel()
 
 void GameEngineLevel::Start()
 {
-	CameraTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::Null);
 
 }
 
@@ -83,6 +82,15 @@ void GameEngineLevel::ActorRender(float _DeltaTime)
 		Cam->Render(_DeltaTime);
 	}
 
+	for (std::pair<int, std::shared_ptr<GameEngineCamera>> Pair : Cameras)
+	{
+		std::shared_ptr<GameEngineCamera> Camera = Pair.second;
+		std::shared_ptr<GameEngineRenderTarget> Target = Camera->GetCamTarget();
+
+		GameEngineDevice::GetBackBufferTarget()->Merge(Target);
+	}
+
+
 	//// 이건 나중에 만들어질 랜더러의 랜더가 다 끝나고 되는 랜더가 될겁니다.
 	//std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator GroupStartIter = Actors.begin();
 	//std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator GroupEndIter = Actors.end();
@@ -111,7 +119,7 @@ void GameEngineLevel::ActorRender(float _DeltaTime)
 	//	}
 	//}
 
-	GameEngineGUI::Render(GetSharedThis(), _DeltaTime);
+	// GameEngineGUI::Render(GetSharedThis(), _DeltaTime);
 
 }
 

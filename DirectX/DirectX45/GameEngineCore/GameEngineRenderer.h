@@ -2,6 +2,18 @@
 #include "GameEngineComponent.h"
 #include "GameEngineShader.h"
 
+class GameEngineRenderUnit 
+{
+public:
+	std::shared_ptr<class GameEngineRenderingPipeLine > Pipe;
+	GameEngineShaderResHelper ShaderResHelper;
+
+public:
+	void SetPipeLine(const std::string_view& _Name);
+	void Render(float _DeltaTime);
+};
+
+
 // Ό³Έν :
 class GameEngineRenderer : public GameEngineComponent
 {

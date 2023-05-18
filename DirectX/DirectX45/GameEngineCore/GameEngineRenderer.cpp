@@ -10,6 +10,28 @@
 #include "GameEnginePixelShader.h"
 #include "GameEngineShaderResHelper.h"
 
+void GameEngineRenderUnit::SetPipeLine(const std::string_view& _Name) 
+{
+	Pipe = GameEngineRenderingPipeLine::Find(_Name);
+
+	{
+		const GameEngineShaderResHelper& Res = Pipe->GetVertexShader()->GetShaderResHelper();
+		ShaderResHelper.Copy(Res);
+	}
+
+	{
+		const GameEngineShaderResHelper& Res = Pipe->GetPixelShader()->GetShaderResHelper();
+		ShaderResHelper.Copy(Res);
+	}
+}
+
+void GameEngineRenderUnit::Render(float _DeltaTime)
+{
+	Pipe->RenderingPipeLineSetting();
+	ShaderResHelper.Setting();
+	Pipe->Render();
+}
+
 GameEngineRenderer::GameEngineRenderer() 
 {
 }

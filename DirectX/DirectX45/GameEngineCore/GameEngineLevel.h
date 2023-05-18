@@ -84,9 +84,6 @@ private:
 	std::map<int, std::shared_ptr<GameEngineCamera>> Cameras;
 	std::shared_ptr<GameEngineCamera> MainCamera;
 
-	std::shared_ptr<GameEngineRenderTarget> CameraTarget;
-
-
 	std::map<int, std::list<std::shared_ptr<GameEngineActor>>> Actors;
 
 	std::map<int, std::list<std::shared_ptr<GameEngineCollision>>> Collisions;
