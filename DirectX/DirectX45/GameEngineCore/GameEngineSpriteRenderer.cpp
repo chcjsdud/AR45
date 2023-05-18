@@ -23,7 +23,10 @@ void AnimationInfo::Reset()
 
 void AnimationInfo::Update(float _DeltaTime)
 {
-	IsEndValue = false;
+	if (false == Loop)
+	{
+		IsEndValue = false;
+	}
 
 	// 1;
 	// 
@@ -63,6 +66,7 @@ void AnimationInfo::Update(float _DeltaTime)
 			}
 			else
 			{
+				IsEndValue = true;
 				--CurFrame;
 			}
 		}
