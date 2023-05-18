@@ -281,7 +281,7 @@ void GameEngineSpriteRenderer::ChangeAnimation(const std::string_view& _Name, si
 		return;
 	}
 
-	if (CurAnimation == Find && false == _Force)
+	if (CurAnimation.get() == Find.get() && false == _Force)
 	{
 		return;
 	}
