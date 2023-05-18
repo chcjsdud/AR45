@@ -23,7 +23,7 @@ void AnimationInfo::Reset()
 
 void AnimationInfo::Update(float _DeltaTime)
 {
-	if (false == Loop)
+	if (true == Loop)
 	{
 		IsEndValue = false;
 	}
