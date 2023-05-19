@@ -277,7 +277,7 @@ void GameEngineCamera::Release()
 		std::list<std::shared_ptr<GameEngineRenderer>>::iterator StartRenderer = RenderGroup.begin();
 		std::list<std::shared_ptr<GameEngineRenderer>>::iterator EndRenderer = RenderGroup.end();
 
-		for (; StartRenderer != EndRenderer; ++StartRenderer)
+		for (; StartRenderer != EndRenderer;)
 		{
 			std::shared_ptr<GameEngineRenderer>& Render = *StartRenderer;
 
