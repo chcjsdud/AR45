@@ -109,7 +109,7 @@ public:
 
 	size_t GetCurrentFrame()
 	{
-		return CurAnimation->CurFrame;
+		return CurAnimation->FrameIndex[CurAnimation->CurFrame];
 	}
 
 	float4 GetAtlasData()
