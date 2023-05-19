@@ -81,8 +81,10 @@ void Player::Start()
 	MainRenderer->SetScaleToTexture("Test.png");
 	MainRenderer->CreateAnimation({ .AnimationName = "Run", .SpriteName = "PlayerRun", .ScaleToTexture =true });
 	MainRenderer->CreateAnimation({ "Win", "TestAnimation.png", 0, 5, 0.1f, true, true });
-	MainRenderer->SetAnimationStartEvent("Win", 5, [this] 
+	MainRenderer->SetAnimationStartEvent("Win", 0, [this] 
 		{
+			int a = 0;
+
 			//std::shared_ptr<TestObject> Actor = GetLevel()->CreateActor<TestObject>();
 			//Actor->GetTransform()->SetLocalPosition(GetTransform()->GetLocalPosition());
 			//Actor->GetTransform()->SetLocalScale({100.0f, 100.0f, 1.0f});

@@ -2,6 +2,7 @@
 #include "PlayLevel.h"
 #include "Player.h"
 #include "TestObject.h"
+#include "PlayLevelUIActor.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineCamera.h>
@@ -74,6 +75,7 @@ void PlayLevel::Start()
 	GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
 
 
+
 	std::shared_ptr<GameEngineCoreWindow> Window = GameEngineGUI::FindGUIWindowConvert<GameEngineCoreWindow>("CoreWindow");
 
 	{
@@ -126,6 +128,8 @@ void PlayLevel::Start()
 
 	}
 
+
+	std::shared_ptr<PlayLevelUIActor> Object = CreateActor<PlayLevelUIActor>(1000);
 
 	//{
 	//	std::shared_ptr<TestObject> Object = CreateActor<TestObject>(-20);

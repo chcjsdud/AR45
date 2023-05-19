@@ -9,6 +9,7 @@ class GameEngineRenderer;
 class GameEngineRenderTarget;
 class GameEngineCamera : public GameEngineActor
 {
+	friend GameEngineLevel;
 	friend GameEngineRenderer;
 
 public:
@@ -59,12 +60,16 @@ public:
 		return CamTarget;
 	}
 
+	bool IsView(const TransformData& _TransData);
+
 
 protected:
 	void Start() override;
 
 private:
 	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>> Renderers;
+
+	DirectX::BoundingOrientedBox Box;
 
 	bool FreeCamera = false;
 
