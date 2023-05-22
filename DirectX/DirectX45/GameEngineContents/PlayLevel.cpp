@@ -67,10 +67,13 @@ void PlayLevel::Start()
 		{
 			GameEngineTexture::Load(File[i].GetFullPath());
 		}
+
+		
 	}
 
 
 
+	GetMainCamera()->SetSortType(0, SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
 
