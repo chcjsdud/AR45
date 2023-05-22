@@ -55,7 +55,20 @@ void Player::Start()
 		GameEngineInput::CreateKey("PlayerSpeedBoost", VK_LSHIFT);
 	}
 
-	if (nullptr == GameEngineSprite::Find("CHAc_Ground_Run"))
+
+	StateInit();
+}
+
+// 이건 디버깅용도나 
+void Player::Render(float _Delta)
+{
+	// GetTransform()->AddLocalRotation({0.0f, 0.0f, 360.0f * _Delta});
+};
+
+void Player::LevelChangeStart() 
+{
+
+	if (nullptr == GameEngineSprite::Find("PlayerRun"))
 	{
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");
@@ -71,33 +84,33 @@ void Player::Start()
 		// std::vector<GameEngineFile> File = NewDir.GetAllFile({ ".Png", });
 	}
 
+
+	if (nullptr == MainRenderer)
 	{
-		Collsion = CreateComponent<GameEngineCollision>();
-		Collsion->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
-		Collsion->SetOrder(3000);
+		MainRenderer = CreateComponent<GameEngineSpriteRenderer>();
+		MainRenderer->CreateAnimation({ .AnimationName = "Run", .SpriteName = "PlayerRun", .ScaleToTexture = true });
+		MainRenderer->CreateAnimation({ "Win", "TestAnimation.png", 0, 5, 0.1f, true, true });
+		MainRenderer->SetAnimationStartEvent("Win", 0, [this]
+			{
+				int a = 0;
+
+				//std::shared_ptr<TestObject> Actor = GetLevel()->CreateActor<TestObject>();
+				//Actor->GetTransform()->SetLocalPosition(GetTransform()->GetLocalPosition());
+				//Actor->GetTransform()->SetLocalScale({100.0f, 100.0f, 1.0f});
+			});
+
+		MainRenderer->SetScaleRatio(5.0f);
+		MainRenderer->ChangeAnimation("Win");
+
+		{
+			Collsion = CreateComponent<GameEngineCollision>();
+			Collsion->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
+			Collsion->SetOrder(3000);
+		}
+
 	}
 
-	MainRenderer = CreateComponent<GameEngineSpriteRenderer>();
-	MainRenderer->SetScaleToTexture("Test.png");
-	MainRenderer->CreateAnimation({ .AnimationName = "Run", .SpriteName = "PlayerRun", .ScaleToTexture =true });
-	MainRenderer->CreateAnimation({ "Win", "TestAnimation.png", 0, 5, 0.1f, true, true });
-	MainRenderer->SetAnimationStartEvent("Win", 0, [this] 
-		{
-			int a = 0;
+	// MainRenderer->SetScaleToTexture("Test.png");
 
-			//std::shared_ptr<TestObject> Actor = GetLevel()->CreateActor<TestObject>();
-			//Actor->GetTransform()->SetLocalPosition(GetTransform()->GetLocalPosition());
-			//Actor->GetTransform()->SetLocalScale({100.0f, 100.0f, 1.0f});
-		});
-
-	MainRenderer->SetScaleRatio(5.0f);
-	MainRenderer->ChangeAnimation("Win");
-
-	StateInit();
+	// 리소스 로드를 해야할 것이다.
 }
-
-// 이건 디버깅용도나 
-void Player::Render(float _Delta)
-{
-	// GetTransform()->AddLocalRotation({0.0f, 0.0f, 360.0f * _Delta});
-};

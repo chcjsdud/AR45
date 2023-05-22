@@ -23,6 +23,8 @@ protected:
 	void Update(float _Delta) override;
 	void Render(float _Delta) override;
 
+	void LevelChangeStart() override;
+
 	void StateInit();
 
 	float4 TestColor;

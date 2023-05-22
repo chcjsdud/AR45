@@ -10,6 +10,9 @@
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCoreWindow.h>
 
+#include <GameEngineCore/GameEngineTexture.h>
+#include <GameEngineCore/GameEngineSprite.h>
+
 std::shared_ptr<Player> Object0 = nullptr;
 std::shared_ptr<TestObject> Object1 = nullptr;
 std::shared_ptr<GameEngineSpriteRenderer> RenderTest = nullptr;
@@ -27,6 +30,11 @@ void PlayLevel::Update(float _DeltaTime)
 	if (Object3->Render->GetTransform()->Collision({ Object1->Render->GetTransform(), ColType::OBBBOX3D, ColType::OBBBOX3D }))
 	{
 		int a = 0;
+	}
+
+	if (true == GameEngineInput::IsDown("LevelChangeKey"))
+	{
+		GameEngineCore::ChangeLevel("TitleLevel");
 	}
 
 	//if (nullptr != Object1 && 1.0f <= Object1->GetLiveTime())
@@ -52,6 +60,10 @@ void PlayLevel::PlayerCreate(/*Playlevel* this*/)
 
 void PlayLevel::Start()
 {
+	if (false == GameEngineInput::IsKey("LevelChangeKey"))
+	{
+		GameEngineInput::CreateKey("LevelChangeKey", 'I');
+	}
 
 	{
 		GameEngineDirectory NewDir;
@@ -151,5 +163,11 @@ void PlayLevel::LevelChangeStart()
 void PlayLevel::LevelChangeEnd() 
 {
 	GameEngineLevel::LevelChangeEnd();
+
+	GameEngineTexture::ResourcesClear();
+	GameEngineSprite::ResourcesClear();
+
+	// GameEngineLevel::
+
 	int a = 0;
 }

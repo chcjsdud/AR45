@@ -32,8 +32,8 @@ void Player::StateInit()
 			// 함수포인터로 할수 있다.
 			// 
 
-			GameEngineTextureSetter* Tex = MainRenderer->GetShaderResHelper().GetTextureSetter("DiffuseTex");
-			std::string Name = Tex->Res->GetNameToString();
+			//GameEngineTextureSetter* Tex = MainRenderer->GetShaderResHelper().GetTextureSetter("DiffuseTex");
+			//std::string Name = Tex->Res->GetNameToString();
 
 
 			float RotSpeed = 10.0f;
