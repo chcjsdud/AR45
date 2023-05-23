@@ -84,6 +84,7 @@ void GameEngineCore::EngineUpdate()
 		// Prev레벨에서 사용한 텍스처들
 
 
+		// 그냥 텍스처 자체를 지우지는 않을 것이다.
 		PrevLevel;
 		MainLevel;
 		NextLevel = nullptr;
