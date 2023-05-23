@@ -94,11 +94,6 @@ void PlayLevel::Start()
 	std::shared_ptr<GameEngineCoreWindow> Window = GameEngineGUI::FindGUIWindowConvert<GameEngineCoreWindow>("CoreWindow");
 
 	{
-		//if (nullptr == Window)
-		//{
-		//	MsgAssert("윈도우 테스트 코드 미작동");
-		//}
-
 		Window->Test = std::bind(&PlayLevel::PlayerCreate, this);
 
 		Object0 = CreateActorToName<Player>("fasdfdsa");
@@ -138,9 +133,7 @@ void PlayLevel::Start()
 
 			std::shared_ptr<GameEngineCollision> Col = Object3->CreateComponent<GameEngineCollision>(2000);
 			Col->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
-
 		}
-
 	}
 
 
