@@ -18,6 +18,7 @@
     <ClInclude Include="PlayLevelUIActor.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="MyContentSpriteRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -40,6 +41,7 @@
     <ClCompile Include="PlayLevelUIActor.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="MyContentSpriteRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">

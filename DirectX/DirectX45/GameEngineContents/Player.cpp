@@ -10,6 +10,7 @@
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineSprite.h>
 #include "TestObject.h"
+#include "MyContentSpriteRenderer.h"
 
 Player::Player()
 {
@@ -87,7 +88,7 @@ void Player::LevelChangeStart()
 
 	if (nullptr == MainRenderer)
 	{
-		MainRenderer = CreateComponent<GameEngineSpriteRenderer>();
+		MainRenderer = CreateComponent<MyContentSpriteRenderer>();
 		MainRenderer->CreateAnimation({ .AnimationName = "Run", .SpriteName = "PlayerRun", .ScaleToTexture = true });
 		MainRenderer->CreateAnimation({ "Win", "TestAnimation.png", 0, 5, 0.1f, true, true });
 		MainRenderer->SetAnimationStartEvent("Win", 0, [this]
