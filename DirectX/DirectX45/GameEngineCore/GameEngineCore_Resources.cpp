@@ -249,7 +249,8 @@ void GameEngineCore::CoreResourcesInit()
 
 		std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".hlsl", ".fx" });
 
-		// 쉐이더 자동컴파일
+		// std::string FileString = Files[0].
+
 		GameEngineVertexShader::Load(Files[0].GetFullPath(), "Merge_VS");
 		GameEnginePixelShader::Load(Files[0].GetFullPath(), "Merge_PS");
 
