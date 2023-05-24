@@ -156,11 +156,5 @@ void PlayLevel::LevelChangeStart()
 void PlayLevel::LevelChangeEnd() 
 {
 	GameEngineLevel::LevelChangeEnd();
-
-	GameEngineTexture::ResourcesClear();
-	GameEngineSprite::ResourcesClear();
-
-	// GameEngineLevel::
-
 	int a = 0;
 }

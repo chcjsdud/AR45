@@ -36,6 +36,7 @@ void GameEngineCore::CoreResourcesInit()
 		for (size_t i = 0; i < File.size(); i++)
 		{
 			GameEngineTexture::Load(File[i].GetFullPath());
+			GameEngineTexture::RealLoad(File[i].GetFullPath());
 		}
 	}
 

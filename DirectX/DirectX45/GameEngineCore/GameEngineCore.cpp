@@ -85,8 +85,32 @@ void GameEngineCore::EngineUpdate()
 
 
 		// 그냥 텍스처 자체를 지우지는 않을 것이다.
-		PrevLevel;
-		MainLevel;
+		if (nullptr != PrevLevel)
+		{
+			for (const std::pair<std::string, std::string>& Pair : PrevLevel->TexturePath)
+			{
+				if (nullptr != MainLevel && true == MainLevel->TexturePath.contains(Pair.first))
+				{
+					continue;
+				}
+
+				GameEngineTexture::UnLoad(Pair.first);
+			}
+		}
+
+		if (nullptr != MainLevel)
+		{
+			for (const std::pair<std::string, std::string>& Pair : MainLevel->TexturePath)
+			{
+				if (nullptr != PrevLevel && true == PrevLevel->TexturePath.contains(Pair.first))
+				{
+					continue;
+				}
+
+				GameEngineTexture::RealLoad(Pair.second, Pair.first);
+			}
+		}
+
 		NextLevel = nullptr;
 		GameEngineTime::GlobalTime.Reset();
 	}
