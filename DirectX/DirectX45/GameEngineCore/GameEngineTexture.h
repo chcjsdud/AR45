@@ -77,12 +77,6 @@ public:
 		return NewTexture;
 	}
 
-	static std::shared_ptr<GameEngineTexture> Create(const std::string_view& _Name, const std::string_view& _Path)
-	{
-		std::shared_ptr<GameEngineTexture> NewTexture = GameEngineResource::Create(_Name);
-		return NewTexture;
-	}
-
 	static std::shared_ptr<GameEngineTexture> Create(const std::string_view& _Name, ID3D11Texture2D* _Value)
 	{
 		std::shared_ptr<GameEngineTexture> NewTexture = GameEngineResource::Create(_Name);

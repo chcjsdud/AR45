@@ -56,7 +56,9 @@ void GameEngineCore::EngineUpdate()
 
 		if (nullptr != MainLevel)
 		{
+			CurLoadLevel = MainLevel.get();
 			MainLevel->LevelChangeEnd();
+			CurLoadLevel = nullptr;
 			MainLevel->ActorLevelChangeEnd();
 		}
 
@@ -64,7 +66,9 @@ void GameEngineCore::EngineUpdate()
 
 		if (nullptr != MainLevel)
 		{
+			CurLoadLevel = MainLevel.get();
 			MainLevel->LevelChangeStart();
+			CurLoadLevel = nullptr;
 			MainLevel->ActorLevelChangeStart();
 		}
 
@@ -87,28 +91,12 @@ void GameEngineCore::EngineUpdate()
 		// 그냥 텍스처 자체를 지우지는 않을 것이다.
 		if (nullptr != PrevLevel)
 		{
-			for (const std::pair<std::string, std::string>& Pair : PrevLevel->TexturePath)
-			{
-				if (nullptr != MainLevel && true == MainLevel->TexturePath.contains(Pair.first))
-				{
-					continue;
-				}
-
-				GameEngineTexture::UnLoad(Pair.first);
-			}
+			PrevLevel->TextureUnLoad(MainLevel.get());
 		}
 
 		if (nullptr != MainLevel)
 		{
-			for (const std::pair<std::string, std::string>& Pair : MainLevel->TexturePath)
-			{
-				if (nullptr != PrevLevel && true == PrevLevel->TexturePath.contains(Pair.first))
-				{
-					continue;
-				}
-
-				GameEngineTexture::RealLoad(Pair.second, Pair.first);
-			}
+			MainLevel->TextureRealLoad(PrevLevel.get());
 		}
 
 		NextLevel = nullptr;
@@ -132,10 +120,20 @@ void GameEngineCore::EngineUpdate()
 	GameEngineInput::Update(TimeDeltaTime);
 	GameEngineSound::SoundUpdate();
 
+	// 업데이트가 일어나는 동안 로드가 된애들
+
+	CurLoadLevel = MainLevel.get();
 	MainLevel->TimeEvent.Update(TimeDeltaTime);
 	MainLevel->AccLiveTime(TimeDeltaTime);
 	MainLevel->Update(TimeDeltaTime);
 	MainLevel->ActorUpdate(TimeDeltaTime);
+	CurLoadLevel = nullptr;
+	MainLevel->TextureRealLoad(nullptr);
+
+	if (nullptr != MainLevel)
+	{
+		MainLevel->TextureRealLoad(nullptr);
+	}
 
 	GameEngineVideo::VideoState State = GameEngineVideo::GetCurState();
 	if (State != GameEngineVideo::VideoState::Running)
