@@ -153,7 +153,7 @@ void GameEngineTexture::VSReset(UINT _Slot)
 {
 	static ID3D11ShaderResourceView* Nullptr = nullptr;
 
-	GameEngineDevice::GetContext()->PSSetShaderResources(_Slot, 1, &Nullptr);
+	GameEngineDevice::GetContext()->VSSetShaderResources(_Slot, 1, &Nullptr);
 }
 void GameEngineTexture::PSReset(UINT _Slot)
 {
