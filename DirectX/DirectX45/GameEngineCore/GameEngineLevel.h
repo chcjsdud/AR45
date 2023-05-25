@@ -112,7 +112,7 @@ private:
 
 	void TextureUnLoad(GameEngineLevel* _NextLevel);
 
-	void TextureRealLoad(GameEngineLevel* _PrevLevel);
+	void TextureReLoad(GameEngineLevel* _PrevLevel);
 
 };
 

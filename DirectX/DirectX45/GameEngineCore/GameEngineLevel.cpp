@@ -305,7 +305,7 @@ void GameEngineLevel::TextureUnLoad(GameEngineLevel* _NextLevel)
 	LoadEndPath.clear();
 }
 
-void GameEngineLevel::TextureRealLoad(GameEngineLevel* _PrevLevel)
+void GameEngineLevel::TextureReLoad(GameEngineLevel* _PrevLevel)
 {
 
 	for (const std::pair<std::string, std::string>& Pair : TexturePath)
@@ -315,7 +315,7 @@ void GameEngineLevel::TextureRealLoad(GameEngineLevel* _PrevLevel)
 			continue;
 		}
 
-		GameEngineTexture::RealLoad(Pair.second, Pair.first);
+		GameEngineTexture::ReLoad(Pair.second, Pair.first);
 		LoadEndPath.insert(std::make_pair(Pair.first, Pair.second));
 	}
 
