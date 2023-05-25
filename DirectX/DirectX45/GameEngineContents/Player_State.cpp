@@ -56,14 +56,10 @@ void Player::StateInit()
 
 			if (true == GameEngineInput::IsPress("PlayerMoveLeft"))
 			{
-				MainRenderer->ColorOptionValue.MulColor.a -= _DeltaTime;
-
 				GetTransform()->AddLocalPosition(float4::Left * Speed * _DeltaTime);
 			}
 			if (true == GameEngineInput::IsPress("PlayerMoveRight"))
 			{
-				MainRenderer->ColorOptionValue.MulColor.a += _DeltaTime;
-
 				GetTransform()->AddLocalPosition(float4::Right * Speed * _DeltaTime);
 			}
 			if (true == GameEngineInput::IsPress("PlayerMoveUp"))

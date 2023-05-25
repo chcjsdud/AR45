@@ -19,6 +19,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="MyContentSpriteRenderer.h" />
+    <ClInclude Include="FadeEffect.h">
+      <Filter>PostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -42,6 +45,9 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="MyContentSpriteRenderer.cpp" />
+    <ClCompile Include="FadeEffect.cpp">
+      <Filter>PostEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
@@ -49,6 +55,9 @@
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{df11f953-5c45-4952-85fb-a35bec5d2a60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PostEffect">
+      <UniqueIdentifier>{8b278d14-8721-4921-8f5e-5601845f39f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

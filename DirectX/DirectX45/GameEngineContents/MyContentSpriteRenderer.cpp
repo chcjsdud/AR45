@@ -23,8 +23,8 @@ void MyContentSpriteRenderer::Start()
 	ColorOptionValue.MulColor = float4::One;
 	ColorOptionValue.PlusColor = float4::Null;
 
-	AColor.r = 1.0f;
-	AColor.a = 1.0f;
+	AColor.r = 0.0f;
+	AColor.a = 0.0f;
 
 	GetShaderResHelper().SetConstantBufferLink("AtlasData", AtlasData);
 	GetShaderResHelper().SetConstantBufferLink("ColorOption", ColorOptionValue);

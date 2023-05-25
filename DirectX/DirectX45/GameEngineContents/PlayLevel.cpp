@@ -9,6 +9,7 @@
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCoreWindow.h>
+#include "FadeEffect.h"
 
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineSprite.h>
@@ -89,7 +90,7 @@ void PlayLevel::Start()
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
 
-
+	FEffect = GetLastTarget()->CreateEffect<FadeEffect>();
 
 	std::shared_ptr<GameEngineCoreWindow> Window = GameEngineGUI::FindGUIWindowConvert<GameEngineCoreWindow>("CoreWindow");
 
