@@ -25,4 +25,5 @@ void TestObject::Start()
 {
 	Render = CreateComponent<GameEngineSpriteRenderer>();
 	Render->CameraCullingOn();
+	Render->ColorOptionValue.MulColor.a = 0.5f;
 }
