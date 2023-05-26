@@ -46,6 +46,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "문서", "문서", "{F6FD53
 		랜파.jpg = 랜파.jpg
 		수학.txt = 수학.txt
 		자기만의 쉐이더 만드는법.txt = 자기만의 쉐이더 만드는법.txt
+		할일.txt = 할일.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shader", "Shader", "{6981530D-A537-4FD4-BD42-F9FBFD6F2F69}"
