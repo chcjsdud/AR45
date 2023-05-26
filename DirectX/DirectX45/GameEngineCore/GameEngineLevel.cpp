@@ -175,12 +175,20 @@ void GameEngineLevel::ActorRender(float _DeltaTime)
 	if (true == GameEngineInput::IsDown("GUISwitch"))
 	{
 		GUIRender = !GUIRender;
+
+		if (false == GUIRender)
+		{
+			GameEngineGUI::Release();
+		}
+		else {
+			GameEngineGUI::Initialize();
+		}
 	}
 
 	if (true == GUIRender)
 	{
-		// GameEngineGUI::Render(GetSharedThis(), _DeltaTime);
-	}
+		GameEngineGUI::Render(GetSharedThis(), _DeltaTime);
+	} 
 
 }
 
