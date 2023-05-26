@@ -38,6 +38,18 @@ void PlayLevel::Update(float _DeltaTime)
 		GameEngineCore::ChangeLevel("TitleLevel");
 	}
 
+	if (true == GameEngineInput::IsDown("FadeIn"))
+	{
+		FEffect->FadeIn();
+	}
+
+	if (true == GameEngineInput::IsDown("FadeOut"))
+	{
+		FEffect->FadeOut();
+	}
+
+
+
 	//if (nullptr != Object1 && 1.0f <= Object1->GetLiveTime())
 	//{
 	//	if (nullptr == Object1)
@@ -61,6 +73,12 @@ void PlayLevel::PlayerCreate(/*Playlevel* this*/)
 
 void PlayLevel::Start()
 {
+	if (false == GameEngineInput::IsKey("FadeIn"))
+	{
+		GameEngineInput::CreateKey("FadeIn", '1');
+		GameEngineInput::CreateKey("FadeOut", '2');
+	}
+
 	if (false == GameEngineInput::IsKey("LevelChangeKey"))
 	{
 		GameEngineInput::CreateKey("LevelChangeKey", 'I');
@@ -121,7 +139,7 @@ void PlayLevel::Start()
 		{
 			Object3 = CreateActor<TestObject>(-20);
 			Object3->GetTransform()->SetLocalPosition({ 000.0f, 200.0f, 0.0f });
-			Object3->Render->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
+			Object3->Render->GetTransform()->SetLocalScale({ 1000.0f, 1000.0f, 100.0f });
 
 			std::shared_ptr<GameEngineCollision> Col = Object3->CreateComponent<GameEngineCollision>(2000);
 			Col->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });

@@ -199,6 +199,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Contents_Resources.cpp" />
     <ClCompile Include="FadeEffect.cpp">
       <SubType>
       </SubType>
