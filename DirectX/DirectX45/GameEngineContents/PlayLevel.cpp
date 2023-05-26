@@ -38,14 +38,20 @@ void PlayLevel::Update(float _DeltaTime)
 		GameEngineCore::ChangeLevel("TitleLevel");
 	}
 
-	if (true == GameEngineInput::IsDown("FadeIn"))
+	if (true == GameEngineInput::IsPress("FadeIn"))
 	{
-		FEffect->FadeIn();
+		std::shared_ptr<GameEngineCamera> Camera = GetLevel()->GetCamera(0);
+
+		Camera->AddZoomRatio(-_DeltaTime);
+
+		// FEffect->FadeIn();
 	}
 
-	if (true == GameEngineInput::IsDown("FadeOut"))
+	if (true == GameEngineInput::IsPress("FadeOut"))
 	{
-		FEffect->FadeOut();
+		std::shared_ptr<GameEngineCamera> Camera = GetLevel()->GetCamera(0);
+		Camera->AddZoomRatio(_DeltaTime);
+		// FEffect->FadeOut();
 	}
 
 
