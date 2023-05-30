@@ -110,7 +110,7 @@ void PlayLevel::Start()
 
 
 
-	GetMainCamera()->SetSortType(0, SortType::ZSort);
+	// GetMainCamera()->SetSortType(0, SortType::ZSort);
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -1000.0f});
 
@@ -119,6 +119,17 @@ void PlayLevel::Start()
 	std::shared_ptr<GameEngineCoreWindow> Window = GameEngineGUI::FindGUIWindowConvert<GameEngineCoreWindow>("CoreWindow");
 
 	{
+
+		{
+			Object3 = CreateActor<TestObject>(520);
+			Object3->GetTransform()->SetLocalPosition({ -100.0f, 200.0f, 0.0f });
+			Object3->Render->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
+
+			std::shared_ptr<GameEngineCollision> Col = Object3->CreateComponent<GameEngineCollision>(2000);
+			Col->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
+		}
+
+
 		Window->Test = std::bind(&PlayLevel::PlayerCreate, this);
 
 		Object0 = CreateActorToName<Player>("fasdfdsa");
@@ -143,18 +154,9 @@ void PlayLevel::Start()
 		//Object2->GetTransform()->SetParent(Object1->GetTransform());
 
 		{
-			Object3 = CreateActor<TestObject>(-20);
+			Object3 = CreateActor<TestObject>(520);
 			Object3->GetTransform()->SetLocalPosition({ 000.0f, 200.0f, 0.0f });
 			Object3->Render->GetTransform()->SetLocalScale({ 1000.0f, 1000.0f, 100.0f });
-
-			std::shared_ptr<GameEngineCollision> Col = Object3->CreateComponent<GameEngineCollision>(2000);
-			Col->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
-		}
-
-		{
-			Object3 = CreateActor<TestObject>(-20);
-			Object3->GetTransform()->SetLocalPosition({ -100.0f, 200.0f, 0.0f });
-			Object3->Render->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
 
 			std::shared_ptr<GameEngineCollision> Col = Object3->CreateComponent<GameEngineCollision>(2000);
 			Col->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });

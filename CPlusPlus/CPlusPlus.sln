@@ -10,6 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{51FBF79B-1F2
 		객체지향.txt = 객체지향.txt
 		검색순서.txt = 검색순서.txt
 		단축키.txt = 단축키.txt
+		알고리즘.pptx = 알고리즘.pptx
 		용어정리.txt = 용어정리.txt
 		자료구조.txt = 자료구조.txt
 	EndProjectSection
