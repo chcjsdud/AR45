@@ -71,8 +71,8 @@ public:
 	static std::shared_ptr<GameEngineTexture> Load(const std::string_view& _Path, const std::string_view& _Name) 
 	{
 		std::shared_ptr<GameEngineTexture> NewTexture = GameEngineResource::Create(_Name);
-
 		PathCheck(_Path, _Name);
+		NewTexture->SetPath(_Path);
 		NewTexture->ResLoad(_Path);
 		return NewTexture;
 	}
@@ -156,6 +156,8 @@ public:
 	}
 
 	GameEnginePixelColor GetPixel(int _X, int _Y, GameEnginePixelColor DefaultColor = GameEnginePixelColor::Black);
+
+	void ReLoad();
 
 protected:
 
