@@ -211,8 +211,6 @@ void GameEngineShaderResHelper::SetTexture(const std::string_view& _SettingName,
 		return;
 	}
 
-	_Texture->ReLoad();
-
 	std::string UpperName = GameEngineString::ToUpper(_SettingName);
 
 	std::multimap<std::string, GameEngineTextureSetter>::iterator FindIter = TextureSetters.find(UpperName);
@@ -249,8 +247,6 @@ void GameEngineShaderResHelper::SetTexture(const std::string_view& _SettingName,
 	std::multimap<std::string, GameEngineTextureSetter>::iterator NameEndIter = TextureSetters.upper_bound(UpperName);
 
 	std::shared_ptr<GameEngineTexture> FindTex = GameEngineTexture::Find(_ImageName);
-
-	FindTex->ReLoad();
 
 	if (nullptr == FindTex)
 	{

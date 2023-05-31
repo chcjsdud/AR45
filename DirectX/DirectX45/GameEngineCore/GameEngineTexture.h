@@ -120,7 +120,7 @@ public:
 			MsgAssert("존재하지 않는 텍스처를 로드 하려고 했습니다.");
 		}
 
-		NewTexture->ResLoad(_Path);
+		NewTexture->ReLoad();
 		return NewTexture;
 	}
 
@@ -158,6 +158,7 @@ public:
 	GameEnginePixelColor GetPixel(int _X, int _Y, GameEnginePixelColor DefaultColor = GameEnginePixelColor::Black);
 
 	void ReLoad();
+	void Release();
 
 protected:
 
@@ -187,7 +188,5 @@ private:
 
 	void VSReset(UINT _Slot);
 	void PSReset(UINT _Slot);
-
-	void Release();
 };
 
