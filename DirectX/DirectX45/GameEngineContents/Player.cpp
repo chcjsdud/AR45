@@ -12,8 +12,11 @@
 #include "TestObject.h"
 #include "MyContentSpriteRenderer.h"
 
+Player* Player::MainPlayer = nullptr;
+
 Player::Player()
 {
+	MainPlayer = this;
 }
 
 Player::~Player()
@@ -114,4 +117,9 @@ void Player::LevelChangeStart()
 	// MainRenderer->SetScaleToTexture("Test.png");
 
 	// 리소스 로드를 해야할 것이다.
+}
+
+void Player::TestCallBack()
+{
+	MsgTextBox("됩니다");
 }

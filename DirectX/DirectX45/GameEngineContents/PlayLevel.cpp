@@ -9,6 +9,7 @@
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineVideo.h>
 #include <GameEngineCore/GameEngineCoreWindow.h>
+#include <GameEngineCore/GameEngineButton.h>
 #include "FadeEffect.h"
 
 #include <GameEngineCore/GameEngineTexture.h>
