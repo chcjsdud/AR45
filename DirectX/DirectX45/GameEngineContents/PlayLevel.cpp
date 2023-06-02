@@ -29,11 +29,6 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Update(float _DeltaTime)
 {
-	if (Object3->Render->GetTransform()->Collision({ Object1->Render->GetTransform(), ColType::OBBBOX3D, ColType::OBBBOX3D }))
-	{
-		int a = 0;
-	}
-
 	if (true == GameEngineInput::IsDown("LevelChangeKey"))
 	{
 		GameEngineCore::ChangeLevel("TitleLevel");
@@ -121,45 +116,18 @@ void PlayLevel::Start()
 
 	{
 
-		{
-			Object3 = CreateActor<TestObject>(520);
-			Object3->GetTransform()->SetLocalPosition({ -100.0f, 200.0f, 0.0f });
-			Object3->Render->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
-
-			std::shared_ptr<GameEngineCollision> Col = Object3->CreateComponent<GameEngineCollision>(2000);
-			Col->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
-		}
-
-
 		Window->Test = std::bind(&PlayLevel::PlayerCreate, this);
 
-		Object0 = CreateActorToName<Player>("fasdfdsa");
-		Object0->GetTransform()->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
-
-		Object1 = CreateActor<TestObject>(-20);
-		Object1->GetTransform()->SetLocalPosition({150.0f, 0.0f, 0.0f});
-		Object1->Render->GetTransform()->SetLocalScale({100.0f, 100.0f, 100.0f});
-
-		// RenderTest = Object1->CreateComponent<GameEngineSpriteRenderer>();
-
-		//RenderTest->GetTransform()->SetLocalPosition({ 100.0f, 0.0f, 0.0f });
-		//RenderTest->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
-
-		Object1->GetTransform()->SetParent(Object0->GetTransform());
-
-
-		//std::shared_ptr<TestObject> Object2 = CreateActor<TestObject>(-20);
-		//Object2->GetTransform()->SetLocalPosition({ 400.0f, 0.0f, 0.0f });
-		//Object2->Render->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
-
-		//Object2->GetTransform()->SetParent(Object1->GetTransform());
+		{
+			Object0 = CreateActorToName<Player>("fasdfdsa");
+			// Object0->GetTransform()->SetLocalPosition({ -100.0f, 0.0f, 0.0f });
+		}
 
 		{
-			Object3 = CreateActor<TestObject>(520);
-			Object3->GetTransform()->SetLocalPosition({ 000.0f, 200.0f, 0.0f });
-			Object3->Render->GetTransform()->SetLocalScale({ 1000.0f, 1000.0f, 100.0f });
+			Object1 = CreateActor<TestObject>(520);
+			Object1->GetTransform()->SetLocalPosition({ 000.0f, 200.0f, 0.0f });
 
-			std::shared_ptr<GameEngineCollision> Col = Object3->CreateComponent<GameEngineCollision>(2000);
+			std::shared_ptr<GameEngineCollision> Col = Object1->CreateComponent<GameEngineCollision>(2000);
 			Col->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
 		}
 	}

@@ -36,7 +36,7 @@ void PlayLevelUIActor::Start()
 
 	{
 		std::shared_ptr<GameEngineButton> Button = GetLevel()->CreateActor<GameEngineButton>(520);
-		Button->GetTransform()->SetLocalPosition({ 0, 200, 1 });
+		Button->GetTransform()->SetLocalPosition({ -300, 200, 1 });
 		Button->GetTransform()->SetLocalScale({100, 100, 1});
 
 		Button->SetEvent([this]() 

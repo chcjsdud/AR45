@@ -26,6 +26,7 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
+
 	FSM.Update(_DeltaTime);
 
 
