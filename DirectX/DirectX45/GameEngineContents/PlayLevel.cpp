@@ -31,7 +31,8 @@ void PlayLevel::Update(float _DeltaTime)
 {
 	if (true == GameEngineInput::IsDown("LevelChangeKey"))
 	{
-		GameEngineCore::ChangeLevel("TitleLevel");
+		IsDebugSwitch();
+		// GameEngineCore::ChangeLevel("TitleLevel");
 	}
 
 	if (true == GameEngineInput::IsPress("FadeIn"))
@@ -83,6 +84,8 @@ void PlayLevel::Start()
 
 	if (false == GameEngineInput::IsKey("LevelChangeKey"))
 	{
+		// IsDebugSwitch();
+
 		GameEngineInput::CreateKey("LevelChangeKey", 'I');
 	}
 
