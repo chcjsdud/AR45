@@ -243,7 +243,7 @@ GameEngineTransform::~GameEngineTransform()
 
 void GameEngineTransform::TransformUpdate()
 {
-	TransData.LocalCalculration();
+	TransData.LocalCalculation();
 
 	if (nullptr == Parent)
 	{
@@ -263,7 +263,7 @@ void GameEngineTransform::TransformUpdate()
 void GameEngineTransform::WorldCalculation()
 {
 	float4x4 ParentWorldMatrix = Parent->GetWorldMatrixRef();
-	TransData.WorldCalculration(ParentWorldMatrix, AbsoluteScale, AbsoluteRotation, AbsolutePosition);
+	TransData.WorldCalculation(ParentWorldMatrix, AbsoluteScale, AbsoluteRotation, AbsolutePosition);
 }
 
 void GameEngineTransform::LocalDecompose() 

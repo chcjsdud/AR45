@@ -11,6 +11,11 @@ bool GameEngineLevel::IsDebugRender = false;
 
 GameEngineLevel::GameEngineLevel() 
 {
+	LevelCameraInit();
+}
+
+void GameEngineLevel::LevelCameraInit()
+{
 	MainCamera = CreateNewCamera(0);
 
 	std::shared_ptr<GameEngineCamera> UICamera = CreateNewCamera(100);
@@ -430,7 +435,6 @@ void GameEngineLevel::TextureUnLoad(GameEngineLevel* _NextLevel)
 
 void GameEngineLevel::TextureReLoad(GameEngineLevel* _PrevLevel)
 {
-
 	for (const std::pair<std::string, std::string>& Pair : TexturePath)
 	{
 		if (nullptr != _PrevLevel && true == _PrevLevel->TexturePath.contains(Pair.first))
@@ -443,4 +447,31 @@ void GameEngineLevel::TextureReLoad(GameEngineLevel* _PrevLevel)
 	}
 
 	TexturePath.clear();
+}
+
+void GameEngineLevel::AllActorDestroy()
+{
+	{
+		// 이건 나중에 만들어질 랜더러의 랜더가 다 끝나고 되는 랜더가 될겁니다.
+		std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator GroupStartIter = Actors.begin();
+		std::map<int, std::list<std::shared_ptr<GameEngineActor>>>::iterator GroupEndIter = Actors.end();
+
+		for (; GroupStartIter != GroupEndIter; ++GroupStartIter)
+		{
+			std::list<std::shared_ptr<GameEngineActor>>& ActorList = GroupStartIter->second;
+
+			std::list<std::shared_ptr<GameEngineActor>>::iterator ActorStart = ActorList.begin();
+			std::list<std::shared_ptr<GameEngineActor>>::iterator ActorEnd = ActorList.end();
+
+			for (; ActorStart != ActorEnd; ++ActorStart)
+			{
+				std::shared_ptr<GameEngineActor>& Actor = *ActorStart;
+				Actor->Death();
+			}
+		}
+
+		ActorRelease();
+	}
+
+	LevelCameraInit();
 }
