@@ -26,10 +26,15 @@ Player::~Player()
 
 void Player::Update(float _DeltaTime)
 {
+	if (1.0f <= GetLiveTime())
+	{
+		SubRender->SetFlipX();
+		ResetLiveTime();
+	}
 
 	FSM.Update(_DeltaTime);
-
-
+	// Pivot2->GetTransform()->AddLocalRotation({0.0f, 90.0f * _DeltaTime, 0.0f});
+//	SubRender->GetTransform()->SetWorldRotation(float4::Zero);
 }
 
 void Player::Start()
@@ -89,7 +94,6 @@ void Player::LevelChangeStart()
 		// std::vector<GameEngineFile> File = NewDir.GetAllFile({ ".Png", });
 	}
 
-
 	if (nullptr == MainRenderer)
 	{
 		MainRenderer = CreateComponent<MyContentSpriteRenderer>();
@@ -112,6 +116,22 @@ void Player::LevelChangeStart()
 			Collsion->GetTransform()->SetLocalScale({ 10.0f, 100.0f, 100.0f });
 			Collsion->SetOrder(3000);
 		}
+
+	}
+
+	{
+		Pivot = CreateComponent<GameEngineComponent>();
+		Pivot->GetTransform()->SetLocalRotation({15.0f, 0.0f, 0.0f});
+
+		Pivot2 = CreateComponent<GameEngineComponent>();
+		// Pivot2->GetTransform()->SetLocalRotation({ 45.0f, 0.0f, 0.0f });
+
+		Pivot2->GetTransform()->SetParent(Pivot->GetTransform());
+
+		SubRender = CreateComponent<GameEngineSpriteRenderer>();
+		SubRender->GetTransform()->SetParent(Pivot2->GetTransform());
+		SubRender->GetTransform()->AddLocalScale({80.0f, 80.0f, 1.0f});
+		SubRender->GetTransform()->AddLocalPosition({200.0f, 0.0f, 0.0f});
 
 	}
 
