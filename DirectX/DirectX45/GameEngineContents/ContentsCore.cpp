@@ -3,6 +3,7 @@
 #include <GameEngineCore\GameEngineCore.h>
 #include "PlayLevel.h"
 #include "TitleLevel.h"
+#include "TileMapLevel.h"
 #include <GameEngineCore/GameEngineCoreWindow.h>
 
 
@@ -23,13 +24,11 @@ void ContentsCore::GameStart()
 	new int();
 
 	GameEngineGUI::GUIWindowCreate<GameEngineCoreWindow>("CoreWindow");
-
-
 	ContentsResourcesCreate();
-
 	GameEngineCore::CreateLevel<TitleLevel>();
 	GameEngineCore::CreateLevel<PlayLevel>();
-	GameEngineCore::ChangeLevel("PlayLevel");
+	GameEngineCore::CreateLevel<TileMapLevel>();
+	GameEngineCore::ChangeLevel("TileMapLevel");
 }
 
 void ContentsCore::GameEnd() 
