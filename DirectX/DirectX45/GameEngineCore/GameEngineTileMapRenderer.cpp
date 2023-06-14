@@ -31,11 +31,19 @@ void GameEngineTileMapRenderer::Start()
 	GetShaderResHelper().SetConstantBufferLink("ColorOption", ColorOptionValue);
 }
 
-void GameEngineTileMapRenderer::CreateTileMap(int _X, int _Y, const float4& _TileSize, TileMapMode _Mode)
+void GameEngineTileMapRenderer::CreateTileMap(int _X, int _Y, const float4& _TileSize, const float4& _RenderSize, TileMapMode _Mode)
 {
 	TileSize = _TileSize;
 	TileSize.z = 1.0f;
 	TileSizeH = TileSize.half();
+
+	if (_RenderSize == float4::Zero)
+	{
+		RenderSize = TileSize;
+	}
+	else {
+		RenderSize = _RenderSize;
+	}
 
 	MapCount.x = static_cast<float>(_X);
 	MapCount.y = static_cast<float>(_Y);
@@ -133,7 +141,7 @@ void GameEngineTileMapRenderer::Render(float _Delta)
 					break;
 				}
 
-				Scale.Scale(TileSize);
+				Scale.Scale(RenderSize);
 				Pos.Pos(vPos);
 				TileTransData.WorldViewProjectionMatrix = Scale * Pos * TransData.WorldMatrix;
 
