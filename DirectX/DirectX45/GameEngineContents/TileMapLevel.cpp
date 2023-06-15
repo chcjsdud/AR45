@@ -45,8 +45,14 @@ void TileMapLevel::Start()
 		GameEngineInput::CreateKey("LevelChangeKey", 'I');
 	}
 
+	GetMainCamera()->GetCamTarget()->DepthSettingOff();
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->GetTransform()->SetLocalPosition({ 0, 0, -1000.0f });
+
+	TileMapPoint = CreateActor<GameEngineActor>();
+	std::shared_ptr<GameEngineSpriteRenderer> Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>(10);
+	Sp->GetTransform()->SetLocalScale({ 10.0f, 10, 1.0f });
+
 
 	std::shared_ptr<GameEngineActor> NewGame = CreateActor<GameEngineActor>();
 	TileMap = NewGame->CreateComponent<GameEngineTileMapRenderer>();
@@ -61,9 +67,6 @@ void TileMapLevel::Start()
 		}
 	}
 
-	TileMapPoint = CreateActor<GameEngineActor>();
-	std::shared_ptr<GameEngineSpriteRenderer> Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>();
-	Sp->GetTransform()->SetLocalScale({10.0f, 10, 1.0f});
 }
 
 void TileMapLevel::Update(float _DeltaTime)
