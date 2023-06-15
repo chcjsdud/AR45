@@ -3,6 +3,8 @@
 #include <GameEngineBase\GameEngineDebug.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineCore.h>
+#include <GameEngineCore/GameEngineFont.h>
+#include <GameEngineCore/GameEngineFontRenderer.h>
 
 
 TileMapLevel::TileMapLevel() 
@@ -24,6 +26,8 @@ void TileMapLevel::Start()
 		GameEngineInput::CreateKey("TilePointDown", 'S');
 		GameEngineInput::CreateKey("TilePointChange", 'E');
 	}
+
+	GameEngineFont::Load("»ﬁ∏’µ’±Ÿ«ÏµÂ∂Û¿Œ");
 
 	if (nullptr == GameEngineSprite::Find("TileMap"))
 	{
@@ -51,6 +55,13 @@ void TileMapLevel::Start()
 
 	TileMapPoint = CreateActor<GameEngineActor>();
 	Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>(10);
+
+	std::shared_ptr<GameEngineFontRenderer> FontRender = TileMapPoint->CreateComponent<GameEngineFontRenderer>(300);
+
+	FontRender->SetFont("»ﬁ∏’µ’±Ÿ«ÏµÂ∂Û¿Œ");
+	FontRender->SetText("¡Àº€«’¥œ¥Ÿ~~~~~");
+
+
 	// Sp->GetTransform()->SetLocalScale({ 10.0f, 10, 1.0f });
 
 	if (nullptr == GameEngineSprite::Find("PlayerRun"))
