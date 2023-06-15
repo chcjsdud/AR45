@@ -41,6 +41,8 @@ public:
 
 	void SetTile(const float4& _Pos, const std::string_view& _SpriteName = "Error", size_t _Index = 0);
 
+	int GetTIleIndex(const float4& _Pos);
+
 	bool IsOver(int _X, int _Y) const;
 
 	inline float4 GetCount() const
