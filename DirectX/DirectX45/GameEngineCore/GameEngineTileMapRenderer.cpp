@@ -242,3 +242,42 @@ int GameEngineTileMapRenderer::GetTIleIndex(const float4& _Pos)
 	}
 	return Tiles[X][Y].Index;
 }
+
+
+float4 GameEngineTileMapRenderer::PosToTilePos(float4 _Pos)
+{
+	int X = -1;
+	int Y = -1;
+
+
+	switch (Mode)
+	{
+	case TileMapMode::Rect:
+		X = _Pos.x / TileSize.x;
+		Y = _Pos.y / TileSize.y;
+		break;
+	case TileMapMode::Iso:
+		X = (_Pos.x / TileSizeH.x + -_Pos.y / TileSizeH.y) / 2;
+		Y = (-_Pos.y / TileSizeH.y - (_Pos.x / TileSizeH.x)) / 2;
+		break;
+	default:
+		break;
+	}
+	float4 ReturnPos;
+	switch (Mode)
+	{
+	case TileMapMode::Rect:
+		ReturnPos = { TileSize.x * X, TileSize.y * Y, 1.0f };
+		break;
+	case TileMapMode::Iso:
+		ReturnPos.x = (X * TileSizeH.x) - (Y * TileSizeH.x);
+		ReturnPos.y = -(X * TileSizeH.y) - (Y * TileSizeH.y);
+		ReturnPos.y -= TileSizeH.y;
+		break;
+	default:
+		break;
+	}
+
+	return ReturnPos;
+
+}

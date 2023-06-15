@@ -43,6 +43,8 @@ public:
 
 	int GetTIleIndex(const float4& _Pos);
 
+	float4 PosToTilePos(float4 _Pos);
+
 	bool IsOver(int _X, int _Y) const;
 
 	inline float4 GetCount() const
