@@ -41,7 +41,7 @@ public:
 
 	void SetTile(const float4& _Pos, const std::string_view& _SpriteName = "Error", size_t _Index = 0);
 
-	int GetTIleIndex(const float4& _Pos);
+	size_t GetTIleIndex(const float4& _Pos);
 
 	float4 PosToTilePos(float4 _Pos);
 
