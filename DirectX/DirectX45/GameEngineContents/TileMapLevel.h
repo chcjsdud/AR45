@@ -23,5 +23,6 @@ protected:
 private:
 	std::shared_ptr<GameEngineActor> TileMapPoint;
 	std::shared_ptr<GameEngineTileMapRenderer> TileMap;
+	std::shared_ptr<GameEngineSpriteRenderer> Sp;
 };
 

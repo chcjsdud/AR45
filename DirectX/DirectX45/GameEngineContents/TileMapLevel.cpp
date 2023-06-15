@@ -50,9 +50,29 @@ void TileMapLevel::Start()
 	GetMainCamera()->GetTransform()->SetLocalPosition({ 0, 0, -1000.0f });
 
 	TileMapPoint = CreateActor<GameEngineActor>();
-	std::shared_ptr<GameEngineSpriteRenderer> Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>(10);
-	Sp->GetTransform()->SetLocalScale({ 10.0f, 10, 1.0f });
+	Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>(10);
+	// Sp->GetTransform()->SetLocalScale({ 10.0f, 10, 1.0f });
 
+	if (nullptr == GameEngineSprite::Find("PlayerRun"))
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Texture");
+
+		GameEngineSprite::LoadFolder(NewDir.GetPlusFileName("PlayerRun").GetFullPath());
+		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Test\\TestAnimation.png").GetFullPath(), 3, 5);
+	}
+
+	if (nullptr != Sp)
+	{
+		// Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>();
+		Sp->CreateAnimation({ .AnimationName = "Run", .SpriteName = "PlayerRun", .ScaleToTexture = true });
+		Sp->CreateAnimation({ "Win", "TestAnimation.png", 0, 5, 0.1f, true, true });
+		Sp->SetScaleRatio(5.0f);
+		Sp->ChangeAnimation("Win");
+		// Sp->ImageClipping(0.3f);
+	}
 
 	std::shared_ptr<GameEngineActor> NewGame = CreateActor<GameEngineActor>();
 	TileMap = NewGame->CreateComponent<GameEngineTileMapRenderer>();
@@ -71,6 +91,13 @@ void TileMapLevel::Start()
 
 void TileMapLevel::Update(float _DeltaTime)
 {
+	static float Test = 1.0f;
+
+	Test -= _DeltaTime * 0.1f;
+
+	Sp->ImageClipping(Test);
+
+
 	if (true == GameEngineInput::IsDown("LevelChangeKey"))
 	{
 		GameEngineCore::ChangeLevel("PlayLevel");
