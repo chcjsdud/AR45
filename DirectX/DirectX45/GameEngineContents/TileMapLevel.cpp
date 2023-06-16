@@ -60,6 +60,7 @@ void TileMapLevel::Start()
 
 	FontRender->SetFont("ÈÞ¸ÕµÕ±ÙÇìµå¶óÀÎ");
 	FontRender->SetText("ÁË¼ÛÇÕ´Ï´Ù~~~~~");
+	FontRender->SetScale(100.0f);
 
 
 	// Sp->GetTransform()->SetLocalScale({ 10.0f, 10, 1.0f });
