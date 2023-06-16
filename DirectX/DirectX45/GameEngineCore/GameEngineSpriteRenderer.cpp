@@ -308,73 +308,51 @@ void GameEngineSpriteRenderer::Update(float _Delta)
 		const SpriteInfo& Info = CurAnimation->CurSpriteInfo();
 
 		GetShaderResHelper().SetTexture("DiffuseTex", Info.Texture);
+
 		AtlasData = Info.CutData;
+		if (ClippingPercent != 1.0f)
+		{
+			switch (ScalePivot)
+			{
+			case Left:
+				AtlasData.PosX += (AtlasData.SizeX* (1-ClippingPercent));
+				break;
+			case Right:
+				AtlasData.SizeX *= ClippingPercent;
+				break;
+			case Top:
+				AtlasData.PosY += (AtlasData.SizeY * (1-ClippingPercent));
+				break;
+			case Bot:
+				AtlasData.SizeY *= ClippingPercent;
+				break;
+			default:
+				break;
+			}
+		}
 
 		if (true == CurAnimation->ScaleToTexture)
 		{
 			std::shared_ptr<GameEngineTexture> Texture = Info.Texture;
 			CurTexture = Texture;
-
 			float4 Scale = Texture->GetScale();
 
-			Scale.x *= Info.CutData.SizeX;
-			Scale.y *= Info.CutData.SizeY;
+			Scale.x *= AtlasData.SizeX;
+			Scale.y *= AtlasData.SizeY;
 			Scale.z = 1.0f;
 
 			Scale *= ScaleRatio;
 
 			GetTransform()->SetLocalScale(Scale);
 		}
-
-		if (ClippingPercent != 1.0f)
-		{
-			OriginAtlasData = AtlasData;
-
-			switch (ScalePivot)
-			{
-			case Left:
-				break;
-			case Right:
-				break;
-			case Top:
-				break;
-			case Bot:
-				OriginAtlasData.SizeY *= ClippingPercent;
-				break;
-			default:
-				break;
-			}
-
-			if (nullptr != CurTexture)
-			{
-				float4 Scale = CurTexture->GetScale();
-
-				Scale.x *= OriginAtlasData.SizeX;
-				Scale.y *= OriginAtlasData.SizeY;
-				Scale.z = 1.0f;
-
-				Scale *= ScaleRatio;
-
-				GetTransform()->SetLocalScale(Scale);
-			}
-		}
-
 	}
 }
 
 void GameEngineSpriteRenderer::Render(float _Delta)
 {
-	if (ClippingPercent != 1.0f)
-	{
-		GetShaderResHelper().SetConstantBufferLink("AtlasData", OriginAtlasData);
-	}
 
 	GameEngineRenderer::Render(_Delta);
-
-	if (ClippingPercent != 1.0f)
-	{
-		GetShaderResHelper().SetConstantBufferLink("AtlasData", AtlasData);
-	}
+	//AtlasData = float4(0, 0, 1, 1);
 
 }
 

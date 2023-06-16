@@ -138,6 +138,25 @@ public:
 
 		ScalePivot = _ScalePivot;
 		PosPivot = _PosPivot;
+
+		AtlasData = float4(0, 0, 1, 1);
+		switch (ScalePivot)
+		{
+		case Left:
+			AtlasData.PosX += (AtlasData.SizeX * (1 - ClippingPercent));
+			break;
+		case Right:
+			AtlasData.SizeX *= ClippingPercent;
+			break;
+		case Top:
+			AtlasData.PosY += (AtlasData.SizeY * (1 - ClippingPercent));
+			break;
+		case Bot:
+			AtlasData.SizeY *= ClippingPercent;
+			break;
+		default:
+			break;
+		}
 	}
 
 	inline float GetScaleRatio() const
@@ -186,7 +205,6 @@ private:
 	size_t Frame = -1;
 
 	float ClippingPercent = 1.0f;
-	float4 OriginAtlasData;
 	ImagePivot ScalePivot = ImagePivot::Bot;
 	ImagePivot PosPivot = ImagePivot::Bot;
 	std::shared_ptr<GameEngineTexture> CurTexture;
