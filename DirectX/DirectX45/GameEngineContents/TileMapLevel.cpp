@@ -55,6 +55,7 @@ void TileMapLevel::Start()
 
 	TileMapPoint = CreateActor<GameEngineActor>();
 	Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>(10);
+	Sp->GetTransform()->SetLocalScale({100.0f, 100.0f, 1.0f});
 
 	std::shared_ptr<GameEngineFontRenderer> FontRender = TileMapPoint->CreateComponent<GameEngineFontRenderer>(300);
 
@@ -76,15 +77,15 @@ void TileMapLevel::Start()
 		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("Test\\TestAnimation.png").GetFullPath(), 3, 5);
 	}
 
-	if (nullptr != Sp)
-	{
-		// Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>();
-		Sp->CreateAnimation({ .AnimationName = "Run", .SpriteName = "PlayerRun", .ScaleToTexture = true });
-		Sp->CreateAnimation({ "Win", "TestAnimation.png", 0, 5, 0.1f, true, true });
-		Sp->SetScaleRatio(5.0f);
-		Sp->ChangeAnimation("Win");
-		// Sp->ImageClipping(0.3f);
-	}
+	//if (nullptr != Sp)
+	//{
+	//	// Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>();
+	//	Sp->CreateAnimation({ .AnimationName = "Run", .SpriteName = "PlayerRun", .ScaleToTexture = true });
+	//	Sp->CreateAnimation({ "Win", "TestAnimation.png", 0, 5, 0.1f, true, true });
+	//	Sp->SetScaleRatio(5.0f);
+	//	Sp->ChangeAnimation("Win");
+	//	// Sp->ImageClipping(0.3f);
+	//}
 
 	std::shared_ptr<GameEngineActor> NewGame = CreateActor<GameEngineActor>();
 	TileMap = NewGame->CreateComponent<GameEngineTileMapRenderer>();
@@ -107,7 +108,7 @@ void TileMapLevel::Update(float _DeltaTime)
 
 	Test -= _DeltaTime * 0.1f;
 
-	Sp->ImageClipping(Test);
+	Sp->ImageClippingY(Test, ClipYDir::Top);
 
 
 	if (true == GameEngineInput::IsDown("LevelChangeKey"))
