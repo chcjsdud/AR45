@@ -24,5 +24,8 @@ private:
 	std::shared_ptr<GameEngineActor> TileMapPoint;
 	std::shared_ptr<GameEngineTileMapRenderer> TileMap;
 	std::shared_ptr<GameEngineSpriteRenderer> Sp;
+	std::shared_ptr<GameEngineComponent> Pivot;
+	std::shared_ptr<GameEngineComponent> Pivot2;
+	std::shared_ptr<GameEngineRenderer> RollRender;
 };
 

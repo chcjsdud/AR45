@@ -6,10 +6,10 @@
 
 std::function<bool(const CollisionData&, const CollisionData&)> GameEngineTransform::ArrColFunction[static_cast<int>(ColType::MAX)][static_cast<int>(ColType::MAX)];
 
-class InitColFunction 
+class InitColFunction
 {
 public:
-	InitColFunction() 
+	InitColFunction()
 	{
 		GameEngineTransform::ArrColFunction[static_cast<int>(ColType::SPHERE3D)][static_cast<int>(ColType::SPHERE3D)] = &GameEngineTransform::SphereToSpehre;
 		GameEngineTransform::ArrColFunction[static_cast<int>(ColType::SPHERE3D)][static_cast<int>(ColType::AABBBOX3D)] = &GameEngineTransform::SphereToAABB;
@@ -40,7 +40,7 @@ public:
 
 InitColFunction InitFunction;
 
-void TransformData::LocalCalculation() 
+void TransformData::LocalCalculation()
 {
 	ScaleMatrix.Scale(Scale);
 
@@ -52,22 +52,29 @@ void TransformData::LocalCalculation()
 	LocalWorldMatrix = ScaleMatrix * RotationMatrix * PositionMatrix;
 }
 
-void TransformData::WorldCalculation(const float4x4& _Parent, bool AbsoluteScale, bool AbsoluteRotation, bool AbsolutePosition)
+void TransformData::LocalCalculation(const float4& _ParentQuaternion)
+{
+	ScaleMatrix.Scale(Scale);
+
+	Rotation.w = 0.0f;
+	Quaternion = DirectX::XMQuaternionMultiply(Rotation.EulerDegToQuaternion(), -_ParentQuaternion);
+
+	RotationMatrix = Quaternion.QuaternionToRotationMatrix();
+	PositionMatrix.Pos(Position);
+
+	LocalWorldMatrix = ScaleMatrix * RotationMatrix * PositionMatrix;
+}
+
+void TransformData::WorldCalculation(const float4x4& _Parent, bool AbsoluteScale, bool AbsolutePosition)
 {
 	float4 PScale, PRotation, PPosition;
 	_Parent.Decompose(PScale, PRotation, PPosition);
-
 
 	if (true == AbsoluteScale)
 	{
 		PScale = float4::One;
 	}
-	if (true == AbsoluteRotation)
-	{
-		// 부모의 회전 
-		PRotation = float4::Zero;
-		PRotation.EulerDegToQuaternion();
-	}
+
 	if (true == AbsolutePosition)
 	{
 		PPosition = float4::Zero;
@@ -243,36 +250,46 @@ GameEngineTransform::~GameEngineTransform()
 
 void GameEngineTransform::TransformUpdate()
 {
-	TransData.LocalCalculation();
 
 	if (nullptr == Parent)
 	{
+		TransData.LocalCalculation();
 		TransData.WorldMatrix = TransData.LocalWorldMatrix;
 	}
 	else // 차이
 	{
+		if (true == AbsoluteRotation)
+		{
+			float4 ParentQuater = Parent->GetWorldQuaternion();
+			TransData.LocalCalculation(ParentQuater);
+		}
+		else
+		{
+			TransData.LocalCalculation();
+		}
+
 		WorldCalculation();
 	}
 
 	WorldDecompose();
 	LocalDecompose();
-		// ParentWorldMatrix.Decompose(PScale, PRoatation, PPosition);
+	// ParentWorldMatrix.Decompose(PScale, PRoatation, PPosition);
 
 }
 
 void GameEngineTransform::WorldCalculation()
 {
 	float4x4 ParentWorldMatrix = Parent->GetWorldMatrixRef();
-	TransData.WorldCalculation(ParentWorldMatrix, AbsoluteScale, AbsoluteRotation, AbsolutePosition);
+	TransData.WorldCalculation(ParentWorldMatrix, AbsoluteScale, AbsolutePosition);
 }
 
-void GameEngineTransform::LocalDecompose() 
+void GameEngineTransform::LocalDecompose()
 {
 	TransData.LocalWorldMatrix.Decompose(TransData.LocalScale, TransData.LocalQuaternion, TransData.LocalPosition);
 	TransData.LocalRotation = TransData.LocalQuaternion.QuaternionToEulerDeg();
 
 }
-void GameEngineTransform::WorldDecompose() 
+void GameEngineTransform::WorldDecompose()
 {
 	TransData.WorldMatrix.Decompose(TransData.WorldScale, TransData.WorldQuaternion, TransData.WorldPosition);
 	TransData.WorldRotation = TransData.WorldQuaternion.QuaternionToEulerDeg();
@@ -357,7 +374,7 @@ void GameEngineTransform::SetParent(GameEngineTransform* _Parent, bool _IsParent
 		Parent->Child.push_back(this);
 		Parent->Master->Childs.push_back(Master->shared_from_this());
 	}
-	else 
+	else
 	{
 		WorldDecompose();
 
@@ -392,8 +409,7 @@ void GameEngineTransform::CalChild()
 {
 	for (GameEngineTransform* ChildTrans : Child)
 	{
-		ChildTrans->WorldCalculation();
-		ChildTrans->WorldDecompose();
+		ChildTrans->TransformUpdate();
 		ChildTrans->CalChild();
 	}
 }
@@ -472,7 +488,7 @@ void GameEngineTransform::AllAccTime(float _DeltaTime)
 	}
 }
 
-void GameEngineTransform::AllUpdate(float _DeltaTime) 
+void GameEngineTransform::AllUpdate(float _DeltaTime)
 {
 
 	if (nullptr == Master)
@@ -494,7 +510,7 @@ void GameEngineTransform::AllUpdate(float _DeltaTime)
 }
 
 
-void GameEngineTransform::AllRender(float _DeltaTime) 
+void GameEngineTransform::AllRender(float _DeltaTime)
 {
 	if (nullptr == Master)
 	{

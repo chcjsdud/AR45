@@ -54,14 +54,25 @@ void TileMapLevel::Start()
 	GetMainCamera()->GetTransform()->SetLocalPosition({ 0, 0, -1000.0f });
 
 	TileMapPoint = CreateActor<GameEngineActor>();
+	// 캐릭터를 랜더링 하기 위한 녀석.
 	Sp = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>(10);
 	Sp->GetTransform()->SetLocalScale({100.0f, 100.0f, 1.0f});
 
-	std::shared_ptr<GameEngineFontRenderer> FontRender = TileMapPoint->CreateComponent<GameEngineFontRenderer>(300);
+	Pivot = TileMapPoint->CreateComponent<GameEngineComponent>();
 
-	FontRender->SetFont("휴먼둥근헤드라인");
-	FontRender->SetText("죄송합니다~~~~~");
-	FontRender->SetScale(100.0f);
+	Pivot->GetTransform()->SetLocalRotation({60, 0.0f, 0.0f});
+
+	// Pivot2 = TileMapPoint->CreateComponent<GameEngineComponent>();
+
+	RollRender = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>(10);
+	RollRender->GetTransform()->SetParent(Pivot->GetTransform());
+	RollRender->GetTransform()->SetLocalPosition({0, 200, 0});
+	RollRender->GetTransform()->SetLocalScale({100, 100, 1});
+
+	//std::shared_ptr<GameEngineFontRenderer> FontRender = TileMapPoint->CreateComponent<GameEngineFontRenderer>(300);
+	//FontRender->SetFont("휴먼둥근헤드라인");
+	//FontRender->SetText("죄송합니다~~~~~");
+	//FontRender->SetScale(100.0f);
 
 
 	// Sp->GetTransform()->SetLocalScale({ 10.0f, 10, 1.0f });
@@ -104,12 +115,15 @@ void TileMapLevel::Start()
 
 void TileMapLevel::Update(float _DeltaTime)
 {
-	static float Test = 1.0f;
+	//static float Test = 1.0f;
 
-	Test -= _DeltaTime * 0.1f;
+	//Test -= _DeltaTime * 0.1f;
 
-	Sp->ImageClippingY(Test, ClipYDir::Top);
+	//Sp->ImageClippingY(Test, ClipYDir::Top);
 
+	Pivot->GetTransform()->AddLocalRotation({0,0,_DeltaTime * 180.0f});
+
+	RollRender->GetTransform()->SetWorldRotation({ 0, 0, 0 });
 
 	if (true == GameEngineInput::IsDown("LevelChangeKey"))
 	{
