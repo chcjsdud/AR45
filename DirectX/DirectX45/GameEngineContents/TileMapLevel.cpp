@@ -121,9 +121,11 @@ void TileMapLevel::Update(float _DeltaTime)
 
 	//Sp->ImageClippingY(Test, ClipYDir::Top);
 
-	Pivot->GetTransform()->AddLocalRotation({0,0,_DeltaTime * 180.0f});
+	// Pivot->GetTransform()->AddLocalRotation({0,0,_DeltaTime * 180.0f});
 
-	RollRender->GetTransform()->SetWorldRotation({ 0, 0, 0 });
+	// RollRender->GetTransform()->SetWorldRotation({ 0, 0, 0 });
+
+	RollRender->GetTransform()->SetWorldPosition({ 100, 100, 0 });
 
 	if (true == GameEngineInput::IsDown("LevelChangeKey"))
 	{
