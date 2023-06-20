@@ -40,7 +40,17 @@ void TileMapLevel::Start()
 
 		GameEngineSprite::LoadSheet(NewDir.GetPlusFileName("FOGWAR.png").GetFullPath(), 3, 1);
 
-		// std::vector<GameEngineFile> File = NewDir.GetAllFile({ ".Png", });
+	}
+
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Sound");
+
+		GameEngineSound::Load(NewDir.GetPlusFileName("BGMTest.mp3").GetFullPath());
+
+		BgmPlayer = GameEngineSound::Play("BGMTest.mp3");
 	}
 
 
@@ -129,7 +139,8 @@ void TileMapLevel::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::IsDown("LevelChangeKey"))
 	{
-		GameEngineCore::ChangeLevel("PlayLevel");
+		BgmPlayer.Stop();
+		// GameEngineCore::ChangeLevel("PlayLevel");
 	}
 
 	float Speed = 100.f;

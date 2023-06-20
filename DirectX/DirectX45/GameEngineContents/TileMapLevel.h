@@ -2,6 +2,8 @@
 #include <GameEngineCore\GameEngineLevel.h>
 #include <GameEngineCore/GameEngineTileMapRenderer.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
+#include <GameEnginePlatform/GameEngineSound.h>
+
 // Ό³Έν :
 class TileMapLevel : public GameEngineLevel
 {
@@ -15,6 +17,8 @@ public:
 	TileMapLevel(TileMapLevel&& _Other) noexcept = delete;
 	TileMapLevel& operator=(const TileMapLevel& _Other) = delete;
 	TileMapLevel& operator=(TileMapLevel&& _Other) noexcept = delete;
+
+	GameEngineSoundPlayer BgmPlayer;
 
 protected:
 	void Start() override;

@@ -9,3 +9,57 @@
 
 // c++의 경우
 1. 자료구조는 일련의 자료형을 관리하는 이론들을 말합니다.
+2. 대부분의 언어에서 클래스로 표현한다.
+3. 구분을 2가지로 짖는다.
+
+   메모리의 구분 2가지
+   노드형 메모리로 관리하거나
+   배열형 메모리를 관리하고
+
+   3가지 구분
+   시퀀스 push를 했을때 5 7 8 9 6 4 1 4
+          순회시켰더니  5 7 8 9 6 4 1 4
+
+   배열형 스퀀스
+
+   연관  push를 했을때 5 7 8 9 6 4 1 4
+         순회시켰더니  1 4 4 5 6 7 8 9 <= 정렬하는게 아니다. 넣어준순서가 변경되면 다 연관입니다.
+                      7 5 8 9 6 4 1 4 <=  내가 넣어순서가 바뀌었다는게 핵심이다.
+
+
+
+   어뎁터
+
+배열형 시퀀스 => std::vector
+노드형 스퀀스 => std::list
+노드형 연관 => std::map
+배열형 해쉬 연관 => std::unordered_map
+
+
+어떠한 메모리 영역을 정수로 바꾸는 것입니다.
+
+// "asdfasdfasdfsadfas" = 200
+
+uint Createhash(void* _Data, int _Size)
+
+unsigned int Hash = Createhash("asdfasdfasdfsadfas", strlen("asdfasdfasdfsadfas"))
+// 최대한 겹치지 않는 정수로 바꿔주는것 
+
+
+                "fasdfasdfsad"
+        "fdsafsda"          "vxhjkoafshuiw"
+"fdshajkfas"  "fsadfasdf"
+
+
+[][][GameEngineSound*][][][][]
+
+"BGM.mp3" => 3
+
+std::unordered_map<std::string, 값>
+
+"asdfasdfasdfsadfas" 200
+해쉬함수의 효율
+
+간단히 말해서 내부에서 500개 배열 200번째에 넣어놓는것.
+
+검색의 속도 상승을 위해서 보통 사용하는데. 
