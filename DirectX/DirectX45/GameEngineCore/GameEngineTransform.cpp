@@ -42,49 +42,29 @@ InitColFunction InitFunction;
 
 void TransformData::LocalCalculation()
 {
-	ScaleMatrix.Scale(Scale);
-
-	Rotation.w = 0.0f;
 	Quaternion = Rotation.EulerDegToQuaternion();
-	RotationMatrix = Quaternion.QuaternionToRotationMatrix();
-	PositionMatrix.Pos(Position);
-
-	LocalWorldMatrix = ScaleMatrix * RotationMatrix * PositionMatrix;
+	LocalWorldMatrix.Compose(Scale, Quaternion, Position);
 }
 
 void TransformData::WorldCalculation(const float4x4& _Parent, bool AbsoluteScale, bool AbsoluteRotation, bool AbsolutePosition)
 {
-	float4 PScale, PRotation, PPosition;
-	_Parent.Decompose(PScale, PRotation, PPosition);
+	float4x4 tempWorldMatrix = LocalWorldMatrix * _Parent;
 
-
+	float4 TempScale, TempRotQuat, TempPos;
+	tempWorldMatrix.Decompose(TempScale, TempRotQuat, TempPos);
 	if (true == AbsoluteScale)
 	{
-		PScale = float4::One;
+		TempScale = Scale;
 	}
 	if (true == AbsoluteRotation)
 	{
-		// 부모의 회전 
-		PRotation = float4::Zero;
-		PRotation.EulerDegToQuaternion();
+		TempRotQuat = Quaternion;
 	}
 	if (true == AbsolutePosition)
 	{
-		PPosition = float4::Zero;
+		TempPos = Position;
 	}
-
-	float4x4 MatScale, MatRot, MatPos;
-
-	//scale
-	MatScale.Scale(PScale);
-
-	//rot
-	MatRot = PRotation.QuaternionToRotationMatrix();
-
-	//pos
-	MatPos.Pos(PPosition);
-
-	WorldMatrix = LocalWorldMatrix * (MatScale * MatRot * MatPos);
+	WorldMatrix.Compose(TempScale, TempRotQuat, TempPos);
 }
 
 void TransformData::SetViewAndProjection(const float4x4& _View, const float4x4& _Projection)
