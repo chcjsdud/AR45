@@ -79,6 +79,15 @@ void TileMapLevel::Start()
 	RollRender->GetTransform()->SetLocalPosition({0, 200, 0});
 	RollRender->GetTransform()->SetLocalScale({100, 100, 1});
 
+	RollRender2 = TileMapPoint->CreateComponent<GameEngineSpriteRenderer>(10);
+	RollRender2->GetTransform()->SetParent(RollRender->GetTransform());
+	RollRender2->GetTransform()->SetLocalPosition({ 0, 1.5f, 0 });
+	RollRender2->GetTransform()->SetLocalScale({ 1, 1, 1 });
+
+	// RollRender2->GetTransform()->SetWorldPosition({ 100, 100, 0 });
+	// RollRender2->GetTransform()->SetWorldScale({ 100, 100, 100 });
+	
+
 	//std::shared_ptr<GameEngineFontRenderer> FontRender = TileMapPoint->CreateComponent<GameEngineFontRenderer>(300);
 	//FontRender->SetFont("ÈÞ¸ÕµÕ±ÙÇìµå¶óÀÎ");
 	//FontRender->SetText("ÁË¼ÛÇÕ´Ï´Ù~~~~~");
@@ -125,17 +134,17 @@ void TileMapLevel::Start()
 
 void TileMapLevel::Update(float _DeltaTime)
 {
-	//static float Test = 1.0f;
+	static float Test = 0.0f;
 
-	//Test -= _DeltaTime * 0.1f;
+	Test -= _DeltaTime * 180.0f;
 
 	//Sp->ImageClippingY(Test, ClipYDir::Top);
+	
+	Pivot->GetTransform()->AddLocalRotation({0,0,_DeltaTime * 180.0f});
 
-	// Pivot->GetTransform()->AddLocalRotation({0,0,_DeltaTime * 180.0f});
+	RollRender->GetTransform()->SetWorldRotation({ 0, 0, Test });
 
-	// RollRender->GetTransform()->SetWorldRotation({ 0, 0, 0 });
-
-	RollRender->GetTransform()->SetWorldPosition({ 100, 100, 0 });
+	// RollRender->GetTransform()->SetWorldPosition({ 100, 100, 0 });
 
 	if (true == GameEngineInput::IsDown("LevelChangeKey"))
 	{

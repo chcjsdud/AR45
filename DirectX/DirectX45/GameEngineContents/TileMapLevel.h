@@ -31,5 +31,6 @@ private:
 	std::shared_ptr<GameEngineComponent> Pivot;
 	std::shared_ptr<GameEngineComponent> Pivot2;
 	std::shared_ptr<GameEngineRenderer> RollRender;
+	std::shared_ptr<GameEngineRenderer> RollRender2;
 };
 
