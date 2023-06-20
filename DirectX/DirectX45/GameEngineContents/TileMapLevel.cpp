@@ -117,7 +117,7 @@ void TileMapLevel::Start()
 	{
 		for (size_t x = 0; x < TileMap->GetCount().x; x++)
 		{
-			TileMap->SetTile(x, y, "FOGWAR.png", 0);
+			TileMap->SetTile(static_cast<int>(x), static_cast<int>(y), "FOGWAR.png", 0);
 		}
 	}
 
