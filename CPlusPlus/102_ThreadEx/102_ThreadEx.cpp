@@ -121,12 +121,12 @@ void Test()
 	//Lock.unlock();
 }
 
-void TextureLoading() 
+void TextureLoading(std::string _Path) 
 {
 	// aaa.png
 	// bbb.png
 	// ccc.png
-	std::cout << "텍스처를 로딩합니다" << std::endl;
+	std::cout << _Path << std::endl;
 }
 
 void SoundLoading()
@@ -174,16 +174,19 @@ int main()
 		// 파일을 n바이트까지 읽었습니다.
 
 
-		for (size_t i = 0; i < 10; i++)
-		{
+		//for (size_t i = 0; i < 10; i++)
+		//{
 			Job* NewJob = new Job();
 
 			switch (Select)
 			{
 			case 'a':
 			case 'A':
-				NewJob->Function = TextureLoading;
+			{
+				std::string Path = "aaaaaaaaaaaaaaaaaaaaaaa";
+				NewJob->Function = std::bind(TextureLoading, Path);
 				break;
+			}
 			case 's':
 			case 'S':
 				NewJob->Function = SoundLoading;
@@ -193,11 +196,13 @@ int main()
 			}
 
 
-			if (FALSE == PostQueuedCompletionStatus(IOCPHandle, static_cast<DWORD>(ThreadWork::Job), reinterpret_cast<unsigned __int64>(NewJob), nullptr))
-			{
-				int a = 0;
-			}
-		}
+			PostQueuedCompletionStatus(IOCPHandle, static_cast<DWORD>(ThreadWork::Job), reinterpret_cast<unsigned __int64>(NewJob), nullptr);
+
+			//if (FALSE == PostQueuedCompletionStatus(IOCPHandle, static_cast<DWORD>(ThreadWork::Job), reinterpret_cast<unsigned __int64>(NewJob), nullptr))
+			//{
+			//	int a = 0;
+			//}
+		//}
 
 	}
 
