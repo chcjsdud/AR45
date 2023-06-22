@@ -42,6 +42,7 @@ void Test()
 
 	Text += std::to_wstring(++ThreadIndex);
 
+	// 쓰레드가 실행되고 나서 거내부에서 실행되어야 이름을 지어줄수 있어요.
 	SetThreadDescription(GetCurrentThread(), Text.c_str());
 
 	DWORD Byte;
@@ -213,6 +214,9 @@ int main()
 	// 쓰레드 풀이라고 합니다.
 
 	// std::cout << ResultValue << std::endl;
+
+	// std::thread Thread0;
+	// std::thread Thread1 = Thread0;
 
 	for (size_t i = 0; i < AllThread.size(); i++)
 	{

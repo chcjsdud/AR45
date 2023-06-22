@@ -18,6 +18,8 @@ TileMapLevel::~TileMapLevel()
 
 void TileMapLevel::Start() 
 {
+
+
 	if (false == GameEngineInput::IsKey("TilePointLeft"))
 	{
 		GameEngineInput::CreateKey("TilePointLeft", 'A');
@@ -132,6 +134,40 @@ void TileMapLevel::Start()
 
 }
 
+std::atomic AllLoadCount = 0;
+
+void AFunction(GameEngineThread* Thread) 
+{
+	GameEngineDirectory NewDir;
+	NewDir.MoveParentToDirectory("ContentResources");
+	NewDir.Move("ContentResources");
+	NewDir.Move("Texture");
+	NewDir.Move("CHAc_Ground_Super");
+
+	std::vector<GameEngineFile> AllLoadFile = NewDir.GetAllFile({ ".png" });
+
+	for (size_t i = 0; i < AllLoadFile.size(); i++)
+	{
+		GameEngineTexture::Load(AllLoadFile[i].GetFullPath());
+	}
+}
+
+void BFunction(GameEngineThread* Thread)
+{
+	GameEngineDirectory NewDir;
+	NewDir.MoveParentToDirectory("ContentResources");
+	NewDir.Move("ContentResources");
+	NewDir.Move("Texture");
+	NewDir.Move("CHAc_Ground_Jump");
+
+	std::vector<GameEngineFile> AllLoadFile = NewDir.GetAllFile({ ".png" });
+
+	for (size_t i = 0; i < AllLoadFile.size(); i++)
+	{
+		GameEngineTexture::Load(AllLoadFile[i].GetFullPath());
+	}
+}
+
 void TileMapLevel::Update(float _DeltaTime)
 {
 	static float Test = 0.0f;
@@ -148,7 +184,13 @@ void TileMapLevel::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::IsDown("LevelChangeKey"))
 	{
-		BgmPlayer.Stop();
+
+		GameEngineCore::JobQueue.Work(AFunction);
+		GameEngineCore::JobQueue.Work(BFunction);
+
+		// Thread.Start("TestThread", AFunction);
+
+		// BgmPlayer.Stop();
 		// GameEngineCore::ChangeLevel("PlayLevel");
 	}
 
