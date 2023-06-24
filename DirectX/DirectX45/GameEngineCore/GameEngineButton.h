@@ -30,17 +30,17 @@ public:
 		return Render;
 	}
 
-	void SetReleaseTexuture(const std::string_view& _ImageName)
+	void SetReleaseTexture(const std::string_view& _ImageName)
 	{
 		ReleaseImage = _ImageName;
 	}
 
-	void SetHoverTexuture(const std::string_view& _ImageName)
+	void SetHoverTexture(const std::string_view& _ImageName)
 	{
 		HoverImage = _ImageName;
 	}
 
-	void SetPressTexuture(const std::string_view& _ImageName)
+	void SetPressTexture(const std::string_view& _ImageName)
 	{
 		PressImage = _ImageName;
 	}
