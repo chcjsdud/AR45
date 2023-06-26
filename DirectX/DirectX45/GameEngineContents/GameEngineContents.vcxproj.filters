@@ -25,6 +25,9 @@
     <ClInclude Include="TileMapLevel.h">
       <Filter>Levels</Filter>
     </ClInclude>
+    <ClInclude Include="OldFilm.h">
+      <Filter>PostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -54,6 +57,9 @@
     <ClCompile Include="Contents_Resources.cpp" />
     <ClCompile Include="TileMapLevel.cpp">
       <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="OldFilm.cpp">
+      <Filter>PostEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,8 @@
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/GameEngineFont.h>
 #include <GameEngineCore/GameEngineFontRenderer.h>
+#include <GameEngineCore/BlurEffect.h>
+#include "OldFilm.h"
 
 
 TileMapLevel::TileMapLevel() 
@@ -131,6 +133,9 @@ void TileMapLevel::Start()
 			TileMap->SetTile(static_cast<int>(x), static_cast<int>(y), "FOGWAR.png", 0);
 		}
 	}
+
+	GetLastTarget()->CreateEffect<OldFilm>();
+	GetLastTarget()->CreateEffect<BlurEffect>();
 
 }
 

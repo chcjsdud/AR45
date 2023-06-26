@@ -79,16 +79,16 @@ void ContentsCore::ContentsResourcesCreate()
 		Pipe->SetDepthState("EngineDepth");
 	}
 
-	{
-		std::shared_ptr<GameEngineTexture> Res = GameEngineTexture::Find("EngineBaseTex.png");
-		for (size_t y = 0; y < 10; y++)
-		{
-			for (size_t x = 0; x < 10; x++)
-			{
-				Res->SetPixel(x, y, {0, 0, 0, 0});
-			}
-		}
-	}
+	//{
+	//	std::shared_ptr<GameEngineTexture> Res = GameEngineTexture::Find("EngineBaseTex.png");
+	//	for (size_t y = 0; y < 10; y++)
+	//	{
+	//		for (size_t x = 0; x < 10; x++)
+	//		{
+	//			Res->SetPixel(x, y, {0, 0, 0, 0});
+	//		}
+	//	}
+	//}
 
 
 	//{
