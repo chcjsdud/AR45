@@ -103,8 +103,7 @@ OutPut Texture_VS(Input _Value)
         VtxUV.y = 1.0f - VtxUV.y;
     }
     
-    OutPutValue.UV.x = (VtxUV.x * FrameScale.x) + FramePos.
-x;
+    OutPutValue.UV.x = (VtxUV.x * FrameScale.x) + FramePos.x;
     OutPutValue.UV.y = (VtxUV.y * FrameScale.y) + FramePos.y;
     
     OutPutValue.ClipUV = _Value.UV;
@@ -165,7 +164,7 @@ float4 Texture_PS(OutPut _Value) : SV_Target0
         }
     }
     
-        Color *= MulColor;
+    Color *= MulColor;
     Color += PlusColor;
     
     return Color;
