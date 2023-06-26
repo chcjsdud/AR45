@@ -196,6 +196,11 @@ void TileMapLevel::Update(float _DeltaTime)
 
 	float Speed = 100.f;
 
+	if (true == GameEngineInput::IsDown("TilePointLeft"))
+	{
+		Sp->SetFlipX();
+	}
+
 	if (true == GameEngineInput::IsPress("TilePointLeft"))
 	{
 		TileMapPoint->GetTransform()->AddLocalPosition(float4::Left * _DeltaTime * Speed);
