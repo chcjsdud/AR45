@@ -72,14 +72,10 @@ protected:
 	{
 		std::string UpperName = GameEngineString::ToUpper(_Name);
 
+		if (nullptr != Find(UpperName))
 		{
-			std::lock_guard<std::mutex> Lock(NameLock);
-			if (NamedResources.end() != NamedResources.find(UpperName))
-			{
-				MsgAssert("이미 존재하는 이름의 리소스를 또 만들려고 했습니다.");
-				NameLock.unlock();
-				return nullptr;
-			}
+			MsgAssert("이미 존재하는 이름의 리소스를 또 만들려고 했습니다.");
+			return nullptr;
 		}
 
 		std::shared_ptr<ResourcesType> NewRes = std::make_shared<ResourcesType>();
