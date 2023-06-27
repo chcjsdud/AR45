@@ -40,8 +40,6 @@ int main()
 
     Functionopper Test;
 
-    return;
-
     Test();
 
     std::cout << "Hello World!\n";

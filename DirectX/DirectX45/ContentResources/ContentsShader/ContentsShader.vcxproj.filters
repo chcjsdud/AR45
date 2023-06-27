@@ -3,5 +3,6 @@
   <ItemGroup>
     <FxCompile Include="MyShader.fx" />
     <FxCompile Include="FadeShader.hlsl" />
+    <FxCompile Include="OldFilmShader.hlsl" />
   </ItemGroup>
 </Project>
