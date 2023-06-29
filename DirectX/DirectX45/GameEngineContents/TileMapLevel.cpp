@@ -124,7 +124,7 @@ void TileMapLevel::Start()
 	std::shared_ptr<GameEngineActor> NewGame = CreateActor<GameEngineActor>();
 	TileMap = NewGame->CreateComponent<GameEngineTileMapRenderer>();
 
-	TileMap->CreateTileMap(10, 10, { 100, 50 }, { 100 * 1.2f, 50 * 1.2f}, TileMapMode::Iso);
+	TileMap->CreateTileMap(80, 80, { 20, 10 }, { 20 , 10 }, TileMapMode::Iso);
 
 	for (size_t y = 0; y < TileMap->GetCount().y; y++)
 	{
@@ -132,6 +132,11 @@ void TileMapLevel::Start()
 		{
 			TileMap->SetTile(static_cast<int>(x), static_cast<int>(y), "FOGWAR.png", 0);
 		}
+	}
+
+	for (size_t i = 0; i < 20; i++)
+	{
+		TileMap->SetTile(5, i + 5, "FOGWAR.png", 1);
 	}
 
 	// GetLastTarget()->CreateEffect<OldFilm>();
