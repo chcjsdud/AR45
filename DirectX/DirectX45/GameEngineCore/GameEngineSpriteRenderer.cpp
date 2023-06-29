@@ -82,13 +82,7 @@ void AnimationInfo::Update(float _DeltaTime)
 			}
 		}
 
-
-
 		CurTime += FrameTime[CurFrame];
-
-		// 0 ~ 9
-
-		// 9
 	}
 }
 
