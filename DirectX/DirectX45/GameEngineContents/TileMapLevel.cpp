@@ -7,6 +7,7 @@
 #include <GameEngineCore/GameEngineFontRenderer.h>
 #include <GameEngineCore/BlurEffect.h>
 #include "OldFilm.h"
+#include "OldTVEffect.h"
 
 
 TileMapLevel::TileMapLevel() 
@@ -124,7 +125,7 @@ void TileMapLevel::Start()
 	std::shared_ptr<GameEngineActor> NewGame = CreateActor<GameEngineActor>();
 	TileMap = NewGame->CreateComponent<GameEngineTileMapRenderer>();
 
-	TileMap->CreateTileMap(80, 80, { 20, 10 }, { 20 , 10 }, TileMapMode::Iso);
+	TileMap->CreateTileMap(30, 30, { 20, 10 }, { 20 , 10 }, TileMapMode::Iso);
 
 	for (size_t y = 0; y < TileMap->GetCount().y; y++)
 	{
@@ -139,7 +140,7 @@ void TileMapLevel::Start()
 		TileMap->SetTile(5, i + 5, "FOGWAR.png", 1);
 	}
 
-	// GetLastTarget()->CreateEffect<OldFilm>();
+	GetLastTarget()->CreateEffect<OldTVEffect>();
 
 	// 가장 쉬운 방법이 스몰버퍼
 	// GetLastTarget()->CreateEffect<BlurEffect>();

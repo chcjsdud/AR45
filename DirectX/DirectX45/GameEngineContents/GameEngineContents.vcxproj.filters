@@ -28,6 +28,9 @@
     <ClInclude Include="OldFilm.h">
       <Filter>PostEffect</Filter>
     </ClInclude>
+    <ClInclude Include="OldTVEffect.h">
+      <Filter>PostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -59,6 +62,9 @@
       <Filter>Levels</Filter>
     </ClCompile>
     <ClCompile Include="OldFilm.cpp">
+      <Filter>PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="OldTVEffect.cpp">
       <Filter>PostEffect</Filter>
     </ClCompile>
   </ItemGroup>

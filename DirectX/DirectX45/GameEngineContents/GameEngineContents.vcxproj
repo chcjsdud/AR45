@@ -179,6 +179,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="OldTVEffect.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -217,6 +218,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="OldTVEffect.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
