@@ -134,10 +134,10 @@ void TileMapLevel::Start()
 		}
 	}
 
-	GetLastTarget()->CreateEffect<OldFilm>();
+	// GetLastTarget()->CreateEffect<OldFilm>();
 
 	// 가장 쉬운 방법이 스몰버퍼
-	GetLastTarget()->CreateEffect<BlurEffect>();
+	// GetLastTarget()->CreateEffect<BlurEffect>();
 }
 
 std::atomic AllLoadCount = 0;
