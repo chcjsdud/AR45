@@ -64,7 +64,7 @@ void TileMapLevel::Start()
 		GameEngineInput::CreateKey("LevelChangeKey", 'I');
 	}
 
-	GetMainCamera()->GetCamTarget()->DepthSettingOff();
+	// GetMainCamera()->GetCamTarget()->DepthSettingOff();
 	GetMainCamera()->SetProjectionType(CameraType::Orthogonal);
 	GetMainCamera()->GetTransform()->SetLocalPosition({ 0, 0, -1000.0f });
 
@@ -125,7 +125,7 @@ void TileMapLevel::Start()
 	std::shared_ptr<GameEngineActor> NewGame = CreateActor<GameEngineActor>();
 	TileMap = NewGame->CreateComponent<GameEngineTileMapRenderer>();
 
-	TileMap->CreateTileMap(30, 30, 0.0f, { 20, 10 }, { 20 , 10 }, TileMapMode::Iso);
+	TileMap->CreateTileMap(30, 30, -300.0f, { 20, 10 }, { 20 , 10 }, TileMapMode::Iso);
 
 	for (size_t y = 0; y < TileMap->GetCount().y; y++)
 	{
@@ -140,7 +140,7 @@ void TileMapLevel::Start()
 		TileMap->SetTile(5, i + 5, "FOGWAR.png", 1);
 	}
 
-	GetLastTarget()->CreateEffect<OldTVEffect>();
+	// GetLastTarget()->CreateEffect<OldTVEffect>();
 
 	// 가장 쉬운 방법이 스몰버퍼
 	// GetLastTarget()->CreateEffect<BlurEffect>();
