@@ -125,7 +125,7 @@ void TileMapLevel::Start()
 	std::shared_ptr<GameEngineActor> NewGame = CreateActor<GameEngineActor>();
 	TileMap = NewGame->CreateComponent<GameEngineTileMapRenderer>();
 
-	TileMap->CreateTileMap(30, 30, { 20, 10 }, { 20 , 10 }, TileMapMode::Iso);
+	TileMap->CreateTileMap(30, 30, 0.0f, { 20, 10 }, { 20 , 10 }, TileMapMode::Iso);
 
 	for (size_t y = 0; y < TileMap->GetCount().y; y++)
 	{
