@@ -355,6 +355,11 @@ void GameEngineSpriteRenderer::Render(float _Delta)
 	GameEngineRenderer::Render(_Delta);
 	//AtlasData = float4(0, 0, 1, 1);
 
+	if (nullptr != RenderEndCallBack)
+	{
+		RenderEndCallBack(this);
+	}
+
 }
 
 void GameEngineSpriteRenderer::SetAnimationUpdateEvent(const std::string_view& _AnimationName, size_t _Frame, std::function<void()> _Event)
@@ -448,4 +453,9 @@ void GameEngineSpriteRenderer::ImageClippingY(float _Ratio, ClipYDir _Dir)
 	{
 		Clip.y = 0.0f;
 	}
+}
+
+float4 GameEngineSpriteRenderer::GetAtlasData()
+{
+
 }
