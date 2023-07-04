@@ -12,6 +12,36 @@
 
 TileMapLevel::TileMapLevel() 
 {
+	{
+		TileIndex StartTile;
+		StartTile.X = 3;
+		StartTile.Y = 3;
+		for (size_t i = 0; i < 30; i++)
+		{
+			MonsterWave[StartTile.Index].push_back({ 0 });
+		}
+
+		for (size_t i = 0; i < 30; i++)
+		{
+			MonsterWave[StartTile.Index].push_back({ 1 });
+		}
+	}
+
+	{
+		TileIndex StartTile;
+		StartTile.X = 5;
+		StartTile.Y = 7;
+		for (size_t i = 0; i < 30; i++)
+		{
+			MonsterWave[StartTile.Index].push_back({ 0 });
+		}
+
+		for (size_t i = 0; i < 30; i++)
+		{
+			MonsterWave[StartTile.Index].push_back({ 1 });
+		}
+	}
+
 }
 
 TileMapLevel::~TileMapLevel() 
@@ -89,17 +119,6 @@ void TileMapLevel::Start()
 	RollRender2->GetTransform()->SetLocalPosition({ 0, 1.5f, 0 });
 	RollRender2->GetTransform()->SetLocalScale({ 1, 1, 1 });
 
-	// RollRender2->GetTransform()->SetWorldPosition({ 100, 100, 0 });
-	// RollRender2->GetTransform()->SetWorldScale({ 100, 100, 100 });
-	
-
-	//std::shared_ptr<GameEngineFontRenderer> FontRender = TileMapPoint->CreateComponent<GameEngineFontRenderer>(300);
-	//FontRender->SetFont("ÈÞ¸ÕµÕ±ÙÇìµå¶óÀÎ");
-	//FontRender->SetText("ÁË¼ÛÇÕ´Ï´Ù~~~~~");
-	//FontRender->SetScale(100.0f);
-
-
-	// Sp->GetTransform()->SetLocalScale({ 10.0f, 10, 1.0f });
 
 	if (nullptr == GameEngineSprite::Find("PlayerRun"))
 	{
@@ -182,6 +201,30 @@ void BFunction(GameEngineThread* Thread)
 
 void TileMapLevel::Update(float _DeltaTime)
 {
+	if (5.0f < GetLiveTime())
+	{
+		for (std::pair<const __int64, std::list<MonsterData>>& Pair : MonsterWave)
+		{
+			TileIndex TIndex;
+			TIndex.Index = Pair.first;
+
+			if (0 == Pair.second.size())
+			{
+				continue;
+			}
+
+			std::list<MonsterData>::iterator DataIter = Pair.second.begin();
+
+			MonsterData MonsterIndex = *DataIter;
+
+			// CreateMonster(TIndex.Index, MonsterIndex);
+
+			Pair.second.pop_front();
+		}
+
+		ResetLiveTime();
+	}
+
 	static float Test = 0.0f;
 
 	Test -= _DeltaTime * 180.0f;

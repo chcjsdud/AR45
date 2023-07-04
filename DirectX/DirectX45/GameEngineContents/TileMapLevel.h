@@ -5,6 +5,25 @@
 #include <GameEnginePlatform/GameEngineSound.h>
 #include <GameEngineBase/GameEngineThread.h>
 
+class MonsterData 
+{
+public:
+	int Type = 0;
+};
+
+union TileIndex
+{
+public:
+	struct 
+	{
+		int X;
+		int Y;
+	};
+	__int64 Index;
+};
+
+
+
 // 설명 :
 class TileMapLevel : public GameEngineLevel
 {
@@ -20,6 +39,11 @@ public:
 	TileMapLevel& operator=(TileMapLevel&& _Other) noexcept = delete;
 
 	GameEngineSoundPlayer BgmPlayer;
+
+	// 1Wave는 30초고 30마리가 나온다.
+	// 6웨이브는 180초 180마리가 나온다.
+
+	std::map<__int64, std::list<MonsterData>> MonsterWave;
 
 protected:
 	void Start() override;

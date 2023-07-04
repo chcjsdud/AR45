@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include "KatanaActor.h"
 
 KatanaActor::KatanaActor() 
