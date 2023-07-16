@@ -25,12 +25,9 @@ void OldTVEffect::Start(GameEngineRenderTarget* _Target)
 
 void OldTVEffect::Effect(GameEngineRenderTarget* _Target, float _DeltaTime)
 {
-	BaseValue.Mouse = GameEngineWindow::GetMousePosition();
-	BaseValue.Mouse.z = GameEngineInput::IsPress("EngineMouseLeft");
-	BaseValue.Mouse.w = GameEngineInput::IsPress("EngineMouseLeft");
 
-	BaseValue.Time.x += _DeltaTime;
-	BaseValue.Time.y = _DeltaTime;
+
+
 
 	ResultTarget->Clear();
 	BlurUnit->ShaderResHelper.SetTexture("DiffuseTex", _Target->GetTexture(0));

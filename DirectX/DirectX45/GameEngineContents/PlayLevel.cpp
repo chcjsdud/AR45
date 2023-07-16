@@ -40,6 +40,10 @@ void PlayLevel::Start()
 {
 	// GetMainCamera()->GetCamTarget()->DepthSettingOff();
 
+	GetCamera(0)->SetProjectionType(CameraType::Orthogonal);
+
+	std::shared_ptr<Player> Object = CreateActor<Player>();
+
 	{
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("ContentResources");

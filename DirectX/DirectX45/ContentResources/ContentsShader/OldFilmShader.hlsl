@@ -40,15 +40,15 @@ float4 OldFilm_PS(OutPut _Value) : SV_Target0
 {
     float4 Color = DiffuseTex.Sample(WRAPSAMPLER, _Value.UV.xy);
     
-    // 0.2 => 0.8
-    // 1 => 0
+    //// 0.2 => 0.8
+    //// 1 => 0
     
-    Color.x = (1.0f - Color.x) * OldFilmValue.x;
-    //if (Color.x != 0)
-    //{
-    //    Color.xyzw = 1.0f;
-    //}
-    Color.yzw = Color.x;
+    //Color.x = (1.0f - Color.x) * OldFilmValue.x;
+    ////if (Color.x != 0)
+    ////{
+    ////    Color.xyzw = 1.0f;
+    ////}
+    //Color.yzw = Color.x;
     
     return Color;
 }
