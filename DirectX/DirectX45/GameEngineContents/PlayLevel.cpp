@@ -38,6 +38,7 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::Start()
 {
+	Col = std::make_shared<JPSCollision>();
 	// GetMainCamera()->GetCamTarget()->DepthSettingOff();
 
 	{

@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore\GameEngineLevel.h>
+#include <GameEngineBase/JPSCollision.h>
 
 // Ό³Έν :
 class PlayLevel : public GameEngineLevel
@@ -30,7 +31,7 @@ protected:
 
 private:
 	void PlayerCreate();
-
+	std::shared_ptr<JPSCollision> Col;
 
 };
 
