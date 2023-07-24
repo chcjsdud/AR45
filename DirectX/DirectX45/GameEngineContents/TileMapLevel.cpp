@@ -159,10 +159,10 @@ void TileMapLevel::Start()
 		TileMap->SetTile(5, i + 5, "FOGWAR.png", 1);
 	}
 
-	// GetLastTarget()->CreateEffect<OldTVEffect>();
+	 GetLastTarget()->CreateEffect<OldFilm>();
 
 	// 가장 쉬운 방법이 스몰버퍼
-	// GetLastTarget()->CreateEffect<BlurEffect>();
+	 GetLastTarget()->CreateEffect<BlurEffect>();
 }
 
 std::atomic AllLoadCount = 0;
@@ -243,10 +243,10 @@ void TileMapLevel::Update(float _DeltaTime)
 		GameEngineCore::JobQueue.Work(AFunction);
 		GameEngineCore::JobQueue.Work(BFunction);
 
-		// Thread.Start("TestThread", AFunction);
+		 //Thread.Start("TestThread", AFunction);
 
 		// BgmPlayer.Stop();
-		// GameEngineCore::ChangeLevel("PlayLevel");
+	    GameEngineCore::ChangeLevel("PlayLevel");
 	}
 
 	float Speed = 100.f;

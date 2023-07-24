@@ -132,6 +132,14 @@ public:
 
 		float CosSeta = DotProduct3D(Pivot, Other);
 
+		if (CosSeta >= 1.f)
+		{
+			CosSeta = 0.999999f;
+		}
+		else if (CosSeta <= -1.f)
+		{
+			CosSeta = -0.999999f;
+		}
 
 		float Angle = 0.f;
 		(Pivot.x * Other.y) - (Pivot.y * Other.x) > 0.0f ? Angle = acosf(CosSeta) : Angle = -acosf(CosSeta);
