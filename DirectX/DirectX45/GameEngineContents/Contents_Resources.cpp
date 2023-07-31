@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEnginePixelShader.h>
 #include <GameEngineCore/GameEngineRenderingPipeLine.h>
 #include <GameEngineCore/GameEngineBlend.h>
+#include <GameEngineCore/GameEngineFBXMesh.h>
 
 void ContentsCore::ContentsResourcesCreate()
 {
@@ -164,6 +165,24 @@ void ContentsCore::ContentsResourcesCreate()
 	//	Pipe->SetBlendState("AlphaBlend");
 	//	Pipe->SetDepthState("EngineDepth");
 	//}
+
+	{
+		GameEngineDirectory NewDir;
+		NewDir.MoveParentToDirectory("ContentResources");
+		NewDir.Move("ContentResources");
+		NewDir.Move("Mesh");
+		NewDir.Move("Characters");
+
+		std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".FBX"});
+
+		for (size_t i = 0; i < Files.size(); i++)
+		{
+			GameEngineFBXMesh::Load(Files[i].GetFullPath());
+		}
+
+		//GameEngineVertexShader::Load(Files[0].GetFullPath(), "MyShader_VS");
+		//GameEnginePixelShader::Load(Files[0].GetFullPath(), "MyShader_PS");
+	}
 
 
 

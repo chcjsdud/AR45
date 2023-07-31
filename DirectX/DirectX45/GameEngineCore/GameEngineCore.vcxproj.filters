@@ -169,6 +169,9 @@
     <ClInclude Include="GameEngineFBXAnimation.h">
       <Filter>Resources\Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineFBX.h">
+      <Filter>Resources\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineCore.cpp" />
@@ -332,6 +335,9 @@
     <ClCompile Include="GameEngineFBXAnimation.cpp">
       <Filter>Resources\Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineFBX.cpp">
+      <Filter>Resources\Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -471,6 +477,60 @@
     <None Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk-mt.zip">
       <Filter>ThirdParty\FBX\bin\Release</Filter>
     </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\zlib-md.pdb">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\libxml2-mt.pdb">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\libxml2-md.pdb">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk-mt.pdb">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk-md.pdb">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk.pdb">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\alembic-mt.pdb">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\alembic-md.pdb">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\zlib-mt.pdb">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\alembic-md.pdb">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\alembic-mt.pdb">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk.pdb">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-md.pdb">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-mt.pdb">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\libxml2-md.pdb">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\libxml2-mt.pdb">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\zlib-md.pdb">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\zlib-mt.pdb">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\FW1Font\lib\x64\Debug\FW1FontWrapper.lib">
@@ -491,23 +551,32 @@
     <CopyFileToFolders Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk.dll">
       <Filter>ThirdParty\FBX\bin\Release</Filter>
     </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk.lib">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-md.lib">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-mt.lib">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX\lib\x64\Debug\libxml2-md.lib">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX\lib\x64\Debug\libxml2-mt.lib">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX\lib\x64\Debug\zlib-md.lib">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX\lib\x64\Debug\zlib-mt.lib">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk.lib">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="ThirdParty\FBX\lib\x64\Debug\libxml2-md.lib">
-      <Filter>ThirdParty\FBX\bin\Debug</Filter>
-    </Library>
-    <Library Include="ThirdParty\FBX\lib\x64\Debug\libxml2-mt.lib">
-      <Filter>ThirdParty\FBX\bin\Debug</Filter>
-    </Library>
-    <Library Include="ThirdParty\FBX\lib\x64\Debug\zlib-md.lib">
-      <Filter>ThirdParty\FBX\bin\Debug</Filter>
-    </Library>
-    <Library Include="ThirdParty\FBX\lib\x64\Debug\zlib-mt.lib">
-      <Filter>ThirdParty\FBX\bin\Debug</Filter>
-    </Library>
-    <Library Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk.lib">
-      <Filter>ThirdParty\FBX\bin\Debug</Filter>
-    </Library>
     <Library Include="ThirdParty\FBX\lib\x64\Release\libxml2-md.lib">
       <Filter>ThirdParty\FBX\bin\Release</Filter>
     </Library>
@@ -519,15 +588,6 @@
     </Library>
     <Library Include="ThirdParty\FBX\lib\x64\Release\zlib-mt.lib">
       <Filter>ThirdParty\FBX\bin\Release</Filter>
-    </Library>
-    <Library Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk.lib">
-      <Filter>ThirdParty\FBX\bin\Release</Filter>
-    </Library>
-    <Library Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-md.lib">
-      <Filter>ThirdParty\FBX\bin\Debug</Filter>
-    </Library>
-    <Library Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-mt.lib">
-      <Filter>ThirdParty\FBX\bin\Debug</Filter>
     </Library>
     <Library Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk-mt.lib">
       <Filter>ThirdParty\FBX\bin\Release</Filter>
