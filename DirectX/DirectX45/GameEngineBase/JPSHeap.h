@@ -24,8 +24,8 @@ public:
 		Int32 absX = std::abs(m_x - rhs.m_x);
 		Int32 absY = std::abs(m_y - rhs.m_y);
 
-		Int32 diagDist = std::fmin(absX, absY);
-		Int32 straightDist = std::fmax(absX, absY) - diagDist;
+		Int32 diagDist = static_cast<int>(std::fmin(absX, absY));
+		Int32 straightDist = static_cast<int>(std::fmax(absX, absY)) - diagDist;
 		return diagDist * 1.414213562373095f + straightDist;
 	}
 };

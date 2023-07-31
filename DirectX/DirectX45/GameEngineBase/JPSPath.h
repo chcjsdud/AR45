@@ -240,7 +240,7 @@ private:
 			}
 			if (up.first != -1 && ((up.second > -1 && up.first > center.first&&up.second + 2 > center.first) || (up.first == up.second && up.first + 2 > center.first)))
 			{
-				jp = JPSCoord(s.m_x, ret ? std::fmax(jp.m_y, up.second + 1) : up.second + 1);
+				jp = JPSCoord(s.m_x, ret ? static_cast<int>(std::fmax(jp.m_y, up.second + 1)) : up.second + 1);
 				return true;
 			}
 			return ret;
@@ -262,7 +262,7 @@ private:
 			}
 			if (up.first != m_GridWidth && ((up.second < m_GridWidth&&up.first < center.first&&up.second - 2 < center.first) || (up.first == up.second && up.first - 2 < center.first)))
 			{
-				jp = JPSCoord(ret ? std::fmin(jp.m_x, up.second - 1) : up.second - 1, s.m_y);
+				jp = JPSCoord(ret ? static_cast<int>(std::fmin(jp.m_x, up.second - 1)) : up.second - 1, s.m_y);
 				return true;
 			}
 			return ret;
@@ -283,7 +283,7 @@ private:
 			}
 			if (up.first != m_GridHeight && ((up.second < m_GridHeight&&up.first < center.first&&up.second - 2 < center.first) || (up.first == up.second && up.first - 2 < center.first)))
 			{
-				jp = JPSCoord(s.m_x, ret ? std::fmin(jp.m_y, up.second - 1) : up.second - 1);
+				jp = JPSCoord(s.m_x, ret ? static_cast<int>(std::fmin(jp.m_y, up.second - 1)) : up.second - 1);
 				return true;
 			}
 			return ret;
@@ -304,7 +304,7 @@ private:
 			}
 			if (up.first != -1 && ((up.second > -1 && up.first > center.first&&up.second + 2 > center.first) || (up.first == up.second && up.first + 2 > center.first)))
 			{
-				jp = JPSCoord(ret ? std::fmax(jp.m_x, up.second + 1) : up.second + 1, s.m_y);
+				jp = JPSCoord(ret ? static_cast<int>(std::fmax(jp.m_x, up.second + 1)) : up.second + 1, s.m_y);
 				return true;
 			}
 			return ret;

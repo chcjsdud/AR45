@@ -1,8 +1,5 @@
 #include "PrecompileHeader.h"
 #include "PlayLevel.h"
-#include "Player.h"
-#include "TestObject.h"
-#include "PlayLevelUIActor.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include <GameEngineCore/GameEngineCamera.h>
@@ -15,7 +12,6 @@
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineSprite.h>
 
-std::shared_ptr<Player> Object0 = nullptr;
 std::shared_ptr<TestObject> Object1 = nullptr;
 std::shared_ptr<GameEngineSpriteRenderer> RenderTest = nullptr;
 
@@ -29,11 +25,7 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Update(float _DeltaTime)
 {
-	if (true == GameEngineInput::IsDown("LevelChangeKey"))
-	{
-		IsDebugSwitch();
-		// GameEngineCore::ChangeLevel("TitleLevel");
-	}
+
 }
 
 void PlayLevel::Start()
@@ -42,8 +34,6 @@ void PlayLevel::Start()
 	// GetMainCamera()->GetCamTarget()->DepthSettingOff();
 
 	GetCamera(0)->SetProjectionType(CameraType::Orthogonal);
-
-	std::shared_ptr<Player> Object = CreateActor<Player>();
 
 	{
 		GameEngineDirectory NewDir;

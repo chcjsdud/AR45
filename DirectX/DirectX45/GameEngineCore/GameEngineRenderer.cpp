@@ -106,8 +106,12 @@ void GameEngineRenderer::Render(float _Delta)
 	// GameEngineDevice::GetContext()->VSSetConstantBuffers();
 	// GameEngineDevice::GetContext()->PSSetConstantBuffers();
 
+	// 랜더 유니트는 1개의 매쉬 1개의 머티리얼을 랜더링 하는 용도입니다.
+	// 3D에가게되면 이게 안되요.
+	// 캐릭터가 매쉬가 1개가 아니야.
+	// 다리 팔 몸통
+	
 	// 텍스처 세팅 상수버퍼 세팅 이런것들이 전부다 처리 된다.
-
 	for (size_t i = 0; i < Units.size(); i++)
 	{
 		Units[i]->Render(_Delta);
