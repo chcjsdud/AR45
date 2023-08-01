@@ -702,6 +702,10 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <DestinationFolders Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(OutDir)\File</DestinationFolders>
     </CopyFileToFolders>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-md.zip" />
+    <None Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-mt.zip" />
+    <None Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk-md.zip" />
+    <None Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk-mt.zip" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\lib\x64\Debug\DirectXTex.lib">

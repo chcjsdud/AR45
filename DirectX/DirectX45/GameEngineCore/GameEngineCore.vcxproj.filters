@@ -492,6 +492,18 @@
     <None Include="ThirdParty\FBX\lib\x64\Release\zlib-mt.pdb">
       <Filter>ThirdParty\FBX\bin\Release</Filter>
     </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-md.zip">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Debug\libfbxsdk-mt.zip">
+      <Filter>ThirdParty\FBX\bin\Debug</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk-md.zip">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
+    <None Include="ThirdParty\FBX\lib\x64\Release\libfbxsdk-mt.zip">
+      <Filter>ThirdParty\FBX\bin\Release</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="ThirdParty\FW1Font\lib\x64\Debug\FW1FontWrapper.lib">
