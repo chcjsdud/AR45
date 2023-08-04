@@ -15,6 +15,7 @@ GameEngineFBXMesh::~GameEngineFBXMesh()
 std::shared_ptr<GameEngineFBXMesh> GameEngineFBXMesh::Load(const std::string& _Path, const std::string& _Name)
 {
 	std::shared_ptr<GameEngineFBXMesh> Res = GameEngineResource::Create(_Name);
+	Res->SetPath(_Path);
 	Res->LoadMesh(_Path, _Name);
 	return Res;
 }
@@ -138,6 +139,7 @@ void GameEngineFBXMesh::MeshLoad()
 
 	ImportBone();
 
+ 	std::string Path = GetPath().data();
 
 	AllBones; // 본정보체
 	AllFindMap;
