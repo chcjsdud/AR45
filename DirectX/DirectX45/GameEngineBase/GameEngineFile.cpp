@@ -104,7 +104,8 @@ void GameEngineFile::LoadText(GameEngineSerializer& _Data)
 
 	size_t FileSize = std::filesystem::file_size(Path.Path);
 
-	fread_s(_Data.GetDataPtr(), _Data.GetWriteOffSet(), FileSize, 1, FilePtr);
+	fread_s(_Data.GetDataPtr(), _Data.GetBufferSize(), FileSize, 1, FilePtr);
+	_Data.ReadOffset = static_cast<unsigned >(_Data.GetBufferSize());
 
 	if (nullptr != FilePtr)
 	{

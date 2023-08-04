@@ -4,6 +4,8 @@
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineIndexBuffer.h"
 #include "GameEngineTexture.h"
+#include "GameEngineStructuredBuffer.h"
+#include "GameEngineMesh.h"
 #include <GameEngineBase/GameEnginePath.h>
 
 // fbx는 오토데스크
@@ -230,9 +232,9 @@ public:
 		_File << MinBoundBox;
 		_File << MaxBoundBox;
 		_File << BoundScaleBox;
-		_File.WriteVector(Vertexs);
-		_File.WriteVector(Indexs);
-		_File.WriteVector(MaterialData);
+		_File << Vertexs;
+		_File << Indexs;
+		_File << MaterialData;
 
 	}
 
@@ -244,9 +246,9 @@ public:
 		_File >> MinBoundBox;
 		_File >> MaxBoundBox;
 		_File >> BoundScaleBox;
-		_File.ReadVector(Vertexs);
-		_File.ReadVector(Indexs);
-		_File.ReadVector(MaterialData);
+		_File >> Vertexs;
+		_File >> Indexs;
+		_File >> MaterialData;
 
 	}
 };
@@ -626,7 +628,7 @@ public:
 	{
 		if (RenderUnitInfos.size() <= _Index)
 		{
-			MsgBoxAssert("랜더 유니트 정보의 인덱스를 초과했습니다.");
+			MsgAssert("랜더 유니트 정보의 인덱스를 초과했습니다.");
 			return nullptr;
 		}
 
@@ -653,14 +655,14 @@ public:
 	Bone* FindBone(size_t MeshIndex, size_t _BoneIndex);
 	Bone* FindBone(size_t MeshIndex, std::string _Name);
 
-	// std::shared_ptr<GameEngineStructuredBuffer> GetAnimationStructuredBuffer(size_t _Index);
+	std::shared_ptr<GameEngineStructuredBuffer> GetAnimationStructuredBuffer(size_t _Index);
 
-	void UserLoad(const std::string_view& _Path/*GameEngineFile& _File*/);
-	void UserSave(const std::string_view& _Path/*GameEngineFile& _File*/);
+	//void UserLoad(const std::string_view& _Path/*GameEngineFile& _File*/);
+	//void UserSave(const std::string_view& _Path/*GameEngineFile& _File*/);
 
-	void UserSave(const std::string_view& _Path, size_t Index);
+	//void UserSave(const std::string_view& _Path, size_t Index);
 
-	void UserSave(const std::string_view& _Path, std::vector<size_t> _Indexs);
+	//void UserSave(const std::string_view& _Path, std::vector<size_t> _Indexs);
 
 protected:
 	// 매쉬가 있어

@@ -10,6 +10,7 @@
 
 #include "GameEngineMesh.h"
 #include "GameEngineBlend.h"
+#include "GameEngineFBXMesh.h"
 #include "GameEngineTexture.h"
 #include "GameEngineDepthState.h"
 #include "GameEngineRasterizer.h"
@@ -276,7 +277,7 @@ void GameEngineCore::CoreResourcesInit()
 		float Radius = 0.5f;
 		// 북극점부터 시작합니다.
 		V.POSITION = float4(0.0f, Radius, 0.0f, 1.0f);
-		V.UV = float4(0.5f, 0.0f);
+		V.TEXCOORD = float4(0.5f, 0.0f);
 		// 노말 백터 혹은 법선백터라고 불리며
 		// 면에 수직인 벡터를 의미하게 된다.
 		// 빛을 반사할때 필수.
@@ -312,7 +313,7 @@ void GameEngineCore::CoreResourcesInit()
 
 				// V.Pos *= GameEngineRandom::RandomFloat(-0.9f, 0.1f);
 
-				V.UV = float4(yUvRatio * z, zUvRatio * y);
+				V.TEXCOORD = float4(yUvRatio * z, zUvRatio * y);
 				V.NORMAL = V.POSITION.NormalizeReturn();
 				V.NORMAL.w = 0.0f;
 
@@ -322,7 +323,7 @@ void GameEngineCore::CoreResourcesInit()
 
 		// 남극점
 		V.POSITION = float4(0.0f, -Radius, 0.0f, 1.0f);
-		V.UV = float4(0.5f, 1.0f);
+		V.TEXCOORD = float4(0.5f, 1.0f);
 		V.NORMAL = float4(0.0f, -Radius, 0.0f, 1.0f);
 		V.NORMAL.Normalize();
 		V.NORMAL.w = 0.0f;
@@ -650,6 +651,7 @@ void GameEngineCore::CoreResourcesEnd()
 	GameEngineVertexShader::ResourcesClear();
 	GameEngineVertexBuffer::ResourcesClear();
 	GameEngineRenderTarget::ResourcesClear();
+	GameEngineFBXMesh::ResourcesClear();
 	GameEngineConstantBuffer::ResourcesClear();
 	GameEngineRenderingPipeLine::ResourcesClear();
 

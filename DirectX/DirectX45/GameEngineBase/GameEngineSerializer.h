@@ -21,6 +21,8 @@ public:
 // Ό³Έν :
 class GameEngineSerializer
 {
+	friend class GameEngineFile;
+
 public:
 	// constrcuter destructer
 	GameEngineSerializer();
@@ -36,6 +38,11 @@ public:
 	void BufferResize(unsigned int _Size) 
 	{
 		Data.resize(_Size);
+	}
+
+	size_t GetBufferSize() const
+	{
+		return Data.size();
 	}
 
 	unsigned int GetReadOffSet() const
@@ -110,10 +117,10 @@ public:
 	}
 
 	template<typename Value>
-	void WriteVector(std::vector<Value>& _Data)
+	void operator<<(std::vector<Value>& _Data)
 	{
 		unsigned int Size = static_cast<unsigned int>(_Data.size());
-		Write(Size);
+		operator<<(Size);
 
 		if (Size <= 0)
 		{
@@ -124,7 +131,7 @@ public:
 		{
 			if (false == std::is_base_of<GameEngineSerializObject, Value>::value)
 			{
-				Write(_Data[i]);
+				Write(&_Data[i], sizeof(Value));
 			}
 			else
 			{
@@ -137,7 +144,7 @@ public:
 
 
 	template<typename Key, typename  Value>
-	void WriteMap(std::map<Key, Value>& _Data)
+	void operator<<(std::map<Key, Value>& _Data)
 	{
 		unsigned int Size = static_cast<unsigned int>(_Data.size());
 		Write(Size);
@@ -194,10 +201,10 @@ public:
 
 
 	template<typename Value>
-	void ReadVector(std::vector<Value>& _Data)
+	void operator>>(std::vector<Value>& _Data)
 	{
 		unsigned int Size = 0;
-		Read(Size);
+		operator>>(Size);
 
 		if (Size <= 0)
 		{
@@ -210,7 +217,7 @@ public:
 		{
 			if (false == std::is_base_of<GameEngineSerializObject, Value>::value)
 			{
-				Read(_Data[i]);
+				Read(&_Data[i], sizeof(Value));
 			}
 			else
 			{
@@ -222,7 +229,7 @@ public:
 	}
 
 	template<typename Key, typename  Value>
-	void ReadMap(std::map<Key, Value>& _Data)
+	void operator>>(std::map<Key, Value>& _Data)
 	{
 		unsigned int Size = 0;
 		Read(Size);
@@ -268,7 +275,7 @@ public:
 
 	std::string GetString() 
 	{
-		const char* Return = reinterpret_cast<const char*>(Data[0]);
+		const char* Return = reinterpret_cast<const char*>(&Data[0]);
 
 		return Return;
 	}
