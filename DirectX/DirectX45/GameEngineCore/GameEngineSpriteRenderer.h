@@ -177,8 +177,8 @@ public:
 protected:
 	void SpriteRenderInit();
 	float4 AtlasData;
-	float4 Clip = float4::One;
-	float4 Flip = float4::Zero;
+	float4 Clip = float4::ONE;
+	float4 Flip = float4::ZERO;
 
 	std::function<void(GameEngineRenderer*)> RenderEndCallBack = nullptr;
 

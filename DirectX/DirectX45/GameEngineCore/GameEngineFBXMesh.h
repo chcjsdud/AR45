@@ -38,38 +38,38 @@ public:
 	std::string SpcTextureName; // ÅØ½ºÃ³°æ·Î
 
 public:
-	void Write(GameEngineFile& _File) override
+	void Write(GameEngineSerializer& _File) override
 	{
-		_File.Write(Name);
-		_File.Write(AmbColor); // ºû
-		_File.Write(SpcColor); // ºû
-		_File.Write(EmvColor); // ºû
-		_File.Write(SpecularPower);
-		_File.Write(TransparencyFactor);
-		_File.Write(Shininess);
-		_File.Write(DifTexturePath);	// ÅØ½ºÃ³
-		_File.Write(NorTexturePath); // ÅØ½ºÃ³
-		_File.Write(SpcTexturePath); // ÅØ½ºÃ³
-		_File.Write(DifTextureName);	// ÅØ½ºÃ³
-		_File.Write(NorTextureName); // ÅØ½ºÃ³
-		_File.Write(SpcTextureName); // ÅØ½ºÃ³
+		_File << Name;
+		_File << AmbColor; // ºû
+		_File << SpcColor; // ºû
+		_File << EmvColor; // ºû
+		_File << SpecularPower;
+		_File << TransparencyFactor;
+		_File << Shininess;
+		_File << DifTexturePath;	// ÅØ½ºÃ³
+		_File << NorTexturePath; // ÅØ½ºÃ³
+		_File << SpcTexturePath; // ÅØ½ºÃ³
+		_File << DifTextureName;	// ÅØ½ºÃ³
+		_File << NorTextureName; // ÅØ½ºÃ³
+		_File << SpcTextureName; // ÅØ½ºÃ³
 	}
 
-	void Read(GameEngineFile& _File) override
+	void Read(GameEngineSerializer& _File) override
 	{
-		_File.Read(Name);
-		_File.Read(AmbColor); // ºû
-		_File.Read(SpcColor); // ºû
-		_File.Read(EmvColor); // ºû
-		_File.Read(SpecularPower);
-		_File.Read(TransparencyFactor);
-		_File.Read(Shininess);
-		_File.Read(DifTexturePath);	// ÅØ½ºÃ³
-		_File.Read(NorTexturePath); // ÅØ½ºÃ³
-		_File.Read(SpcTexturePath); // ÅØ½ºÃ³
-		_File.Read(DifTextureName);	// ÅØ½ºÃ³
-		_File.Read(NorTextureName); // ÅØ½ºÃ³
-		_File.Read(SpcTextureName); // ÅØ½ºÃ³
+		_File >> Name;
+		_File >> AmbColor; // ºû
+		_File >> SpcColor; // ºû
+		_File >> EmvColor; // ºû
+		_File >> SpecularPower;
+		_File >> TransparencyFactor;
+		_File >> Shininess;
+		_File >> DifTexturePath;	// ÅØ½ºÃ³
+		_File >> NorTexturePath; // ÅØ½ºÃ³
+		_File >> SpcTexturePath; // ÅØ½ºÃ³
+		_File >> DifTextureName;	// ÅØ½ºÃ³
+		_File >> NorTextureName; // ÅØ½ºÃ³
+		_File >> SpcTextureName; // ÅØ½ºÃ³
 	}
 
 
@@ -112,39 +112,39 @@ struct FbxExMeshInfo : public GameEngineSerializObject
 		MorphNum = 0;
 	}
 
-	void Write(GameEngineFile& _File) override
+	void Write(GameEngineSerializer& _File) override
 	{
-		_File.Write(Name);
-		_File.Write(bTriangulated);
-		_File.Write(UniqueId);
-		_File.Write(FaceNum);
-		_File.Write(VertexNum);
-		_File.Write(MaterialNum);
-		_File.Write(bIsSkeletalMesh);
-		_File.Write(SkeletonRoot);
-		_File.Write(SkeletonElemNum);
-		_File.Write(bIsLodGroup);
-		_File.Write(LODGroupName);
-		_File.Write(LodLevel);
-		_File.Write(MorphNum);
+		_File << Name;
+		_File << bTriangulated;
+		_File << UniqueId;
+		_File << FaceNum;
+		_File << VertexNum;
+		_File << MaterialNum;
+		_File << bIsSkeletalMesh;
+		_File << SkeletonRoot;
+		_File << SkeletonElemNum;
+		_File << bIsLodGroup;
+		_File << LODGroupName;
+		_File << LodLevel;
+		_File << MorphNum;
 
 	}
 
-	void Read(GameEngineFile& _File) override
+	void Read(GameEngineSerializer& _File) override
 	{
-		_File.Read(Name);
-		_File.Read(bTriangulated);
-		_File.Read(UniqueId);
-		_File.Read(FaceNum);
-		_File.Read(VertexNum);
-		_File.Read(MaterialNum);
-		_File.Read(bIsSkeletalMesh);
-		_File.Read(SkeletonRoot);
-		_File.Read(SkeletonElemNum);
-		_File.Read(bIsLodGroup);
-		_File.Read(LODGroupName);
-		_File.Read(LodLevel);
-		_File.Read(MorphNum);
+		_File << Name;
+		_File << bTriangulated;
+		_File << UniqueId;
+		_File << FaceNum;
+		_File << VertexNum;
+		_File << MaterialNum;
+		_File << bIsSkeletalMesh;
+		_File << SkeletonRoot;
+		_File << SkeletonElemNum;
+		_File << bIsLodGroup;
+		_File << LODGroupName;
+		_File << LodLevel;
+		_File << MorphNum;
 	}
 };
 
@@ -185,7 +185,7 @@ public:
 	std::shared_ptr<GameEngineVertexBuffer> VertexBuffer;
 	std::vector< std::shared_ptr<GameEngineIndexBuffer>> IndexBuffers;
 
-	std::vector<std::shared_ptr<GameEngineMesh>> Meshs;
+	std::vector<std::shared_ptr<class GameEngineMesh>> Meshs;
 
 	FbxRenderUnitInfo() :
 		IsLod(false),
@@ -222,46 +222,31 @@ public:
 
 	}
 
-	void Write(GameEngineFile& _File) override
+	void Write(GameEngineSerializer& _File) override
 	{
-		//int VectorIndex;
-		//int IsLodLv;
-		//bool IsLod;
-		//float4 MinBoundBox;
-		//float4 MaxBoundBox;
-		//float4 BoundScaleBox;
-		//std::map<FbxMesh*, std::vector<GameEngineVertex>*> FbxVertexMap;
-		//std::map<FbxMesh*, std::map<int, std::vector<FbxExIW>>> MapWI;
-		//std::vector<GameEngineVertex> Vertexs;
-		//std::vector<std::vector<unsigned int>> Indexs;
-		//std::vector<FbxExMaterialSettingData> MaterialData;
-		//std::shared_ptr<GameEngineVertexBuffer> VertexBuffer;
-		//std::vector< std::shared_ptr<GameEngineIndexBuffer>> IndexBuffers;
-		//std::vector<std::shared_ptr<GameEngineMesh>> Meshs;
-
-		_File.Write(VectorIndex);
-		_File.Write(IsLodLv);
-		_File.Write(IsLod);
-		_File.Write(MinBoundBox);
-		_File.Write(MaxBoundBox);
-		_File.Write(BoundScaleBox);
-		_File.Write(Vertexs);
-		_File.Write(Indexs);
-		_File.Write(MaterialData);
+		_File << VectorIndex;
+		_File << IsLodLv;
+		_File << IsLod;
+		_File << MinBoundBox;
+		_File << MaxBoundBox;
+		_File << BoundScaleBox;
+		_File.WriteVector(Vertexs);
+		_File.WriteVector(Indexs);
+		_File.WriteVector(MaterialData);
 
 	}
 
-	void Read(GameEngineFile& _File) override
+	void Read(GameEngineSerializer& _File) override
 	{
-		_File.Read(VectorIndex);
-		_File.Read(IsLodLv);
-		_File.Read(IsLod);
-		_File.Read(MinBoundBox);
-		_File.Read(MaxBoundBox);
-		_File.Read(BoundScaleBox);
-		_File.Read(Vertexs);
-		_File.Read(Indexs);
-		_File.Read(MaterialData);
+		_File >> VectorIndex;
+		_File >> IsLodLv;
+		_File >> IsLod;
+		_File >> MinBoundBox;
+		_File >> MaxBoundBox;
+		_File >> BoundScaleBox;
+		_File.ReadVector(Vertexs);
+		_File.ReadVector(Indexs);
+		_File.ReadVector(MaterialData);
 
 	}
 };
@@ -288,40 +273,40 @@ struct JointPos
 	float YSize;
 	float ZSize;
 
-	void Write(GameEngineFile& _File) const
+	void Write(GameEngineSerializer& _File) const
 	{
-		_File.Write(Scale);
-		_File.Write(Rotation); // ÄõÅÍ´Ï¿Â.
-		_File.Write(Translation);
-		_File.Write(GlobalScale);
-		_File.Write(GlobalRotation);
-		_File.Write(GlobalTranslation);
-		_File.Write(Offset);
-		_File.Write(SotredOffset);
-		_File.Write(Local);
-		_File.Write(Global);
-		_File.Write(Length);
-		_File.Write(XSize);
-		_File.Write(YSize);
-		_File.Write(ZSize);
+		_File << Scale;
+		_File << Rotation;
+		_File << Translation;
+		_File << GlobalScale;
+		_File << GlobalRotation;
+		_File << GlobalTranslation;
+		_File << Offset;
+		_File << SotredOffset;
+		_File << Local;
+		_File << Global;
+		_File << Length;
+		_File << XSize;
+		_File << YSize;
+		_File << ZSize;
 	}
 
-	void Read(GameEngineFile& _File)
+	void Read(GameEngineSerializer& _File)
 	{
-		_File.Read(Scale);
-		_File.Read(Rotation); // ÄõÅÍ´Ï¿Â.
-		_File.Read(Translation);
-		_File.Read(GlobalScale);
-		_File.Read(GlobalRotation);
-		_File.Read(GlobalTranslation);
-		_File.Read(Offset);
-		_File.Read(SotredOffset);
-		_File.Read(Local);
-		_File.Read(Global);
-		_File.Read(Length);
-		_File.Read(XSize);
-		_File.Read(YSize);
-		_File.Read(ZSize);
+		_File >> Scale;
+		_File >> Rotation;
+		_File >> Translation;
+		_File >> GlobalScale;
+		_File >> GlobalRotation;
+		_File >> GlobalTranslation;
+		_File >> Offset;
+		_File >> SotredOffset;
+		_File >> Local;
+		_File >> Global;
+		_File >> Length;
+		_File >> XSize;
+		_File >> YSize;
+		_File >> ZSize;
 	}
 
 	void BuildMatrix()
@@ -581,24 +566,24 @@ struct Bone : public GameEngineSerializObject
 		BonePos.Reset();
 	}
 
-	void Write(GameEngineFile& _File) override
+	void Write(GameEngineSerializer& _File) override
 	{
-		_File.Write(Name);
-		_File.Write(Flags);
-		_File.Write(NumChildren);
-		_File.Write(Index);
-		_File.Write(ParentIndex);
-		_File.Write(BonePos);
+		_File << Name;
+		_File << Flags;
+		_File << NumChildren;
+		_File << Index;
+		_File << ParentIndex;
+		_File.WriteUserData(BonePos);
 	}
 
-	void Read(GameEngineFile& _File) override
+	void Read(GameEngineSerializer& _File) override
 	{
-		_File.Read(Name);
-		_File.Read(Flags);
-		_File.Read(NumChildren);
-		_File.Read(Index);
-		_File.Read(ParentIndex);
-		_File.Read(BonePos);
+		_File >> Name;
+		_File >> Flags;
+		_File >> NumChildren;
+		_File >> Index;
+		_File >> ParentIndex;
+		_File.ReadUserData(BonePos);
 	}
 };
 
@@ -668,7 +653,7 @@ public:
 	Bone* FindBone(size_t MeshIndex, size_t _BoneIndex);
 	Bone* FindBone(size_t MeshIndex, std::string _Name);
 
-	std::shared_ptr<GameEngineStructuredBuffer> GetAnimationStructuredBuffer(size_t _Index);
+	// std::shared_ptr<GameEngineStructuredBuffer> GetAnimationStructuredBuffer(size_t _Index);
 
 	void UserLoad(const std::string_view& _Path/*GameEngineFile& _File*/);
 	void UserSave(const std::string_view& _Path/*GameEngineFile& _File*/);

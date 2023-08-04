@@ -2,6 +2,7 @@
 #include "GameEngineSerializer.h"
 #include "GameEngineDebug.h"
 
+
 GameEngineSerializer::GameEngineSerializer()
 	: WriteOffset(0)
 	, ReadOffset(0)
@@ -50,6 +51,11 @@ void GameEngineSerializer::operator<<(const float _Value)
 	Write(&_Value, sizeof(float));
 }
 
+void GameEngineSerializer::operator<<(const bool _Value)
+{
+	Write(&_Value, sizeof(bool));
+}
+
 void GameEngineSerializer::operator<<(const std::string& _Value)
 {
 	operator<<(static_cast<unsigned int>(_Value.size()));
@@ -65,6 +71,18 @@ void GameEngineSerializer::operator<<(const uint64_t& _Value)
 {
 	Write(&_Value, sizeof(uint64_t));
 }
+
+void GameEngineSerializer::operator<<(const float4& _Value)
+{
+	Write(&_Value, sizeof(float4));
+}
+
+void GameEngineSerializer::operator<<(const float4x4& _Value)
+{
+	Write(&_Value, sizeof(float4x4));
+}
+
+
 
 void GameEngineSerializer::operator>>(std::string& _Value)
 {
@@ -91,6 +109,21 @@ void GameEngineSerializer::operator>>(unsigned int& _Value)
 void GameEngineSerializer::operator>>(float& _Value)
 {
 	Read(&_Value, sizeof(float));
+}
+
+void GameEngineSerializer::operator>>(bool& _Value)
+{
+	Read(&_Value, sizeof(bool));
+}
+
+void GameEngineSerializer::operator>>(float4& _Value)
+{
+	Read(&_Value, sizeof(float4));
+}
+
+void GameEngineSerializer::operator>>(float4x4& _Value)
+{
+	Read(&_Value, sizeof(float4x4));
 }
 
 void GameEngineSerializer::operator>>(uint64_t& _Value)

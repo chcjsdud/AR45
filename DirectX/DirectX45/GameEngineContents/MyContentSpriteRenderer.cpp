@@ -21,8 +21,8 @@ void MyContentSpriteRenderer::Start()
 	AtlasData.z = 1.0f;
 	AtlasData.w = 1.0f;
 
-	ColorOptionValue.MulColor = float4::One;
-	ColorOptionValue.PlusColor = float4::Null;
+	ColorOptionValue.MulColor = float4::ONE;
+	ColorOptionValue.PlusColor = float4::ZERONULL;
 
 	AColor.r = 0.0f;
 	AColor.a = 0.0f;

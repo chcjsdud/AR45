@@ -26,8 +26,8 @@ void GameEngineTileMapRenderer::Start()
 	AtlasData.z = 1.0f;
 	AtlasData.w = 1.0f;
 
-	ColorOptionValue.MulColor = float4::One;
-	ColorOptionValue.PlusColor = float4::Null;
+	ColorOptionValue.MulColor = float4::ONE;
+	ColorOptionValue.PlusColor = float4::ZERONULL;
 
 	GetShaderResHelper().SetConstantBufferLink("AtlasData", AtlasData);
 	GetShaderResHelper().SetConstantBufferLink("ColorOption", ColorOptionValue);
@@ -41,7 +41,7 @@ void GameEngineTileMapRenderer::CreateTileMap(int _X, int _Y, float _ZPos, const
 	TileSizeH = TileSize.half();
 	ZPos = _ZPos;
 
-	if (_RenderSize == float4::Zero)
+	if (_RenderSize == float4::ZERO)
 	{
 		RenderSize = TileSize;
 	}
