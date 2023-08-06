@@ -49,6 +49,7 @@ std::shared_ptr<GameEngineRenderUnit> GameEngineFBXRenderer::SetFBXMesh(const st
 		return nullptr;
 	}
 
+
 	if (nullptr == FBXMesh && nullptr != FindFBXMesh)
 	{
 		FBXMesh = FindFBXMesh;
@@ -57,6 +58,8 @@ std::shared_ptr<GameEngineRenderUnit> GameEngineFBXRenderer::SetFBXMesh(const st
 	{
 		// 지금까지 만든거 다 날립니다.
 	}
+
+	// return nullptr;
 
 	if (Unit.empty())
 	{
@@ -74,11 +77,10 @@ std::shared_ptr<GameEngineRenderUnit> GameEngineFBXRenderer::SetFBXMesh(const st
 	}
 
 	std::shared_ptr<GameEngineRenderUnit> RenderUnit = Unit[Index][_SubSetIndex];
-	RenderUnit->SetPipeLine(_Material);
-	// RenderUnit->PushCamera();
+	std::shared_ptr <GameEngineMesh> GetFBXMesh = FBXMesh->GetGameEngineMesh(Index, _SubSetIndex);
 
-	std::shared_ptr <GameEngineMesh> FbxMesh = FBXMesh->GetGameEngineMesh(Index, _SubSetIndex);
-	RenderUnit->SetMesh(FbxMesh);
+	RenderUnit->SetMesh(GetFBXMesh);
+	RenderUnit->SetPipeLine(_Material);
 
 	if (RenderUnit->ShaderResHelper.IsTexture("DiffuseTexture"))
 	{

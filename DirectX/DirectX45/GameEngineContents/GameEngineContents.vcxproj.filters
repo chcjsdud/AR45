@@ -16,6 +16,9 @@
     <ClInclude Include="OldTVEffect.h">
       <Filter>PostEffect</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -34,6 +37,9 @@
     <ClCompile Include="OldTVEffect.cpp">
       <Filter>PostEffect</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Levels">
@@ -41,6 +47,9 @@
     </Filter>
     <Filter Include="PostEffect">
       <UniqueIdentifier>{8b278d14-8721-4921-8f5e-5601845f39f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{a40706ab-f9ff-4497-a220-122ba8944c02}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

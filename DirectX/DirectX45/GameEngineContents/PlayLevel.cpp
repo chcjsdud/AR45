@@ -8,6 +8,7 @@
 #include <GameEngineCore/GameEngineCoreWindow.h>
 #include <GameEngineCore/GameEngineButton.h>
 #include "FadeEffect.h"
+#include "Player.h"
 
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineSprite.h>
@@ -30,26 +31,15 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::Start()
 {
-	Col = std::make_shared<JPSCollision>();
+	// Col = std::make_shared<JPSCollision>();
 	// GetMainCamera()->GetCamTarget()->DepthSettingOff();
 
-	GetCamera(0)->SetProjectionType(CameraType::Orthogonal);
-
-	{
-		GameEngineDirectory NewDir;
-		NewDir.MoveParentToDirectory("ContentResources");
-		NewDir.Move("ContentResources");
-		NewDir.Move("Texture");
-		NewDir.Move("Test");
-
-		std::vector<GameEngineFile> File = NewDir.GetAllFile({ ".Png", });
+	GetMainCamera()->SetProjectionType(CameraType::Perspective);
+	GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -500.0f});
 
 
-		for (size_t i = 0; i < File.size(); i++)
-		{
-			GameEngineTexture::Load(File[i].GetFullPath());
-		}
-	}
+	CreateActor<Player>();
+
 }
 void PlayLevel::LevelChangeStart()
 {
