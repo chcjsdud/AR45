@@ -992,7 +992,7 @@ std::shared_ptr<GameEngineMesh> GameEngineFBXMesh::GetGameEngineMesh(size_t _Mes
 
 	FbxRenderUnitInfo& Unit = RenderUnitInfos[_MeshIndex];
 
-	if (nullptr == Unit.VertexBuffer)
+	if (nullptr == Unit.VertexBuffer) 
 	{
 		std::shared_ptr<GameEngineVertexBuffer> VertexBuffer = GameEngineVertexBuffer::Create(Unit.Vertexs);
 

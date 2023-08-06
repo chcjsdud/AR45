@@ -6,27 +6,30 @@ class GameEngineRenderUnit
 	: std::enable_shared_from_this<GameEngineRenderUnit>
 {
 public:
-	GameEngineRenderUnit();
-
-public:
-	std::shared_ptr<class GameEngineInputLayOut> InputLayOutPtr;
-	std::shared_ptr<class GameEngineMesh> Mesh;
-	std::shared_ptr<class GameEngineRenderingPipeLine> Pipe;
 	GameEngineShaderResHelper ShaderResHelper;
+	std::shared_ptr<class GameEngineRenderingPipeLine> Pipe;
 
-	// 
-
-public:
+	GameEngineRenderUnit();
 	void SetMesh(const std::string_view& _Name);
+	void SetMesh(std::shared_ptr<class GameEngineMesh> _Mesh);
 	void SetPipeLine(const std::string_view& _Name);
 	void Render(float _DeltaTime);
+	void SetRenderer(GameEngineRenderer* _Renderer);
+
+private:
+	GameEngineRenderer* ParentRenderer = nullptr;
+	std::shared_ptr<class GameEngineInputLayOut> InputLayOutPtr;
+	std::shared_ptr<class GameEngineMesh> Mesh;
 };
 
 
 class RenderBaseValue 
 {
 public:
-	float4 Time;
+	float DeltaTime = 0.0f;
+	float SumDeltaTime = 0.0f;
+	int IsAnimation = 0;
+	int IsNormal = 0;
 	float4 ScreenScale;
 	float4 Mouse;
 };
@@ -54,6 +57,9 @@ public:
 	void SetPipeLine(const std::string_view& _Name, int _index = 0);
 
 	void SetMesh(const std::string_view& _Name, int _index = 0);
+
+	// 랜더유니트를 만든다.
+	std::shared_ptr<GameEngineRenderUnit> CreateRenderUnit();
 
 	// 여기서 리턴된 파이프라인을 수정하면 이 파이프라인을 사용하는 모든 애들이 바뀌게 된다.
 	std::shared_ptr<GameEngineRenderingPipeLine> GetPipeLine(int _index = 0);
@@ -86,7 +92,11 @@ protected:
 
 	void Render(float _Delta) override;
 
+	void RenderBaseValueUpdate(float _Delta);
+
 	void PushCameraRender(int _CameraOrder);
+
+	RenderBaseValue BaseValue;
 
 private:
 	bool IsCameraCulling = false;
@@ -102,7 +112,6 @@ private:
 	//std::shared_ptr<class GameEngineRenderingPipeLine> Pipe;
 	//GameEngineShaderResHelper ShaderResHelper;
 
-	RenderBaseValue BaseValue;
 
 	void RenderTransformUpdate(GameEngineCamera* _Camera);
 };

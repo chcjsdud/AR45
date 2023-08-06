@@ -17,9 +17,24 @@ GameEngineRenderUnit::GameEngineRenderUnit()
 	InputLayOutPtr = std::make_shared<GameEngineInputLayOut>();
 }
 
+void GameEngineRenderUnit::SetRenderer(GameEngineRenderer* _Renderer)
+{
+	ParentRenderer = _Renderer;
+}
+
 void GameEngineRenderUnit::SetMesh(const std::string_view& _Name) 
 {
 	Mesh = GameEngineMesh::Find(_Name);
+
+	if (false == InputLayOutPtr->IsCreate() && nullptr != Pipe)
+	{
+		InputLayOutPtr->ResCreate(Mesh->GetVertexBuffer(), Pipe->GetVertexShader());
+	}
+}
+
+void GameEngineRenderUnit::SetMesh(std::shared_ptr<GameEngineMesh> _Mesh)
+{
+	Mesh = _Mesh;
 
 	if (false == InputLayOutPtr->IsCreate() && nullptr != Pipe)
 	{
@@ -98,11 +113,15 @@ void GameEngineRenderer::RenderTransformUpdate(GameEngineCamera* _Camera)
 	GetTransform()->SetCameraMatrix(_Camera->GetView(), _Camera->GetProjection());
 }
 
+void GameEngineRenderer::RenderBaseValueUpdate(float _Delta)
+{
+	BaseValue.SumDeltaTime += _Delta;
+	BaseValue.DeltaTime = _Delta;
+}
+
 void GameEngineRenderer::Render(float _Delta) 
 {
-	BaseValue.Time.x += _Delta;
-	BaseValue.Time.y = _Delta;
-
+	RenderBaseValueUpdate(_Delta);
 	// GameEngineDevice::GetContext()->VSSetConstantBuffers();
 	// GameEngineDevice::GetContext()->PSSetConstantBuffers();
 
@@ -167,7 +186,9 @@ void GameEngineRenderer::SetMesh(const std::string_view& _Name, int _index /*= 0
 	}
 
 
-	Unit->Mesh = GameEngineMesh::Find(_Name);
+	std::shared_ptr<GameEngineMesh> Mesh = GameEngineMesh::Find(_Name);
+
+	Unit->SetMesh(Mesh);
 }
 
 void GameEngineRenderer::SetPipeLine(const std::string_view& _Name, int _index)
@@ -243,3 +264,16 @@ void GameEngineRenderer::CalSortZ(GameEngineCamera* _Camera)
 	}
 
 }
+
+
+std::shared_ptr<GameEngineRenderUnit> GameEngineRenderer::CreateRenderUnit()
+{
+	std::shared_ptr<GameEngineRenderUnit> Unit = std::make_shared<GameEngineRenderUnit>();
+
+	Unit->SetRenderer(this);
+
+	Units.push_back(Unit);
+
+	return Unit;
+}
+
