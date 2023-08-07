@@ -17,7 +17,7 @@ void GameEngineFBXRenderer::SetFBXMesh(const std::string& _Name, std::string _Ma
 	// 너 몇개 가지고 있어.
 	for (size_t UnitCount = 0; UnitCount < FindFBXMesh->GetRenderUnitCount(); UnitCount++)
 	{
-		size_t SubSet = FindFBXMesh->GetSubSetCount(UnitCount);
+		// size_t SubSet = FindFBXMesh->GetSubSetCount(UnitCount);
 
 		SetFBXMesh(_Name, _Material, UnitCount);
 	}
