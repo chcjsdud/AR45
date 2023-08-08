@@ -124,5 +124,8 @@
     <Filter Include="JPS">
       <UniqueIdentifier>{f5e898f2-bbfa-4fd3-95d1-b97200ffa2f5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{64a0c96f-652a-4713-b084-0b3ddfa3516b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
