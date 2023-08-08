@@ -204,7 +204,6 @@ void GameEngineCamera::Render(float _DeltaTime)
 
 			Render->RenderTransformUpdate(this);
 			Render->Render(ScaleTime);
-
 		}
 	}
 }

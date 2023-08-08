@@ -5,7 +5,7 @@
 
 #include "GameEngineLevel.h"
 #include "GameEngineCamera.h"
-#include "GameEngineRenderingPipeLine.h"
+#include "GameEngineMaterial.h"
 #include "GameEngineVertexShader.h"
 #include "GameEnginePixelShader.h"
 #include "GameEngineShaderResHelper.h"
@@ -42,9 +42,11 @@ void GameEngineRenderUnit::SetMesh(std::shared_ptr<GameEngineMesh> _Mesh)
 	}
 }
 
-void GameEngineRenderUnit::SetPipeLine(const std::string_view& _Name) 
+void GameEngineRenderUnit::SetMaterial(const std::string_view& _Name)
 {
-	Pipe = GameEngineRenderingPipeLine::Find(_Name);
+	// GetCamera()->Units[0];
+
+	Pipe = GameEngineMaterial::Find(_Name);
 
 	if (nullptr == Pipe)
 	{
@@ -150,14 +152,14 @@ void GameEngineRenderer::Render(float _Delta)
 	// 다리 팔 몸통
 	
 	// 텍스처 세팅 상수버퍼 세팅 이런것들이 전부다 처리 된다.
-	for (size_t i = 0; i < Units.size(); i++)
-	{
-		Units[i]->Render(_Delta);
-	}
+	//for (size_t i = 0; i < Units.size(); i++)
+	//{
+	//	Units[i]->Render(_Delta);
+	//}
 
 }
 
-std::shared_ptr<GameEngineRenderingPipeLine> GameEngineRenderer::GetPipeLine(int _index/* = 0*/) 
+std::shared_ptr<GameEngineMaterial> GameEngineRenderer::GetPipeLine(int _index/* = 0*/) 
 {
 	if (Units.size() <= _index)
 	{
@@ -168,7 +170,7 @@ std::shared_ptr<GameEngineRenderingPipeLine> GameEngineRenderer::GetPipeLine(int
 }
 
 //// 이걸 사용하게되면 이 랜더러의 유니트는 자신만의 클론 파이프라인을 가지게 된다.
-//std::shared_ptr<GameEngineRenderingPipeLine> GameEngineRenderer::GetPipeLineClone(int _index/* = 0*/)
+//std::shared_ptr<GameEngineMaterial> GameEngineRenderer::GetPipeLineClone(int _index/* = 0*/)
 //{
 //	if (Units.size() <= _index)
 //	{
@@ -288,11 +290,8 @@ void GameEngineRenderer::CalSortZ(GameEngineCamera* _Camera)
 std::shared_ptr<GameEngineRenderUnit> GameEngineRenderer::CreateRenderUnit()
 {
 	std::shared_ptr<GameEngineRenderUnit> Unit = std::make_shared<GameEngineRenderUnit>();
-
 	Unit->SetRenderer(this);
-
 	Units.push_back(Unit);
-
 	return Unit;
 }
 

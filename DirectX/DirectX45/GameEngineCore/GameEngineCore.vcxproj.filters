@@ -39,7 +39,7 @@
       <Filter>Device</Filter>
     </ClInclude>
     <ClInclude Include="PrecompileHeader.h" />
-    <ClInclude Include="GameEngineRenderingPipeLine.h">
+    <ClInclude Include="GameEngineMaterial.h">
       <Filter>Object\Rendering\Component</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineShader.h">
@@ -221,7 +221,7 @@
       <Filter>Device</Filter>
     </ClCompile>
     <ClCompile Include="PrecompileHeader.cpp" />
-    <ClCompile Include="GameEngineRenderingPipeLine.cpp">
+    <ClCompile Include="GameEngineMaterial.cpp">
       <Filter>Object\Rendering\Component</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineShader.cpp">

@@ -80,7 +80,7 @@ std::shared_ptr<GameEngineRenderUnit> GameEngineFBXRenderer::SetFBXMesh(const st
 	std::shared_ptr <GameEngineMesh> GetFBXMesh = FBXMesh->GetGameEngineMesh(Index, _SubSetIndex);
 
 	RenderUnit->SetMesh(GetFBXMesh);
-	RenderUnit->SetPipeLine(_Material);
+	RenderUnit->SetMaterial(_Material);
 
 	if (RenderUnit->ShaderResHelper.IsTexture("DiffuseTexture"))
 	{
