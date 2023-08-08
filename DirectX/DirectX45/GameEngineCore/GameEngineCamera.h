@@ -16,8 +16,9 @@ class GameEngineRenderer;
 class GameEngineRenderTarget;
 class GameEngineCamera : public GameEngineActor
 {
-	friend GameEngineLevel;
-	friend GameEngineRenderer;
+	friend class GameEngineLevel;
+	friend class GameEngineRenderer;
+	friend class GameEngineRenderUnit;
 
 public:
 	// constrcuter destructer
@@ -129,6 +130,8 @@ private:
 	float Far = 10000.0f;
 
 	void PushRenderer(std::shared_ptr<GameEngineRenderer> _Render);
+	void PushRenderUnit(std::shared_ptr<GameEngineRenderUnit> _Unit);
+
 
 	void Release();
 

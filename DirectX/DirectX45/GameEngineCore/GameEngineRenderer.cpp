@@ -69,6 +69,14 @@ void GameEngineRenderUnit::SetMaterial(const std::string_view& _Name)
 		InputLayOutPtr->ResCreate(Mesh->GetVertexBuffer(), Pipe->GetVertexShader());
 	}
 
+	if (nullptr != ParentRenderer)
+	{
+		ParentRenderer->GetCamera()->PushRenderUnit(shared_from_this());
+	}
+	
+
+	// 카메라에 들어가야 하는순간.
+
 
 	if (true == ShaderResHelper.IsConstantBuffer("TransformData"))
 	{
@@ -80,7 +88,6 @@ void GameEngineRenderUnit::SetMaterial(const std::string_view& _Name)
 	{
 		ShaderResHelper.SetConstantBufferLink("RenderBaseValue", ParentRenderer->BaseValue);
 	}
-
 
 }
 
@@ -159,7 +166,7 @@ void GameEngineRenderer::Render(float _Delta)
 
 }
 
-std::shared_ptr<GameEngineMaterial> GameEngineRenderer::GetPipeLine(int _index/* = 0*/) 
+std::shared_ptr<GameEngineMaterial> GameEngineRenderer::GetMaterial(int _index/* = 0*/)
 {
 	if (Units.size() <= _index)
 	{
@@ -290,6 +297,8 @@ void GameEngineRenderer::CalSortZ(GameEngineCamera* _Camera)
 std::shared_ptr<GameEngineRenderUnit> GameEngineRenderer::CreateRenderUnit()
 {
 	std::shared_ptr<GameEngineRenderUnit> Unit = std::make_shared<GameEngineRenderUnit>();
+
+	// Unit->shared_from_this();
 	Unit->SetRenderer(this);
 	Units.push_back(Unit);
 	return Unit;
