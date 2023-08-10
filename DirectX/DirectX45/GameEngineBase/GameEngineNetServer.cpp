@@ -18,15 +18,17 @@ void GameEngineNetServer::AcceptThread(SOCKET _AcceptSocket, GameEngineNetServer
             return;
         }
 
+        // 이 유저가 접속했을때 꼭 해야할께 있을 가능성이 높은데.
+
         std::shared_ptr<GameEngineThread> NewThread = std::make_shared<GameEngineThread>();
         _Net->RecvThreads.push_back(NewThread);
 
         std::string ThreadName = std::to_string(CientSocket);
         ThreadName += "Server Recv Thread";
-        
-        NewThread->Start(ThreadName, std::bind(&GameEngineNet::RecvThreadFunction, CientSocket, _Net));
+     
+        _Net->AccpetCallBack(CientSocket, _Net);
 
-        int a = 0;
+        NewThread->Start(ThreadName, std::bind(&GameEngineNet::RecvThreadFunction, CientSocket, _Net));
     }
 
     int a = 0;
@@ -44,9 +46,12 @@ GameEngineNetServer::~GameEngineNetServer()
     }
 }
 
-void GameEngineNetServer::Send(void* Data, unsigned int _Size)
+void GameEngineNetServer::Send(const char* Data, unsigned int _Size)
 {
-
+    for (size_t i = 0; i < Users.size(); i++)
+    {
+        send(Users[i], Data, _Size, 0);
+    }
 }
 
 void GameEngineNetServer::ServerOpen(short _Port, int _BackLog)

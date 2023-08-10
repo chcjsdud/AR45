@@ -186,7 +186,15 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEngineNetObject.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineNetServer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEnginePacket.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -256,7 +264,15 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineNetObject.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineNetServer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEnginePacket.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -296,6 +312,9 @@
     <ClInclude Include="JPSHeap.h" />
     <ClInclude Include="JPSPath.h" />
     <ClInclude Include="PrecompileHeader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="프로토콜설명.pptx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,9 +1,14 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <GameEngineBase/GameEngineNetObject.h>
 
 // 설명 :
-class Player : public GameEngineActor
+// 아예 서버 적용 플레이어를 만들거냐.
+class Player : public GameEngineActor, public GameEngineNetObject
 {
+public:
+	static Player* MainPlayer;
+
 public:
 	// constrcuter destructer
 	Player();
@@ -17,8 +22,10 @@ public:
 
 protected:
 	void Start() override;
-
 	void Update(float _Delta) override;
+
+	void UserUpdate(float _DeltaTime);
+	void ServerUpdate(float _DeltaTime);
 
 private:
 

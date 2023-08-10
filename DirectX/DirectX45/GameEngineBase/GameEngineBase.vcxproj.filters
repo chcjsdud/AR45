@@ -53,6 +53,12 @@
     <ClCompile Include="GameEngineNetClient.cpp">
       <Filter>Server</Filter>
     </ClCompile>
+    <ClCompile Include="GameEnginePacket.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineNetObject.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineDebug.h">
@@ -119,6 +125,12 @@
     <ClInclude Include="GameEngineNetClient.h">
       <Filter>Server</Filter>
     </ClInclude>
+    <ClInclude Include="GameEnginePacket.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineNetObject.h">
+      <Filter>Server</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
@@ -145,5 +157,10 @@
     <Filter Include="Server">
       <UniqueIdentifier>{64a0c96f-652a-4713-b084-0b3ddfa3516b}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="프로토콜설명.pptx">
+      <Filter>Server</Filter>
+    </None>
   </ItemGroup>
 </Project>

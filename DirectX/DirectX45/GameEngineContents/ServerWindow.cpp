@@ -1,15 +1,24 @@
 #include "PrecompileHeader.h"
 #include "ServerWindow.h"
+#include "ConnectIDPacket.h"
+#include "ObjectUpdatePacket.h"
+#include "Player.h"
 
 GameEngineNet* ServerWindow::NetInst = nullptr;
 
 ServerWindow::ServerWindow() 
 {
 	IP.resize(1024);
+	TestSendBuffer.resize(1024);
 }
 
 ServerWindow::~ServerWindow() 
 {
+}
+
+void ServerWindow::Start()
+{
+
 }
 
 void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTime)
@@ -21,6 +30,22 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 	if (true == IsServer)
 	{
 		ImGui::Text(GameEngineString::AnsiToUTF8(Text).c_str());
+		
+		// 처리하면 쉬워진다.
+		ImGui::PushID(321312321);
+		ImGui::InputText(Text.c_str(), &TestSendBuffer[0], TestSendBuffer.size());
+		ImGui::PopID();
+
+		ImGui::PushID(33333121);
+		Text = "SendTest";
+		if (ImGui::Button(GameEngineString::AnsiToUTF8(Text).c_str()))
+		{
+			int StrLen = strlen(TestSendBuffer.c_str());
+			NetInst->Send(&TestSendBuffer[0], StrLen);
+		}
+		ImGui::PopID();
+
+
 		return;
 	}
 
@@ -28,6 +53,24 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 	if (true == IsClient)
 	{
 		ImGui::Text(GameEngineString::AnsiToUTF8(Text).c_str());
+		Text = "SendTest";
+
+		// 처리하면 쉬워진다.
+		ImGui::PushID(321312321);
+		ImGui::InputText(Text.c_str(), &TestSendBuffer[0], TestSendBuffer.size());
+		ImGui::PopID();
+
+		ImGui::PushID(33333121);
+		Text = "SendTest";
+		if (ImGui::Button(GameEngineString::AnsiToUTF8(Text).c_str()))
+		{
+			int StrLen = strlen(TestSendBuffer.c_str());
+
+			// TestSendBuffer = Arr;
+			NetInst->Send(&TestSendBuffer[0], StrLen);
+		}
+		ImGui::PopID();
+
 		return;
 	}
 
@@ -39,7 +82,11 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 	if (ImGui::Button(GameEngineString::AnsiToUTF8(Text).c_str()))
 	{
 		Server.ServerOpen(static_cast<unsigned short>(Port));
+		ServerInit(Level);
 		IsServer = true;
+
+		Player::MainPlayer->InitServerObject();
+
 		NetInst = &Server;
 
 	}
@@ -56,5 +103,18 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 		IsClient = Client.Connect(IP, static_cast<unsigned short>(Port));
 		NetInst = &Client;
 	}
+
+}
+
+void ServerWindow::ServerInit(std::shared_ptr<GameEngineLevel> Level)
+{
+	Server.SetAcceptCallBack(
+		[=](SOCKET, GameEngineNetServer* _Server)
+		{
+			// 이때 상대에게 ID를 보낼겁니다.
+			std::shared_ptr<ConnectIDPacket> Packet = std::make_shared<ConnectIDPacket>();
+			std::shared_ptr<Player> NewPlayer = Level->CreateActor<Player>();
+		}
+	);
 
 }

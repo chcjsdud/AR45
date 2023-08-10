@@ -18,7 +18,10 @@ public:
 	ServerWindow& operator=(ServerWindow&& _Other) noexcept = delete;
 
 protected:
+	void Start() override;
 	void OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTime) override;
+
+	void ServerInit(std::shared_ptr<GameEngineLevel> Level);
 
 private:
 	GameEngineNetServer Server;
@@ -29,5 +32,6 @@ private:
 	std::string IP = "127.0.0.1";
 	int Port = 30000;
 	bool IsClient;
+	std::string TestSendBuffer = "fashdjklfhajklfhasdjfhaklfhafhasd";
 };
 

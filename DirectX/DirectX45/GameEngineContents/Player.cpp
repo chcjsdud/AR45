@@ -2,9 +2,11 @@
 #include "Player.h"
 #include <GameEngineCore/GameEngineFBXRenderer.h>
 
+Player* Player::MainPlayer = nullptr;
+
 Player::Player() 
 {
-
+	MainPlayer = this;
 }
 
 Player::~Player() 
@@ -41,6 +43,33 @@ void Player::Start()
 
 void Player::Update(float _DeltaTime)
 {
+	// 서버의 관리를 받는 오브젝트라면
+	// 클라이언트의 입장에서는 
+	// 상대의 패킷으로만 움직여야 한다.
+	// 2가지로 나뉘게 된다.
+
+	NetControllType Type = GetControllType();
+
+	switch (Type)
+	{
+	case NetControllType::None:
+		UserUpdate(_DeltaTime);
+		break;
+	case NetControllType::UserControll:
+		UserUpdate(_DeltaTime);
+		break;
+	case NetControllType::ServerControll:
+		ServerUpdate(_DeltaTime);
+		break;
+	default:
+		break;
+	}
+
+}
+
+void Player::UserUpdate(float _DeltaTime)
+{
+	// 직접 조작할때는 아래와 같이
 	float Speed = 200.0f;
 
 	if (true == GameEngineInput::IsPress("MoveLeft"))
@@ -67,4 +96,8 @@ void Player::Update(float _DeltaTime)
 	{
 		GetTransform()->AddLocalPosition(GetTransform()->GetWorldBackVector() * Speed * _DeltaTime);
 	}
+}
+void Player::ServerUpdate(float _DeltaTime)
+{
+
 }
