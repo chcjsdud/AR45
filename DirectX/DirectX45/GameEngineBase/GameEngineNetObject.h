@@ -25,6 +25,11 @@ public:
 	GameEngineNetObject& operator=(const GameEngineNetObject& _Other) = delete;
 	GameEngineNetObject& operator=(GameEngineNetObject&& _Other) noexcept = delete;
 
+	static int CreateServerID()
+	{
+		return ++AtomicObjectID;
+	}
+
 	void InitServerObject();
 
 	void InitClientObject(int _ObjectID);
@@ -37,6 +42,11 @@ public:
 	NetControllType  GetControllType()
 	{
 		return ControllType;
+	}
+
+	int GetNetObjectID()
+	{
+		return ObjectID;
 	}
 
 

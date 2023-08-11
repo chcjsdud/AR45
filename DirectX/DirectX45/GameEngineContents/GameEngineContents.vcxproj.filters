@@ -28,6 +28,9 @@
     <ClInclude Include="ConnectIDPacket.h">
       <Filter>Packet</Filter>
     </ClInclude>
+    <ClInclude Include="PacketEnum.h">
+      <Filter>Server</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -52,11 +55,8 @@
     <ClCompile Include="ServerWindow.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectUpdatePacket.cpp">
-      <Filter>Packet</Filter>
-    </ClCompile>
-    <ClCompile Include="ConnectIDPacket.cpp">
-      <Filter>Packet</Filter>
+    <ClCompile Include="PacketEnum.cpp">
+      <Filter>Server</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,6 +74,9 @@
     </Filter>
     <Filter Include="Packet">
       <UniqueIdentifier>{db7aae6d-6fac-42bd-a5f7-164011937e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{f6208191-efe7-491a-8c63-9fa647ce1158}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

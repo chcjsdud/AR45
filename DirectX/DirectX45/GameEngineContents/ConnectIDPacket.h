@@ -1,4 +1,5 @@
 #pragma once
+#include "PacketEnum.h"
 #include <GameEngineBase/GameEnginePacket.h>
 #include <GameEngineCore/GameEngineTransform.h>
 
@@ -8,17 +9,29 @@ class ConnectIDPacket : public GameEnginePacket
 {
 public:
 	// constrcuter destructer
-	ConnectIDPacket();
-	~ConnectIDPacket();
+	ConnectIDPacket()
+	{
+		SetPacketID(PacketEnum::ConnectIDPacket);
+	}
+	~ConnectIDPacket()
+	{
 
-	// delete Function
-	ConnectIDPacket(const ConnectIDPacket& _Other) = delete;
-	ConnectIDPacket(ConnectIDPacket&& _Other) noexcept = delete;
-	ConnectIDPacket& operator=(const ConnectIDPacket& _Other) = delete;
-	ConnectIDPacket& operator=(ConnectIDPacket&& _Other) noexcept = delete;
+	}
 
 protected:
+	void Serialize(GameEngineSerializer& _Ser) override
+	{
+		GameEnginePacket::Serialize(_Ser);
+		_Ser << TestValue;
+	}
+
+	void DeSeralize(GameEngineSerializer& _Ser) override
+	{
+		GameEnginePacket::DeSeralize(_Ser);
+		_Ser << TestValue;
+	}
 
 private:
+	int TestValue = 999;
 };
 

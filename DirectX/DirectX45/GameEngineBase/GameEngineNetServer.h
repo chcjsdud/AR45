@@ -1,6 +1,7 @@
 #pragma once
 #include "GameEngineNet.h"
 #include "GameEngineThread.h"
+#include "GameEnginePacket.h"
 
 // Ό³Έν :
 class GameEngineNetServer : public GameEngineNet

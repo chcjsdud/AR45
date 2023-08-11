@@ -22,6 +22,8 @@ protected:
 	void OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTime) override;
 
 	void ServerInit(std::shared_ptr<GameEngineLevel> Level);
+	void ServerPacketInit(GameEngineNetServer& _Net);
+	void ClientPacketInit(GameEngineNetClient& _Net);
 
 private:
 	GameEngineNetServer Server;

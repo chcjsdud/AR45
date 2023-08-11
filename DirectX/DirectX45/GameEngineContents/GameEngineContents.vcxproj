@@ -190,6 +190,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="OldTVEffect.h" />
+    <ClInclude Include="PacketEnum.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -205,10 +209,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConnectIDPacket.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
       <SubType>
       </SubType>
@@ -222,15 +222,15 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ObjectUpdatePacket.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="OldFilm.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="OldTVEffect.cpp" />
+    <ClCompile Include="PacketEnum.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
