@@ -26,6 +26,10 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Update(float _DeltaTime)
 {
+	if (true == Player::MainPlayer->IsNet())
+	{
+		Player::MainPlayer->GetNet()->UpdatePacket();
+	}
 
 }
 

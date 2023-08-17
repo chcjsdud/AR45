@@ -26,7 +26,7 @@ void GameEngineNetServer::AcceptThread(SOCKET _AcceptSocket, GameEngineNetServer
         std::string ThreadName = std::to_string(CientSocket);
         ThreadName += "Server Recv Thread";
      
-        _Net->AccpetCallBack(CientSocket, _Net);
+        _Net->AcceptCallBack(CientSocket, _Net);
 
         NewThread->Start(ThreadName, std::bind(&GameEngineNet::RecvThreadFunction, CientSocket, _Net));
     }
@@ -50,6 +50,7 @@ void GameEngineNetServer::Send(const char* Data, unsigned int _Size)
 {
     for (size_t i = 0; i < Users.size(); i++)
     {
+        // 이걸 보낸놈 한테는 다시 보낼필요가 없다.
         send(Users[i], Data, _Size, 0);
     }
 }

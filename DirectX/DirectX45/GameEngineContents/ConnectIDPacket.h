@@ -8,10 +8,13 @@
 class ConnectIDPacket : public GameEnginePacket
 {
 public:
+	static const PacketEnum Type = PacketEnum::ConnectIDPacket;
+
+public:
 	// constrcuter destructer
 	ConnectIDPacket()
 	{
-		SetPacketID(PacketEnum::ConnectIDPacket);
+		SetPacketID(Type);
 	}
 	~ConnectIDPacket()
 	{
@@ -28,7 +31,7 @@ protected:
 	void DeSeralize(GameEngineSerializer& _Ser) override
 	{
 		GameEnginePacket::DeSeralize(_Ser);
-		_Ser << TestValue;
+		_Ser >> TestValue;
 	}
 
 private:

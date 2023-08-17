@@ -21,10 +21,19 @@ public:
 
 	void SetAcceptCallBack(std::function<void(SOCKET, GameEngineNetServer*)> _AccpetCallBack)	
 	{
-		AccpetCallBack = _AccpetCallBack;
+		AcceptCallBack = _AccpetCallBack;
 	}
 	
+	void AddUser(int _ID, SOCKET _UserSocket)
+	{
+		if (true == Users.contains(_ID))
+		{
+			MsgAssert("이미 존재하는 유저가 또 존재할수는 없습니다 ID 오류 입니다.");
+			return;
+		}
 
+		Users[_ID] = _UserSocket;
+	}
 
 protected:
 	void Send(const char* Data, unsigned int _Size) override;
@@ -35,10 +44,14 @@ private:
 
 	GameEngineThread AccpetThread;
 
-	std::vector<SOCKET> Users;
+	std::map<int, SOCKET> Users;
+
+	// std::vector<SOCKET> Users;
+
+
 	std::vector<std::shared_ptr<GameEngineThread>> RecvThreads;
 
-	std::function<void(SOCKET _AcceptSocket, GameEngineNetServer* _Net)> AccpetCallBack;
+	std::function<void(SOCKET _AcceptSocket, GameEngineNetServer* _Net)> AcceptCallBack;
 
 	static void AcceptThread(SOCKET _AcceptSocket, GameEngineNetServer* _Net);
 };

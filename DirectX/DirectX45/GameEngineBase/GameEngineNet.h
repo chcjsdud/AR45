@@ -28,6 +28,8 @@ public:
 
 	GameEngineDispatcher Dispatcher;
 
+	void UpdatePacket();
+
 protected:
 	static void RecvThreadFunction(SOCKET _Socket, GameEngineNet* _Net);
 
@@ -36,6 +38,8 @@ private:
 
 	std::mutex RecvPacketLock;
 	std::list<std::shared_ptr<GameEnginePacket>> RecvPacket;
+
+	std::list<std::shared_ptr<GameEnginePacket>> ProcessPackets;
 
 
 };

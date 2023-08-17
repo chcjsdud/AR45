@@ -88,16 +88,59 @@ void GameEngineNet::RecvThreadFunction(SOCKET _Socket, GameEngineNet* _Net)
 
 		while (true)
 		{
+			
 			// ConnectIDPacket
 			std::shared_ptr<GameEnginePacket> Packet = _Net->Dispatcher.ConvertPacket(PacketType, Serializer);
 
-			_Net->Dispatcher.ProcessPacket(Packet);
+			if (nullptr != Packet)
+			{
+				_Net->RecvPacketLock.lock();
+				_Net->RecvPacket.push_back(Packet);
+				_Net->RecvPacketLock.unlock();
+			} else 
+			{
+				int a = 0;
+			}
 
-			// 패킷처리를 여기서 하지 않습니다.
+			// Write가 증가할 것이다.
+			// _Net->Dispatcher.ProcessPacket(Packet);
+			
+			// 12 바이트가 날아왔는데 12바이트가 처리됐다.
+			if (Serializer.GetWriteOffSet() == Serializer.GetReadOffSet())
+			{
+				Serializer.Reset();
+				PacketType = -1;
+				PacketSize = -1;
+				break;
+			}
+			else
+			{
+				unsigned int RemainSize = Serializer.GetWriteOffSet() - Serializer.GetReadOffSet();
 
+				if (8 > RemainSize)
+				{
+					break;
+				}
 
-			// 그런데
+				{
+					unsigned char* TypePivotPtr = &Serializer.GetDataPtr()[0];
+					int* ConvertPtr = reinterpret_cast<int*>(TypePivotPtr);
+					PacketType = *ConvertPtr;
+				}
 
+				{
+					unsigned char* SizePivotPtr = &Serializer.GetDataPtr()[4];
+					int* ConvertPtr = reinterpret_cast<int*>(SizePivotPtr);
+					PacketSize = *ConvertPtr;
+				}
+
+				if (RemainSize < PacketSize)
+				{
+					// 남은 찌거기를 다 앞으로 밀어버린다.
+					Serializer.ClearReadData();
+					break;
+				}
+			}
 		}
 	}
 }
@@ -116,3 +159,25 @@ void GameEngineNet::Send(SOCKET _Socket, const char* Data, unsigned int _Size)
 {
 	send(_Socket, Data, _Size, 0);
 }
+
+void GameEngineNet::UpdatePacket()
+{
+	RecvPacketLock.lock();
+
+	if (0 >= RecvPacket.size())
+	{
+		RecvPacketLock.unlock();
+		return;
+	}
+
+	ProcessPackets = RecvPacket;
+	RecvPacket.clear();
+	RecvPacketLock.unlock();
+
+	for (std::shared_ptr<GameEnginePacket> Packet : ProcessPackets)
+	{
+		Dispatcher.ProcessPacket(Packet);
+	}
+
+	ProcessPackets.clear();
+};

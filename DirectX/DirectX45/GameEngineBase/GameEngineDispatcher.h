@@ -17,14 +17,21 @@ public:
 	GameEngineDispatcher& operator=(GameEngineDispatcher&& _Other) noexcept = delete;
 
 	template<typename PacketType, typename EnumType>
-	void AddHandler(EnumType _Type, std::function<void(std::shared_ptr<PacketType>)> _CallBack)
+	void AddHandler(std::function<void(std::shared_ptr<PacketType>)> _CallBack)
 	{
-		AddHandler(static_cast<int>(_Type), _CallBack);
+		AddHandler(_CallBack);
 	}
 
 	template<typename PacketType>
-	void AddHandler(int Type, std::function<void(std::shared_ptr<PacketType>)> _CallBack)
+	void AddHandler(std::function<void(std::shared_ptr<PacketType>)> _CallBack)
 	{
+		int Type = static_cast<int>(PacketType::Type);
+
+		if (true == PacketHandlers.contains(Type))
+		{
+			MsgAssert("이미 존재하는 핸드러를 또 등록하려고 했습니다.");
+		}
+
 		ConvertPacketHandlers[Type] = [=](GameEngineSerializer& _Ser)
 		{
 			std::shared_ptr<PacketType> NewPacket = std::make_shared<PacketType>();
@@ -80,8 +87,5 @@ private:
 	// std::function<void(std::shared_ptr<ConnectIDPacket>)>
 	// std::function<void(std::shared_ptr<GameEnginePacket>)>
 	std::map<int, std::function<void(std::shared_ptr<GameEnginePacket>)>> PacketHandlers;
-
-
-
 };
 

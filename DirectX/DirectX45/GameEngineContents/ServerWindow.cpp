@@ -85,7 +85,7 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 		ServerPacketInit(Server);
 		Server.ServerOpen(static_cast<unsigned short>(Port));
 		ServerInit(Level);
-		Player::MainPlayer->InitServerObject();
+		Player::MainPlayer->InitServerObject(&Server);
 
 
 		IsServer = true;
@@ -125,9 +125,10 @@ void ServerWindow::ServerInit(std::shared_ptr<GameEngineLevel> Level)
 			GameEngineSerializer Ser;
 			Packet->SerializePacket(Ser);
 
+			_Server->AddUser(ID, _Socket);
+
 			// 유일하게 한번 딱 직접 소켓을 써서 보내야할때.
 			GameEngineNet::Send(_Socket, Ser.GetConstCharPtr(), Ser.GetWriteOffSet());
-
 		}
 	);
 
@@ -135,17 +136,34 @@ void ServerWindow::ServerInit(std::shared_ptr<GameEngineLevel> Level)
 
 void ServerWindow::ServerPacketInit(GameEngineNetServer& _Net)
 {
+	_Net.Dispatcher.AddHandler<ObjectUpdatePacket>(
+		[=](std::shared_ptr<ObjectUpdatePacket> _Packet)
+		{
+			if (false == GameEngineNetObject::IsNetObject(_Packet->GetObjectID()))
+			{
+				// GetLevel()->CreateActor<>
+			}
+		}
+	);
 
 }
 
 void ServerWindow::ClientPacketInit(GameEngineNetClient& _Net)
 {
-	_Net.Dispatcher.AddHandler<ConnectIDPacket>(PacketEnum::ConnectIDPacket, 
-		[](std::shared_ptr<ConnectIDPacket> _Packet)
+	_Net.Dispatcher.AddHandler<ConnectIDPacket>(
+		[=](std::shared_ptr<ConnectIDPacket> _Packet)
 		{
-			//GetLevel()->
+			// 이순간 메인플레이어를 만들어 내든
+			// 기존의 메인플레이어를 서버로 이니셜라이즈 시키든.
+			Player::MainPlayer->InitClientObject(_Packet->GetObjectID(), ServerWindow::NetInst);
+		}
+	);
 
+	_Net.Dispatcher.AddHandler<ObjectUpdatePacket>(
+		[=](std::shared_ptr<ObjectUpdatePacket> _Packet)
+		{
 			int a = 0;
 		}
 	);
+
 }

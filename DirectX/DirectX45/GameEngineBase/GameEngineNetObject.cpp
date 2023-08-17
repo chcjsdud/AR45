@@ -16,20 +16,22 @@ GameEngineNetObject::~GameEngineNetObject()
 
 
 // 서버의 관리를 받겠다는것
-void GameEngineNetObject::InitServerObject()
+void GameEngineNetObject::InitServerObject(GameEngineNet* _Net)
 {
 	ObjectID = ++AtomicObjectID;
 	ObjectLock.lock();
 	AllNetObjects.insert(std::pair<int, GameEngineNetObject*>(ObjectID, this));
 	ObjectLock.unlock();
-	ControllType = NetControllType::UserControll;
+
+	Net = _Net;
 }
 
-void GameEngineNetObject::InitClientObject(int _ObjectID)
+void GameEngineNetObject::InitClientObject(int _ObjectID, GameEngineNet* _Net)
 {
 	ObjectID = _ObjectID;
 	ObjectLock.lock();
 	AllNetObjects.insert(std::pair<int, GameEngineNetObject*>(ObjectID, this));
 	ObjectLock.unlock();
-	ControllType = NetControllType::ServerControll;
+
+	Net = _Net;
 }
