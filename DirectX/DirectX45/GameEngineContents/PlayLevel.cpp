@@ -9,6 +9,7 @@
 #include <GameEngineCore/GameEngineButton.h>
 #include "FadeEffect.h"
 #include "Player.h"
+#include "ServerWindow.h"
 
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineSprite.h>
@@ -26,9 +27,9 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Update(float _DeltaTime)
 {
-	if (true == Player::MainPlayer->IsNet())
+	if (nullptr != ServerWindow::NetInst)
 	{
-		Player::MainPlayer->GetNet()->UpdatePacket();
+		ServerWindow::NetInst->UpdatePacket();
 	}
 
 }

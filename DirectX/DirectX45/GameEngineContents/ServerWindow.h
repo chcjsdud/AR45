@@ -17,18 +17,19 @@ public:
 	ServerWindow& operator=(const ServerWindow& _Other) = delete;
 	ServerWindow& operator=(ServerWindow&& _Other) noexcept = delete;
 
+	static GameEngineNet* NetInst;
+
 protected:
 	void Start() override;
 	void OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTime) override;
 
 	void ServerInit(std::shared_ptr<GameEngineLevel> Level);
-	void ServerPacketInit(GameEngineNetServer& _Net);
-	void ClientPacketInit(GameEngineNetClient& _Net);
+	void ServerPacketInit(GameEngineNetServer* _Net);
+	void ClientPacketInit(GameEngineNetClient* _Net);
 
 private:
 	GameEngineNetServer Server;
 	GameEngineNetClient Client;
-	static GameEngineNet* NetInst;
 
 	bool IsServer;
 	std::string IP = "127.0.0.1";

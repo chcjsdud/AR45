@@ -147,11 +147,11 @@ void GameEngineNet::RecvThreadFunction(SOCKET _Socket, GameEngineNet* _Net)
 
 
 
-void GameEngineNet::SendPacket(std::shared_ptr<GameEnginePacket> _Packet)
+void GameEngineNet::SendPacket(std::shared_ptr<GameEnginePacket> _Packet, int _IgnoreID)
 {
 	GameEngineSerializer Ser;
 	_Packet->SerializePacket(Ser);
-	Send(reinterpret_cast<const char*>(Ser.GetDataPtr()), Ser.GetWriteOffSet());
+	Send(reinterpret_cast<const char*>(Ser.GetDataPtr()), Ser.GetWriteOffSet(), _IgnoreID);
 
 }
 

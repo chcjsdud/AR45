@@ -18,8 +18,8 @@ public:
 
 	static void Send(SOCKET _Socket, const char* Data, unsigned int _Size);
 
-	virtual void Send(const char* Data, unsigned int _Size) = 0;
-	void SendPacket(std::shared_ptr<class GameEnginePacket> _Packet);
+	virtual void Send(const char* Data, unsigned int _Size, int _IgnoreID = -1) = 0;
+	void SendPacket(std::shared_ptr<class GameEnginePacket> _Packet, int _IgnoreID = -1);
 
 	inline bool IsNet() 
 	{

@@ -36,7 +36,7 @@ public:
 	}
 
 protected:
-	void Send(const char* Data, unsigned int _Size) override;
+	void Send(const char* Data, unsigned int _Size, int _IgnoreID = -1) override;
 
 private:
 	int BackLog = 512;

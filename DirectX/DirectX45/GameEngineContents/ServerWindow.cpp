@@ -82,10 +82,10 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 	Text = "호스트 하기";
 	if (ImGui::Button(GameEngineString::AnsiToUTF8(Text).c_str()))
 	{
-		ServerPacketInit(Server);
+		ServerPacketInit(&Server);
 		Server.ServerOpen(static_cast<unsigned short>(Port));
 		ServerInit(Level);
-		Player::MainPlayer->InitServerObject(&Server);
+		Player::MainPlayer->InitNetObject(GameEngineNetObject::CreateServerID(), &Server);
 
 
 		IsServer = true;
@@ -104,7 +104,7 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 	Text = "클라이언트로 접속하기";
 	if (ImGui::Button(GameEngineString::AnsiToUTF8(Text).c_str()))
 	{
-		ClientPacketInit(Client);
+		ClientPacketInit(&Client);
 		IsClient = Client.Connect(IP, static_cast<unsigned short>(Port));
 		NetInst = &Client;
 	}
@@ -134,32 +134,33 @@ void ServerWindow::ServerInit(std::shared_ptr<GameEngineLevel> Level)
 
 }
 
-void ServerWindow::ServerPacketInit(GameEngineNetServer& _Net)
+void ServerWindow::ServerPacketInit(GameEngineNetServer* _Net)
 {
-	_Net.Dispatcher.AddHandler<ObjectUpdatePacket>(
+	_Net->Dispatcher.AddHandler<ObjectUpdatePacket>(
 		[=](std::shared_ptr<ObjectUpdatePacket> _Packet)
 		{
 			if (false == GameEngineNetObject::IsNetObject(_Packet->GetObjectID()))
 			{
-				// GetLevel()->CreateActor<>
+				std::shared_ptr<Player> NewPlayer = GetLevel()->CreateActor<Player>();
+				NewPlayer->InitNetObject(_Packet->GetObjectID(), _Net);
 			}
 		}
 	);
 
 }
 
-void ServerWindow::ClientPacketInit(GameEngineNetClient& _Net)
+void ServerWindow::ClientPacketInit(GameEngineNetClient* _Net)
 {
-	_Net.Dispatcher.AddHandler<ConnectIDPacket>(
+	_Net->Dispatcher.AddHandler<ConnectIDPacket>(
 		[=](std::shared_ptr<ConnectIDPacket> _Packet)
 		{
 			// 이순간 메인플레이어를 만들어 내든
 			// 기존의 메인플레이어를 서버로 이니셜라이즈 시키든.
-			Player::MainPlayer->InitClientObject(_Packet->GetObjectID(), ServerWindow::NetInst);
+			Player::MainPlayer->InitNetObject(_Packet->GetObjectID(), ServerWindow::NetInst);
 		}
 	);
 
-	_Net.Dispatcher.AddHandler<ObjectUpdatePacket>(
+	_Net->Dispatcher.AddHandler<ObjectUpdatePacket>(
 		[=](std::shared_ptr<ObjectUpdatePacket> _Packet)
 		{
 			int a = 0;

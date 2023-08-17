@@ -46,7 +46,7 @@ GameEngineNetServer::~GameEngineNetServer()
     }
 }
 
-void GameEngineNetServer::Send(const char* Data, unsigned int _Size)
+void GameEngineNetServer::Send(const char* Data, unsigned int _Size, int _IgnoreID)
 {
     for (size_t i = 0; i < Users.size(); i++)
     {

@@ -36,9 +36,7 @@ public:
 		return ++AtomicObjectID;
 	}
 
-	void InitServerObject(GameEngineNet* _Net);
-
-	void InitClientObject(int _ObjectID, GameEngineNet* _Net);
+	void InitNetObject(int _ObjectID, GameEngineNet* _Net);
 
 	void SetControll(NetControllType _ControllType)
 	{
@@ -65,6 +63,8 @@ public:
 		return Net;
 	}
 
+	void PushPacket(std::shared_ptr<GameEnginePacket> _Packet);
+
 protected:
 
 private:
@@ -76,5 +76,7 @@ private:
 	int ObjectID = -1;
 
 	GameEngineNet* Net = nullptr;
+
+	std::list<std::shared_ptr<GameEnginePacket>> Packets;
 };
 
