@@ -7,15 +7,26 @@
 
 enum class NetControllType
 {
-	None,
+	NetControll,
 	UserControll,
-	ServerControll,
 };
 
 // 설명 :
 class GameEngineNetObject
 {
 public:
+	static void PushNetObjectPacket(std::shared_ptr<GameEnginePacket> _Packet)
+	{
+		int Id = _Packet->GetObjectID();
+
+		if (false == AllNetObjects.contains(Id))
+		{
+			MsgAssert("존재하지 않는 오브젝트에 패킷이 날아왔습니다.");
+		}
+
+		AllNetObjects[Id]->PushPacket(_Packet);
+	}
+
 	static bool IsNetObject(int _Id)
 	{
 		return AllNetObjects.contains(_Id);
@@ -43,9 +54,14 @@ public:
 		ControllType = _ControllType;
 	}
 
-	NetControllType  GetControllType()
+	NetControllType GetControllType()
 	{
 		return ControllType;
+	}
+
+	void SetUserControllType()
+	{
+		ControllType = NetControllType::UserControll;
 	}
 
 	int GetNetObjectID()
@@ -65,6 +81,25 @@ public:
 
 	void PushPacket(std::shared_ptr<GameEnginePacket> _Packet);
 
+	bool IsPacket() 
+	{
+		return Packets.size();
+	}
+
+	template<typename PacketType>
+	std::shared_ptr<PacketType> PopFirstPacket()
+	{
+		std::shared_ptr<PacketType> PacketReturn = std::dynamic_pointer_cast<PacketType>(Packets.front());
+		Packets.pop_front();
+		return PacketReturn;
+	}
+
+	template<typename EnumType>
+	EnumType GetFirstPacketType()
+	{
+		return static_cast<EnumType>(Packets.front()->GetPacketID());
+	}
+
 protected:
 
 private:
@@ -72,7 +107,7 @@ private:
 	static std::mutex ObjectLock;
 	static std::map<int, GameEngineNetObject*> AllNetObjects;
 
-	NetControllType ControllType = NetControllType::None;
+	NetControllType ControllType = NetControllType::NetControll;
 	int ObjectID = -1;
 
 	GameEngineNet* Net = nullptr;

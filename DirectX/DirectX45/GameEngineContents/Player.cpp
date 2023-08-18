@@ -50,20 +50,44 @@ void Player::Update(float _DeltaTime)
 	// 2가지로 나뉘게 된다.
 
 	NetControllType Type = GetControllType();
-
 	switch (Type)
 	{
-	case NetControllType::None:
-		UserUpdate(_DeltaTime);
-		break;
 	case NetControllType::UserControll:
 		UserUpdate(_DeltaTime);
 		break;
-	case NetControllType::ServerControll:
-		ServerUpdate(_DeltaTime);
+	case NetControllType::NetControll:
+		NetUpdate(_DeltaTime);
 		break;
 	default:
 		break;
+	}
+
+}
+
+void Player::NetUpdate(float _DeltaTime)
+{
+	if (false == IsPacket())
+	{
+		return;
+	}
+
+	while (IsPacket())
+	{
+		PacketEnum Type = GetFirstPacketType<PacketEnum>();
+
+		switch (Type)
+		{
+		case PacketEnum::ObjectUpdatePacket:
+		{
+			std::shared_ptr<ObjectUpdatePacket> ObjectUpdate = PopFirstPacket<ObjectUpdatePacket>();
+			GetTransform()->SetLocalPosition(ObjectUpdate->Position);
+			GetTransform()->SetLocalRotation(ObjectUpdate->Rotation);
+			break;
+		}
+		default:
+			MsgAssert("처리하지 못하는 패킷이 플레이어로 날아왔습니다.");
+			return;
+		}
 	}
 
 }
@@ -113,13 +137,9 @@ void Player::UserUpdate(float _DeltaTime)
 	{
 		std::shared_ptr<ObjectUpdatePacket> NewPacket = std::make_shared<ObjectUpdatePacket>();
 		NewPacket->SetObjectID(GetNetObjectID());
-		NewPacket->Position = GetTransform()->GetWorldPosition();
-		NewPacket->Rotation = GetTransform()->GetWorldPosition();
+		NewPacket->Position = GetTransform()->GetLocalPosition();
+		NewPacket->Rotation = GetTransform()->GetLocalRotation();
 		GetNet()->SendPacket(NewPacket);
 	}
 	
-}
-void Player::ServerUpdate(float _DeltaTime)
-{
-
 }

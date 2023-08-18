@@ -162,6 +162,7 @@ void GameEngineNet::Send(SOCKET _Socket, const char* Data, unsigned int _Size)
 
 void GameEngineNet::UpdatePacket()
 {
+	// 이게 쓰레드에서 또 이뤄지면 위험할수 있다.
 	RecvPacketLock.lock();
 
 	if (0 >= RecvPacket.size())
