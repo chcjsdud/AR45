@@ -49,7 +49,6 @@ public:
 
 	void SetPath(const std::string_view& _Path);
 
-
 protected:
 
 private:
