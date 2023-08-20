@@ -6,6 +6,7 @@
 #include <GameEngineCore/GameEngineMaterial.h>
 #include <GameEngineCore/GameEngineBlend.h>
 #include <GameEngineCore/GameEngineFBXMesh.h>
+#include <GameEngineCore/GameEngineFBXAnimation.h>
 
 void ContentsCore::ContentsResourcesCreate()
 {
@@ -167,17 +168,38 @@ void ContentsCore::ContentsResourcesCreate()
 	//}
 
 	{
-		GameEngineDirectory NewDir;
-		NewDir.MoveParentToDirectory("ContentResources");
-		NewDir.Move("ContentResources");
-		NewDir.Move("Mesh");
-		NewDir.Move("Characters");
-
-		std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".FBX"});
-
-		for (size_t i = 0; i < Files.size(); i++)
 		{
-			GameEngineFBXMesh::Load(Files[i].GetFullPath());
+			GameEngineDirectory NewDir;
+			NewDir.MoveParentToDirectory("ContentResources");
+			NewDir.Move("ContentResources");
+			NewDir.Move("Mesh");
+			NewDir.Move("AnimationTest");
+			NewDir.Move("Mesh");
+
+			std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".FBX" });
+
+			for (size_t i = 0; i < Files.size(); i++)
+			{
+				std::string View = Files[i].GetFullPath().c_str();
+				GameEngineFBXMesh::Load(Files[i].GetFullPath());
+			}
+		}
+
+		{
+			GameEngineDirectory NewDir;
+			NewDir.MoveParentToDirectory("ContentResources");
+			NewDir.Move("ContentResources");
+			NewDir.Move("Mesh");
+			NewDir.Move("AnimationTest");
+			NewDir.Move("Animation");
+
+			std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".FBX" });
+
+			for (size_t i = 0; i < Files.size(); i++)
+			{
+				std::string View = Files[i].GetFullPath().c_str();
+				GameEngineFBXAnimation::Load(Files[i].GetFullPath());
+			}
 		}
 
 		//GameEngineVertexShader::Load(Files[0].GetFullPath(), "MyShader_VS");

@@ -41,7 +41,7 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 		Text = "SendTest";
 		if (ImGui::Button(GameEngineString::AnsiToUTF8(Text).c_str()))
 		{
-			int StrLen = strlen(TestSendBuffer.c_str());
+			size_t StrLen = strlen(TestSendBuffer.c_str());
 			NetInst->Send(&TestSendBuffer[0], StrLen);
 		}
 		ImGui::PopID();
@@ -65,7 +65,7 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 		Text = "SendTest";
 		if (ImGui::Button(GameEngineString::AnsiToUTF8(Text).c_str()))
 		{
-			int StrLen = strlen(TestSendBuffer.c_str());
+			size_t StrLen = strlen(TestSendBuffer.c_str());
 
 			// TestSendBuffer = Arr;
 			NetInst->Send(&TestSendBuffer[0], StrLen);

@@ -18,8 +18,6 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::GameStart() 
 {
-
-
 	new int();
 
 	GameEngineGUI::GUIWindowCreate<ServerWindow>("ServerWindow");
