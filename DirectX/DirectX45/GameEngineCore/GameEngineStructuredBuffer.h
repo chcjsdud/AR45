@@ -146,8 +146,8 @@ private:
 	D3D11_SHADER_BUFFER_DESC ShaderDesc;
 	D3D11_MAPPED_SUBRESOURCE SettingResources;
 	ID3D11ShaderResourceView* ShaderResourceView = nullptr;
-	int DataSize;
-	int DataCount;
-	bool IsInit;
+	int DataSize = 0;
+	int DataCount = 0;
+	bool IsInit = false;
 };
 

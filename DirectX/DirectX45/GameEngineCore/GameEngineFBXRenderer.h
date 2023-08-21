@@ -108,12 +108,22 @@ protected:
 private:
 	bool Pause = false;
 
+	// 그게 불가능하다.
+	// 맨처음 세팅해준 메인 매쉬와완전히 연관되어 있는 매쉬여야만 가능하다.
 	std::shared_ptr<GameEngineFBXMesh> FBXMesh;
-	std::vector<std::vector<std::shared_ptr<GameEngineRenderUnit>>> Unit;
+
+	// vertexbuffer1       indexbuffer          
+	// 0번매쉬의            0번째 서브셋
+	std::vector<         std::vector<std::shared_ptr<GameEngineRenderUnit>>> Unit;
 
 	std::map<std::string, std::shared_ptr<GameEngineFBXAnimationInfo>> Animations;
 	std::shared_ptr<GameEngineFBXAnimationInfo> CurAnimation;
 
+	// 처음에는 그냥 들고만 있다가
+	// 애니메이션이 되는순간
+	// 확장되어야 한다.
+	// 본개수 만큼
+	// 앞쪽에 키는 매쉬 개수 x 본개수의 뜻을 가지게 된다.
 	std::map<size_t, std::vector<float4x4>> AnimationBoneMatrixs;
 	std::map<size_t, std::vector<AnimationBoneData>> AnimationBoneDatas;
 };

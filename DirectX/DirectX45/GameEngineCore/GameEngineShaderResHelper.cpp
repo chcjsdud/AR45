@@ -2,6 +2,7 @@
 #include "GameEngineShaderResHelper.h"
 #include "GameEngineShader.h"
 #include "GameEngineConstantBuffer.h"
+#include "GameEngineStructuredBuffer.h"
 
 
 void GameEngineShaderResHelper::Copy(const GameEngineShaderResHelper& _ResHelper) 
@@ -21,12 +22,49 @@ void GameEngineShaderResHelper::Copy(const GameEngineShaderResHelper& _ResHelper
 		SamplerSetters.insert(Setter);
 	}
 
+	for (const std::pair<std::string, GameEngineStructuredBufferSetter>& Setter : _ResHelper.StructuredBufferSettingMap)
+	{
+		StructuredBufferSettingMap.insert(Setter);
+	}
 }
 
 void GameEngineConstantBufferSetter::Setting() 
 {
 	Res->ChangeData(CPUData, CPUDataSize);
 
+	ShaderType Type = ParentShader->GetType();
+
+	switch (Type)
+	{
+	case ShaderType::None:
+	{
+		MsgAssert("어떤 쉐이더에 세팅될지 알수없는 상수버퍼 입니다.");
+		break;
+	}
+	case ShaderType::Vertex:
+	{
+		Res->VSSetting(BindPoint);
+		break;
+	}
+	case ShaderType::Pixel:
+	{
+		Res->PSSetting(BindPoint);
+		break;
+	}
+	default:
+		break;
+	}
+
+}
+
+int GameEngineStructuredBufferSetter::GetDataSize()
+{
+	return Res->GetDataSize();
+}
+
+void GameEngineStructuredBufferSetter::Setting() 
+{
+	Res->ChangeData(SetData, Size * Count);
 	ShaderType Type = ParentShader->GetType();
 
 	switch (Type)
@@ -329,6 +367,24 @@ bool GameEngineShaderResHelper::IsConstantBuffer(const std::string_view& _Name)
 
 	return true;
 }
+
+bool GameEngineShaderResHelper::IsStructuredBuffer(const std::string_view& _Name)
+{
+	std::string UpperName = GameEngineString::ToUpper(_Name);
+
+	std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator FindIter = StructuredBufferSettingMap.find(UpperName);
+
+	if (StructuredBufferSettingMap.end() == FindIter)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+
+
+
 
 bool GameEngineShaderResHelper::IsTexture(const std::string& _Name)
 {

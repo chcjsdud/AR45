@@ -4,6 +4,13 @@ struct AniMat
     float4x4 Mat;
 };
 
+// 상수버퍼로 안되냐?
+// 상수버퍼는 동적 할당이 안된다.
+// 용량제한이 700바이트 정도 밖에 안된다.
+// 애니메이션을 하는데 필요한게 행렬 200~300
+// 64
+
+// 1프레임에 해당하는 모든본의 행렬입니다.
 StructuredBuffer<AniMat> ArrAniMationMatrix : register(t11);
 
 // inout c++로 치면 레퍼런스
@@ -45,7 +52,6 @@ void SkinningNormal(inout float4 _Normal, inout float4 _Weight, inout int4 _Inde
     _Normal.w = 0.0f;
 
 }
-
 
 cbuffer RenderBaseValue : register(b10)
 {
@@ -110,13 +116,13 @@ Output MeshAniTexture_VS(Input _Input)
     float4 InputPos = _Input.POSITION;
     InputPos.w = 1.0f;
     
-    if (IsAnimation == 1)
+    if (IsAnimation != 0)
     {
         Skinning(InputPos, _Input.BLENDWEIGHT, _Input.BLENDINDICES, ArrAniMationMatrix);
         InputPos.w = 1.0f;
     }
     
-    NewOutPut.POSITION = _Input.POSITION;
+    NewOutPut.POSITION = InputPos;
     NewOutPut.POSITION.w = 1.0f;
     // 자신의 로컬공간에서 애니메이션을 시키고
     // NewOutPut.POSITION = mul(_Input.POSITION, ArrAniMationMatrix[_Input.BLENDINDICES[0]].Mat);

@@ -1,6 +1,9 @@
 #include "PrecompileHeader.h"
 #include "GameEngineStructuredBuffer.h"
 
+std::map<std::string, std::map<int, std::shared_ptr < GameEngineStructuredBuffer>>> GameEngineStructuredBuffer::StructuredBufferRes;
+
+
 GameEngineStructuredBuffer::GameEngineStructuredBuffer() 
 {
 }

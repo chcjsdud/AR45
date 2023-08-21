@@ -47,7 +47,6 @@ struct AniMat
     float4x4 Mat;
 };
 
-
 // 그래픽카드에서 이뤄지는것.
 Output MeshTexture_VS(Input _Input)
 {
