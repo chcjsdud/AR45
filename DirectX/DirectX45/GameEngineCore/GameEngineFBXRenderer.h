@@ -98,6 +98,8 @@ public:
 		return Unit;
 	}
 
+	void Update(float _DeltaTime) override;
+
 	void PauseSwtich();
 
 	void ChangeAnimation(const std::string& _AnimationName);

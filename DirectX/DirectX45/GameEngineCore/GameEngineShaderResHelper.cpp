@@ -22,9 +22,9 @@ void GameEngineShaderResHelper::Copy(const GameEngineShaderResHelper& _ResHelper
 		SamplerSetters.insert(Setter);
 	}
 
-	for (const std::pair<std::string, GameEngineStructuredBufferSetter>& Setter : _ResHelper.StructuredBufferSettingMap)
+	for (const std::pair<std::string, GameEngineStructuredBufferSetter>& Setter : _ResHelper.StructuredBufferSetters)
 	{
-		StructuredBufferSettingMap.insert(Setter);
+		StructuredBufferSetters.insert(Setter);
 	}
 }
 
@@ -207,6 +207,16 @@ void GameEngineShaderResHelper::Setting()
 		}
 	}
 
+	{
+		std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator StartIter = StructuredBufferSetters.begin();
+		std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator EndIter = StructuredBufferSetters.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			GameEngineStructuredBufferSetter& Setter = StartIter->second;
+			Setter.Setting();
+		}
+	}
 
 }
 
@@ -300,6 +310,20 @@ void GameEngineShaderResHelper::SetTexture(const std::string_view& _SettingName,
 
 }
 
+GameEngineStructuredBufferSetter* GameEngineShaderResHelper::GetStructuredBufferSetter(const std::string_view& _View)
+{
+	std::string UpperName = GameEngineString::ToUpper(_View);
+
+	std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator FindIter = StructuredBufferSetters.find(UpperName);
+
+	if (FindIter == StructuredBufferSetters.end())
+	{
+		return nullptr;
+	}
+
+	return &(FindIter->second);
+}
+
 GameEngineTextureSetter* GameEngineShaderResHelper::GetTextureSetter(const std::string_view& _View)
 {
 	std::string UpperName = GameEngineString::ToUpper(_View);
@@ -372,9 +396,9 @@ bool GameEngineShaderResHelper::IsStructuredBuffer(const std::string_view& _Name
 {
 	std::string UpperName = GameEngineString::ToUpper(_Name);
 
-	std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator FindIter = StructuredBufferSettingMap.find(UpperName);
+	std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator FindIter = StructuredBufferSetters.find(UpperName);
 
-	if (StructuredBufferSettingMap.end() == FindIter)
+	if (StructuredBufferSetters.end() == FindIter)
 	{
 		return false;
 	}

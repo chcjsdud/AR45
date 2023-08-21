@@ -1865,8 +1865,13 @@ void GameEngineFBXMesh::CreateGameEngineStructuredBuffer()
 
 	for (size_t i = 0; i < AllBones.size(); i++)
 	{
-		std::shared_ptr<GameEngineStructuredBuffer> NewStructuredBuffer = AllBoneStructuredBuffers.emplace_back(std::make_shared<GameEngineStructuredBuffer>());
-		NewStructuredBuffer->CreateResize(sizeof(float4x4), static_cast<int>(AllBones[i].size()), nullptr);
+		if (nullptr != AllBoneStructuredBuffers[i])
+		{
+			continue;
+		}
+
+		AllBoneStructuredBuffers[i] = std::make_shared<GameEngineStructuredBuffer>();
+		AllBoneStructuredBuffers[i]->CreateResize(sizeof(float4x4), static_cast<int>(AllBones[i].size()), nullptr);
 	}
 }
 

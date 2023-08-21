@@ -52,8 +52,6 @@ public:
 	size_t Count;
 	std::vector<char> OriginalData;
 
-private:
-
 	void Setting() override;
 
 	// void Resize(size_t _Count);
@@ -85,9 +83,11 @@ private:
 	std::multimap<std::string, GameEngineConstantBufferSetter> ConstantBufferSetters;
 	std::multimap<std::string, GameEngineTextureSetter> TextureSetters;
 	std::multimap<std::string, GameEngineSamplerSetter> SamplerSetters;
-	std::multimap<std::string, GameEngineStructuredBufferSetter> StructuredBufferSettingMap;
+	std::multimap<std::string, GameEngineStructuredBufferSetter> StructuredBufferSetters;
 
 public:
+	GameEngineStructuredBufferSetter* GetStructuredBufferSetter(const std::string_view& _View);
+
 	GameEngineTextureSetter* GetTextureSetter(const std::string_view& _View);
 
 	std::vector<GameEngineTextureSetter*> GetTextureSetters(const std::string_view& _View);
@@ -104,7 +104,7 @@ public:
 
 	void CreateStructuredBufferSetter(const GameEngineStructuredBufferSetter& _Setter)
 	{
-		StructuredBufferSettingMap.insert(std::make_pair(_Setter.Name, _Setter));
+		StructuredBufferSetters.insert(std::make_pair(_Setter.Name, _Setter));
 	}
 
 	void CreateConstantBufferSetter(const GameEngineConstantBufferSetter& _Setter)

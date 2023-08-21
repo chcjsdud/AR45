@@ -70,6 +70,11 @@ void GameEngineFBXAnimationInfo::Update(float _DeltaTime)
 		NextFrame = 0;
 	}
 
+	if (CurFrame >= End)
+	{
+		CurFrame = 0;
+	}
+
 	// mesh      subset
 	std::vector<std::vector< std::shared_ptr<GameEngineRenderUnit>>>& Units = ParentRenderer->GetAllRenderUnit();
 
@@ -177,7 +182,7 @@ void GameEngineFBXRenderer::SetFBXMesh(const std::string& _Name, std::string _Ma
 // SetFbxMesh를 해서 만들어진 랜더 유니트를 사용하게 하기 위해서 리턴해준다.
 std::shared_ptr<GameEngineRenderUnit> GameEngineFBXRenderer::SetFBXMesh(const std::string& _Name,
 	std::string _Material,
-	size_t MeshIndex,
+	size_t _MeshIndex,
 	size_t _SubSetIndex /*= 0*/)
 {
 	std::shared_ptr<GameEngineFBXMesh> FindFBXMesh = GameEngineFBXMesh::Find(_Name);
@@ -215,27 +220,49 @@ std::shared_ptr<GameEngineRenderUnit> GameEngineFBXRenderer::SetFBXMesh(const st
 		}
 	}
 
-	std::shared_ptr<GameEngineRenderUnit> RenderUnit = Unit[MeshIndex][_SubSetIndex];
-	std::shared_ptr <GameEngineMesh> GetFBXMesh = FBXMesh->GetGameEngineMesh(MeshIndex, _SubSetIndex);
+	std::shared_ptr<GameEngineRenderUnit> RenderUnit = Unit[_MeshIndex][_SubSetIndex];
+	std::shared_ptr <GameEngineMesh> GetFBXMesh = FBXMesh->GetGameEngineMesh(_MeshIndex, _SubSetIndex);
 
 	RenderUnit->SetMesh(GetFBXMesh);
 	RenderUnit->SetMaterial(_Material);
 
-	if (RenderUnit->ShaderResHelper.IsTexture("ArrAniMationMatrix"))
+
+
+
+	if (RenderUnit->ShaderResHelper.IsStructuredBuffer("ArrAniMationMatrix"))
 	{
-		// RenderUnit->ShaderResHelper.get
+		if (AnimationBoneMatrixs.end() == AnimationBoneMatrixs.find(_MeshIndex))
+		{
+			int Count = FBXMesh->GetBoneCount(_MeshIndex);
+			AnimationBoneMatrixs[_MeshIndex].resize(Count);
+			AnimationBoneDatas[_MeshIndex].resize(Count);
+		}
 
-		//if (nullptr != GameEngineTexture::Find(MatData.DifTextureName))
-		//{
-		//	RenderUnit->ShaderResHelper.SetTexture("DiffuseTexture", MatData.DifTextureName);
-		//}
+		GameEngineStructuredBufferSetter* AnimationBuffer = RenderUnit->ShaderResHelper.GetStructuredBufferSetter("ArrAniMationMatrix");
+
+		AnimationBuffer->Res = FBXMesh->GetAnimationStructuredBuffer(_MeshIndex);
+
+		if (nullptr == AnimationBuffer->Res)
+		{
+			MsgAssert("애니메이션용 스트럭처드 버퍼가 존재하지 않습니다.");
+			return RenderUnit;
+		}
+
+		if (0 == AnimationBoneMatrixs[_MeshIndex].size())
+		{
+			return RenderUnit;
+		}
+
+		// 링크를 걸어준것.
+		AnimationBuffer->SetData = &AnimationBoneMatrixs[_MeshIndex][0];
+		AnimationBuffer->Size = sizeof(float4x4);
+		AnimationBuffer->Count = AnimationBoneMatrixs[_MeshIndex].size();
 	}
-
 
 
 	if (RenderUnit->ShaderResHelper.IsTexture("DiffuseTexture"))
 	{
-		const FbxExMaterialSettingData& MatData = FBXMesh->GetMaterialSettingData(MeshIndex, _SubSetIndex);
+		const FbxExMaterialSettingData& MatData = FBXMesh->GetMaterialSettingData(_MeshIndex, _SubSetIndex);
 
 		if (nullptr != GameEngineTexture::Find(MatData.DifTextureName))
 		{
@@ -246,7 +273,7 @@ std::shared_ptr<GameEngineRenderUnit> GameEngineFBXRenderer::SetFBXMesh(const st
 
 	if (RenderUnit->ShaderResHelper.IsTexture("NormalTexture"))
 	{
-		const FbxExMaterialSettingData& MatData = FBXMesh->GetMaterialSettingData(MeshIndex, _SubSetIndex);
+		const FbxExMaterialSettingData& MatData = FBXMesh->GetMaterialSettingData(_MeshIndex, _SubSetIndex);
 
 		if (nullptr != GameEngineTexture::Find(MatData.NorTextureName))
 		{
@@ -313,21 +340,6 @@ void GameEngineFBXRenderer::CreateFBXAnimation(const std::string& _AnimationName
 		return;
 	}
 
-	// 애니메이션을 만들고 했으면
-	// 이미 메인 매쉬는 세팅되어 있어야 하고.
-	// 그 메인 매쉬에 랜더유니트도 다 만들어져 있을것이다.
-
-	int Count = FBXMesh->GetMeshInfosCount();
-	for (size_t i = 0; i < Count; i++)
-	{
-		if (AnimationBoneMatrixs.end() == AnimationBoneMatrixs.find(Count))
-		{
-			int Count = FBXMesh->GetBoneCount(i);
-			AnimationBoneMatrixs[i].resize(Count);
-			AnimationBoneDatas[i].resize(Count);
-		}
-	}
-
 
 	std::shared_ptr<GameEngineFBXAnimationInfo> NewAnimation = std::make_shared<GameEngineFBXAnimationInfo>();
 	FbxExAniData* AnimData = Animation->GetAnimationData(_Index);
@@ -365,4 +377,15 @@ void GameEngineFBXRenderer::ChangeAnimation(const std::string& _AnimationName)
 	}
 
 	CurAnimation = FindIter->second;
+}
+
+
+void GameEngineFBXRenderer::Update(float _DeltaTime)
+{
+	if (nullptr == CurAnimation)
+	{
+		return;
+	}
+
+	CurAnimation->Update(_DeltaTime);
 }
