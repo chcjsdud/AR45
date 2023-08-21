@@ -201,9 +201,6 @@ void ContentsCore::ContentsResourcesCreate()
 				GameEngineFBXAnimation::Load(Files[i].GetFullPath());
 			}
 		}
-
-		//GameEngineVertexShader::Load(Files[0].GetFullPath(), "MyShader_VS");
-		//GameEnginePixelShader::Load(Files[0].GetFullPath(), "MyShader_PS");
 	}
 
 

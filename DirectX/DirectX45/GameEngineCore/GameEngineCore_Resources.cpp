@@ -11,6 +11,7 @@
 #include "GameEngineMesh.h"
 #include "GameEngineBlend.h"
 #include "GameEngineFBXMesh.h"
+#include "GameEngineFBXAnimation.h"
 #include "GameEngineTexture.h"
 #include "GameEngineDepthState.h"
 #include "GameEngineRasterizer.h"
@@ -678,6 +679,7 @@ void GameEngineCore::CoreResourcesEnd()
 	GameEngineVertexBuffer::ResourcesClear();
 	GameEngineRenderTarget::ResourcesClear();
 	GameEngineFBXMesh::ResourcesClear();
+	GameEngineFBXAnimation::ResourcesClear();
 	GameEngineConstantBuffer::ResourcesClear();
 	GameEngineMaterial::ResourcesClear();
 
