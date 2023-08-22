@@ -33,6 +33,8 @@ public:
 class GameEngineFBX
 {
 public:
+	static bool IsCheckAnimationFBX(std::string_view _Path);
+
 	// constrcuter destructer
 	GameEngineFBX();
 	~GameEngineFBX();
@@ -71,5 +73,6 @@ protected:
 	bool IsAnimation = false;
 
 private:
+	bool CheckAnimationFBX(std::string_view _Path);
 };
 

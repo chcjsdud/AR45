@@ -2,6 +2,65 @@
 #include "GameEngineFBX.h"
 #include <GameEngineBase/GameEngineString.h>
 
+bool GameEngineFBX::IsCheckAnimationFBX(std::string_view _Path)
+{
+	GameEngineFBX FBX;
+
+	FBX.FBXInit(_Path.data());
+
+	return FBX.CheckAnimationFBX(_Path);
+}
+
+bool GameEngineFBX::CheckAnimationFBX(std::string_view _Path)
+{
+	bool IsReturn = false;
+
+	std::string_view Path = _Path;
+
+	fbxsdk::FbxArray<FbxString*> AniNameArray;
+	Scene->FillAnimStackNameArray(AniNameArray);
+
+	if (0 == AniNameArray.Size())
+	{
+		return false;
+	}
+
+	for (int i = 0; i < AniNameArray.Size(); i++)
+	{
+		std::string Name = GameEngineString::UTF8ToAnsi(AniNameArray[i]->Buffer());
+		FbxTakeInfo* TakeInfo = Scene->GetTakeInfo(Name.c_str());
+		FbxTime StartTime = TakeInfo->mLocalTimeSpan.GetStart();
+		FbxTime EndTime = TakeInfo->mLocalTimeSpan.GetStop();
+
+		fbxsdk::FbxTime::EMode Mode = Scene->GetGlobalSettings().GetTimeMode();
+		FbxLongLong StartCount = StartTime.GetFrameCount(Mode);
+		FbxLongLong EndCount = EndTime.GetFrameCount(Mode);
+
+		int a = 0;
+
+		//if (0 >= AnimationDatas[i].TimeStartCount)
+		//{
+		//	AnimationDatas[i].TimeStartCount *= (FbxLongLong)-1;
+		//}
+
+		//AnimationDatas[i].TimeEndCount = AnimationDatas[i].EndTime.GetFrameCount(AnimationDatas[i].TimeMode);
+		//AnimationDatas[i].FrameCount = AnimationDatas[i].TimeEndCount - AnimationDatas[i].TimeStartCount;
+
+		//AnimationDatas[i].FbxModeCount = (long long)fbxsdk::FbxTime::GetFrameRate(AnimationDatas[i].TimeMode);
+		//AnimationDatas[i].FbxModeRate = (double)fbxsdk::FbxTime::GetFrameRate(AnimationDatas[i].TimeMode);
+
+
+		//fbxsdk::FbxLongLong StartCount = StartTime.eFrameCount;
+	}
+
+	for (int i = 0; i < AniNameArray.Size(); i++)
+	{
+		delete AniNameArray[i];
+	}
+
+	return IsReturn;
+}
+
 GameEngineFBX::GameEngineFBX() 
 {
 }
