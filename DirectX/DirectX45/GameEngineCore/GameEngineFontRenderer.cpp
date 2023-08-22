@@ -50,5 +50,12 @@ void GameEngineFontRenderer::Render(float _Delta)
 
 void GameEngineFontRenderer::Start() 
 {
-	GameEngineRenderer::Start();
+	// GameEngineRenderer::Start();
+
+	// UI카메라라
+	PushCameraRender(100);
+	Unit = CreateRenderUnit();
+
+	Unit->RenderFunction = std::bind(&GameEngineFontRenderer::Render, this, std::placeholders::_1);
+
 }

@@ -22,6 +22,7 @@
 #include "GameEngineRenderTarget.h"
 #include "GameEngineConstantBuffer.h"
 #include "GameEngineMaterial.h"
+#include "GameEngineFont.h"
 
 
 
@@ -663,6 +664,10 @@ void GameEngineCore::CoreResourcesInit()
 		Pipe->SetPixelShader("BlurShader.hlsl");
 		Pipe->SetBlendState("AlphaBlend");
 		Pipe->SetDepthState("EngineDepth");
+	}
+
+	{
+		GameEngineFont::Load("±Ã¼­");
 	}
 }
 

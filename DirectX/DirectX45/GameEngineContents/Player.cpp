@@ -1,6 +1,7 @@
 #include "PrecompileHeader.h"
 #include "Player.h"
 #include <GameEngineCore/GameEngineFBXRenderer.h>
+#include <GameEngineCore/GameEngineFontRenderer.h>
 #include "ObjectUpdatePacket.h"
 
 Player* Player::MainPlayer = nullptr;
@@ -35,9 +36,17 @@ void Player::Start()
 	}
 
 
-	std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+	{
+		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+		Renderer->SetFBXMesh("House1.FBX", "MeshTexture");
+	}
 
-	Renderer->SetFBXMesh("House1.FBX", "MeshTexture");
+	{
+		std::shared_ptr<GameEngineFontRenderer> Renderer = CreateComponent<GameEngineFontRenderer>();
+		Renderer->SetScale(100.0f);
+		Renderer->SetFont("±Ã¼­");
+		Renderer->SetText("aaaaaaaaaa");
+	}
 
 	//Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
 	//Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX");

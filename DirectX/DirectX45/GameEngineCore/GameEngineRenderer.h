@@ -8,6 +8,8 @@ public:
 	GameEngineShaderResHelper ShaderResHelper;
 	std::shared_ptr<class GameEngineMaterial> Material;
 
+	std::function<void(float)> RenderFunction;
+
 	GameEngineRenderUnit();
 	void SetMesh(const std::string_view& _Name);
 	void SetMesh(std::shared_ptr<class GameEngineMesh> _Mesh);
