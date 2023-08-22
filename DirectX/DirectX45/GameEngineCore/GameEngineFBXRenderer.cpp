@@ -239,7 +239,7 @@ std::shared_ptr<GameEngineRenderUnit> GameEngineFBXRenderer::SetFBXMesh(const st
 	{
 		if (AnimationBoneMatrixs.end() == AnimationBoneMatrixs.find(_MeshIndex))
 		{
-			int Count = FBXMesh->GetBoneCount(_MeshIndex);
+			size_t Count = FBXMesh->GetBoneCount(_MeshIndex);
 			AnimationBoneMatrixs[_MeshIndex].resize(Count);
 			AnimationBoneDatas[_MeshIndex].resize(Count);
 		}

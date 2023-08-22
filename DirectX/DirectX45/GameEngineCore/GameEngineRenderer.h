@@ -2,7 +2,7 @@
 #include "GameEngineComponent.h"
 #include "GameEngineShader.h"
 
-class GameEngineRenderUnit : public std::enable_shared_from_this<GameEngineRenderUnit>
+class GameEngineRenderUnit : public GameEngineObjectBase, public std::enable_shared_from_this<GameEngineRenderUnit>
 {
 public:
 	GameEngineShaderResHelper ShaderResHelper;

@@ -63,11 +63,11 @@ Output MeshTexture_VS(Input _Input)
 }
 
 Texture2D DiffuseTexture : register(t0);
-SamplerState ENGINEBASE : register(s0);
+SamplerState WRAPSAMPLER : register(s0);
 
 float4 MeshTexture_PS(Output _Input) : SV_Target0
 {
-    float4 Color = DiffuseTexture.Sample(ENGINEBASE, _Input.TEXCOORD.xy);
+    float4 Color = DiffuseTexture.Sample(WRAPSAMPLER, _Input.TEXCOORD.xy);
     
     if (Color.a <= 0.0f)
     {
