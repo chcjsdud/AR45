@@ -176,26 +176,33 @@ void ContentsCore::ContentsResourcesCreate()
 			NewDir.Move("ContentResources");
 			NewDir.Move("Mesh");
 			NewDir.Move("AnimationTest");
+			NewDir.Move("Mesh");
 
 			std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".FBX" });
 
 			for (size_t i = 0; i < Files.size(); i++)
 			{
-				std::string View = Files[i].GetFullPath().c_str();
-
-				bool Check = GameEngineFBX::IsCheckAnimationFBX(View);
-
-				if (false == Check)
-				{
-					GameEngineFBXMesh::Load(Files[i].GetFullPath());
-				}
-				else 
-				{
-					GameEngineFBXAnimation::Load(Files[i].GetFullPath());
-				}
+				// bool Check = GameEngineFBX::IsCheckAnimationFBX(View);
+				GameEngineFBXMesh::Load(Files[i].GetFullPath());
 			}
 		}
 
+		{
+			GameEngineDirectory NewDir;
+			NewDir.MoveParentToDirectory("ContentResources");
+			NewDir.Move("ContentResources");
+			NewDir.Move("Mesh");
+			NewDir.Move("AnimationTest");
+			NewDir.Move("Animation");
+
+			std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".FBX" });
+
+			for (size_t i = 0; i < Files.size(); i++)
+			{
+				// bool Check = GameEngineFBX::IsCheckAnimationFBX(View);
+				GameEngineFBXAnimation::Load(Files[i].GetFullPath());
+			}
+		}
 	}
 
 

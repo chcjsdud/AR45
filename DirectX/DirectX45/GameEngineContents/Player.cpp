@@ -26,13 +26,6 @@ void Player::Start()
 		GameEngineInput::CreateKey("MoveDown", 'E');
 		GameEngineInput::CreateKey("MoveForward", 'W');
 		GameEngineInput::CreateKey("MoveBack", 'S');
-
-		//GameEngineInput::CreateKey("RotY+", VK_NUMPAD1);
-		//GameEngineInput::CreateKey("RotY-", VK_NUMPAD2);
-		//GameEngineInput::CreateKey("RotZ+", VK_NUMPAD4);
-		//GameEngineInput::CreateKey("RotZ-", VK_NUMPAD5);
-		//GameEngineInput::CreateKey("RotX+", VK_NUMPAD7);
-		//GameEngineInput::CreateKey("RotX-", VK_NUMPAD8);
 	}
 
 
@@ -42,11 +35,18 @@ void Player::Start()
 	}
 
 	{
-		std::shared_ptr<GameEngineFontRenderer> Renderer = CreateComponent<GameEngineFontRenderer>();
-		Renderer->SetScale(100.0f);
-		Renderer->SetFont("±Ã¼­");
-		Renderer->SetText("aaaaaaaaaa");
+		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
+		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX");
+		Renderer->ChangeAnimation("Run");
 	}
+
+	//{
+	//	std::shared_ptr<GameEngineFontRenderer> Renderer = CreateComponent<GameEngineFontRenderer>();
+	//	Renderer->SetScale(100.0f);
+	//	Renderer->SetFont("±Ã¼­");
+	//	Renderer->SetText("aaaaaaaaaa");
+	//}
 
 	//Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
 	//Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX");

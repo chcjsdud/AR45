@@ -3,6 +3,7 @@
 #include <GameEngineBase\GameEngineTimeEvent.h>
 #include <string_view>
 #include <map>
+#include <GameEngineCore/GameEngineLight.h>
 #include <GameEngineCore/GameEngineRenderTarget.h>
 
 // 설명 :
@@ -12,7 +13,9 @@ class GameEngineRenderer;
 class GameEngineCollision;
 class GameEngineLevel : public GameEngineObject
 {
+	friend class GameEngineLight;
 	friend class GameEngineRenderer;
+	friend class GameEngineRenderUnit;
 	friend class GameEngineCollision;
 	friend class GameEngineTransform;
 	friend class GameEngineCore;
@@ -129,6 +132,16 @@ private:
 
 	void PushCameraRenderer(std::shared_ptr<GameEngineRenderer> _Renderer, int _CameraOrder);
 
+	// 빛을 받냐 안받냐만 존재하고
+	// 빛이 3개 있으면 
+	// Light
+	std::list<std::shared_ptr<GameEngineLight>> AllLight;
+
+	LightDatas LightDataObject;
+	void PushLight(std::shared_ptr<GameEngineLight> _Light);
+
+
+
 	std::map<int, std::list<std::shared_ptr<GameEngineActor>>> Actors;
 
 	std::map<int, std::list<std::shared_ptr<GameEngineCollision>>> Collisions;
@@ -138,7 +151,6 @@ private:
 	void ActorInit(std::shared_ptr<GameEngineActor> _Actor, int _Order, GameEngineLevel* _Level);
 
 	void ActorUpdate(float _DeltaTime);
-	void ActorRender(float _DeltaTime);
 	void ActorRelease();
 	void ActorLevelChangeStart();
 	void ActorLevelChangeEnd();

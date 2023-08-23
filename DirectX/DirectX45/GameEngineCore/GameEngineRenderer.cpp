@@ -84,6 +84,12 @@ void GameEngineRenderUnit::SetMaterial(const std::string_view& _Name)
 		ShaderResHelper.SetConstantBufferLink("RenderBaseValue", ParentRenderer->BaseValue);
 	}
 
+	if (true == ShaderResHelper.IsConstantBuffer("LightDatas"))
+	{
+		LightDatas& Data = ParentRenderer->GetActor()->GetLevel()->LightDataObject;
+		ShaderResHelper.SetConstantBufferLink("LightDatas", Data);
+	}
+
 }
 
 void GameEngineRenderUnit::Render(float _DeltaTime)
