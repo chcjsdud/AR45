@@ -109,6 +109,7 @@ void TransformData::SetViewAndProjection(const float4x4& _View, const float4x4& 
 {
 	View = _View;
 	Projection = _Projection;
+	WorldView = WorldMatrix * View;
 	WorldViewProjectionMatrix = WorldMatrix * View * Projection;
 }
 

@@ -45,6 +45,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "문서", "문서", "{F6FD53
 	ProjectSection(SolutionItems) = preProject
 		랜파.jpg = 랜파.jpg
 		수학.txt = 수학.txt
+		빛.txt = 빛.txt
 		자기만의 쉐이더 만드는법.txt = 자기만의 쉐이더 만드는법.txt
 		할일.txt = 할일.txt
 	EndProjectSection
