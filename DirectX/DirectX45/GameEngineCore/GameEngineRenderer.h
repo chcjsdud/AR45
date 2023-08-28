@@ -32,6 +32,7 @@ private:
 class RenderBaseValue 
 {
 public:
+	float4 BaseColor = {1.0f, 0.0f, 0.0f, 1.0f};
 	float DeltaTime = 0.0f;
 	float SumDeltaTime = 0.0f;
 	int IsAnimation = 0;
@@ -64,6 +65,8 @@ public:
 	void SetMaterial(const std::string_view& _Name, int _index = 0);
 
 	// void SetMesh(const std::string_view& _Name, int _index = 0);
+
+	std::shared_ptr<GameEngineRenderUnit> CreateRenderUnit(std::string_view _Mesh, std::string_view _Material);
 
 	// 랜더유니트를 만든다.
 	std::shared_ptr<GameEngineRenderUnit> CreateRenderUnit();

@@ -17,14 +17,22 @@ std::shared_ptr<GameEngineFBXAnimation> GameEngineFBXAnimation::Load(const std::
 	return NewRes;
 }
 
+void GameEngineFBXAnimation::Initialize()
+{
+	FBXInit(GetPathToString());
+	CheckAnimation();
+}
+
 void GameEngineFBXAnimation::LoadMesh(const std::string& _Path, const std::string& _Name)
 {
-	FBXInit(_Path);
+	SetPath(_Path);
 
-	// 매쉬는 정말 매쉬만 있고
-	// 애니메이션 안에 
+	//FBXInit(_Path);
 
-	CheckAnimation();
+	//// 매쉬는 정말 매쉬만 있고
+	//// 애니메이션 안에 
+
+	//CheckAnimation();
 
 	// importbone
 

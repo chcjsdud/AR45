@@ -3,19 +3,11 @@
 #include "Light.fx"
 #include "RenderBaseValue.fx"
 
-
-
-
-
 struct Input
 {
     float4 POSITION : POSITION;
     float4 TEXCOORD : TEXCOORD;
     float4 NORMAL : NORMAL;
-    float4 TANGENT : TANGENT;
-    float4 BINORMAL : BINORMAL;
-    float4 BLENDWEIGHT : BLENDWEIGHT;
-    int4 BLENDINDICES : BLENDINDICES;
 };
 
 struct Output
@@ -24,7 +16,6 @@ struct Output
     // viewport 행렬까지 레스터라이저에서 곱해준다.
     float4 POSITION : SV_POSITION;
     float4 VIEWPOSITION : POSITION;
-    float4 TEXCOORD : TEXCOORD;
     float4 NORMAL : NORMAL;
 };
 
@@ -48,25 +39,8 @@ Output MeshAniTexture_VS(Input _Input)
     float4 InputNormal = _Input.NORMAL;
     InputNormal.w = 0.0f;
     
-    if (IsAnimation != 0)
-    {
-        Skinning(InputPos, _Input.BLENDWEIGHT, _Input.BLENDINDICES, ArrAniMationMatrix);
-        // SkinningNormal(InputNormal, _Input.BLENDWEIGHT, _Input.BLENDINDICES, ArrAniMationMatrix);
-        InputPos.w = 1.0f;
-        InputNormal.w = 0.0f;
-    }
-    
-    
-    // 자신의 로컬공간에서 애니메이션을 시키고
-    // NewOutPut.POSITION = mul(_Input.POSITION, ArrAniMationMatrix[_Input.BLENDINDICES[0]].Mat);
-    
-    // 빛 
-    
     // 스크린좌표계 이다.
     NewOutPut.POSITION = mul(InputPos, WorldViewProjectionMatrix);
-    NewOutPut.TEXCOORD = _Input.TEXCOORD;
-    
-    // 빛계산을 하기 위한 포지션이므로 이녀석은 뷰공간에 있어야 한다.
     NewOutPut.VIEWPOSITION = mul(InputPos, WorldView);
     _Input.NORMAL.w = 0.0f;
     NewOutPut.NORMAL = mul(InputNormal, WorldView);
@@ -74,13 +48,9 @@ Output MeshAniTexture_VS(Input _Input)
     return NewOutPut;
 }
 
-Texture2D DiffuseTexture : register(t0);
-SamplerState ENGINEBASE : register(s0);
-
 float4 MeshAniTexture_PS(Output _Input) : SV_Target0
 {
-    // 디퓨즈컬러
-    float4 Color = DiffuseTexture.Sample(ENGINEBASE, _Input.TEXCOORD.xy);
+    float4 Color = BaseColor;
     
     // 디퓨즈 라이트
     

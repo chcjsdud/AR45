@@ -1,3 +1,5 @@
+#include "..\..\EngineResources\Shader\RenderBaseValue.fx"
+
 struct Input
 {
     float4 Pos : POSITION;
@@ -85,15 +87,6 @@ OutPut OldTV_VS(Input _Value)
 //    fragColor = float4(video, 1.0);
 //}
 
-cbuffer RenderBaseValue : register(b11)
-{
-    // 상수버퍼는 
-    float4 Time;
-    float4 ScreenSize;
-    float4 Mouse;
-}
-
-
 Texture2D DiffuseTex : register(t0);
 SamplerState WRAP : register(s0);
 
@@ -114,7 +107,7 @@ void mainImage(out float4 fragColor, in float2 fragCoord)
 {
     // float2 uv = fragCoord.xy / ScreenSize.xy;
     float2 uv = fragCoord.xy;
-    float t = Time.x;
+    float t = SumDeltaTime.x;
     float2 mid = float2(0.5, 0.5);
     // float2 focus = Mouse.xy / ScreenSize.xy;
     float2 focus = Mouse.xy;
@@ -133,7 +126,7 @@ float4 OldTV_PS(OutPut _Value) : SV_Target0
     
     float2 uv = _Value.UV.xy;
     //// uv.y = 1.0 - uv.y;
-    uv.x += sin(uv.y * 10.0f + Time.x) / 10.0;
+    uv.x += sin(uv.y * 10.0f + SumDeltaTime.x) / 10.0;
     
     //// uv.x += Time.x * 0.1f;
     float4 Color = DiffuseTex.Sample(WRAP, uv.xy);
