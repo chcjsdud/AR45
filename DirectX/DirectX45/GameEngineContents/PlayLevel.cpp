@@ -10,6 +10,7 @@
 #include "FadeEffect.h"
 #include "Player.h"
 #include "ServerWindow.h"
+#include <GameEngineCore/EngineGrid.h>
 
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineSprite.h>
@@ -27,6 +28,11 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Update(float _DeltaTime)
 {
+	if (true == GameEngineInput::IsDown("LevelMoveKey"))
+	{
+		GameEngineCore::ChangeLevel("TitleLevel");
+	}
+
 	if (nullptr != ServerWindow::NetInst)
 	{
 		ServerWindow::NetInst->UpdatePacket();
@@ -36,6 +42,11 @@ void PlayLevel::Update(float _DeltaTime)
 
 void PlayLevel::Start()
 {
+	if (false == GameEngineInput::IsKey("LevelMoveKey"))
+	{
+		GameEngineInput::CreateKey("LevelMoveKey", 'Y');
+	}
+
 	// Col = std::make_shared<JPSCollision>();
 	// GetMainCamera()->GetCamTarget()->DepthSettingOff();
 
@@ -46,6 +57,8 @@ void PlayLevel::Start()
 		std::shared_ptr<GameEngineLight> Light = CreateActor<GameEngineLight>();
 	}
 
+
+	std::shared_ptr<EngineGrid> Grid = CreateActor<EngineGrid>();
 
 	{
 		std::shared_ptr<Player> NewPlayer = CreateActor<Player>();

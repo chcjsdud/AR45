@@ -63,6 +63,7 @@ public:
 	// 그 쉐이더에서 어떤 텍스처를 사용했고
 	// 어떤 샘플러 어떤 상수버퍼를 사용했는지를 알아야 한다.
 	void SetMaterial(const std::string_view& _Name, int _index = 0);
+	void SetMesh(const std::string_view& _Name, int _index = 0);
 
 	// void SetMesh(const std::string_view& _Name, int _index = 0);
 
@@ -70,6 +71,8 @@ public:
 
 	// 랜더유니트를 만든다.
 	std::shared_ptr<GameEngineRenderUnit> CreateRenderUnit();
+
+	std::shared_ptr<GameEngineRenderUnit> CreateRenderUnitToIndex(unsigned int _Index);
 
 	// 여기서 리턴된 파이프라인을 수정하면 이 파이프라인을 사용하는 모든 애들이 바뀌게 된다.
 	std::shared_ptr<GameEngineMaterial> GetMaterial(int _index = 0);
@@ -96,6 +99,16 @@ public:
 
 	// 업데이트에서 할것이기 때문에 그냥 하겠습니다. 
 	// 랜더 도중에 카메라를 바꾸거나 한다면 이상한 일이 발생할수 있다.
+
+	std::shared_ptr<GameEngineRenderUnit> GetUnit(unsigned int _Index = 0)
+	{
+		if (_Index >= Units.size())
+		{
+			return nullptr;
+		}
+
+		return Units[_Index];
+	}
 
 protected:
 	void Start();

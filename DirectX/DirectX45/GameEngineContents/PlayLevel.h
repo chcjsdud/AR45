@@ -30,7 +30,6 @@ protected:
 
 
 private:
-	void PlayerCreate();
 	std::shared_ptr<JPSCollision> Col;
 
 };

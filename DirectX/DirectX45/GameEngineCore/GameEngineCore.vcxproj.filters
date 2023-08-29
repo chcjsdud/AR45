@@ -181,6 +181,9 @@
     <ClInclude Include="GameEngineLight.h">
       <Filter>Object\Rendering</Filter>
     </ClInclude>
+    <ClInclude Include="EngineGrid.h">
+      <Filter>Object\Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineCore.cpp" />
@@ -356,6 +359,9 @@
     <ClCompile Include="GameEngineLight.cpp">
       <Filter>Object\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="EngineGrid.cpp">
+      <Filter>Object\Contents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Object">
@@ -471,6 +477,9 @@
     </Filter>
     <Filter Include="ThirdParty\FBX\bin\Release">
       <UniqueIdentifier>{9f77ce30-651b-4257-ba50-f3d88c06f813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Contents">
+      <UniqueIdentifier>{1a8bb035-ef24-4402-bd16-6c76e22fa5ef}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

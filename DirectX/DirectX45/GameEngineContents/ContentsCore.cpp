@@ -2,6 +2,7 @@
 #include "ContentsCore.h"
 #include <GameEngineCore\GameEngineCore.h>
 #include "PlayLevel.h"
+#include "TitleLevel.h"
 #include "ServerWindow.h"
 #include <GameEngineCore/GameEngineCoreWindow.h>
 
@@ -23,6 +24,7 @@ void ContentsCore::GameStart()
 	GameEngineGUI::GUIWindowCreate<ServerWindow>("ServerWindow");
 	ContentsResourcesCreate();
 	GameEngineCore::CreateLevel<PlayLevel>();
+	GameEngineCore::CreateLevel<TitleLevel>();
 	GameEngineCore::ChangeLevel("PlayLevel");
 }
 

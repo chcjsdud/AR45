@@ -56,7 +56,8 @@ void GameEngineLevel::ActorUpdate(float _DeltaTime)
 	if (true == MainCamera->IsFreeCamera())
 	{
 		MainCamera->Update(_DeltaTime);
-		return;
+
+		GameEngineInput::AllReset();
 	}
 
 	{
