@@ -46,7 +46,7 @@ void Player::Start()
 		GameEngineTime Time;
 		Time.Reset();
 		float Check0 = Time.TimeCheck();
-		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX");
+		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", {0.05f});
 		float Check1 = Time.TimeCheck();
 		Renderer->ChangeAnimation("Run");
 	}
