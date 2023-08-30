@@ -44,17 +44,17 @@ float4 MeshAniTexture_PS(Output _Input) : SV_Target0
         return float4(1.0f, 1.0f, 1.0f, GridScale.w);
     }
     
-    float CalX1 = abs(_Input.WPOSITION.x) % GridScale.x * 10.0f;
-    float CalZ1 = abs(_Input.WPOSITION.x) % GridScale.z * 10.0f;
+    //float CalX1 = abs(_Input.WPOSITION.x) % GridScale.x * 10.0f;
+    //float CalZ1 = abs(_Input.WPOSITION.x) % GridScale.z * 10.0f;
     
-    if (GridScale.y * 10.0f >= CalX)
-    {
-        return float4(1.0f, 1.0f, 1.0f, 1.0f - GridScale.w);
-    }
-    else if (GridScale.y * 10.0f >= CalZ)
-    {
-        return float4(1.0f, 1.0f, 1.0f, 1.0f - GridScale.w);
-    }
+    //if (GridScale.y * 3.0f >= CalX)
+    //{
+    //    return float4(1.0f, 1.0f, 1.0f, 1.0f);
+    //}
+    //else if (GridScale.y * 3.0f >= CalZ)
+    //{
+    //    return float4(1.0f, 1.0f, 1.0f, 1.0f);
+    //}
     
     return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
