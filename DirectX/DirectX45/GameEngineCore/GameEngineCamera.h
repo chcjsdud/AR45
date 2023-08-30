@@ -96,7 +96,6 @@ public:
 		return ZoomRatio;
 	}
 
-
 protected:
 	void Start() override;
 
@@ -132,9 +131,10 @@ private:
 	void PushRenderer(std::shared_ptr<GameEngineRenderer> _Render);
 	void PushRenderUnit(std::shared_ptr<GameEngineRenderUnit> _Unit);
 
-
 	void Release();
 
 	std::shared_ptr<GameEngineRenderTarget> CamTarget;
+
+	void FreeCameraSwitch();
 };
 
