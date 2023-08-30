@@ -28,28 +28,30 @@ void Player::Start()
 		GameEngineInput::CreateKey("MoveBack", 'S');
 	}
 
-	//std::shared_ptr<GameEngineRenderer> Renderer = CreateComponent<GameEngineRenderer>();
-	//Renderer->CreateRenderUnit("sphere", "MeshColor");
-	//Renderer->GetTransform()->SetLocalScale({100.0f, 100.0f, 100.0f});
-
-
+	std::shared_ptr<GameEngineRenderer> Renderer = CreateComponent<GameEngineRenderer>();
+	Renderer->CreateRenderUnit("sphere", "MeshTexture");
+	Renderer->GetTransform()->SetLocalScale({100.0f, 100.0f, 100.0f});
+	Renderer->GetTransform()->SetLocalPosition({ 0.0f, 300.0f, 0.0f });
+	Renderer->GetShaderResHelper().SetTexture("DiffuseTexture", "BumpDif.png");
+	Renderer->GetShaderResHelper().SetTexture("NormalTexture", "BumpNormal.png");
+	Renderer->GetRenderBaseValueRef().IsNormal = 1;
 
 	//{
 	//	std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 	//	Renderer->SetFBXMesh("House1.FBX", "MeshTexture");
 	//}
 
-	{
-		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
-		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
+	//{
+	//	std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+	//	Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
 
-		GameEngineTime Time;
-		Time.Reset();
-		float Check0 = Time.TimeCheck();
-		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", {0.05f});
-		float Check1 = Time.TimeCheck();
-		Renderer->ChangeAnimation("Run");
-	}
+	//	GameEngineTime Time;
+	//	Time.Reset();
+	//	float Check0 = Time.TimeCheck();
+	//	Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", {0.05f});
+	//	float Check1 = Time.TimeCheck();
+	//	Renderer->ChangeAnimation("Run");
+	//}
 
 
 	//{

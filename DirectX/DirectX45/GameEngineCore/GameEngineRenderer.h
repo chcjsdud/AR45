@@ -110,6 +110,12 @@ public:
 		return Units[_Index];
 	}
 
+	RenderBaseValue& GetRenderBaseValueRef()
+	{
+		return BaseValue;
+	}
+
+
 protected:
 	void Start();
 
