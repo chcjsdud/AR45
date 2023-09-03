@@ -41,31 +41,6 @@ void Player::Start()
 	//	Renderer->SetFBXMesh("House1.FBX", "MeshTexture");
 	//}
 
-	{
-		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
-		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
-
-		GameEngineTime Time;
-		Time.Reset();
-		float Check0 = Time.TimeCheck();
-		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", {0.05f});
-		float Check1 = Time.TimeCheck();
-		Renderer->ChangeAnimation("Run");
-	}
-
-
-	//{
-	//	std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
-	//	Renderer->SetFBXMesh("Player_Artorias.FBX", "MeshAniTexture");
-
-	//	GameEngineTime Time;
-	//	Time.Reset();
-	//	float Check0 = Time.TimeCheck();
-	//	Renderer->CreateFBXAnimation("Run", "Dead.fbx");
-	//	float Check1 = Time.TimeCheck();
-	//	Renderer->ChangeAnimation("Run");
-	//}
-
 
 	//{
 	//	std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
@@ -94,6 +69,33 @@ void Player::Start()
 	// Renderer->SetFBXMesh("House1.FBX", "MeshTexture");
 	// Renderer->SetFBXMesh("AnimMan.FBX", "MeshTexture", 0, 0);
 	// Renderer->SetFBXMesh("AnimMan.FBX", "MeshTexture", 0, 2);
+
+
+	if (true)
+	{
+		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
+
+		GameEngineTime Time;
+		Time.Reset();
+		float Check0 = Time.TimeCheck();
+		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", { 0.05f });
+		float Check1 = Time.TimeCheck();
+		Renderer->ChangeAnimation("Run");
+	}
+
+	if (false)
+	{
+		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+		Renderer->SetFBXMesh("Player_Artorias.FBX", "MeshAniTexture");
+
+		GameEngineTime Time;
+		Time.Reset();
+		float Check0 = Time.TimeCheck();
+		Renderer->CreateFBXAnimation("Run", "Dead.fbx", { 0.05f });
+		float Check1 = Time.TimeCheck();
+		Renderer->ChangeAnimation("Run");
+	}
 
 }
 

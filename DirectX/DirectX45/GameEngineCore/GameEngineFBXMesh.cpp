@@ -174,48 +174,37 @@ void GameEngineFBXMesh::MeshLoad()
 	MeshInfos;
 }
 
-Bone* GameEngineFBXMesh::FindBone(size_t MeshIndex, size_t _BoneIndex)
+Bone* GameEngineFBXMesh::FindBone(size_t _BoneIndex)
 {
 	// m_vecRefBones 벡터로 들고 있는애
 
-	if (AllBones.size() <= MeshIndex)
-	{
-		MsgAssert("존재하지 않는 매쉬의 본을 가져오려고 했습니다.");
-		return nullptr;
-	}
-
-	if (AllBones[MeshIndex].size() <= _BoneIndex)
+	if (AllBones.size() <= _BoneIndex)
 	{
 		MsgAssert("존재하는 본의 범위를 넘겼습니다.");
 		return nullptr;
 	}
 
-	return &AllBones[MeshIndex][_BoneIndex];
+	return &AllBones[_BoneIndex];
 
 }
-Bone* GameEngineFBXMesh::FindBone(size_t MeshIndex, std::string _Name)
+Bone* GameEngineFBXMesh::FindBone(std::string _Name)
 {
 	if (0 == AllBones.size())
 	{
 		ImportBone();
 	}
 
-	if (0 == AllBones[MeshIndex].size())
-	{
-		return nullptr;
-	}
-
-	if (0 == AllFindMap[MeshIndex].size())
+	if (0 == AllFindMap.size())
 	{
 		MsgAssert("본을 찾는 작업을 하지 않은 매쉬입니다");
 	}
 
-	if (AllFindMap[MeshIndex].end() == AllFindMap[MeshIndex].find(_Name))
+	if (AllFindMap.end() == AllFindMap.find(_Name))
 	{
 		return nullptr;
 	}
 
-	return AllFindMap[MeshIndex][_Name];
+	return AllFindMap[_Name];
 
 }
 
@@ -1201,9 +1190,7 @@ bool GameEngineFBXMesh::ImportBone()
 	// 조사한 클러스터들에 연결되어있는 본들을 조사하기 시작한다.
 	for (size_t Clusterindex = 0; Clusterindex < ClusterArray.size(); Clusterindex++)
 	{
-		AllBones.emplace_back();
-		std::map<std::string, Bone*>& FindMap = AllFindMap.emplace_back();
-
+		// AllBones.emplace_back();
 		if (0 == ClusterArray[Clusterindex].size())
 		{
 			continue;
@@ -1324,12 +1311,17 @@ bool GameEngineFBXMesh::ImportBone()
 
 		int RootIdx = -1;
 
+		if (0 == AllBones.size())
+		{
+			for (size_t i = 0; i < SortedLinks.size(); i++)
+			{
+				Bone& tempBoneData = AllBones.emplace_back();
+				tempBoneData.Index = static_cast<int>(AllBones.size() - 1);
+			}
+		}
+
 		for (LinkIndex = 0; LinkIndex < SortedLinks.size(); LinkIndex++)
 		{
-			Bone& tempBoneData = AllBones[Clusterindex].emplace_back();
-			// Bone& tempBoneData = m_vecRefBones.at(m_vecRefBones.size() - 1);
-			tempBoneData.Index = static_cast<int>(AllBones[Clusterindex].size() - 1);
-
 			Link = SortedLinks[LinkIndex];
 
 			int ParentIndex = -1;
@@ -1442,72 +1434,78 @@ bool GameEngineFBXMesh::ImportBone()
 				GlobalLinkS = LocalLinkS = GlobalsPerLink[static_cast<int>(LinkIndex)].GetS();
 			}
 
-			Bone& Bone = AllBones[Clusterindex][static_cast<int>(LinkIndex)];
-
+			Bone& Bone = AllBones[static_cast<int>(LinkIndex)];
 			Bone.Name = Link->GetName();
 
-			JointPos& BonePosData = Bone.BonePos;
-			fbxsdk::FbxSkeleton* Skeleton = Link->GetSkeleton();
-			if (Skeleton)
+			if (false == AllFindMap.contains(Link->GetName()))
 			{
-				BonePosData.Length = (float)Skeleton->LimbLength.Get();
-				BonePosData.XSize = (float)Skeleton->Size.Get();
-				BonePosData.YSize = (float)Skeleton->Size.Get();
-				BonePosData.ZSize = (float)Skeleton->Size.Get();
-			}
-			else
-			{
-				BonePosData.Length = 1.;
-				BonePosData.XSize = 100.;
-				BonePosData.YSize = 100.;
-				BonePosData.ZSize = 100.;
+				AllFindMap[Link->GetName()] = &Bone;
 			}
 
-			Bone.ParentIndex = ParentIndex;
-			Bone.NumChildren = 0;
-			for (int ChildIndex = 0; ChildIndex < Link->GetChildCount(); ChildIndex++)
-			{
-				fbxsdk::FbxNode* Child = Link->GetChild(ChildIndex);
-				if (IsBone(Child))
+				JointPos& BonePosData = Bone.BonePos;
+				fbxsdk::FbxSkeleton* Skeleton = Link->GetSkeleton();
+				if (Skeleton)
 				{
-					Bone.NumChildren++;
+					BonePosData.Length = (float)Skeleton->LimbLength.Get();
+					BonePosData.XSize = (float)Skeleton->Size.Get();
+					BonePosData.YSize = (float)Skeleton->Size.Get();
+					BonePosData.ZSize = (float)Skeleton->Size.Get();
 				}
-			}
+				else
+				{
+					BonePosData.Length = 1.;
+					BonePosData.XSize = 100.;
+					BonePosData.YSize = 100.;
+					BonePosData.ZSize = 100.;
+				}
 
-			BonePosData.SetTranslation(LocalLinkT);
-			BonePosData.SetRotation(LocalLinkQ);
-			BonePosData.SetScale(LocalLinkS);
-			BonePosData.SetGlobalTranslation(GlobalLinkT);
-			BonePosData.SetGlobalRotation(GlobalLinkQ);
-			BonePosData.SetGlobalScale(GlobalLinkS);
-			BonePosData.BuildMatrix();
+				Bone.ParentIndex = ParentIndex;
+				Bone.NumChildren = 0;
+				for (int ChildIndex = 0; ChildIndex < Link->GetChildCount(); ChildIndex++)
+				{
+					fbxsdk::FbxNode* Child = Link->GetChild(ChildIndex);
+					if (IsBone(Child))
+					{
+						Bone.NumChildren++;
+					}
+				}
+
+				BonePosData.SetTranslation(LocalLinkT);
+				BonePosData.SetRotation(LocalLinkQ);
+				BonePosData.SetScale(LocalLinkS);
+				BonePosData.SetGlobalTranslation(GlobalLinkT);
+				BonePosData.SetGlobalRotation(GlobalLinkQ);
+				BonePosData.SetGlobalScale(GlobalLinkS);
+				BonePosData.BuildMatrix();
 		}
 
 
-		for (size_t i = 0; i < AllBones[Clusterindex].size(); i++)
+
+
+
+	}
+
+	for (size_t i = 0; i < AllBones.size(); i++)
+	{
+		if (AllFindMap.end() == AllFindMap.find(AllBones[i].Name))
 		{
-			if (FindMap.end() == FindMap.find(AllBones[Clusterindex][i].Name))
-			{
-				FindMap.insert(std::make_pair(AllBones[Clusterindex][i].Name, &AllBones[Clusterindex][i]));
-				continue;
-			}
-
-			std::multimap<std::string, Bone*>::iterator it, itlow, itup;
-
-			itlow = FindMap.lower_bound(AllBones[Clusterindex][i].Name);  // itlow points to b
-			itup = FindMap.upper_bound(AllBones[Clusterindex][i].Name);   // itup points to e (not d)
-
-			int Count = 0;
-			for (it = itlow; it != itup; ++it)
-			{
-				++Count;
-			}
-
-			std::string Name = AllBones[Clusterindex][i].Name + std::to_string(Count);
-			FindMap.insert(std::make_pair(GameEngineString::ToUpper(Name), &AllBones[Clusterindex][i]));
+			AllFindMap.insert(std::make_pair(AllBones[i].Name, &AllBones[i]));
+			continue;
 		}
 
+		std::multimap<std::string, Bone*>::iterator it, itlow, itup;
 
+		itlow = AllFindMap.lower_bound(AllBones[i].Name);  // itlow points to b
+		itup = AllFindMap.upper_bound(AllBones[i].Name);   // itup points to e (not d)
+
+		int Count = 0;
+		for (it = itlow; it != itup; ++it)
+		{
+			++Count;
+		}
+
+		std::string Name = AllBones[i].Name + std::to_string(Count);
+		AllFindMap.insert(std::make_pair(GameEngineString::ToUpper(Name), &AllBones[i]));
 	}
 
 	LoadSkinAndCluster();
@@ -1588,7 +1586,7 @@ void GameEngineFBXMesh::LoadAnimationVertexData(FbxRenderUnitInfo* _MeshSet, con
 		}
 
 		std::string StrBoneName = clusterData.LinkName;
-		Bone* pBone = FindBone(_MeshSet->VectorIndex, StrBoneName);
+		Bone* pBone = FindBone(StrBoneName);
 		if (nullptr == pBone)
 		{
 			continue;
@@ -1881,26 +1879,11 @@ void GameEngineFBXMesh::BuildSkeletonSystem(fbxsdk::FbxScene* pScene, std::vecto
 
 void GameEngineFBXMesh::CreateGameEngineStructuredBuffer()
 {
-	AllBoneStructuredBuffers.resize(AllBones.size());
-
-	for (size_t i = 0; i < AllBones.size(); i++)
-	{
-		if (nullptr != AllBoneStructuredBuffers[i])
-		{
-			continue;
-		}
-
-		AllBoneStructuredBuffers[i] = std::make_shared<GameEngineStructuredBuffer>();
-		AllBoneStructuredBuffers[i]->CreateResize(sizeof(float4x4), static_cast<int>(AllBones[i].size()), nullptr);
-	}
+	AllBoneStructuredBuffers = std::make_shared<GameEngineStructuredBuffer>();
+	AllBoneStructuredBuffers->CreateResize(sizeof(float4x4), static_cast<int>(AllBones.size()), nullptr);
 }
 
-std::shared_ptr<GameEngineStructuredBuffer> GameEngineFBXMesh::GetAnimationStructuredBuffer(size_t _Index)
+std::shared_ptr<GameEngineStructuredBuffer> GameEngineFBXMesh::GetAnimationStructuredBuffer()
 {
-	if (AllBoneStructuredBuffers.size() <= _Index)
-	{
-		MsgAssert("스트럭처드 버퍼 인덱스 오버");
-	}
-
-	return AllBoneStructuredBuffers[_Index];
+	return AllBoneStructuredBuffers;
 }
