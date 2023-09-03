@@ -128,12 +128,10 @@ void GameEngineFile::LoadText(GameEngineSerializer& _Data)
 
 std::string GameEngineFile::GetString()
 {
-
 	uintmax_t size = GetFileSize();
 	GameEngineSerializer Ser;
 	Ser.BufferResize(static_cast<unsigned int>(size + 1));
 	LoadText(Ser);
-
 	return Ser.GetString();
 }
 
@@ -147,4 +145,9 @@ GameEngineDirectory GameEngineFile::GetDirectory()
 	GameEnginePath ReturnPath = Path;
 	ReturnPath.MoveParent();
 	return GameEngineDirectory(ReturnPath.Path);
+}
+
+void GameEngineFile::ChangeExtension(std::string_view _NewExtension)
+{
+	Path.replace_extension(_NewExtension);
 }

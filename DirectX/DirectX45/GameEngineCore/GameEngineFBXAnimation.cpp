@@ -19,6 +19,10 @@ std::shared_ptr<GameEngineFBXAnimation> GameEngineFBXAnimation::Load(const std::
 
 void GameEngineFBXAnimation::Initialize()
 {
+	GameEngineFile File;
+	File.SetPath(GetPathToString());
+	File.ChangeExtension(".AnimationFBX");
+
 	if (true ==  IsInit)
 	{
 		return;
@@ -26,6 +30,19 @@ void GameEngineFBXAnimation::Initialize()
 
 	FBXInit(GetPathToString());
 	CheckAnimation();
+
+
+
+	// std::string FileName = _Name.data();
+	// FileName += ".AnimationFBX";
+
+	//GameEngineFile SaveFile = Dir.GetPlusFileName(FileName);
+	//if (SaveFile.IsExists())
+	//{
+	//	UserLoad(SaveFile.GetFullPath());
+	//	return;
+	//}
+
 
 	IsInit = true;
 }

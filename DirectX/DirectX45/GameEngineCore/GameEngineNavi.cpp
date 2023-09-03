@@ -1,3 +1,4 @@
+#include "PrecompileHeader.h"
 #include "GameEngineNavi.h"
 
 GameEngineNavi::GameEngineNavi() 
@@ -20,7 +21,7 @@ void GameEngineNavi::NaviLoad(std::string _FileName)
 
 		for (size_t j = i + 1; j < Nodes.size(); j++)
 		{
-			std::shared_ptr<NaviNode> OtherNode = Nodes[i];
+			std::shared_ptr<NaviNode> OtherNode = Nodes[j];
 			for (size_t indexCount = 0; indexCount < 3; indexCount++)
 			{
 				// 포지션으로 비교하거나 인덱스로 비교해라.
