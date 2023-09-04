@@ -71,7 +71,7 @@ void Player::Start()
 	// Renderer->SetFBXMesh("AnimMan.FBX", "MeshTexture", 0, 2);
 
 
-	if (true)
+	if (false)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
@@ -84,7 +84,7 @@ void Player::Start()
 		Renderer->ChangeAnimation("Run");
 	}
 
-	if (false)
+	if (true)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("Player_Artorias.FBX", "MeshAniTexture");

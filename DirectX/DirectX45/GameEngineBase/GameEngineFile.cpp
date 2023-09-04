@@ -93,7 +93,9 @@ void GameEngineFile::LoadBin(GameEngineSerializer& _Data)
 	
 	_Data.BufferResize(static_cast<unsigned int>(FileSize));
 
-	fread_s(_Data.GetDataPtr(), _Data.GetWriteOffSet(), FileSize, 1, FilePtr);
+	fread_s(_Data.GetDataPtr(), _Data.GetBufferSize(), FileSize, 1, FilePtr);
+
+	_Data.WriteOffset = FileSize;
 
 	if (nullptr != FilePtr)
 	{

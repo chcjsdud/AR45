@@ -32,7 +32,7 @@ public:
 
 	// Event
 
-	void Init(const std::string_view& _Name, int _Index);
+	void Init(std::shared_ptr<GameEngineFBXMesh> _Mesh, std::shared_ptr<GameEngineFBXAnimation> _Animation, const std::string_view & _Name, int _Index);
 	void Reset();
 	void Update(float _DeltaTime);
 

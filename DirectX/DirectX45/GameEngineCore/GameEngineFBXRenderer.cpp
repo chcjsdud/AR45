@@ -4,13 +4,21 @@
 #include "GameEngineMaterial.h"
 
 
-void GameEngineFBXAnimationInfo::Init(const std::string_view& _Name, int _Index)
+void GameEngineFBXAnimationInfo::Init(std::shared_ptr<GameEngineFBXMesh> _Mesh, std::shared_ptr<GameEngineFBXAnimation> _Animation, const std::string_view& _Name, int _Index)
 {
 	// GameENgineFBXAnimation의 행렬 정보가 완전해지는것은 
 	// CalFbxExBoneFrameTransMatrix가 호출되고 난 후입니다.
 	// 애니메이션의 행렬이 계산되는겁니다.
-	Aniamtion->AnimationMatrixLoad(Mesh, _Name, _Index);
+
+	_Animation->AnimationMatrixLoad(_Mesh, _Name, _Index);
+	Aniamtion = _Animation;
 	FBXAnimationData = Aniamtion->GetAnimationData(_Index);
+	Start = static_cast<UINT>(FBXAnimationData->TimeStartCount);
+	End = static_cast<UINT>(FBXAnimationData->TimeEndCount);
+	Mesh = _Mesh;
+	Aniamtion = _Animation;
+
+
 	Start = 0;
 	End = static_cast<unsigned int>(FBXAnimationData->TimeEndCount);
 }
@@ -331,20 +339,21 @@ void GameEngineFBXRenderer::CreateFBXAnimation(const std::string& _AnimationName
 		return;
 	}
 
-	Animation->Initialize();
+	//GameEngineFile File;
+	//File.SetPath(Animation->GetPath());
+	//File.ChangeExtension(".AnimationFBX");
 
+	//if (false == File.IsExists())
+	//{
+	//	Animation->Initialize();
+	//}
 
 	std::shared_ptr<GameEngineFBXAnimationInfo> NewAnimation = std::make_shared<GameEngineFBXAnimationInfo>();
-	FbxExAniData* AnimData = Animation->GetAnimationData(_Index);
-	NewAnimation->Start = static_cast<UINT>(AnimData->TimeStartCount);
-	NewAnimation->End = static_cast<UINT>(AnimData->TimeEndCount);
-	NewAnimation->Mesh = GetFBXMesh();
-	NewAnimation->Aniamtion = Animation;
+	NewAnimation->Init(FBXMesh, Animation,_AnimationName, _Index);
 	NewAnimation->ParentRenderer = this;
 	NewAnimation->Inter = _Params.Inter;
 	NewAnimation->Loop = _Params.Loop;
 	NewAnimation->Reset();
-	NewAnimation->Init(_AnimationName, _Index);
 
 	BaseValue.IsAnimation = 1;
 	Animations.insert(std::make_pair(UpperName, NewAnimation));

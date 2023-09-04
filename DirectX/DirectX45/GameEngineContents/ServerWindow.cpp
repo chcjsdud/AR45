@@ -42,7 +42,7 @@ void ServerWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _DeltaTim
 		if (ImGui::Button(GameEngineString::AnsiToUTF8(Text).c_str()))
 		{
 			size_t StrLen = strlen(TestSendBuffer.c_str());
-			NetInst->Send(&TestSendBuffer[0], StrLen);
+			NetInst->Send(&TestSendBuffer[0], static_cast<unsigned int>(StrLen));
 		}
 		ImGui::PopID();
 

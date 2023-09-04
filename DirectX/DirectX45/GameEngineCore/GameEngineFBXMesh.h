@@ -137,19 +137,19 @@ struct FbxExMeshInfo : public GameEngineSerializObject
 
 	void Read(GameEngineSerializer& _File) override
 	{
-		_File << Name;
-		_File << bTriangulated;
-		_File << UniqueId;
-		_File << FaceNum;
-		_File << VertexNum;
-		_File << MaterialNum;
-		_File << bIsSkeletalMesh;
-		_File << SkeletonRoot;
-		_File << SkeletonElemNum;
-		_File << bIsLodGroup;
-		_File << LODGroupName;
-		_File << LodLevel;
-		_File << MorphNum;
+		_File >> Name;
+		_File >> bTriangulated;
+		_File >> UniqueId;
+		_File >> FaceNum;
+		_File >> VertexNum;
+		_File >> MaterialNum;
+		_File >> bIsSkeletalMesh;
+		_File >> SkeletonRoot;
+		_File >> SkeletonElemNum;
+		_File >> bIsLodGroup;
+		_File >> LODGroupName;
+		_File >> LodLevel;
+		_File >> MorphNum;
 	}
 };
 

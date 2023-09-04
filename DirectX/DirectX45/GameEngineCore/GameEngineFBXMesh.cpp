@@ -143,9 +143,50 @@ void GameEngineFBXMesh::Initialize()
 		return;
 	}
 
+	GameEngineFile File;
+	File.SetPath(GetPath());
+
+	FBXMeshName = File.GetFileName();
+
+
+	File.ChangeExtension(".MeshFBX");
+
+	if (true == File.IsExists())
+	{
+		GameEngineSerializer Ser;
+		File.LoadBin(Ser);
+		Ser >> FBXMeshName;
+		Ser >> MeshInfos;
+		Ser >> RenderUnitInfos;
+		Ser >> AllBones;
+
+		for (size_t i = 0; i < AllBones.size(); i++)
+		{
+			AllFindMap[AllBones[i].Name] = &AllBones[i];
+		}
+
+		CreateGameEngineStructuredBuffer();
+
+		IsInit = true;
+
+		return;
+	}
+
+	// 여기에서는 유저 정보로 저장한게 있으면
+	// 유저 정보로 로드하고 리턴.
+
 	FBXInit(GetPathToString());
 	MeshLoad();
 	CreateGameEngineStructuredBuffer();
+
+	// 한번 유저정보로 저장을 할겁니다.
+
+	GameEngineSerializer Ser;
+	Ser << FBXMeshName;
+	Ser << MeshInfos;
+	Ser << RenderUnitInfos;
+	Ser << AllBones;
+	File.SaveBin(Ser);
 
 	IsInit = true;
 }
