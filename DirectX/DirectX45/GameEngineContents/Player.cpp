@@ -71,7 +71,7 @@ void Player::Start()
 	// Renderer->SetFBXMesh("AnimMan.FBX", "MeshTexture", 0, 2);
 
 
-	if (false)
+	if (true)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
@@ -85,6 +85,21 @@ void Player::Start()
 	}
 
 	if (true)
+	{
+		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
+		Renderer->GetTransform()->SetLocalPosition({0.0f, 0.0f, 50.0f});
+
+		GameEngineTime Time;
+		Time.Reset();
+		float Check0 = Time.TimeCheck();
+		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", { 0.05f });
+		float Check1 = Time.TimeCheck();
+		Renderer->ChangeAnimation("Run");
+	}
+
+
+	if (false)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("Player_Artorias.FBX", "MeshAniTexture");

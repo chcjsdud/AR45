@@ -53,6 +53,13 @@ void PlayLevel::Start()
 	GetMainCamera()->SetProjectionType(CameraType::Perspective);
 	GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -500.0f});
 
+
+	// GameEngineRenderTarget::Create();
+
+	GameEngineCoreWindow::AddDebugRenderTarget(0, "MainCameraForwardTarget", GetMainCamera()->GetCamForwardTarget());
+	GameEngineCoreWindow::AddDebugRenderTarget(0, "AllRenderTarget", GetMainCamera()->GetCamAllRenderTarget());
+
+
 	{
 		std::shared_ptr<GameEngineLight> Light = CreateActor<GameEngineLight>();
 	}

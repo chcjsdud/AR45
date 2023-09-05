@@ -689,6 +689,16 @@ void GameEngineCore::CoreResourcesInit()
 			Pipe->SetDepthState("EngineDepth");
 		}
 
+
+		{
+			std::shared_ptr<GameEngineMaterial> Pipe = GameEngineMaterial::Create("MeshAniTextureDeferred");
+			Pipe->SetVertexShader("MeshAniTextureDeferred.hlsl");
+			Pipe->SetRasterizer("Engine2DBase");
+			Pipe->SetPixelShader("MeshAniTextureDeferred.hlsl");
+			Pipe->SetBlendState("AlphaBlend");
+			Pipe->SetDepthState("EngineDepth");
+		}
+
 		{
 			std::shared_ptr<GameEngineMaterial> Pipe = GameEngineMaterial::Create("MeshColor");
 			Pipe->SetVertexShader("MeshColor.hlsl");

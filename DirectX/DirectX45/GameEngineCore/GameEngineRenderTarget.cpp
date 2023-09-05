@@ -24,6 +24,7 @@ void GameEngineRenderTarget::ResCreate(std::shared_ptr<GameEngineTexture> _Textu
 {
 	Color = _Color;
 	Textures.push_back(_Texture);
+	SRVs.push_back(_Texture->GetSRV());
 	RTVs.push_back(_Texture->GetRTV());
 }
 
@@ -44,6 +45,7 @@ void GameEngineRenderTarget::ResCreate(DXGI_FORMAT _Format, float4 _Scale, float
 
 	std::shared_ptr<GameEngineTexture> Tex = GameEngineTexture::Create(Desc);
 	Textures.push_back(Tex);
+	SRVs.push_back(Tex->GetSRV());
 	RTVs.push_back(Tex->GetRTV());
 }
 
@@ -73,6 +75,8 @@ void GameEngineRenderTarget::Clear()
 
 void GameEngineRenderTarget::Setting() 
 {
+   // https://learn.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-limits
+
 	ID3D11RenderTargetView** RTV = &RTVs[0];
 
 	if (nullptr == RTV)
@@ -89,7 +93,7 @@ void GameEngineRenderTarget::Setting()
 	}
 
 	// 지금 당장은 z값을 쓰지 않겠습니다.
-	GameEngineDevice::GetContext()->OMSetRenderTargets(1, RTV, DSV);
+	GameEngineDevice::GetContext()->OMSetRenderTargets(RTVs.size(), RTV, DSV);
 }
 
 void GameEngineRenderTarget::Reset()

@@ -23,6 +23,8 @@ class GameEngineTexture;
 class GameEngineRenderTarget : public GameEngineResource<GameEngineRenderTarget>,
 	std::enable_shared_from_this<GameEngineRenderTarget>
 {
+
+	friend class GameEngineCoreWindow;
 	friend class GameEngineCore;
 public:
 	// constrcuter destructer
@@ -97,6 +99,11 @@ public:
 		DepthSetting = false;
 	}
 
+	void AddNewTexture(DXGI_FORMAT _Format, float4 _Scale, float4 _Color)
+	{
+		ResCreate(_Format, _Scale, _Color);
+	}
+
 protected:
 
 private:
@@ -111,6 +118,7 @@ private:
 
 	std::vector<std::shared_ptr<GameEngineTexture>> Textures;
 	std::vector<ID3D11RenderTargetView*> RTVs;
+	std::vector<ID3D11ShaderResourceView*> SRVs;
 
 	std::shared_ptr<GameEngineTexture> DepthTexture;
 

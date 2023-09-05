@@ -21,7 +21,10 @@ void ContentsCore::GameStart()
 {
 	new int();
 
-	GameEngineGUI::GUIWindowCreate<ServerWindow>("ServerWindow");
+	// GameEngineGUI::GUIWindowCreate<ServerWindow>("ServerWindow");
+
+	GameEngineGUI::GUIWindowCreate<GameEngineCoreWindow>("CoreWindow");
+
 	ContentsResourcesCreate();
 	GameEngineCore::CreateLevel<PlayLevel>();
 	GameEngineCore::CreateLevel<TitleLevel>();

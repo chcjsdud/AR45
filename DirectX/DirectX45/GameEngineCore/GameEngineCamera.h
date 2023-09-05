@@ -46,6 +46,8 @@ public:
 		return ViewPort;
 	}
 
+	void ViewPortSetting();
+
 	void Setting();
 
 	void SetProjectionType(CameraType _Type)
@@ -63,9 +65,14 @@ public:
 
 	void CameraTransformUpdate();
 
-	std::shared_ptr<GameEngineRenderTarget> GetCamTarget() 
+	std::shared_ptr<GameEngineRenderTarget> GetCamForwardTarget() 
 	{
-		return CamTarget;
+		return CamForwardTarget;
+	}
+
+	std::shared_ptr<GameEngineRenderTarget> GetCamAllRenderTarget()
+	{
+		return AllRenderTarget;
 	}
 
 	bool IsView(const TransformData& _TransData);
@@ -133,7 +140,14 @@ private:
 
 	void Release();
 
-	std::shared_ptr<GameEngineRenderTarget> CamTarget;
+	std::shared_ptr<GameEngineRenderTarget> CamForwardTarget;
+	std::shared_ptr<GameEngineRenderTarget> AllRenderTarget;
+
+	GameEngineRenderUnit CalLightUnit;
+
+	// 빛계산의 결과물을 받기 위한 타겟.
+	std::shared_ptr<GameEngineRenderTarget> LightResultTarget;
+
 
 	void FreeCameraSwitch();
 };
