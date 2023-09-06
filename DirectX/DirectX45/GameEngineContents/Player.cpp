@@ -71,10 +71,11 @@ void Player::Start()
 	// Renderer->SetFBXMesh("AnimMan.FBX", "MeshTexture", 0, 2);
 
 
+
 	if (true)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
-		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
+		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
 
 		GameEngineTime Time;
 		Time.Reset();
@@ -82,6 +83,7 @@ void Player::Start()
 		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", { 0.05f });
 		float Check1 = Time.TimeCheck();
 		Renderer->ChangeAnimation("Run");
+		TestRenderer = Renderer;
 	}
 
 	if (true)
@@ -120,6 +122,8 @@ void Player::Update(float _DeltaTime)
 	// 클라이언트의 입장에서는 
 	// 상대의 패킷으로만 움직여야 한다.
 	// 2가지로 나뉘게 된다.
+
+	// TestRenderer->GetTransform()->AddLocalRotation({0.0f, 0.0f, _DeltaTime});
 
 	NetControllType Type = GetControllType();
 	switch (Type)

@@ -26,6 +26,9 @@
     <FxCompile Include="DeferredCalLight.hlsl">
       <Filter>Deferred</Filter>
     </FxCompile>
+    <FxCompile Include="DeferredMerge.hlsl">
+      <Filter>Deferred</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">

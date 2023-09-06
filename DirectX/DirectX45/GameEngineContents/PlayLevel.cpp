@@ -56,8 +56,10 @@ void PlayLevel::Start()
 
 	// GameEngineRenderTarget::Create();
 
-	GameEngineCoreWindow::AddDebugRenderTarget(0, "MainCameraForwardTarget", GetMainCamera()->GetCamForwardTarget());
 	GameEngineCoreWindow::AddDebugRenderTarget(0, "AllRenderTarget", GetMainCamera()->GetCamAllRenderTarget());
+	GameEngineCoreWindow::AddDebugRenderTarget(1, "LightRenderTarget", GetMainCamera()->GetDeferredLightTarget());
+	GameEngineCoreWindow::AddDebugRenderTarget(2, "MainCameraForwardTarget", GetMainCamera()->GetCamForwardTarget());
+	GameEngineCoreWindow::AddDebugRenderTarget(3, "DeferredTarget", GetMainCamera()->GetCamDeferrdTarget());
 
 
 	{

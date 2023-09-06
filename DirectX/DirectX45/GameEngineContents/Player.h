@@ -28,6 +28,7 @@ protected:
 	void NetUpdate(float _DeltaTime);
 
 private:
-
+	std::shared_ptr<class GameEngineComponent> Pivot;
+	std::shared_ptr<class GameEngineFBXRenderer> TestRenderer;
 };
 

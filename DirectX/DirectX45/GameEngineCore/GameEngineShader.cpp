@@ -154,6 +154,7 @@ void GameEngineShader::ShaderResCheck()
 
 void GameEngineShader::AutoCompile(GameEngineFile& _File)
 {
+
 	std::string ShaderCode = _File.GetString();
 
 	{
@@ -179,7 +180,16 @@ void GameEngineShader::AutoCompile(GameEngineFile& _File)
 			{
 				size_t FirstIndex = ShaderCode.find_last_of(" ", EntryIndex);
 				std::string EntryName = ShaderCode.substr(FirstIndex + 1, EntryIndex - FirstIndex - 1);
+
+				//if ("DeferredCalLight" == EntryName)
+				//{
+				//	int a = 0;
+				//}
+
 				EntryName += "_PS";
+
+
+
 				GameEnginePixelShader::Load(_File.GetFullPath(), EntryName);
 			}
 		}
