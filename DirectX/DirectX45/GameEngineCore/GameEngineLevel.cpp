@@ -27,8 +27,6 @@ void GameEngineLevel::LevelCameraInit()
 
 	std::shared_ptr<GameEngineCamera> UICamera = CreateNewCamera(100);
 	UICamera->SetProjectionType(CameraType::Orthogonal);
-
-
 	LastTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL);
 }
 
@@ -305,18 +303,15 @@ void GameEngineLevel::Render(float _DeltaTime)
 			++LightDataObject.LightCount;
 		}
 
-		//AllRenderTarget->Clear();
-		//AllRenderTarget->Setting();
-		// Cam->Setting();
+		Cam->CameraTransformUpdate();
 		Cam->ViewPortSetting();
 		Cam->AllRenderTarget->Clear();
 		Cam->AllRenderTarget->Setting();
-		Cam->CameraTransformUpdate();
 		Cam->Render(_DeltaTime);
 
-		Cam->CamForwardTarget->Clear();
-		Cam->CamForwardTarget->Merge(Cam->AllRenderTarget, 0);
-		Cam->CamForwardTarget->Effect(_DeltaTime);
+		// Cam->CamForwardTarget->Clear();
+		// Cam->CamForwardTarget->Merge(Cam->GetCamTarget(), 0);
+		// Cam->CamForwardTarget->Effect(_DeltaTime);
 
 		if (false == IsDebugRender)
 		{

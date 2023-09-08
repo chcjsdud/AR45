@@ -95,7 +95,7 @@ void GameEngineFile::LoadBin(GameEngineSerializer& _Data)
 
 	fread_s(_Data.GetDataPtr(), _Data.GetBufferSize(), FileSize, 1, FilePtr);
 
-	_Data.WriteOffset = FileSize;
+	_Data.WriteOffset = static_cast<unsigned>(FileSize);
 
 	if (nullptr != FilePtr)
 	{

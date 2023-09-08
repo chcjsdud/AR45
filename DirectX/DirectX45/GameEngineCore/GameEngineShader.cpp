@@ -53,6 +53,14 @@ void GameEngineShader::ShaderResCheck()
 
 	D3D11_SHADER_INPUT_BIND_DESC ResDesc;
 
+	//UINT ParameterIndex;	
+	//std::vector<D3D11_SIGNATURE_PARAMETER_DESC> OutDesc;
+	//OutDesc.resize(Info.OutputParameters);
+	//for (size_t i = 0; i < Info.OutputParameters; i++)
+	//{
+	//	HRESULT Result =  CompileInfo->GetOutputParameterDesc(i, &OutDesc[i]);
+	//}
+
 	// 내가 사용한 상수버퍼 텍스처 샘플러등의 총합입니다.
 	for (UINT i = 0; i < Info.BoundResources; i++)
 	{
@@ -190,8 +198,22 @@ void GameEngineShader::AutoCompile(GameEngineFile& _File)
 
 
 
-				GameEnginePixelShader::Load(_File.GetFullPath(), EntryName);
+				std::shared_ptr<GameEnginePixelShader> Shader = GameEnginePixelShader::Load(_File.GetFullPath(), EntryName);
+
+				if (nullptr != Shader)
+				{
+					size_t PixelBody = ShaderCode.rfind("\n", EntryIndex);
+
+					std::string PixelFirst = ShaderCode.substr(PixelBody + 1, EntryIndex - PixelBody);
+
+					if (std::string::npos != PixelFirst.find("DeferredOut"))
+					{
+						Shader->Path = RenderPath::Deferred;
+					}
+				}
+
 			}
+
 		}
 	}
 

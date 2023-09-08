@@ -12,6 +12,7 @@ enum class SortType
 	YSort,
 };
 
+
 // Ό³Έν :
 class GameEngineRenderer;
 class GameEngineRenderTarget;
@@ -123,7 +124,7 @@ protected:
 	void Start() override;
 
 private:
-	std::map<int, std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>> Units;
+	std::map<RenderPath, std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>> Units;
 
 	std::map<int, std::list<std::shared_ptr<GameEngineRenderer>>> Renderers;
 	std::map<int, SortType> SortValues;
@@ -152,13 +153,14 @@ private:
 	float Far = 10000.0f;
 
 	void PushRenderer(std::shared_ptr<GameEngineRenderer> _Render);
-	void PushRenderUnit(std::shared_ptr<GameEngineRenderUnit> _Unit);
+	void PushRenderUnit(std::shared_ptr<GameEngineRenderUnit> _Unit, RenderPath _Path = RenderPath::None);
 
 	void Release();
 
 	std::shared_ptr<GameEngineRenderTarget> CamTarget;
 	std::shared_ptr<GameEngineRenderTarget> CamForwardTarget;
 	std::shared_ptr<GameEngineRenderTarget> CamDeferrdTarget;
+	std::shared_ptr<GameEngineRenderTarget> CamAlphaTarget;
 	std::shared_ptr<GameEngineRenderTarget> AllRenderTarget;
 
 	GameEngineRenderUnit CalLightUnit;

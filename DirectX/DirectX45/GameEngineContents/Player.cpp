@@ -76,6 +76,36 @@ void Player::Start()
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
+		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, -100.0f });
+
+		GameEngineTime Time;
+		Time.Reset();
+		float Check0 = Time.TimeCheck();
+		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", { 0.05f });
+		float Check1 = Time.TimeCheck();
+		Renderer->ChangeAnimation("Run");
+		TestRenderer = Renderer;
+	}
+
+	if (true)
+	{
+		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
+		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, -50.0f });
+
+		GameEngineTime Time;
+		Time.Reset();
+		float Check0 = Time.TimeCheck();
+		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", { 0.05f });
+		float Check1 = Time.TimeCheck();
+		Renderer->ChangeAnimation("Run");
+	}
+
+
+	if (true)
+	{
+		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
 
 		GameEngineTime Time;
 		Time.Reset();

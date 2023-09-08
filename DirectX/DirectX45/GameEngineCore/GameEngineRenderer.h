@@ -2,6 +2,16 @@
 #include "GameEngineComponent.h"
 #include "GameEngineShader.h"
 
+enum class RenderPath
+{
+	None,
+	Forward,
+	Deferred,
+	Alpha,
+	Debug,
+};
+
+
 class GameEngineRenderUnit : public GameEngineObjectBase, public std::enable_shared_from_this<GameEngineRenderUnit>
 {
 public:
@@ -13,7 +23,7 @@ public:
 	GameEngineRenderUnit();
 	void SetMesh(const std::string_view& _Name);
 	void SetMesh(std::shared_ptr<class GameEngineMesh> _Mesh);
-	void SetMaterial(const std::string_view& _Name);
+	void SetMaterial(const std::string_view& _Name, RenderPath _Path = RenderPath::None);
 	void Render(float _DeltaTime);
 	void SetRenderer(class GameEngineRenderer* _Renderer);
 
@@ -62,6 +72,7 @@ public:
 	// 어떤 쉐이더를 사용했다는 걸 알아야 하고
 	// 그 쉐이더에서 어떤 텍스처를 사용했고
 	// 어떤 샘플러 어떤 상수버퍼를 사용했는지를 알아야 한다.
+
 	void SetMaterial(const std::string_view& _Name, int _index = 0);
 	void SetMesh(const std::string_view& _Name, int _index = 0);
 

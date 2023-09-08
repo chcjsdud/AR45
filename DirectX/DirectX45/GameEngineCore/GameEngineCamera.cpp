@@ -6,6 +6,8 @@
 #include "GameEngineDevice.h"
 #include "GameEngineRenderer.h"
 #include "GameEngineRenderTarget.h"
+#include "GameEngineMaterial.h"
+#include "GameEnginePixelShader.h"
 
 GameEngineCamera::GameEngineCamera()
 {
@@ -70,14 +72,12 @@ void GameEngineCamera::Start()
 	DeferredLightTarget->AddNewTexture(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL); // 앰비언트 라이트를 담는다.
 
 	CamForwardTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL);
-	CamForwardTarget->CreateDepthTexture();
-
 	CamDeferrdTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL);
-	CamDeferrdTarget->SetDepthTexture(CamForwardTarget->GetDepthTexture());
+	CamAlphaTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL);
 
 	CalLightUnit.SetMesh("FullRect");
 	CalLightUnit.SetMaterial("DeferredCalLight");
-	
+
 	// LightDatas& Data = ParentRenderer->GetActor()->GetLevel()->LightDataObject;
 	// ShaderResHelper.SetConstantBufferLink("LightDatas", Data);
 
@@ -167,7 +167,7 @@ void GameEngineCamera::Update(float _DeltaTime)
 
 		if (true == GameEngineInput::IsPress("CamMoveLeft"))
 		{
-			GetTransform()->AddLocalPosition(GetTransform()->GetWorldLeftVector()* Speed * _DeltaTime);
+			GetTransform()->AddLocalPosition(GetTransform()->GetWorldLeftVector() * Speed * _DeltaTime);
 		}
 		if (true == GameEngineInput::IsPress("CamMoveRight"))
 		{
@@ -277,9 +277,9 @@ void GameEngineCamera::Render(float _DeltaTime)
 	}
 
 	{
-		for (std::pair<const int, std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>>& UnitGroup : Units)
+		for (std::pair<const RenderPath, std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>>& Path : Units)
 		{
-			std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>& UnitPath = UnitGroup.second;
+			std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>& UnitPath = Path.second;
 
 			std::map<int, std::list<std::shared_ptr<GameEngineRenderUnit>>>::iterator RenderGroupStartIter = UnitPath.begin();
 			std::map<int, std::list<std::shared_ptr<GameEngineRenderUnit>>>::iterator RenderGroupEndIter = UnitPath.end();
@@ -323,9 +323,16 @@ void GameEngineCamera::Render(float _DeltaTime)
 		CamDeferrdTarget->Setting();
 		DefferdMergeUnit.Render(_DeltaTime);
 
+		CamForwardTarget->Clear();
+		CamForwardTarget->Merge(AllRenderTarget, 0);
+
+		// ??
+		// CamAlphaTarget
+
 		CamTarget->Clear();
 		CamTarget->Merge(CamForwardTarget);
 		CamTarget->Merge(CamDeferrdTarget);
+		// CamTarget->Merge(CamAlphaTarget);
 	}
 }
 
@@ -382,7 +389,7 @@ void GameEngineCamera::PushRenderer(std::shared_ptr<GameEngineRenderer> _Render)
 	Renderers[_Render->GetOrder()].push_back(_Render);
 }
 
-void GameEngineCamera::PushRenderUnit(std::shared_ptr<GameEngineRenderUnit> _Unit)
+void GameEngineCamera::PushRenderUnit(std::shared_ptr<GameEngineRenderUnit> _Unit, RenderPath _Path /*= RenderPath::None*/)
 {
 	if (nullptr == _Unit->GetRenderer())
 	{
@@ -391,8 +398,14 @@ void GameEngineCamera::PushRenderUnit(std::shared_ptr<GameEngineRenderUnit> _Uni
 	}
 
 	int Order = _Unit->GetRenderer()->GetOrder();
+	RenderPath Path = _Unit->Material->GetPixelShader()->GetRenderPath();
 
-	Units[0][Order].push_back(_Unit);
+	if (_Path != RenderPath::None)
+	{
+		Path = _Path;
+	}
+
+	Units[Path][Order].push_back(_Unit);
 }
 
 bool GameEngineCamera::IsView(const TransformData& _TransData)
@@ -438,32 +451,35 @@ void GameEngineCamera::Release()
 {
 
 	{
-		std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>& UnitPath = Units[0];
-
-		std::map<int, std::list<std::shared_ptr<GameEngineRenderUnit>>>::iterator RenderGroupStartIter = UnitPath.begin();
-		std::map<int, std::list<std::shared_ptr<GameEngineRenderUnit>>>::iterator RenderGroupEndIter = UnitPath.end();
-
-
-		for (; RenderGroupStartIter != RenderGroupEndIter; ++RenderGroupStartIter)
+		for (std::pair<const RenderPath, std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>>& Path : Units)
 		{
-			std::list<std::shared_ptr<GameEngineRenderUnit>>& RenderGroup = RenderGroupStartIter->second;
+			std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>& UnitPath = Path.second;
 
-			std::list<std::shared_ptr<GameEngineRenderUnit>>::iterator StartRenderUnit = RenderGroup.begin();
-			std::list<std::shared_ptr<GameEngineRenderUnit>>::iterator EndRenderUnit = RenderGroup.end();
+			std::map<int, std::list<std::shared_ptr<GameEngineRenderUnit>>>::iterator RenderGroupStartIter = UnitPath.begin();
+			std::map<int, std::list<std::shared_ptr<GameEngineRenderUnit>>>::iterator RenderGroupEndIter = UnitPath.end();
 
-			float ScaleTime = GameEngineTime::GlobalTime.GetRenderOrderTimeScale(RenderGroupStartIter->first);
 
-			for (; StartRenderUnit != EndRenderUnit; /*++StartRenderer*/)
+			for (; RenderGroupStartIter != RenderGroupEndIter; ++RenderGroupStartIter)
 			{
-				std::shared_ptr<GameEngineRenderUnit>& Render = *StartRenderUnit;
+				std::list<std::shared_ptr<GameEngineRenderUnit>>& RenderGroup = RenderGroupStartIter->second;
 
-				if (false == Render->GetRenderer()->IsDeath())
+				std::list<std::shared_ptr<GameEngineRenderUnit>>::iterator StartRenderUnit = RenderGroup.begin();
+				std::list<std::shared_ptr<GameEngineRenderUnit>>::iterator EndRenderUnit = RenderGroup.end();
+
+				float ScaleTime = GameEngineTime::GlobalTime.GetRenderOrderTimeScale(RenderGroupStartIter->first);
+
+				for (; StartRenderUnit != EndRenderUnit; /*++StartRenderer*/)
 				{
-					++StartRenderUnit;
-					continue;
-				}
+					std::shared_ptr<GameEngineRenderUnit>& Render = *StartRenderUnit;
 
-				StartRenderUnit = RenderGroup.erase(StartRenderUnit);
+					if (false == Render->GetRenderer()->IsDeath())
+					{
+						++StartRenderUnit;
+						continue;
+					}
+
+					StartRenderUnit = RenderGroup.erase(StartRenderUnit);
+				}
 			}
 		}
 	}
