@@ -169,7 +169,6 @@ private:
 	// 빛계산의 결과물을 받기 위한 타겟.
 	std::shared_ptr<GameEngineRenderTarget> DeferredLightTarget;
 
-
 	void FreeCameraSwitch();
 };
 

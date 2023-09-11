@@ -165,6 +165,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BloomEffect.h" />
     <ClInclude Include="BlurEffect.h">
       <SubType>
       </SubType>
@@ -375,6 +376,7 @@
     <ClInclude Include="ThirdParty\FW1Font\Inc\FW1FontWrapper.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BloomEffect.cpp" />
     <ClCompile Include="BlurEffect.cpp">
       <SubType>
       </SubType>

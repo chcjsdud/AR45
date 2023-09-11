@@ -31,6 +31,7 @@ protected:
 
 private:
 	std::shared_ptr<JPSCollision> Col;
+	std::shared_ptr<class BloomEffect> BloomEffectInst;
 
 };
 

@@ -90,7 +90,7 @@ void Player::Start()
 	if (true)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
-		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
+		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
 		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, -50.0f });
 
 		GameEngineTime Time;
@@ -119,7 +119,7 @@ void Player::Start()
 	if (true)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
-		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTexture");
+		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
 		Renderer->GetTransform()->SetLocalPosition({0.0f, 0.0f, 50.0f});
 
 		GameEngineTime Time;

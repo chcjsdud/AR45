@@ -187,6 +187,9 @@
     <ClInclude Include="GameEngineNavi.h">
       <Filter>Object\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="BloomEffect.h">
+      <Filter>Content\PostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineCore.cpp" />
@@ -367,6 +370,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineNavi.cpp">
       <Filter>Object\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="BloomEffect.cpp">
+      <Filter>Content\PostEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -127,6 +127,7 @@ private:
 	std::vector<std::shared_ptr<GameEnginePostProcess>> Effects;
 
 	std::vector<std::shared_ptr<GameEngineTexture>> Textures;
+	std::vector<D3D11_VIEWPORT> ViewPortDatas;
 	std::vector<ID3D11RenderTargetView*> RTVs;
 	std::vector<ID3D11ShaderResourceView*> SRVs;
 

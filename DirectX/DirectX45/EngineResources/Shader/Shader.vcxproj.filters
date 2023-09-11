@@ -5,7 +5,6 @@
     <FxCompile Include="MergeShader.hlsl" />
     <FxCompile Include="DebugMeshRender.hlsl" />
     <FxCompile Include="TileMapShader.hlsl" />
-    <FxCompile Include="BlurShader.hlsl" />
     <FxCompile Include="MeshTexture.hlsl" />
     <FxCompile Include="MeshAniTexture.hlsl" />
     <FxCompile Include="Transform.fx">
@@ -29,6 +28,15 @@
     <FxCompile Include="DeferredMerge.hlsl">
       <Filter>Deferred</Filter>
     </FxCompile>
+    <FxCompile Include="BlurShader.hlsl">
+      <Filter>PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="BloomShader.hlsl">
+      <Filter>PostEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="BloomBlur.hlsl">
+      <Filter>PostEffect</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">
@@ -36,6 +44,9 @@
     </Filter>
     <Filter Include="Deferred">
       <UniqueIdentifier>{18ee753b-e792-4a73-b058-d035f55577dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PostEffect">
+      <UniqueIdentifier>{2ab93c4e-7dd2-4b7e-ba7a-927a719410d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
