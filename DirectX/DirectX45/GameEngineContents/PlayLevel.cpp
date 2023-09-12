@@ -71,8 +71,12 @@ void PlayLevel::Start()
 	{
 		std::shared_ptr<GameEngineLight> Light = CreateActor<GameEngineLight>();
 
-		std::shared_ptr<GameEngineLight> Light2 = CreateActor<GameEngineLight>();
-		Light->GetTransform()->SetLocalRotation({45.0f, 0.0f, 0.0f});
+		Light->LightDataValue.DifLightPower = 0.5f;
+
+		Light->LightDataValue.SpcPow = 5.0f;
+
+		//std::shared_ptr<GameEngineLight> Light2 = CreateActor<GameEngineLight>();
+		//Light->GetTransform()->SetLocalRotation({45.0f, 0.0f, 0.0f});
 	}
 
 
