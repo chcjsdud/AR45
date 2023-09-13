@@ -22,17 +22,17 @@ GameEngineRenderTarget::~GameEngineRenderTarget()
 
 void GameEngineRenderTarget::ResCreate(std::shared_ptr<GameEngineTexture> _Texture, float4 _Color)
 {
-	Color = _Color;
 	Textures.push_back(_Texture);
 	SRVs.push_back(_Texture->GetSRV());
 	RTVs.push_back(_Texture->GetRTV());
+	Color.push_back(_Color);
 
 	D3D11_VIEWPORT ViewPortData;
 
 	ViewPortData.TopLeftX = 0;
 	ViewPortData.TopLeftY = 0;
-	ViewPortData.Width = _Texture->GetScale().uix();
-	ViewPortData.Height = _Texture->GetScale().uiy();
+	ViewPortData.Width = static_cast<float>(_Texture->GetScale().uix());
+	ViewPortData.Height = static_cast<float>(_Texture->GetScale().uiy());
 	ViewPortData.MinDepth = 0.0f;
 	ViewPortData.MaxDepth = 1.0f;
 
@@ -63,8 +63,8 @@ void GameEngineRenderTarget::ResCreate(DXGI_FORMAT _Format, float4 _Scale, float
 
 	ViewPortData.TopLeftX = 0;
 	ViewPortData.TopLeftY = 0;
-	ViewPortData.Width = _Scale.uix();
-	ViewPortData.Height = _Scale.uiy();
+	ViewPortData.Width = static_cast<float>(_Scale.uix());
+	ViewPortData.Height = static_cast<float>(_Scale.uiy());
 	ViewPortData.MinDepth = 0.0f;
 	ViewPortData.MaxDepth = 1.0f;
 
@@ -72,6 +72,7 @@ void GameEngineRenderTarget::ResCreate(DXGI_FORMAT _Format, float4 _Scale, float
 
 	SRVs.push_back(Tex->GetSRV());
 	RTVs.push_back(Tex->GetRTV());
+	Color.push_back(_Color);
 
 }
 
@@ -87,7 +88,7 @@ void GameEngineRenderTarget::Clear()
 			return;
 		}
 
-		GameEngineDevice::GetContext()->ClearRenderTargetView(RTV, Color.Arr1D);
+		GameEngineDevice::GetContext()->ClearRenderTargetView(RTV, Color[i].Arr1D);
 	}
 
 	ID3D11DepthStencilView* DSV
@@ -120,7 +121,7 @@ void GameEngineRenderTarget::Setting()
 
 	// 지금 당장은 z값을 쓰지 않겠습니다.
 	GameEngineDevice::GetContext()->OMSetRenderTargets(static_cast<UINT>(RTVs.size()), RTV, DSV);
-	GameEngineDevice::GetContext()->RSSetViewports(ViewPortDatas.size(), &ViewPortDatas[0]);
+	GameEngineDevice::GetContext()->RSSetViewports(static_cast<unsigned int>(ViewPortDatas.size()), &ViewPortDatas[0]);
 }
 
 void GameEngineRenderTarget::Reset()

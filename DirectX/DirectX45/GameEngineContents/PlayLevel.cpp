@@ -10,6 +10,7 @@
 #include "FadeEffect.h"
 #include <GameEngineCore/BloomEffect.h>
 #include "Player.h"
+#include "Ground.h"
 #include "ServerWindow.h"
 #include <GameEngineCore/EngineGrid.h>
 
@@ -52,7 +53,7 @@ void PlayLevel::Start()
 	// GetMainCamera()->GetCamTarget()->DepthSettingOff();
 
 	GetMainCamera()->SetProjectionType(CameraType::Perspective);
-	GetMainCamera()->GetTransform()->SetLocalPosition({0, 0, -500.0f});
+	GetMainCamera()->GetTransform()->SetLocalPosition({0, 200, -500.0f});
 	BloomEffectInst = GetMainCamera()->GetDeferredLightTarget()->CreateEffect<BloomEffect>();
 
 
@@ -71,9 +72,15 @@ void PlayLevel::Start()
 	{
 		std::shared_ptr<GameEngineLight> Light = CreateActor<GameEngineLight>();
 
-		Light->LightDataValue.DifLightPower = 0.5f;
+		Light->GetTransform()->AddLocalRotation(float4(90, 0.0f, 0.0f));
+		Light->GetTransform()->AddLocalPosition(float4(0, 500.0f, 0.0f));
 
+		Light->LightDataValue.DifLightPower = 1.0f;
 		Light->LightDataValue.SpcPow = 5.0f;
+		Light->LightDataValue.AmbientLight = float4::ZERO;
+
+		GameEngineCoreWindow::AddDebugRenderTarget(7, "ShadowTarget", Light->GetShadowTarget());
+
 
 		//std::shared_ptr<GameEngineLight> Light2 = CreateActor<GameEngineLight>();
 		//Light->GetTransform()->SetLocalRotation({45.0f, 0.0f, 0.0f});
@@ -85,6 +92,10 @@ void PlayLevel::Start()
 	{
 		std::shared_ptr<Player> NewPlayer = CreateActor<Player>();
 		NewPlayer->SetUserControllType();
+	}
+
+	{
+		std::shared_ptr<Ground> Object = CreateActor<Ground>();
 	}
 
 }

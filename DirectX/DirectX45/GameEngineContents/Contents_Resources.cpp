@@ -143,6 +143,7 @@ void ContentsCore::ContentsResourcesCreate()
 	}
 
 
+
 	{
 
 

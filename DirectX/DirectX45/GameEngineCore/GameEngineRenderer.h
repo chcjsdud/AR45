@@ -18,9 +18,10 @@ enum class RenderPath
 class GameEngineRenderUnit : public GameEngineObjectBase, public std::enable_shared_from_this<GameEngineRenderUnit>
 {
 public:
+	bool IsShadow = false;
+
 	GameEngineShaderResHelper ShaderResHelper;
 	std::shared_ptr<class GameEngineMaterial> Material;
-
 	std::function<void(float)> RenderFunction;
 
 	GameEngineRenderUnit();
@@ -34,6 +35,10 @@ public:
 	{
 		return ParentRenderer;
 	}
+
+	void Setting();
+
+	void Draw();
 
 private:
 	class GameEngineRenderer* ParentRenderer = nullptr;
@@ -129,6 +134,33 @@ public:
 		return BaseValue;
 	}
 
+	void ShadowOn(size_t _UnitIndex = -1) 
+	{
+		if (_UnitIndex == -1)
+		{
+			for (size_t i = 0; i < Units.size(); i++)
+			{
+				Units[i]->IsShadow = true;
+			}
+			return;
+		}
+
+		Units[_UnitIndex]->IsShadow = true;
+	}
+
+	void ShadowOff(size_t _UnitIndex = -1)
+	{
+		if (_UnitIndex == -1)
+		{
+			for (size_t i = 0; i < Units.size(); i++)
+			{
+				Units[i]->IsShadow = false;
+			}
+			return;
+		}
+
+		Units[_UnitIndex]->IsShadow = false;
+	}
 
 protected:
 	void Start();

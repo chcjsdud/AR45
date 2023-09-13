@@ -34,6 +34,9 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Levels</Filter>
     </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -63,6 +66,9 @@
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

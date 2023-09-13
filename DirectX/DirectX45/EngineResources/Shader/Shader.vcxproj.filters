@@ -48,5 +48,13 @@
     <Filter Include="PostEffect">
       <UniqueIdentifier>{2ab93c4e-7dd2-4b7e-ba7a-927a719410d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shadow">
+      <UniqueIdentifier>{789f86c1-695b-436f-8d40-8d29dd7c4495}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shadow.hlsl">
+      <Filter>Shadow</Filter>
+    </None>
   </ItemGroup>
 </Project>

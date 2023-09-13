@@ -76,7 +76,7 @@ void Player::Start()
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
-		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, -100.0f });
+		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 50.0f, -100.0f });
 
 		GameEngineTime Time;
 		Time.Reset();
@@ -85,13 +85,15 @@ void Player::Start()
 		float Check1 = Time.TimeCheck();
 		Renderer->ChangeAnimation("Run");
 		TestRenderer = Renderer;
+
+		Renderer->ShadowOn();
 	}
 
 	if (true)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
-		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, -50.0f });
+		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 50.0f, -50.0f });
 
 		GameEngineTime Time;
 		Time.Reset();
@@ -99,6 +101,8 @@ void Player::Start()
 		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", { 0.05f });
 		float Check1 = Time.TimeCheck();
 		Renderer->ChangeAnimation("Run");
+
+		Renderer->ShadowOn();
 	}
 
 
@@ -106,6 +110,7 @@ void Player::Start()
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
+		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 50.0f, 0.0f });
 
 		GameEngineTime Time;
 		Time.Reset();
@@ -114,13 +119,15 @@ void Player::Start()
 		float Check1 = Time.TimeCheck();
 		Renderer->ChangeAnimation("Run");
 		TestRenderer = Renderer;
+
+		Renderer->ShadowOn();
 	}
 
 	if (true)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
-		Renderer->GetTransform()->SetLocalPosition({0.0f, 0.0f, 50.0f});
+		Renderer->GetTransform()->SetLocalPosition({0.0f, 50.0f, 50.0f});
 
 		GameEngineTime Time;
 		Time.Reset();
@@ -128,7 +135,26 @@ void Player::Start()
 		Renderer->CreateFBXAnimation("Run", "ALS_N_Run_F.FBX", { 0.05f });
 		float Check1 = Time.TimeCheck();
 		Renderer->ChangeAnimation("Run");
+
+		Renderer->ShadowOn();
 	}
+
+	if (true)
+	{
+		std::shared_ptr<GameEngineRenderer> Renderer = CreateComponent<GameEngineRenderer>();
+		std::shared_ptr<GameEngineRenderUnit> Unit = Renderer->CreateRenderUnit();
+
+		Renderer->GetTransform()->AddLocalPosition({ 300, 500, 0 });
+		Renderer->GetTransform()->SetLocalScale({ 200, 200, 200 });
+
+		Renderer->GetRenderBaseValueRef().BaseColor = { 1.0f, 0.0f, 0.0f, 1.0f };
+
+		Unit->SetMesh("Box");
+		Unit->SetMaterial("MeshColor");
+
+		Renderer->ShadowOn();
+	}
+
 
 
 	if (false)
@@ -142,6 +168,8 @@ void Player::Start()
 		Renderer->CreateFBXAnimation("Run", "Dead.fbx", { 0.05f });
 		float Check1 = Time.TimeCheck();
 		Renderer->ChangeAnimation("Run");
+
+		Renderer->ShadowOn();
 	}
 
 }

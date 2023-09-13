@@ -162,6 +162,9 @@
     <FxCompile Include="TileMapShader.hlsl" />
     <FxCompile Include="Transform.fx" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Shadow.hlsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

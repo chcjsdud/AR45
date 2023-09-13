@@ -177,6 +177,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Ground.h" />
     <ClInclude Include="MyContentSpriteRenderer.h">
       <SubType>
       </SubType>
@@ -222,6 +223,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Ground.cpp" />
     <ClCompile Include="MyContentSpriteRenderer.cpp">
       <SubType>
       </SubType>
