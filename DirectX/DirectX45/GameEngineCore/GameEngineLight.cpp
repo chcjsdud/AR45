@@ -32,6 +32,7 @@ void GameEngineLight::Start()
 	// 크기가 곧 그림자가 맺히는 범위와 디테일을 의미하게 됩니다.
 	ShadowTarget = GameEngineRenderTarget::Create(DXGI_FORMAT_R32_FLOAT, { LightDataValue.ShadowTargetSizeX, LightDataValue.ShadowTargetSizeY }, float4::RED);
 	ShadowTarget->CreateDepthTexture();
+	ShadowTarget->SetName("Sha");
 }
 
 void GameEngineLight::LightUpdate(GameEngineCamera* _Camera, float _DeltaTime) 

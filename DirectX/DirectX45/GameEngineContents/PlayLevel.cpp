@@ -54,7 +54,7 @@ void PlayLevel::Start()
 
 	GetMainCamera()->SetProjectionType(CameraType::Perspective);
 	GetMainCamera()->GetTransform()->SetLocalPosition({0, 200, -500.0f});
-	BloomEffectInst = GetMainCamera()->GetDeferredLightTarget()->CreateEffect<BloomEffect>();
+	// BloomEffectInst = GetMainCamera()->GetDeferredLightTarget()->CreateEffect<BloomEffect>();
 
 
 	// GameEngineRenderTarget::Create();
@@ -63,9 +63,9 @@ void PlayLevel::Start()
 	GameEngineCoreWindow::AddDebugRenderTarget(1, "LightRenderTarget", GetMainCamera()->GetDeferredLightTarget());
 	GameEngineCoreWindow::AddDebugRenderTarget(2, "MainCameraForwardTarget", GetMainCamera()->GetCamForwardTarget());
 	GameEngineCoreWindow::AddDebugRenderTarget(3, "DeferredTarget", GetMainCamera()->GetCamDeferrdTarget());
-	GameEngineCoreWindow::AddDebugRenderTarget(4, "BloomEffect", BloomEffectInst->ResultTarget);
-	GameEngineCoreWindow::AddDebugRenderTarget(5, "BloomBlurEffect0", BloomEffectInst->BlurTarget0);
-	GameEngineCoreWindow::AddDebugRenderTarget(6, "BloomBlurEffect1", BloomEffectInst->BlurTarget1);
+	// GameEngineCoreWindow::AddDebugRenderTarget(4, "BloomEffect", BloomEffectInst->ResultTarget);
+	//GameEngineCoreWindow::AddDebugRenderTarget(5, "BloomBlurEffect0", BloomEffectInst->BlurTarget0);
+	//GameEngineCoreWindow::AddDebugRenderTarget(6, "BloomBlurEffect1", BloomEffectInst->BlurTarget1);
 	
 
 
