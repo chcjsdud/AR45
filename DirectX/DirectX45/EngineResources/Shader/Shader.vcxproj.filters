@@ -37,6 +37,7 @@
     <FxCompile Include="BloomBlur.hlsl">
       <Filter>PostEffect</Filter>
     </FxCompile>
+    <FxCompile Include="MeshColorDeferred.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">

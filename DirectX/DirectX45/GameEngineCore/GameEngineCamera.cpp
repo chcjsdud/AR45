@@ -88,7 +88,6 @@ void GameEngineCamera::Start()
 	CalLightUnit.ShaderResHelper.SetTexture("PositionTex", AllRenderTarget->GetTexture(2));
 	CalLightUnit.ShaderResHelper.SetTexture("NormalTex", AllRenderTarget->GetTexture(3));
 
-
 	//Texture2D DifColor : register(t0);
 	//Texture2D DifLight : register(t1);
 	//Texture2D SpcLight : register(t2);
@@ -386,8 +385,14 @@ void GameEngineCamera::Render(float _DeltaTime)
 
 		// 오브젝트들은 그릴만한 애들은 다 그렸다고 판단하고
 		// 빛계산의 결과가 들어갈 애들이 여기에서 세팅되고
+
 		DeferredLightTarget->Setting();
-		CalLightUnit.Render(_DeltaTime);
+		// 빛이 1개라면 잘 동작할 것이다.
+		for (std::shared_ptr<GameEngineLight> Light : GetLevel()->AllLight)
+		{
+			CalLightUnit.ShaderResHelper.SetTexture("ShadowTex", Light->GetShadowTarget()->GetTexture(0));
+			CalLightUnit.Render(_DeltaTime);
+		}
 
 		DeferredLightTarget->Effect(_DeltaTime);
 

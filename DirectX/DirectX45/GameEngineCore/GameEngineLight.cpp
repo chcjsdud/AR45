@@ -10,7 +10,7 @@ GameEngineLight::GameEngineLight()
 	LightDataValue.ShadowTargetSizeX = 4096;
 	LightDataValue.ShadowTargetSizeY = 4096;
 	LightDataValue.LightNear = 0.1f;
-	LightDataValue.LightFar = 1000.1f;
+	LightDataValue.LightFar = 1000.0f;
 }
 
 GameEngineLight::~GameEngineLight() 
@@ -38,6 +38,8 @@ void GameEngineLight::Start()
 void GameEngineLight::LightUpdate(GameEngineCamera* _Camera, float _DeltaTime) 
 {
 	// GetTransform()->SetCameraMatrix(_Camera->GetView(), _Camera->GetProjection());
+
+	LightDataValue.CameraViewInverseMatrix = _Camera->GetView().InverseReturn();
 
 	LightDataValue.LightPos = GetTransform()->GetWorldPosition();
 	LightDataValue.LightDir = GetTransform()->GetLocalForwardVector();

@@ -22,6 +22,6 @@ void Ground::Start()
 		Renderer->GetRenderBaseValueRef().BaseColor = { 0.7f, 0.2f, 0.0f, 1.0f};
 
 		Unit->SetMesh("Box");
-		Unit->SetMaterial("MeshColor");
+		Unit->SetMaterial("MeshColorDeferred");
 	}
 }

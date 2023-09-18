@@ -44,11 +44,12 @@ void GameEngineCoreWindow::OnGUI(std::shared_ptr<GameEngineLevel> Level, float _
 
 			for (ID3D11ShaderResourceView* _View : RenderTarget->SRVs)
 			{
-				float4 Scale = RenderTarget->Textures[Index]->GetScale() * 0.2f;
+				float4 Scale = RenderTarget->Textures[Index]->GetScale();
+				float4 SmallScale = Scale * 0.2f;
 
 				++Index;
 
-				if (true == ImGui::ImageButton(static_cast<ImTextureID>(_View), { Scale.x, Scale.y }))
+				if (true == ImGui::ImageButton(static_cast<ImTextureID>(_View), { SmallScale.x, SmallScale.y }))
 				{
 					std::shared_ptr<GameEngineGUIWindow> NewWindow = nullptr;
 					if (nullptr == GameEngineGUI::FindGUIWindow("ImageShot"))

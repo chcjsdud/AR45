@@ -155,6 +155,7 @@
     <FxCompile Include="MeshAniTexture.hlsl" />
     <FxCompile Include="MeshAniTextureDeferred.hlsl" />
     <FxCompile Include="MeshColor.hlsl" />
+    <FxCompile Include="MeshColorDeferred.hlsl" />
     <FxCompile Include="MeshTexture.hlsl" />
     <FxCompile Include="MergeShader.hlsl" />
     <FxCompile Include="RenderBaseValue.fx" />
