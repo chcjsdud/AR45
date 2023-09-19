@@ -157,20 +157,20 @@ void Player::Start()
 
 
 
-	if (true)
-	{
-		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
-		Renderer->SetFBXMesh("Player_Artorias.FBX", "MeshAniTexture");
+	//if (true)
+	//{
+	//	std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
+	//	Renderer->SetFBXMesh("Player_Artorias.FBX", "MeshAniTexture");
 
-		GameEngineTime Time;
-		Time.Reset();
-		float Check0 = Time.TimeCheck();
-		Renderer->CreateFBXAnimation("Run", "Dead.fbx", { 0.05f });
-		float Check1 = Time.TimeCheck();
-		Renderer->ChangeAnimation("Run");
+	//	GameEngineTime Time;
+	//	Time.Reset();
+	//	float Check0 = Time.TimeCheck();
+	//	Renderer->CreateFBXAnimation("Run", "Dead.fbx", { 0.05f });
+	//	float Check1 = Time.TimeCheck();
+	//	Renderer->ChangeAnimation("Run");
 
-		Renderer->ShadowOn();
-	}
+	//	Renderer->ShadowOn();
+	//}
 
 }
 

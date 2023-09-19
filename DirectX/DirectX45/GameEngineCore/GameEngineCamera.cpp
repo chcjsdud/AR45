@@ -369,7 +369,8 @@ void GameEngineCamera::Render(float _DeltaTime)
 
 						Render->GetRenderer()->GetTransform()->SetCameraMatrix(Light->GetLightData().LightViewMatrix, Light->GetLightData().LightProjectionMatrix);
 						TransformData Data = Render->GetRenderer()->GetTransform()->GetTransDataRef();
-						Render->Setting();
+						// Render->Setting();
+						Render->ShadowSetting();
 						std::shared_ptr<GameEngineMaterial> Pipe = GameEngineMaterial::Find("Shadow");
 						Pipe->VertexShader();
 						Pipe->Rasterizer();
