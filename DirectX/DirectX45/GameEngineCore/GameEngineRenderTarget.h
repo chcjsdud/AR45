@@ -116,6 +116,8 @@ public:
 		ResCreate(_Format, _Scale, _Color);
 	}
 
+	void ChangeViewPort(float4 _Scale, int _Index = 0);
+
 protected:
 
 private:

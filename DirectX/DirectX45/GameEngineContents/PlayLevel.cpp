@@ -70,20 +70,27 @@ void PlayLevel::Start()
 
 
 	{
-		std::shared_ptr<GameEngineLight> Light = CreateActor<GameEngineLight>();
+		{
+			std::shared_ptr<GameEngineLight> Light = CreateActor<GameEngineLight>();
+			Light->GetTransform()->AddLocalRotation(float4(90, 0.0f, 0.0f));
+			Light->GetTransform()->AddLocalPosition(float4(0, 500.0f, 0.0f));
+			Light->LightDataValue.DifLightPower = 1.0f;
+			Light->LightDataValue.SpcPow = 5.0f;
+			Light->LightDataValue.AmbientLight = float4::ZERO;
+			GameEngineCoreWindow::AddDebugRenderTarget(7, "ShadowTarget1", Light->GetShadowTarget());
+		}
 
-		Light->GetTransform()->AddLocalRotation(float4(90, 0.0f, 0.0f));
-		Light->GetTransform()->AddLocalPosition(float4(0, 500.0f, 0.0f));
+		{
+			std::shared_ptr<GameEngineLight> Light = CreateActor<GameEngineLight>();
+			Light->GetTransform()->AddLocalRotation(float4(45, 0.0f, 0.0f));
+			float4 FW = Light->GetTransform()->GetLocalForwardVector();
+			Light->GetTransform()->AddLocalPosition(float4(0, 500.0f, -500.0f));
+			Light->LightDataValue.DifLightPower = 1.0f;
+			Light->LightDataValue.SpcPow = 5.0f;
+			Light->LightDataValue.AmbientLight = float4::ZERO;
+			GameEngineCoreWindow::AddDebugRenderTarget(8, "ShadowTarget2", Light->GetShadowTarget());
+		}
 
-		Light->LightDataValue.DifLightPower = 1.0f;
-		Light->LightDataValue.SpcPow = 5.0f;
-		Light->LightDataValue.AmbientLight = float4::ZERO;
-
-		GameEngineCoreWindow::AddDebugRenderTarget(7, "ShadowTarget", Light->GetShadowTarget());
-
-
-		//std::shared_ptr<GameEngineLight> Light2 = CreateActor<GameEngineLight>();
-		//Light->GetTransform()->SetLocalRotation({45.0f, 0.0f, 0.0f});
 	}
 
 

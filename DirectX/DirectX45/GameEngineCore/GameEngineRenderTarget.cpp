@@ -60,7 +60,6 @@ void GameEngineRenderTarget::ResCreate(DXGI_FORMAT _Format, float4 _Scale, float
 	Textures.push_back(Tex);
 
 	D3D11_VIEWPORT ViewPortData;
-
 	ViewPortData.TopLeftX = 0;
 	ViewPortData.TopLeftY = 0;
 	ViewPortData.Width = static_cast<float>(_Scale.uix());
@@ -196,4 +195,17 @@ void GameEngineRenderTarget::Effect(float _DeltaTime)
 void GameEngineRenderTarget::EffectInit(std::shared_ptr<GameEnginePostProcess> _PostProcess)
 {
 	_PostProcess->Start(this);
+}
+
+void GameEngineRenderTarget::ChangeViewPort(float4 _Scale, int _Index)
+{
+	D3D11_VIEWPORT ViewPortData;
+	ViewPortData.TopLeftX = 0;
+	ViewPortData.TopLeftY = 0;
+	ViewPortData.Width = static_cast<float>(_Scale.uix());
+	ViewPortData.Height = static_cast<float>(_Scale.uiy());
+	ViewPortData.MinDepth = 0.0f;
+	ViewPortData.MaxDepth = 1.0f;
+
+	ViewPortDatas[_Index] = ViewPortData;
 }
