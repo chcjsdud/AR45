@@ -139,25 +139,25 @@ void Player::Start()
 	//	Renderer->ShadowOn();
 	//}
 
+	//if (true)
+	//{
+	//	std::shared_ptr<GameEngineRenderer> Renderer = CreateComponent<GameEngineRenderer>();
+	//	std::shared_ptr<GameEngineRenderUnit> Unit = Renderer->CreateRenderUnit();
+
+	//	Renderer->GetTransform()->AddLocalPosition({ 100, 500, 0 });
+	//	Renderer->GetTransform()->SetLocalScale({ 200, 200, 200 });
+
+	//	Renderer->GetRenderBaseValueRef().BaseColor = { 1.0f, 0.0f, 0.0f, 1.0f };
+
+	//	Unit->SetMesh("Box");
+	//	Unit->SetMaterial("MeshColorDeferred");
+
+	//	Renderer->ShadowOn();
+	//}
+
+
+
 	if (true)
-	{
-		std::shared_ptr<GameEngineRenderer> Renderer = CreateComponent<GameEngineRenderer>();
-		std::shared_ptr<GameEngineRenderUnit> Unit = Renderer->CreateRenderUnit();
-
-		Renderer->GetTransform()->AddLocalPosition({ 100, 500, 0 });
-		Renderer->GetTransform()->SetLocalScale({ 200, 200, 200 });
-
-		Renderer->GetRenderBaseValueRef().BaseColor = { 1.0f, 0.0f, 0.0f, 1.0f };
-
-		Unit->SetMesh("Box");
-		Unit->SetMaterial("MeshColorDeferred");
-
-		Renderer->ShadowOn();
-	}
-
-
-
-	if (false)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("Player_Artorias.FBX", "MeshAniTexture");
