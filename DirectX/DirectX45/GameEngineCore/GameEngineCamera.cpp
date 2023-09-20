@@ -77,6 +77,10 @@ void GameEngineCamera::Start()
 	CamDeferrdTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL);
 	CamAlphaTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL);
 
+	DeferredPostLightTarget = GameEngineRenderTarget::Create(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL);
+	DeferredPostLightTarget->AddNewTexture(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL); // 스펙큘러 라이트
+	DeferredPostLightTarget->AddNewTexture(DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT, GameEngineWindow::GetScreenSize(), float4::ZERONULL); // 스펙큘러 라이트
+
 	CalLightUnit.SetMesh("FullRect");
 	CalLightUnit.SetMaterial("DeferredCalLight");
 
@@ -88,6 +92,20 @@ void GameEngineCamera::Start()
 	CalLightUnit.ShaderResHelper.SetTexture("PositionTex", AllRenderTarget->GetTexture(2));
 	CalLightUnit.ShaderResHelper.SetTexture("NormalTex", AllRenderTarget->GetTexture(3));
 
+	//DifLightTex:
+	//SpcLightTex:
+	//AmbLightTex:
+	//ShadowTestTex
+
+
+	LightPostUnit.SetMesh("FullRect");
+	LightPostUnit.SetMaterial("DeferredPostLight");
+
+	LightPostUnit.ShaderResHelper.SetTexture("DifLightTex", DeferredLightTarget->GetTexture(0));
+	LightPostUnit.ShaderResHelper.SetTexture("SpcLightTex", DeferredLightTarget->GetTexture(1));
+	LightPostUnit.ShaderResHelper.SetTexture("AmbLightTex", DeferredLightTarget->GetTexture(2));
+	LightPostUnit.ShaderResHelper.SetTexture("ShadowTestTex", DeferredLightTarget->GetTexture(3));
+
 	//Texture2D DifColor : register(t0);
 	//Texture2D DifLight : register(t1);
 	//Texture2D SpcLight : register(t2);
@@ -95,9 +113,9 @@ void GameEngineCamera::Start()
 	DefferdMergeUnit.SetMesh("FullRect");
 	DefferdMergeUnit.SetMaterial("DeferredMerge");
 	DefferdMergeUnit.ShaderResHelper.SetTexture("DifColor", AllRenderTarget->GetTexture(1));
-	DefferdMergeUnit.ShaderResHelper.SetTexture("DifLight", DeferredLightTarget->GetTexture(0));
-	DefferdMergeUnit.ShaderResHelper.SetTexture("SpcLight", DeferredLightTarget->GetTexture(1));
-	DefferdMergeUnit.ShaderResHelper.SetTexture("AmbLight", DeferredLightTarget->GetTexture(2));
+	DefferdMergeUnit.ShaderResHelper.SetTexture("DifLight", DeferredPostLightTarget->GetTexture(0));
+	DefferdMergeUnit.ShaderResHelper.SetTexture("SpcLight", DeferredPostLightTarget->GetTexture(1));
+	DefferdMergeUnit.ShaderResHelper.SetTexture("AmbLight", DeferredPostLightTarget->GetTexture(2));
 }
 
 void GameEngineCamera::FreeCameraSwitch()
@@ -399,7 +417,14 @@ void GameEngineCamera::Render(float _DeltaTime)
 			++GetLevel()->LightDataObject.LightCount;
 		}
 
+		// 빛계산이 끝나고 디퍼드 머지가 되기전에
+		// 한번 빛을 수정하고 들어갈 것이다.
 		DeferredLightTarget->Effect(_DeltaTime);
+
+		DeferredPostLightTarget->Clear();
+		DeferredPostLightTarget->Setting();
+		LightPostUnit.Render(_DeltaTime);
+
 
 		CamDeferrdTarget->Clear();
 		CamDeferrdTarget->Setting();

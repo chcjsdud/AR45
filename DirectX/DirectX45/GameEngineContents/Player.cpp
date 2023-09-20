@@ -26,6 +26,9 @@ void Player::Start()
 		GameEngineInput::CreateKey("MoveDown", 'E');
 		GameEngineInput::CreateKey("MoveForward", 'W');
 		GameEngineInput::CreateKey("MoveBack", 'S');
+
+		GameEngineInput::CreateKey("Rot", 'G');
+
 	}
 
 	//std::shared_ptr<GameEngineRenderer> Renderer = CreateComponent<GameEngineRenderer>();
@@ -254,6 +257,11 @@ void Player::UserUpdate(float _DeltaTime)
 	if (true == GameEngineInput::IsPress("MoveBack"))
 	{
 		GetTransform()->AddLocalPosition(GetTransform()->GetWorldBackVector() * Speed * _DeltaTime);
+	}
+
+	if (true == GameEngineInput::IsPress("Rot"))
+	{
+		GetTransform()->AddLocalRotation({ 0.0f, 360.0f * _DeltaTime, 0.0f });
 	}
 
 	static float Delta = 0.0f;

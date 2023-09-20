@@ -66,7 +66,7 @@ void PlayLevel::Start()
 	// GameEngineCoreWindow::AddDebugRenderTarget(4, "BloomEffect", BloomEffectInst->ResultTarget);
 	//GameEngineCoreWindow::AddDebugRenderTarget(5, "BloomBlurEffect0", BloomEffectInst->BlurTarget0);
 	//GameEngineCoreWindow::AddDebugRenderTarget(6, "BloomBlurEffect1", BloomEffectInst->BlurTarget1);
-	
+	GameEngineCoreWindow::AddDebugRenderTarget(8, "PostLight", GetMainCamera()->GetDeferredPostLightTarget());
 
 
 	{

@@ -10,7 +10,7 @@ GameEngineLight::GameEngineLight()
 	LightDataValue.ShadowTargetSizeX = 4096;
 	LightDataValue.ShadowTargetSizeY = 4096;
 	LightDataValue.LightNear = 0.1f;
-	LightDataValue.LightFar = 1000.0f;
+	LightDataValue.LightFar = 3000.0f;
 	ShadowRange.x = 1024.0f;
 	ShadowRange.y = 1024.0f;
 }

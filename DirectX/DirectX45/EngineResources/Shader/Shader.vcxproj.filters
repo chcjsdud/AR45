@@ -38,6 +38,9 @@
       <Filter>PostEffect</Filter>
     </FxCompile>
     <FxCompile Include="MeshColorDeferred.hlsl" />
+    <FxCompile Include="DeferredPostLight.hlsl">
+      <Filter>Deferred</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">
