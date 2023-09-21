@@ -30,7 +30,9 @@ public:
 	bool bOnceEnd = true;
 	bool Loop = true;
 
-	// Event
+	// 
+	float BlendIn = 0.2f;
+	float BlendOut = 0.2f;
 
 	void Init(std::shared_ptr<GameEngineFBXMesh> _Mesh, std::shared_ptr<GameEngineFBXAnimation> _Animation, const std::string_view & _Name, int _Index);
 	void Reset();
@@ -136,6 +138,11 @@ private:
 	
 	// 스트럭처드 버퍼랑 링크가 되는 녀석.
 	std::vector<float4x4> AnimationBoneMatrixs;
+
+	// Cha
+	float BlendTime; // 0.2
+	float CurBlendTime; // 0.2
+	std::vector<AnimationBoneData> PrevAnimationBoneDatas;
 
 
 	std::vector<AnimationBoneData> AnimationBoneDatas;
