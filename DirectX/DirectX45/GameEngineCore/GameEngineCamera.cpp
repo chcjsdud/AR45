@@ -403,9 +403,6 @@ void GameEngineCamera::Render(float _DeltaTime)
 
 		GameEngineRenderTarget::Reset();
 
-		// 오브젝트들은 그릴만한 애들은 다 그렸다고 판단하고
-		// 빛계산의 결과가 들어갈 애들이 여기에서 세팅되고
-
 		DeferredLightTarget->Setting();
 		// 빛이 1개라면 잘 동작할 것이다.
 

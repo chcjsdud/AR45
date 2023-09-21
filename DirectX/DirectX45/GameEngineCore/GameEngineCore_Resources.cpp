@@ -497,6 +497,8 @@ void GameEngineCore::CoreResourcesInit()
 		// Desc.AlphaToCoverageEnable = false;
 
 		// 
+		// 알파마다 차등 깊이를 준다.
+		// 문제가 있다 0.5f 이하가 0으로 처리되는 문제가 있었던 걸로 기억한다.
 		Desc.AlphaToCoverageEnable = false;
 		// 블랜드를 여러개 넣을거냐
 		// TRUE면 블랜드를 여러개 넣습니다.
