@@ -41,6 +41,8 @@
     <FxCompile Include="DeferredPostLight.hlsl">
       <Filter>Deferred</Filter>
     </FxCompile>
+    <FxCompile Include="MeshTextureDeferred.hlsl" />
+    <FxCompile Include="MeshTextureAlpha.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">

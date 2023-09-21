@@ -147,15 +147,16 @@ void Player::Start()
 		std::shared_ptr<GameEngineRenderer> Renderer = CreateComponent<GameEngineRenderer>();
 		std::shared_ptr<GameEngineRenderUnit> Unit = Renderer->CreateRenderUnit();
 
-		Renderer->GetTransform()->AddLocalPosition({ 100, 500, 0 });
+		Renderer->GetTransform()->AddLocalPosition({ 0, 100, 0 });
 		Renderer->GetTransform()->SetLocalScale({ 200, 200, 200 });
 
 		Renderer->GetRenderBaseValueRef().BaseColor = { 1.0f, 0.0f, 0.0f, 1.0f };
 
 		Unit->SetMesh("Box");
-		Unit->SetMaterial("MeshColorDeferred");
+		Unit->SetMaterial("MeshTextureAlpha");
+		Unit->ShaderResHelper.SetTexture("DiffuseTexture", "FOGWAR.png");
 
-		Renderer->ShadowOn();
+		// Renderer->ShadowOn();
 	}
 
 

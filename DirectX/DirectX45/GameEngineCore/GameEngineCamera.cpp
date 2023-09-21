@@ -304,13 +304,6 @@ void GameEngineCamera::Render(float _DeltaTime)
 
 		for (std::pair<const RenderPath, std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>>& Path : Units)
 		{
-			if (Path.first == RenderPath::Forward)
-			{
-				//AllRenderTarget->Setting();
-				//DeferredLightTarget->Setting();
-				int a = 0;
-			}
-
 			std::map<int, std::list<std::shared_ptr<class GameEngineRenderUnit>>>& UnitPath = Path.second;
 
 			std::map<int, std::list<std::shared_ptr<GameEngineRenderUnit>>>::iterator RenderGroupStartIter = UnitPath.begin();
@@ -431,12 +424,16 @@ void GameEngineCamera::Render(float _DeltaTime)
 		CamForwardTarget->Clear();
 		CamForwardTarget->Merge(AllRenderTarget, 0);
 
+		CamAlphaTarget->Clear();
+		CamAlphaTarget->Merge(AllRenderTarget, 6);
+
 		// ??
 		// CamAlphaTarget
 
 		CamTarget->Clear();
 		CamTarget->Merge(CamForwardTarget);
 		CamTarget->Merge(CamDeferrdTarget);
+		CamTarget->Merge(CamAlphaTarget);
 		// CamTarget->Merge(CamAlphaTarget);
 	}
 }

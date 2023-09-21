@@ -159,6 +159,8 @@
     <FxCompile Include="MeshColorDeferred.hlsl" />
     <FxCompile Include="MeshTexture.hlsl" />
     <FxCompile Include="MergeShader.hlsl" />
+    <FxCompile Include="MeshTextureAlpha.hlsl" />
+    <FxCompile Include="MeshTextureDeferred.hlsl" />
     <FxCompile Include="RenderBaseValue.fx" />
     <FxCompile Include="TextureShader.hlsl" />
     <FxCompile Include="TileMapShader.hlsl" />
