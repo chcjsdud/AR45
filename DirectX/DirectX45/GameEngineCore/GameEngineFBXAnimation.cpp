@@ -7,6 +7,7 @@ GameEngineFBXAnimation::GameEngineFBXAnimation()
 
 GameEngineFBXAnimation::~GameEngineFBXAnimation()
 {
+	Release();
 }
 
 std::shared_ptr<GameEngineFBXAnimation> GameEngineFBXAnimation::Load(const std::string& _Path, const std::string& _Name)
@@ -457,4 +458,12 @@ void GameEngineFBXAnimation::AnimationMatrixLoad(std::shared_ptr <GameEngineFBXM
 	}
 
 	AnimationDatas;
+}
+
+
+void GameEngineFBXAnimation::Release()
+{
+	AnimationDatas.clear();
+	// 지금 사이즈 크기로 메모리를 줄인다.
+	AnimationDatas.shrink_to_fit();
 }

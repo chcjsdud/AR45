@@ -115,21 +115,21 @@ void GameEngineFBXAnimationInfo::Update(float _DeltaTime)
 		AnimationBoneData[i].RotQuaternion = float4::SLerpQuaternion(CurData.Q, NextData.Q, CurFrameTime);
 		AnimationBoneData[i].Pos = float4::Lerp(CurData.T, NextData.T, CurFrameTime);
 
-		// 블랜드 change animation을 했고 그 이후로 0.2초가 지나지 않았다면
-		if (/*블랜드중이라면*/false)
-		{
-			// 0.2초를 0~1초 바꿔야 합니다.
+		//// 블랜드 change animation을 했고 그 이후로 0.2초가 지나지 않았다면
+		//if (/*블랜드중이라면*/false)
+		//{
+		//	// 0.2초를 0~1초 바꿔야 합니다.
 
-			
-			// 0~0.2
-			// 0~1로 바꾼 값을 
-			float BlendRatio = 0.0f;
+		//	
+		//	// 0~0.2
+		//	// 0~1로 바꾼 값을 
+		//	float BlendRatio = 0.0f;
 
 
-			AnimationBoneData[i].Scale = float4::Lerp(ParentRenderer->PrevAnimationBoneDatas[i].Scale, AnimationBoneData[i].Scale, BlendRatio);
-			AnimationBoneData[i].RotQuaternion = float4::SLerpQuaternion(CurData.Q, NextData.Q, CurFrameTime);
-			AnimationBoneData[i].Pos = float4::Lerp(CurData.T, NextData.T, CurFrameTime);
-		}
+		//	AnimationBoneData[i].Scale = float4::Lerp(ParentRenderer->PrevAnimationBoneDatas[i].Scale, AnimationBoneData[i].Scale, BlendRatio);
+		//	AnimationBoneData[i].RotQuaternion = float4::SLerpQuaternion(CurData.Q, NextData.Q, CurFrameTime);
+		//	AnimationBoneData[i].Pos = float4::Lerp(CurData.T, NextData.T, CurFrameTime);
+		//}
 
 		size_t Size = sizeof(float4x4);
 
@@ -137,6 +137,7 @@ void GameEngineFBXAnimationInfo::Update(float _DeltaTime)
 
 		AnimationBoneMatrix[i] = BoneData->BonePos.Offset * Mat;
 	}
+
 }
 
 void GameEngineFBXAnimationInfo::Reset()
@@ -168,6 +169,23 @@ void GameEngineFBXRenderer::SetFBXMesh(const std::string& _Name, std::string _Ma
 	}
 
 	FindFBXMesh->Initialize();
+
+	const std::vector<Bone>& Bones = FindFBXMesh->GetAllBone();
+
+	if (Bones.size() != AnimationBoneDatas.size())
+	{
+		AnimationBoneDatas.resize(Bones.size());
+
+		for (size_t i = 0; i < Bones.size(); i++)
+		{
+			float4x4 Offset = Bones[i].BonePos.Offset;
+
+			Offset.Decompose(AnimationBoneDatas[i].Scale, AnimationBoneDatas[i].RotQuaternion,AnimationBoneDatas[i].Pos);
+
+			AnimationBoneDatas[i].RotEuler = AnimationBoneDatas[i].RotQuaternion.QuaternionToEulerDeg();
+		}
+	}
+
 
 	// 너 몇개 가지고 있어.
 	for (size_t UnitCount = 0; UnitCount < FindFBXMesh->GetRenderUnitCount(); UnitCount++)
@@ -413,4 +431,57 @@ void GameEngineFBXRenderer::Update(float _DeltaTime)
 	}
 
 	CurAnimation->Update(_DeltaTime);
+
+
+	const TransformData& TransFormData = GetTransform()->GetTransDataRef();
+
+	for (size_t i = 0; i < AttachTransformValue.size(); i++)
+	{
+		AttachTransformInfo& Data = AttachTransformValue[i];
+
+		AnimationBoneData& Info = AnimationBoneDatas[Data.Index];
+
+		Data.Transform->SetLocalPosition(Info.Pos + TransFormData.LocalPosition);
+		Data.Transform->SetLocalRotation(Info.RotEuler/* + TransFormData.LocalQuaternion.QuaternionToEulerDeg()*/);
+	}
+}
+
+AnimationBoneData GameEngineFBXRenderer::GetBoneData(std::string _Name)
+{
+	Bone* BoneData = FBXMesh->FindBone(_Name);
+
+	AnimationBoneData Data;
+
+	if (nullptr == BoneData)
+	{
+		MsgAssert(std::string(_Name) + "존재하지 않는 본의 데이터를 찾으려고 했습니다.");
+		return Data;
+	}
+
+
+	Data = GetBoneData(BoneData->Index);
+
+	const TransformData& TransFormData = GetTransform()->GetTransDataRef();
+	Data.Pos += TransFormData.LocalPosition;
+	Data.RotEuler = Data.RotQuaternion.QuaternionToEulerDeg();
+
+	return Data;
+}
+
+void GameEngineFBXRenderer::SetAttachTransform(std::string_view _Name, GameEngineTransform* _Transform)
+{
+	Bone* BoneData = FBXMesh->FindBone(_Name.data());
+
+	if (nullptr == BoneData)
+	{
+		MsgAssert(std::string(_Name) + "존재하지 않는 본의 데이터를 찾으려고 했습니다.");
+		return;
+	}
+
+	SetAttachTransform(BoneData->Index, _Transform);
+}
+
+void GameEngineFBXRenderer::SetAttachTransform(int Index, GameEngineTransform* _Transform)
+{
+	AttachTransformValue.push_back({ Index, _Transform });
 }

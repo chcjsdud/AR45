@@ -30,5 +30,7 @@ protected:
 private:
 	std::shared_ptr<class GameEngineComponent> Pivot;
 	std::shared_ptr<class GameEngineFBXRenderer> TestRenderer;
+	std::shared_ptr<GameEngineFBXRenderer> Renderer;
+	std::shared_ptr<GameEngineRenderer> BoxRenderer;
 };
 
