@@ -466,4 +466,5 @@ void GameEngineFBXAnimation::Release()
 	AnimationDatas.clear();
 	// 지금 사이즈 크기로 메모리를 줄인다.
 	AnimationDatas.shrink_to_fit();
+	IsInit = false;
 }

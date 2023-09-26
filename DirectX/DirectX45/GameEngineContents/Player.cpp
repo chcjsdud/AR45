@@ -73,7 +73,7 @@ void Player::Start()
 	// Renderer->SetFBXMesh("AnimMan.FBX", "MeshTexture", 0, 0);
 	// Renderer->SetFBXMesh("AnimMan.FBX", "MeshTexture", 0, 2);
 
-	if (true)
+	if (false)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("AnimMan.FBX", "MeshAniTextureDeferred");
@@ -92,12 +92,12 @@ void Player::Start()
 
 
 
-	if (false)
+	if (true)
 	{
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("JUMPER_MESH.FBX", "MeshAniTextureDeferred");
 		Renderer->GetTransform()->SetLocalPosition({ 0.0f, 200.0f, 0.0f });
-		Renderer->GetTransform()->SetLocalScale({ 1.0f, 1.0f, 1.0f });
+		Renderer->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
 
 		GameEngineTime Time;
 		Time.Reset();
@@ -117,9 +117,10 @@ void Player::Start()
 
 		std::shared_ptr<GameEngineFBXRenderer> Renderer = CreateComponent<GameEngineFBXRenderer>();
 		Renderer->SetFBXMesh("Boomerang.fbx", "MeshTextureAlpha");
-		// Renderer->GetTransform()->SetLocalPosition({ 0.0f, 50.0f, 0.0f });
-		Renderer->GetTransform()->SetLocalScale({ 100.0f, 100.0f, 100.0f });
-		TestRenderer->SetAttachTransform("Hand_L", Renderer->GetTransform());
+		// Renderer->GetTransform()->SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+		Renderer->GetTransform()->SetLocalScale({ 200.0f, 200.0f, 200.0f });
+		// Renderer->GetTransform()->SetLocalRotation({ 0.0f, 90.0f, 0.0f });
+		TestRenderer->SetAttachTransform("weapon_l", Renderer->GetTransform(), float4::ZERO, float4(00.0f, 90.0f, 90.0f));
 
 
 		//std::shared_ptr<GameEngineRenderer> Renderer = CreateComponent<GameEngineRenderer>();

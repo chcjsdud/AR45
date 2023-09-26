@@ -101,9 +101,9 @@ void PlayLevel::Start()
 		NewPlayer->SetUserControllType();
 	}
 
-	{
-		std::shared_ptr<Ground> Object = CreateActor<Ground>();
-	}
+	//{
+	//	std::shared_ptr<Ground> Object = CreateActor<Ground>();
+	//}
 
 }
 void PlayLevel::LevelChangeStart()
