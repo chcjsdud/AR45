@@ -439,10 +439,22 @@ void GameEngineFBXRenderer::Update(float _DeltaTime)
 	{
 		AttachTransformInfo& Data = AttachTransformValue[i];
 
-		AnimationBoneData& Info = AnimationBoneDatas[Data.Index];
+		float4x4 Mat = AnimationBoneMatrixs[Data.Index];
 
-		Data.Transform->SetLocalPosition(Info.Pos + TransFormData.LocalPosition);
-		Data.Transform->SetLocalRotation(Info.RotEuler/* + TransFormData.LocalQuaternion.QuaternionToEulerDeg()*/);
+		Mat *= TransFormData.LocalWorldMatrix;
+
+		// AnimationBoneData& Info = AnimationBoneDatas[Data.Index];
+		// Info.Pos *= TransFormData.WorldMatrix;
+		//Info.RotEuler *= TransFormData.WorldMatrix;
+
+		float4 Scale;
+		float4 Rot;
+		float4 Pos;
+
+		Mat.Decompose(Scale, Rot, Pos);
+
+		Data.Transform->SetLocalPosition(Pos);
+		Data.Transform->SetLocalRotation(Rot.QuaternionToEulerDeg());
 	}
 }
 
@@ -470,7 +482,9 @@ AnimationBoneData GameEngineFBXRenderer::GetBoneData(std::string _Name)
 
 void GameEngineFBXRenderer::SetAttachTransform(std::string_view _Name, GameEngineTransform* _Transform)
 {
-	Bone* BoneData = FBXMesh->FindBone(_Name.data());
+	std::string UpperName = GameEngineString::ToUpper(_Name);
+
+	Bone* BoneData = FBXMesh->FindBone(UpperName);
 
 	if (nullptr == BoneData)
 	{
