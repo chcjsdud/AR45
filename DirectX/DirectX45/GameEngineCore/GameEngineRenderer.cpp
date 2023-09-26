@@ -143,6 +143,7 @@ void GameEngineRenderUnit::Draw()
 {
 	UINT IndexCount = Mesh->IndexBufferPtr->GetIndexCount();
 	GameEngineDevice::GetContext()->DrawIndexed(IndexCount, 0, 0);
+	// GameEngineDevice::GetContext()->Draw
 }
 
 void GameEngineRenderUnit::ShadowOn()
