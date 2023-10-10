@@ -13,6 +13,7 @@
 #include "Ground.h"
 #include "ServerWindow.h"
 #include <GameEngineCore/EngineGrid.h>
+#include <GameEngineCore/GameEngineParticleRenderer.h>
 
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineSprite.h>
@@ -101,9 +102,11 @@ void PlayLevel::Start()
 		NewPlayer->SetUserControllType();
 	}
 
-	//{
-	//	std::shared_ptr<Ground> Object = CreateActor<Ground>();
-	//}
+	{
+		std::shared_ptr<GameEngineActor> TestP = CreateActor<GameEngineActor>();
+		std::shared_ptr<GameEngineParticleRenderer> Particle = TestP->CreateComponent<GameEngineParticleRenderer>();
+
+	}
 
 }
 void PlayLevel::LevelChangeStart()

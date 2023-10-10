@@ -53,6 +53,10 @@ void GameEngineCore::CoreResourcesInit()
 	GameEngineVertex::LayOut.AddInputLayOut("BLENDWEIGHT", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT); // 48
 	GameEngineVertex::LayOut.AddInputLayOut("BLENDINDICES", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_SINT); // 48
 
+	GameEngineVertexParticle::LayOut.AddInputLayOut("POSITION", DXGI_FORMAT_R32G32B32A32_FLOAT);
+	GameEngineVertexParticle::LayOut.AddInputLayOut("PINDEX", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_SINT); // 48
+
+
 	//typedef struct D3D11_INPUT_ELEMENT_DESC
 	//{
 	//	LPCSTR SemanticName; = "POSITION"
@@ -550,6 +554,10 @@ void GameEngineCore::CoreResourcesInit()
 
 
 	{
+		// 거기에 대한 2가지 방식이.
+		// 인스턴싱
+		// 지오메트리 쉐이더
+
 		D3D11_DEPTH_STENCIL_DESC Desc = { 0, };
 		//BOOL DepthEnable;
 		//D3D11_DEPTH_WRITE_MASK DepthWriteMask;

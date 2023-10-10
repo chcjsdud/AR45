@@ -43,6 +43,9 @@
     </FxCompile>
     <FxCompile Include="MeshTextureDeferred.hlsl" />
     <FxCompile Include="MeshTextureAlpha.hlsl" />
+    <FxCompile Include="Particle.hlsl">
+      <Filter>Particle</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">
@@ -56,6 +59,9 @@
     </Filter>
     <Filter Include="Shadow">
       <UniqueIdentifier>{789f86c1-695b-436f-8d40-8d29dd7c4495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{50a4372c-0e7f-4161-84d8-5268ebf533f6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
