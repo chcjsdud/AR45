@@ -114,13 +114,13 @@ public:
 
 	void PSSetting(int _BindPoint);
 
-	void CreateResize(const D3D11_SHADER_BUFFER_DESC& _Desc, int Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr);
+	void CreateResize(const D3D11_SHADER_BUFFER_DESC& _Desc, int Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr, bool _CPUAccess = false);
 
-	void CreateResize(size_t DataSize, size_t Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr);
+	void CreateResize(size_t DataSize, size_t Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr, bool _CPUAccess = false);
 
-	void CreateResize(size_t Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr);
+	void CreateResize(size_t Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr, bool _CPUAccess = false);
 
-	void CreateResize(const D3D11_BUFFER_DESC& _Data, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr);
+	void CreateResize(const D3D11_BUFFER_DESC& _Data, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr, bool _CPUAccess = false);
 
 	inline int GetDataSize()
 	{
@@ -154,6 +154,9 @@ private:
 	D3D11_SHADER_BUFFER_DESC ShaderDesc;
 	D3D11_MAPPED_SUBRESOURCE SettingResources;
 	ID3D11ShaderResourceView* ShaderResourceView = nullptr;
+
+	ID3D11Buffer* WriteBuffer = nullptr;
+	ID3D11Buffer* ReadBuffer = nullptr;
 
 	// 컴퓨트 쉐이더에 넣어줄때 사용하는 view
 	ID3D11UnorderedAccessView* UnorderedAccessView = nullptr;

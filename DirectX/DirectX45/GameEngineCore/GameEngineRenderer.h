@@ -55,6 +55,16 @@ private:
 class RenderBaseValue 
 {
 public:
+	//float4 BaseColor;
+	//float DeltaTime;
+	//float SumDeltaTime;
+	//int IsAnimation;
+	//int IsNormal;
+	//float4 ScreenScale;
+	//float4 Mouse;
+	//float4 NoiseResolution;
+
+
 	float4 BaseColor = {1.0f, 0.0f, 0.0f, 1.0f};
 	float DeltaTime = 0.0f;
 	float SumDeltaTime = 0.0f;
@@ -62,6 +72,7 @@ public:
 	int IsNormal = 0;
 	float4 ScreenScale;
 	float4 Mouse;
+	float4 NoiseResolution;
 };
 
 // Ό³Έν :

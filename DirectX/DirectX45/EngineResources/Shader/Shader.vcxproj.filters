@@ -46,6 +46,9 @@
     <FxCompile Include="Particle.hlsl">
       <Filter>Particle</Filter>
     </FxCompile>
+    <FxCompile Include="ParticleUpdate.fx">
+      <Filter>Particle</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header">
