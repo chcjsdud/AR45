@@ -30,19 +30,15 @@ public:
 		return Res;
 	}
 
+	// void Execute();
+	void Setting() override;
+
 protected:
+	// virtual void UpdateData() = 0;
+	// virtual void Clear() = 0;
+
 
 private:
-	// ¾²
-	UINT                            m_iGroupX;
-	UINT                            m_iGroupY;
-	UINT                            m_iGroupZ;
-
-	// 128
-	UINT                      m_iGroupPerThreadX;
-	UINT                      m_iGroupPerThreadY;
-	UINT                      m_iGroupPerThreadZ;
-
 	ID3D11ComputeShader* ShaderPtr = nullptr;
 
 	void ShaderLoad(const std::string_view& _Path, const std::string_view& _EntryPoint, UINT _VersionHigh = 5, UINT _VersionLow = 0);

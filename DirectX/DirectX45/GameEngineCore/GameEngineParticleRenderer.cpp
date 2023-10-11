@@ -5,6 +5,12 @@
 
 GameEngineParticleRenderer::GameEngineParticleRenderer() 
 {
+	ComUnit.SetComputeShader("ParticleUpdate.fx");
+
+
+	ComUnit.ShaderResHelper.SetConstantBufferLink("RenderBaseValue", BaseValue);
+	ComUnit.ShaderResHelper.SetConstantBufferLink("EngineNoise", "noise_03.jpg");
+	ComUnit.ShaderResHelper.SetConstantBufferLink("ParticleUpdateInfo", ParticleUpdateInfoValue);
 }
 
 GameEngineParticleRenderer::~GameEngineParticleRenderer() 
@@ -27,6 +33,13 @@ void GameEngineParticleRenderer::Start()
 		m_ParticleBuffer->CreateResize(sizeof(ParticleData), MaxCount, StructuredBufferType::UAV_INC);
 	}
 
+}
+
+void GameEngineParticleRenderer::Update(float _DeltaTime) 
+{
+	ParticleUpdateInfoValue.ObjectWorldPos = GetTransform()->GetWorldPosition();
+
+	ComUnit.Execute();
 }
 
 void GameEngineParticleRenderer::ParticleRendererInit() 

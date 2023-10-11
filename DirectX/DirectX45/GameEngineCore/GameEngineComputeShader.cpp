@@ -2,12 +2,6 @@
 #include "GameEngineComputeShader.h"
 
 GameEngineComputeShader::GameEngineComputeShader() 
-: m_iGroupX(0)
-, m_iGroupY(0)
-, m_iGroupZ(0)
-, m_iGroupPerThreadX(0)
-, m_iGroupPerThreadY(0)
-, m_iGroupPerThreadZ(0)
 {
 	Type = ShaderType::Compute;
 }
@@ -74,3 +68,39 @@ void GameEngineComputeShader::ShaderLoad(const std::string_view& _Path, const st
 
 	ShaderResCheck();
 }
+
+void GameEngineComputeShader::Setting() 
+{
+	if (nullptr == ShaderPtr)
+	{
+		MsgAssert("컴퓨트 쉐이더가 존재하지 않습니다 세팅에 실패했습니다.");
+	}
+
+	GameEngineDevice::GetContext()->CSSetShader(ShaderPtr, nullptr, 0);
+}
+//
+//void GameEngineComputeShader::Execute()
+//{
+//	// 쉐이더 리소스 뷰를 세팅하고
+//	// UpdateData();
+//
+//	// 상수 업데이트	
+//	//CConstBuffer* pCB = CDevice::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL);
+//	//pCB->SetData(&m_Param);
+//	//pCB->UpdateData_CS();
+//	//void CConstBuffer::UpdateData_CS()
+//	//{
+//	//	CONTEXT->CSSetConstantBuffers((UINT)m_eCBType, 1, m_CB.GetAddressOf());
+//	//}
+//
+//
+//
+//	Setting();
+//
+//	// 실제 연산해라.
+//	GameEngineDevice::GetContext()->Dispatch(m_iGroupX, m_iGroupY, m_iGroupZ);
+//
+//	// 상수버퍼나 이런걸 다 뺀다.
+//	// Clear();
+//
+//}

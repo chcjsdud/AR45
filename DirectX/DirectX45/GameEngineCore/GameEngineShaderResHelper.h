@@ -84,6 +84,7 @@ private:
 	std::multimap<std::string, GameEngineTextureSetter> TextureSetters;
 	std::multimap<std::string, GameEngineSamplerSetter> SamplerSetters;
 	std::multimap<std::string, GameEngineStructuredBufferSetter> StructuredBufferSetters;
+
 public:
 	GameEngineStructuredBufferSetter* GetStructuredBufferSetter(const std::string_view& _View);
 

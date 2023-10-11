@@ -1,7 +1,7 @@
 #include "RenderBaseValue.fx"
 
 // Noise Texture
-Texture2D g_Noise : register(t15);
+Texture2D EngineNoise : register(t15);
 
 static float GaussianFilter[5][5] =
 {
@@ -34,7 +34,7 @@ float4 GaussianSample(float2 _vUV)
         for (int i = 0; i < 5; ++i)
         {
             int2 idx = int2(iUV.y + i, iUV.x + j);
-            vOutColor += g_Noise[idx] * GaussianFilter[j][i];
+            vOutColor += EngineNoise[idx] * GaussianFilter[j][i];
         }
     }
     
@@ -53,10 +53,9 @@ cbuffer ParticleUpdateInfo : register(b7)
     float MaxLife;
     float Temp1;
     float4 ObjectWorldPos; // 액터나 랜더러의 월드 포지션을 
-
 };
 
-struct ParticleData
+struct ParticleComputeData
 {
     // 현재 위치
     float4 vRelativePos;
@@ -76,11 +75,13 @@ struct ParticleData
 struct ParticleShareData
 {
     uint iAliveCount;
-    uint3 iPadding;
+    uint iPadding0;
+    uint iPadding1;
+    uint iPadding2;
 };
 
 // 어제 스트럭처드 버퍼중 UAV_INC <= 으로 만든 녀석만 RW스트럭처드 버퍼로 세팅이 가능하다.
-RWStructuredBuffer<ParticleData> ParticleBuffer : register(u0);
+RWStructuredBuffer<ParticleComputeData> ParticleBuffer : register(u0);
 RWStructuredBuffer<ParticleShareData> ParticleShare : register(u1);
 
 
