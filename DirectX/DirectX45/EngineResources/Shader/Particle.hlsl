@@ -1,4 +1,5 @@
 #include "Transform.fx"
+#include "ParticleHeader.fx"
 
 cbuffer ParticleInfo : register(b7)
 {
@@ -6,23 +7,6 @@ cbuffer ParticleInfo : register(b7)
     float4 EndScale;
     float4 StartColor;
     float4 EndColor;
-};
-
-struct ParticleData
-{
-    // 현재 위치
-    float4 vRelativePos;
-    // 파티클의 방향
-    float4 vDir;
-		
-    // 시간 사라지는시간
-    float fMaxTime;
-    // 현재 시간
-    float fCurTime;
-    // 이동할때의 스피드
-    float fSpeed;
-    // 살아있냐 죽어있냐.
-    uint iActive;
 };
 
 // 스트럭처드 버퍼를 만듭니다.
@@ -58,7 +42,7 @@ struct GS_OUT
 };
 
 [maxvertexcount(6)]
-void GS_ParticleRender(point VS_OUT _in[1], inout TriangleStream<GS_OUT> _OutStream)
+void ParticleRender_GS(point VS_OUT _in[1], inout TriangleStream<GS_OUT> _OutStream)
 {
     GS_OUT output[4] = { (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f };
     
@@ -118,7 +102,7 @@ void GS_ParticleRender(point VS_OUT _in[1], inout TriangleStream<GS_OUT> _OutStr
 Texture2D DiffuseTexture : register(t0);
 SamplerState ENGINEBASE : register(s0);
 
-float4 PS_ParticleRender(GS_OUT _in) : SV_Target
+float4 ParticleRender_PS(GS_OUT _in) : SV_Target
 {
     float4 vColor = (float4) 0.f;
         

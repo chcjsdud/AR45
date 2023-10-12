@@ -15,6 +15,18 @@ GameEngineStructuredBuffer::~GameEngineStructuredBuffer()
 
 void GameEngineStructuredBuffer::Release()
 {
+	if (nullptr != WriteBuffer)
+	{
+		WriteBuffer->Release();
+		WriteBuffer = nullptr;
+	}
+
+	if (nullptr != ReadBuffer)
+	{
+		ReadBuffer->Release();
+		ReadBuffer = nullptr;
+	}
+
 	if (nullptr != UnorderedAccessView)
 	{
 		UnorderedAccessView->Release();
@@ -74,7 +86,7 @@ void GameEngineStructuredBuffer::CreateResize(size_t _DataSize, size_t Count, St
 	BufferInfo.ByteWidth = DataSize * DataCount; // GPU 에 생성할 구조화 버퍼 메모리 크기(최소단위 ??)
 	BufferInfo.StructureByteStride = DataSize; // 1개 크기도 넣어줘야 한다.
 
-	CreateResize(BufferInfo, _Type, _StartData);
+	CreateResize(BufferInfo, _Type, _StartData, _CPUAccess);
 }
 
 void GameEngineStructuredBuffer::CreateResize(const D3D11_BUFFER_DESC& _Data, StructuredBufferType _Type, void* _StartData, bool _CPUAccess)
@@ -83,6 +95,8 @@ void GameEngineStructuredBuffer::CreateResize(const D3D11_BUFFER_DESC& _Data, St
 
 	BufferInfo.MiscFlags = D3D11_RESOURCE_MISC_BUFFER_STRUCTURED;
 	BufferInfo.Usage = D3D11_USAGE_DEFAULT;
+
+	DataType = _Type;
 
 	switch (_Type)
 	{
@@ -239,4 +253,27 @@ void GameEngineStructuredBuffer::PSSetting(int _BindPoint)
 	}
 
 	GameEngineDevice::GetContext()->PSSetShaderResources(_BindPoint, 1, &ShaderResourceView);
+}
+
+
+void GameEngineStructuredBuffer::SetData(void* _pSrc, UINT _DataCount)
+{
+	// 공간이 모자라면 추가할당하면서 초기화한다.
+	if (DataCount < _DataCount)
+	{
+		CreateResize(DataSize, _DataCount, DataType, _pSrc);
+	}
+
+	// 공간이 충분하다면, 데이터 전송
+	else
+	{
+		D3D11_MAPPED_SUBRESOURCE tMapSub = {};
+
+		GameEngineDevice::GetContext()->Map(WriteBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &tMapSub);
+		memcpy(tMapSub.pData, _pSrc, DataSize * DataCount);
+		GameEngineDevice::GetContext()->Unmap(WriteBuffer, 0);
+
+		// 쓰기버퍼 -> 메인버퍼
+		GameEngineDevice::GetContext()->CopyResource(Buffer, WriteBuffer);
+	}
 }

@@ -21,9 +21,9 @@ public:
 	std::shared_ptr<class GameEngineComputeShader> ComputeShader = nullptr;
 
 	// ¾²
-	UINT                            m_iGroupX = 0;
-	UINT                            m_iGroupY = 0;
-	UINT                            m_iGroupZ = 0;
+	UINT                            m_iGroupX = 1;
+	UINT                            m_iGroupY = 1;
+	UINT                            m_iGroupZ = 1;
 
 	// 128
 	UINT                      m_iGroupPerThreadX = 1;

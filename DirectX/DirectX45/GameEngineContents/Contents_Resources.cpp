@@ -146,31 +146,31 @@ void ContentsCore::ContentsResourcesCreate()
 
 	{
 		{
-			GameEngineDirectory NewDir;
-			NewDir.MoveParentToDirectory("ContentResources");
-			NewDir.Move("ContentResources");
-			NewDir.Move("Mesh");
-			NewDir.Move("TestMesh");
+			//GameEngineDirectory NewDir;
+			//NewDir.MoveParentToDirectory("ContentResources");
+			//NewDir.Move("ContentResources");
+			//NewDir.Move("Mesh");
+			//NewDir.Move("TestMesh");
 
-			std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".FBX" });
+			//std::vector<GameEngineFile> Files = NewDir.GetAllFile({ ".FBX" });
 
-			for (size_t i = 0; i < Files.size(); i++)
-			{
-				if (true == GameEngineFBXMesh::IsCheckAnimationFBX(Files[i].GetFullPath()))
-				{
-					std::string Out = Files[i].GetFullPath();
-					Out += " to AnimationMesh \n";
-					OutputDebugStringA(Out.c_str());
-				} else 
-				{
-					std::string Out = Files[i].GetFullPath();
-					Out += " to BoneMesh \n";
-					OutputDebugStringA(Out.c_str());
-				}
+			//for (size_t i = 0; i < Files.size(); i++)
+			//{
+			//	if (true == GameEngineFBXMesh::IsCheckAnimationFBX(Files[i].GetFullPath()))
+			//	{
+			//		std::string Out = Files[i].GetFullPath();
+			//		Out += " to AnimationMesh \n";
+			//		OutputDebugStringA(Out.c_str());
+			//	} else 
+			//	{
+			//		std::string Out = Files[i].GetFullPath();
+			//		Out += " to BoneMesh \n";
+			//		OutputDebugStringA(Out.c_str());
+			//	}
 
-				// bool Check = GameEngineFBX::IsCheckAnimationFBX(View);
-				// GameEngineFBXMesh::Load(Files[i].GetFullPath());
-			}
+			//	// bool Check = GameEngineFBX::IsCheckAnimationFBX(View);
+			//	// GameEngineFBXMesh::Load(Files[i].GetFullPath());
+			//}
 		}
 
 

@@ -64,6 +64,11 @@ int GameEngineStructuredBufferSetter::GetDataSize()
 
 void GameEngineStructuredBufferSetter::Setting() 
 {
+	if (nullptr == SetData)
+	{
+		return;
+	}
+
 	Res->ChangeData(SetData, Size * Count);
 	ShaderType Type = ParentShader->GetType();
 

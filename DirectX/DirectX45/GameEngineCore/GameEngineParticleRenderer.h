@@ -1,6 +1,14 @@
 #pragma once
 #include "GameEngineRenderer.h"
 
+struct ParticleInfo
+{
+	float4 StartScale;
+	float4 EndScale;
+	float4 StartColor;
+	float4 EndColor;
+};
+
 struct ParticleData
 {
 	float4 vRelativePos;
@@ -23,6 +31,13 @@ struct ParticleUpdateInfo
 	float MaxLife = 5.0f;
 	float Temp1;
 	float4 ObjectWorldPos; // 액터나 랜더러의 월드 포지션을 
+
+	//m_UpdateCS->SetWorldSpawn(m_WorldSpawn);
+	//m_UpdateCS->SetObjectWorldPos(Transform()->GetWorldPos());
+	//m_UpdateCS->SetSpawnRange(m_fSpawnRange);
+	//m_UpdateCS->SetMinMaxSpeed(m_vMinMaxSpeed);
+	//m_UpdateCS->SetMinMaxLifeTime(m_vMinMaxLifeTime);
+
 };
 
 
@@ -73,14 +88,15 @@ protected:
 
 	GameEngineComputeUnit ComUnit;
 	ParticleUpdateInfo ParticleUpdateInfoValue;
+	ParticleInfo ParticleInfoValue;
 
 private:
-	int MaxCount;
 	std::shared_ptr<class GameEngineVertexBuffer> Buffer;
-	// std::shared_ptr<class GameEngineStructuredBuffer> m_ParticleBuffer;
-
 	std::shared_ptr<class GameEngineStructuredBuffer> ParticleBuffer;
-	std::shared_ptr<class GameEngineStructuredBuffer> ParticleShare;
+	std::shared_ptr<class GameEngineStructuredBuffer> ParticleShareBuffer;
 
+	
+	int MaxCount = 1000;
+	float Frequency = 5.0f;
 };
 

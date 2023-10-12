@@ -32,8 +32,9 @@ void GameEngineCore::CoreResourcesInit()
 		GameEngineDirectory NewDir;
 		NewDir.MoveParentToDirectory("EngineResources");
 		NewDir.Move("EngineResources");
+		NewDir.Move("Texture");
 
-		std::vector<GameEngineFile> File = NewDir.GetAllFile({ ".Png", });
+		std::vector<GameEngineFile> File = NewDir.GetAllFile({});
 
 
 		for (size_t i = 0; i < File.size(); i++)
@@ -168,6 +169,21 @@ void GameEngineCore::CoreResourcesInit()
 		GameEngineIndexBuffer::Create("Rect", ArrIndex);
 		GameEngineMesh::Create("Rect");
 	}
+
+
+	{
+		std::vector<GameEngineVertex> ArrVertex;
+		ArrVertex.resize(1);
+
+		ArrVertex[0] = { { 0.0f, 0.0f, 0.0f }, {0.0f, 0.0f} };
+		std::vector<UINT> ArrIndex = { 0 };
+
+		GameEngineVertexBuffer::Create("PointMesh", ArrVertex);
+		GameEngineIndexBuffer::Create("PointMesh", ArrIndex);
+		std::shared_ptr<GameEngineMesh> Mesh = GameEngineMesh::Create("PointMesh");
+		Mesh->SetTopology(D3D11_PRIMITIVE_TOPOLOGY_POINTLIST);
+	}
+
 
 
 	{
@@ -862,6 +878,17 @@ void GameEngineCore::CoreResourcesInit()
 		Pipe->SetDepthState("AlwayDepth");
 	}
 
+	{
+		std::shared_ptr<GameEngineMaterial> Pipe = GameEngineMaterial::Create("Particle");
+		Pipe->SetVertexShader("Particle.hlsl");
+		Pipe->SetGeometryShader("Particle.hlsl");
+		Pipe->SetPixelShader("Particle.hlsl");
+		Pipe->SetRasterizer("Engine2DBase");
+		Pipe->SetBlendState("AlphaBlend");
+		// 모든 오브젝트가 순서 맞춰서 다 그려진 다음에 벌어지는 일이라.
+		// 깊이라는걸 
+		Pipe->SetDepthState("AlwayDepth");
+	}
 
 	{
 		std::shared_ptr<GameEngineMaterial> Pipe = GameEngineMaterial::Create("DeferredCalLight");

@@ -129,6 +129,8 @@ public:
 
 	void Release();
 
+	void SetData(void* _pSrc, UINT _DataCount);
+
 protected:
 	static std::shared_ptr < GameEngineStructuredBuffer> CreateResName(const std::string& _Name, int _ByteSize)
 	{
@@ -161,8 +163,9 @@ private:
 	// 컴퓨트 쉐이더에 넣어줄때 사용하는 view
 	ID3D11UnorderedAccessView* UnorderedAccessView = nullptr;
 
-	int DataSize = 0;
-	int DataCount = 0;
+	StructuredBufferType DataType;
+	unsigned int DataSize = 0;
+	unsigned int DataCount = 0;
 	bool IsInit = false;
 };
 
