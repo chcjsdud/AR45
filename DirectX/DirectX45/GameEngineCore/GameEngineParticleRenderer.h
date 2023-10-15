@@ -84,7 +84,6 @@ public:
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
-	void ParticleRendererInit();
 
 	GameEngineComputeUnit ComUnit;
 	ParticleUpdateInfo ParticleUpdateInfoValue;

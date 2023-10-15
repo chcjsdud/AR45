@@ -85,3 +85,8 @@ void GameEngineConstantBuffer::CSSetting(UINT _Slot)
 {
 	GameEngineDevice::GetContext()->CSSetConstantBuffers(_Slot, 1, &Buffer);
 }
+
+void GameEngineConstantBuffer::GSSetting(UINT _Slot)
+{
+	GameEngineDevice::GetContext()->GSSetConstantBuffers(_Slot, 1, &Buffer);
+}

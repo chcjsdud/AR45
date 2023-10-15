@@ -33,9 +33,12 @@ void GameEngineParticleRenderer::Start()
 		ParticleInfoValue.EndScale = float4::ONE * 100.0f;
 
 		Unit->ShaderResHelper.SetConstantBufferLink("ParticleInfo", ParticleInfoValue);
+		MaxCount = 1000;
+
+		Unit->RenderModeValue = RenderMode::Particle;
+		Unit->InstanceCount = MaxCount;
 	}
 
-	MaxCount = 1000;
 
 	// Buffer = GameEngineVertexBuffer::Create(Particle);
 
@@ -100,9 +103,6 @@ void GameEngineParticleRenderer::Update(float _DeltaTime)
 	ComUnit.m_iGroupX = 128;
 
 	ComUnit.Execute();
-}
 
-void GameEngineParticleRenderer::ParticleRendererInit() 
-{
-
+	BaseValue;
 }

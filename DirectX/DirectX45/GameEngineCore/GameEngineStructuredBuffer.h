@@ -114,6 +114,12 @@ public:
 
 	void PSSetting(int _BindPoint);
 
+	void CSSetting(int _BindPoint);
+
+	void GSSetting(int _BindPoint);
+
+	void CSRWSetting(int _BindPoint);
+
 	void CreateResize(const D3D11_SHADER_BUFFER_DESC& _Desc, int Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr, bool _CPUAccess = false);
 
 	void CreateResize(size_t DataSize, size_t Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr, bool _CPUAccess = false);

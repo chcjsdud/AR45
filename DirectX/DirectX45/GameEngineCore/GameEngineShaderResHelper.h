@@ -54,6 +54,8 @@ public:
 
 	void Setting() override;
 
+	void ComputeSetting();
+
 	// void Resize(size_t _Count);
 
 	int GetDataSize();
@@ -133,6 +135,8 @@ public:
 	void Copy(const GameEngineShaderResHelper& _ResHelper);
 
 	void Setting();
+
+	void ComputeSetting();
 
 	void AllResourcesReset();
 };

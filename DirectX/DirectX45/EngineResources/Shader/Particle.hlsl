@@ -15,14 +15,14 @@ StructuredBuffer<ParticleData> ParticleBuffer : register(t16);
 
 struct VS_IN
 {
-    float3 vPos : POSITION;
+    float4 vPos : POSITION;
     // 이녀석은 내가 몇번째 버텍스 버퍼인지 들어옵니다.
     uint iInstance : SV_InstanceID;
 };
 
 struct VS_OUT
 {
-    float3 vLocalPos : POSITION;
+    float4 vLocalPos : POSITION;
     uint iInstance : SV_InstanceID;
 };
 
@@ -37,7 +37,7 @@ VS_OUT ParticleRender_VS(VS_IN _in)
 struct GS_OUT
 {
     float4 vPosition : SV_Position;
-    float2 vUV : TEXCOORD;
+    float4 vUV : TEXCOORD;
     uint iInstance : SV_InstanceID;
 };
 
@@ -46,10 +46,10 @@ void ParticleRender_GS(point VS_OUT _in[1], inout TriangleStream<GS_OUT> _OutStr
 {
     GS_OUT output[4] = { (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f };
     
-    if (0 == ParticleBuffer[_in[0].iInstance].iActive)
-        return;
+    //if (0 == ParticleBuffer[_in[0].iInstance].iActive)
+    //    return;
    
-    float3 vWorldPos = _in[0].vLocalPos + ParticleBuffer[_in[0].iInstance].vRelativePos.xyz;
+    float3 vWorldPos = _in[0].vLocalPos.xyz + ParticleBuffer[_in[0].iInstance].vRelativePos.xyz;
     
     // 파티클 쉐이더를 만들었을때 기준인데. 
     //if (0 == IsWorldSpawn)
@@ -63,6 +63,8 @@ void ParticleRender_GS(point VS_OUT _in[1], inout TriangleStream<GS_OUT> _OutStr
     // 수명 비율
     float fRatio = ParticleBuffer[_in[0].iInstance].fCurTime / ParticleBuffer[_in[0].iInstance].fMaxTime;
     float3 vScale = lerp(StartScale.xyz, EndScale.xyz, fRatio);
+    
+    // float3 vScale = float3(100.0f, 100.0f, 1.0f);
     
     float3 NewPos[4] =
     {
@@ -79,10 +81,10 @@ void ParticleRender_GS(point VS_OUT _in[1], inout TriangleStream<GS_OUT> _OutStr
     }
     
     
-    output[0].vUV = float2(0.f, 0.f);
-    output[1].vUV = float2(1.f, 0.f);
-    output[2].vUV = float2(1.f, 1.f);
-    output[3].vUV = float2(0.f, 1.f);
+    output[0].vUV.xy = float2(0.f, 0.f);
+    output[1].vUV.xy = float2(1.f, 0.f);
+    output[2].vUV.xy = float2(1.f, 1.f);
+    output[3].vUV.xy = float2(0.f, 1.f);
        
     
     // 0 -- 1
@@ -106,10 +108,10 @@ float4 ParticleRender_PS(GS_OUT _in) : SV_Target
 {
     float4 vColor = (float4) 0.f;
         
-    vColor = DiffuseTexture.Sample(ENGINEBASE, _in.vUV);
+    vColor = DiffuseTexture.Sample(ENGINEBASE, _in.vUV.xy);
     
-    float fRatio = ParticleBuffer[_in.iInstance].fCurTime / ParticleBuffer[_in.iInstance].fMaxTime;
-    vColor.rgb *= lerp(StartColor, EndColor, fRatio).rgb;
+    // float fRatio = ParticleBuffer[_in.iInstance].fCurTime / ParticleBuffer[_in.iInstance].fMaxTime;
+    vColor.rgb *= lerp(StartColor, EndColor, 1.0f).rgb;
     
     
     return vColor;
