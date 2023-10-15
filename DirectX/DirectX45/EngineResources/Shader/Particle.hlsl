@@ -46,8 +46,8 @@ void ParticleRender_GS(point VS_OUT _in[1], inout TriangleStream<GS_OUT> _OutStr
 {
     GS_OUT output[4] = { (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f, (GS_OUT) 0.f };
     
-    //if (0 == ParticleBuffer[_in[0].iInstance].iActive)
-    //    return;
+    if (0 == ParticleBuffer[_in[0].iInstance].iActive)
+        return;
    
     float3 vWorldPos = _in[0].vLocalPos.xyz + ParticleBuffer[_in[0].iInstance].vRelativePos.xyz;
     
