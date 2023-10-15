@@ -86,12 +86,19 @@ void GameEngineStructuredBufferSetter::ComputeSetting()
 
 void GameEngineStructuredBufferSetter::Setting() 
 {
-	if (nullptr == SetData)
+	if (nullptr == Res->GetUAV())
 	{
-		return;
+		if (nullptr == SetData)
+		{
+			return;
+		}
+
+		Res->ChangeData(SetData, Size * Count);
+	}
+	else {
+		int a = 0;
 	}
 
-	Res->ChangeData(SetData, Size * Count);
 	ShaderType Type = ParentShader->GetType();
 
 	switch (Type)
@@ -125,6 +132,42 @@ void GameEngineStructuredBufferSetter::Setting()
 		break;
 	}
 
+}
+
+void GameEngineTextureSetter::Reset()
+{
+	ShaderType Type = ParentShader->GetType();
+
+	switch (Type)
+	{
+	case ShaderType::None:
+	{
+		MsgAssert("어떤 쉐이더에 세팅될지 알수없는 상수버퍼 입니다.");
+		break;
+	}
+	case ShaderType::Vertex:
+	{
+		Res->VSReset(BindPoint);
+		break;
+	}
+	case ShaderType::Pixel:
+	{
+		Res->PSReset(BindPoint);
+		break;
+	}
+	case ShaderType::Geometry:
+	{
+		Res->GSReset(BindPoint);
+		break;
+	}
+	case ShaderType::Compute:
+	{
+		Res->CSReset(BindPoint);
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 
@@ -165,7 +208,7 @@ void GameEngineTextureSetter::Setting()
 
 }
 
-void GameEngineTextureSetter::Reset()
+void GameEngineStructuredBufferSetter::Reset()
 {
 	ShaderType Type = ParentShader->GetType();
 
@@ -479,6 +522,18 @@ void GameEngineShaderResHelper::AllResourcesReset()
 			Setter.Reset();
 		}
 	}
+
+	{
+		std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator StartIter = StructuredBufferSetters.begin();
+		std::multimap<std::string, GameEngineStructuredBufferSetter>::iterator EndIter = StructuredBufferSetters.end();
+
+		for (; StartIter != EndIter; ++StartIter)
+		{
+			GameEngineStructuredBufferSetter& Setter = StartIter->second;
+			Setter.Reset();
+		}
+	}
+
 }
 
 bool GameEngineShaderResHelper::IsConstantBuffer(const std::string_view& _Name)

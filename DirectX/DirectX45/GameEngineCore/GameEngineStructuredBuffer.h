@@ -107,17 +107,15 @@ public:
 
 	void VSReset(int _BindPoint);
 	void PSReset(int _BindPoint);
+	void GSReset(int _BindPoint);
+	void CSReset(int _BindPoint);
 
 	void ChangeData(const void* _Data, size_t _Size);
 
 	void VSSetting(int _BindPoint);
-
 	void PSSetting(int _BindPoint);
-
 	void CSSetting(int _BindPoint);
-
 	void GSSetting(int _BindPoint);
-
 	void CSRWSetting(int _BindPoint);
 
 	void CreateResize(const D3D11_SHADER_BUFFER_DESC& _Desc, int Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr, bool _CPUAccess = false);
@@ -127,6 +125,16 @@ public:
 	void CreateResize(size_t Count, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr, bool _CPUAccess = false);
 
 	void CreateResize(const D3D11_BUFFER_DESC& _Data, StructuredBufferType _Type = StructuredBufferType::SRV_ONLY, void* _StartData = nullptr, bool _CPUAccess = false);
+
+	inline ID3D11ShaderResourceView* GetSRV()
+	{
+		return ShaderResourceView;
+	}
+
+	inline ID3D11UnorderedAccessView* GetUAV()
+	{
+		return UnorderedAccessView;
+	}
 
 	inline int GetDataSize()
 	{

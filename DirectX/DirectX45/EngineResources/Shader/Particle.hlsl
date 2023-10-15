@@ -11,7 +11,7 @@ cbuffer ParticleInfo : register(b7)
 
 // 스트럭처드 버퍼를 만듭니다.
 // 개수만큼의 버퍼가 필요하다.
-StructuredBuffer<ParticleData> ParticleBuffer : register(t16);
+StructuredBuffer<ParticleData> ParticleBuffer : register(t12);
 
 struct VS_IN
 {

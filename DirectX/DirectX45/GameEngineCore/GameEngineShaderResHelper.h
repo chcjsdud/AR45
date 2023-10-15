@@ -53,6 +53,7 @@ public:
 	std::vector<char> OriginalData;
 
 	void Setting() override;
+	void Reset() override;
 
 	void ComputeSetting();
 

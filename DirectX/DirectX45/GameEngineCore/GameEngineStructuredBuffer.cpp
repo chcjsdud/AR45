@@ -235,6 +235,19 @@ void GameEngineStructuredBuffer::PSReset(int _BindPoint)
 	GameEngineDevice::GetContext()->PSSetShaderResources(_BindPoint, 1, &Nullptr);
 }
 
+void GameEngineStructuredBuffer::GSReset(int _BindPoint)
+{
+	ID3D11ShaderResourceView* Nullptr = nullptr;
+	GameEngineDevice::GetContext()->GSSetShaderResources(_BindPoint, 1, &Nullptr);
+}
+
+void GameEngineStructuredBuffer::CSReset(int _BindPoint)
+{
+	UINT i = -1;
+	ID3D11UnorderedAccessView* Nullptr = nullptr;
+	GameEngineDevice::GetContext()->CSSetUnorderedAccessViews(_BindPoint, 1, &Nullptr, &i);
+}
+
 void GameEngineStructuredBuffer::VSSetting(int _BindPoint)
 {
 	if (nullptr == ShaderResourceView)
@@ -260,7 +273,7 @@ void GameEngineStructuredBuffer::PSSetting(int _BindPoint)
 {
 	if (nullptr == ShaderResourceView)
 	{
-		MsgAssert("존재하지 않는 텍스처를 사용할 수 없습니다.");
+		MsgAssert("존재하지 않는 구조화 버퍼를 사용할 수 없습니다.");
 	}
 
 	GameEngineDevice::GetContext()->PSSetShaderResources(_BindPoint, 1, &ShaderResourceView);
@@ -270,7 +283,7 @@ void GameEngineStructuredBuffer::CSSetting(int _BindPoint)
 {
 	if (nullptr == ShaderResourceView)
 	{
-		MsgAssert("존재하지 않는 텍스처를 사용할 수 없습니다.");
+		MsgAssert("존재하지 않는 구조화 버퍼를 사용할 수 없습니다.");
 	}
 
 	GameEngineDevice::GetContext()->CSSetShaderResources(_BindPoint, 1, &ShaderResourceView);
@@ -280,7 +293,7 @@ void GameEngineStructuredBuffer::GSSetting(int _BindPoint)
 {
 	if (nullptr == ShaderResourceView)
 	{
-		MsgAssert("존재하지 않는 텍스처를 사용할 수 없습니다.");
+		MsgAssert("존재하지 않는 구조화 버퍼를 사용할 수 없습니다.");
 	}
 
 	GameEngineDevice::GetContext()->GSSetShaderResources(_BindPoint, 1, &ShaderResourceView);
