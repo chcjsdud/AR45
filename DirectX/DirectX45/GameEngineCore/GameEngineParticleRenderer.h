@@ -81,6 +81,8 @@ public:
 	GameEngineParticleRenderer& operator=(const GameEngineParticleRenderer& _Other) = delete;
 	GameEngineParticleRenderer& operator=(GameEngineParticleRenderer&& _Other) noexcept = delete;
 
+	void SetTexture(std::string_view _Name);
+
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
@@ -94,6 +96,7 @@ private:
 	std::shared_ptr<class GameEngineStructuredBuffer> ParticleBuffer;
 	std::shared_ptr<class GameEngineStructuredBuffer> ParticleShareBuffer;
 
+	std::shared_ptr<GameEngineRenderUnit> ParticleUnit = nullptr;
 	
 	int MaxCount = 1000;
 	float Frequency = 5.0f;

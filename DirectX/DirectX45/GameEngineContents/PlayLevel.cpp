@@ -106,6 +106,9 @@ void PlayLevel::Start()
 		std::shared_ptr<GameEngineActor> TestP = CreateActor<GameEngineActor>();
 		std::shared_ptr<GameEngineParticleRenderer> Particle = TestP->CreateComponent<GameEngineParticleRenderer>();
 
+		Particle->SetTexture("Test.png");
+		
+
 	}
 
 }

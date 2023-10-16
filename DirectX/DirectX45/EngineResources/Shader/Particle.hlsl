@@ -81,10 +81,10 @@ void ParticleRender_GS(point VS_OUT _in[1], inout TriangleStream<GS_OUT> _OutStr
     }
     
     
-    output[0].vUV.xy = float2(0.f, 0.f);
-    output[1].vUV.xy = float2(1.f, 0.f);
-    output[2].vUV.xy = float2(1.f, 1.f);
-    output[3].vUV.xy = float2(0.f, 1.f);
+    output[3].vUV.xy = float2(0.f, 0.f);
+    output[2].vUV.xy = float2(1.f, 0.f);
+    output[1].vUV.xy = float2(1.f, 1.f);
+    output[0].vUV.xy = float2(0.f, 1.f);
        
     
     // 0 -- 1

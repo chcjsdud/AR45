@@ -17,6 +17,11 @@ GameEngineParticleRenderer::~GameEngineParticleRenderer()
 {
 }
 
+void GameEngineParticleRenderer::SetTexture(std::string_view _Name)
+{
+	ParticleUnit->ShaderResHelper.SetTexture("DiffuseTexture", _Name);
+}
+
 void GameEngineParticleRenderer::Start()
 {
 	GameEngineRenderer::Start();
@@ -29,14 +34,15 @@ void GameEngineParticleRenderer::Start()
 		ParticleInfoValue.StartColor = float4::ONE;
 		ParticleInfoValue.EndColor = float4::ONE;
 
-		ParticleInfoValue.StartScale = float4::ONE * 100.0f;
-		ParticleInfoValue.EndScale = float4::ONE * 100.0f;
+		ParticleInfoValue.StartScale = float4::ONE * 50.0f;
+		ParticleInfoValue.EndScale = float4::ONE * 300.0f;
 
 		Unit->ShaderResHelper.SetConstantBufferLink("ParticleInfo", ParticleInfoValue);
 		MaxCount = 1000;
 
 		Unit->RenderModeValue = RenderMode::Particle;
 		Unit->InstanceCount = MaxCount;
+		ParticleUnit = Unit;
 	}
 
 

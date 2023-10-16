@@ -16,6 +16,8 @@
 
 void GameEngineComputeUnit::Execute()
 {
+	// 파티클 정보와
+	// 파티클 개수를 
 	ShaderResHelper.ComputeSetting();
 
 	// ShaderResHelper.Setting();
