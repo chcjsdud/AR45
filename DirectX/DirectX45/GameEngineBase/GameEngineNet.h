@@ -1,5 +1,6 @@
 #pragma once
 #include "GameEngineDispatcher.h"
+#include <mutex>
 
 // 설명 :
 // 이녀석은 서버와 클라가 동시에 사용하는 클래스
